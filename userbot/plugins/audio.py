@@ -4,9 +4,9 @@ import subprocess
 from datetime import datetime
 
 from gtts import gTTS
+from userbot.Config import Config
 
 from userbot import legend
-from userbot.Config import Config
 
 menu_category = "fun"
 

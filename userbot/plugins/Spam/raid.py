@@ -3,9 +3,9 @@ import os
 import random
 
 from telethon import events
+from userbot.Config import Config
 
 from userbot import bot
-from userbot.Config import Config
 
 from . import *
 

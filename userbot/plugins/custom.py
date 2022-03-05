@@ -1,7 +1,7 @@
+from userbot.core.logger import logging
 from validators.url import url
 
 from userbot import legend
-from userbot.core.logger import logging
 
 from ..Config import Config
 from ..core.managers import eod, eor

@@ -2,8 +2,9 @@
 # ported to telethon by @LEGEND_K_BOY (@LEGEND_K_BOY)
 import os
 
-from userbot import legend
 from userbot.core.logger import logging
+
+from userbot import legend
 
 from ..Config import Config
 from ..core.managers import eor

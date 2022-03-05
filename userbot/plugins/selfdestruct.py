@@ -1,7 +1,8 @@
 from asyncio import sleep
 
-from userbot import legend
 from userbot.core.logger import logging
+
+from userbot import legend
 
 menu_category = "tools"
 LOGS = logging.getLogger(__name__)

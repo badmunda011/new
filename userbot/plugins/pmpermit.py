@@ -5,9 +5,9 @@ from datetime import datetime
 from telethon import Button, functions
 from telethon.events import CallbackQuery
 from telethon.utils import get_display_name
+from userbot.core.logger import logging
 
 from userbot import legend
-from userbot.core.logger import logging
 
 from ..Config import Config
 from ..core.managers import eod, eor

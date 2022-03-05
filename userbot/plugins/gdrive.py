@@ -20,9 +20,9 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload, MediaIoBaseDownload
 from telethon import events
+from userbot.core.logger import logging
 
 from userbot import legend
-from userbot.core.logger import logging
 
 from ..Config import Config
 from ..core.managers import eod, eor

@@ -5,6 +5,8 @@ import aiohttp
 import requests
 from github import Github
 from pySmartDL import SmartDL
+from telethon.errors import ChatSendInlineForbiddenError as noin
+from telethon.errors.rpcerrorlist import BotMethodInvalidError as dedbot
 
 from userbot import legend
 
@@ -13,14 +15,12 @@ from ..core.logger import logging
 from ..core.managers import eod, eor
 from ..helpers.utils import reply_id
 from . import reply_id
-from telethon.errors import ChatSendInlineForbiddenError as noin
-from telethon.errors.rpcerrorlist import BotInlineDisabledError as noinline
-from telethon.errors.rpcerrorlist import BotMethodInvalidError as dedbot
-from ..helpers.utils import reply_id
+
 LOGS = logging.getLogger(os.path.basename(__name__))
 ppath = os.path.join(os.getcwd(), "temp", "githubuser.jpg")
 menu_category = "misc"
 from . import Legend_channel
+
 GIT_TEMP_DIR = "./temp/"
 
 msg = f"""
@@ -29,6 +29,7 @@ msg = f"""
   •        [♦️ Deploy ♦️](https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FLEGEND-AI%2FLEGENDBOT&template=https%3A%2F%2Fgithub.com%2FLEGEND-AI%2FLEGENDBOT)
   •  ©️ {Legend_channel} ™
 """
+
 
 @legend.legend_cmd(
     pattern="repo$",

@@ -18,9 +18,9 @@ from telethon.tl.types import (
     MessageEntityUnderline,
 )
 from telethon.utils import add_surrogate, del_surrogate
+from userbot.core.logger import logging
 
 from userbot import legend
-from userbot.core.logger import logging
 
 LOGS = logging.getLogger(__name__)
 
