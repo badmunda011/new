@@ -316,6 +316,7 @@ async def square_cmd(event):
     await event.client.send_file(event.chat_id, img, reply_to=reply)
     await legendevent.delete()
 
+
 pathdc = "./userbot/"
 if not os.path.isdir(pathdc):
     os.makedirs(pathdc)
