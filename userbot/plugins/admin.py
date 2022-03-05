@@ -288,6 +288,7 @@ async def _ban_person(event):
         return await legendevent.edit(
             "`I dont have message nuking rights! But still he is banned!`"
         )
+    await legendevent.delete()
     if reason:
         await bot.send_file(
             event.chat_id,
