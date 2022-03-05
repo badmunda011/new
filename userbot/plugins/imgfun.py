@@ -108,12 +108,12 @@ async def imirror(event):  # sourcery no-metrics
 
 
 @legend.legend_cmd(
-    pattern="irotate(?: |$)(\d+)$",
-    command=("irotate", menu_category),
+    pattern="trig(?:\s|$)([\s\S]*)",
+    command=("trig", menu_category),
     info={
-        "header": "To rotate the replied image or sticker",
+        "header": "To trig the replied image or sticker",
         "usage": [
-            "{tr}irotate <angle>",
+            "{tr}trig",
         ],
     },
 )
@@ -141,12 +141,12 @@ async def dc(event):
 
 
 @legend.legend_cmd(
-    pattern="waste(?: |$)(\d+)$",
+    pattern="waste(?:\s|$)([\s\S]*)",
     command=("waste", menu_category),
     info={
         "header": "To waste the replied image or sticker",
         "usage": [
-            "{tr}waste",
+            "{tr}waste <number>",
         ],
     },
 )
@@ -174,12 +174,12 @@ async def dc(event):
 
 
 @legend.legend_cmd(
-    pattern="trig(?: |$)(\d+)$",
-    command=("trig", menu_category),
+    pattern="irotate(?: |$)(\d+)$",
+    command=("irortate", menu_category),
     info={
         "header": "To Trig the replied image or sticker",
         "usage": [
-            "{tr}trig",
+            "{tr}irotate <angle>",
         ],
     },
 )
@@ -317,6 +317,11 @@ async def square_cmd(event):
     await legendevent.delete()
 
 
+pathdc = "./userbot/"
+if not os.path.isdir(pathdc):
+    os.makedirs(pathdc)
+
+
 @legend.legend_cmd(
     pattern="bright(?: |$)(\d+)?$",
     command=("bright", menu_category),
@@ -353,16 +358,16 @@ async def dc(event):
 
 
 @legend.legend_cmd(
-    pattern="dotify(?: |$)(\d+)?$",
-    command=("dotify", menu_category),
+    pattern="otify(?: |$)(\d+)?$",
+    command=("otify", menu_category),
     info={
         "header": "To convert image into doted image",
         "usage": [
-            "{tr}dotify <number>",
+            "{tr}otify <number>",
         ],
     },
 )
-async def pic_gifcmd(event):
+async def pic_gmd(event):
     "To convert image into doted image"
     reply = await event.get_reply_message()
     mediatype = media_type(reply)

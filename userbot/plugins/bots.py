@@ -17,8 +17,8 @@ menu_category = "tools"
     pattern="recognize(?:\s|$)([\s\S]*)",
     command=("recognize", menu_category),
     info={
-        "header": "आईएमजी को पहचानने के लिए।",
-        "description": "मान लीजिए कि यू को आईएमजी में टेक्स्ट ढूंढना है। फिर इस cmd का उपयोग pic . के उत्तर के साथ करें,",
+        "header": "to recognize the img।",
+        "description": "suppose u have to find text in img. Then use this cmd as pic. do with the answer of",
         "usage": [
             "{tr}recognize <reply to pic>",
         ],
@@ -27,7 +27,7 @@ menu_category = "tools"
 )
 async def _(event):
     if not event.reply_to_msg_id:
-        await event.edit("किसी भी उपयोगकर्ता की मीडिया फ़ाइल का उत्तर दें")
+        await event.edit("Reply to any user's media file")
         return
     reply_message = await event.get_reply_message()
     if not reply_message.media:
@@ -35,9 +35,9 @@ async def _(event):
         return
     chat = "@Rekognition_Bot"
     if reply_message.sender.bot:
-        await event.edit("वास्तविक उपयोगकर्ता संदेश का उत्तर दें।")
+        await event.edit("Reply to real user message।")
         return
-    await event.edit("इस मीडिया को पहचान रहे है।")
+    await event.edit("Recognizing this media.")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -47,9 +47,9 @@ async def _(event):
             response = await response
         except YouBlockedUserError:
             await event.client(functions.contacts.UnblockRequest("@Rekognition_Bot"))
-            await eod("सफलतापूर्वक अनवरोधित किया गया अब पुन: प्रयास करें")
+            await eod("successfully unlocked try again now")
             return
-        if response.text.startswith("अगला संदेश देखें"):
+        if response.text.startswith("see next message"):
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=461083923)
             )
@@ -65,8 +65,8 @@ async def _(event):
     pattern="history(?:\s|$)([\s\S]*)",
     command=("history", menu_category),
     info={
-        "header": "किसी भी उपयोगकर्ता का इतिहास प्राप्त करने के लिए।",
-        "description": "यदि उपयोगकर्ता नाम बदलता है तो यह सीएमडी उपयोग करने के लिए सबसे अच्छा है किसी भी उपयोगकर्ता का इतिहास प्राप्त करें,",
+        "header": "To get history of any user।",
+        "description": "If username changes then it is best to use cmd to get history of any user,",
         "usage": [
             "{tr}history <reply to user>",
         ],
@@ -80,7 +80,7 @@ async def _(event):
     chat = "Sangmatainfo_bot"
     victim = reply_message.sender.id
     if reply_message.sender.bot:
-        await eod(event, "वास्तविक उपयोगकर्ताओं की आवश्यकता है। बोट्स नहीं")
+        await eod(event, "Real users are required. no boats")
         return
     lol = await eor(event, "Checking...")
     async with event.client.conversation(chat) as conv:
@@ -90,7 +90,7 @@ async def _(event):
             response2 = await conv.get_response()
         except YouBlockedUserError:
             await event.client(functions.contacts.UnblockRequest("@Sangmatainfo_bot"))
-            await eod(event, "हो गया अनब्लॉक @Sangmatainfo_bot अब पुनः प्रयास करें")
+            await eod(event, "Done unblocked @Sangmatainfo_bot Try again now")
             return
         if response1.text.startswith("Name History"):
             await lol.edit(response1.text)
@@ -118,7 +118,7 @@ async def _(event):
     if not event.reply_to_msg_id:
         await eod(
             event,
-            "`कृपया इस CMD कार्य को प्राप्त करने के लिए किसी उपयोगकर्ता को उत्तर दें`",
+            "`Please reply to a user to get this CMD working`",
         )
         return
     reply_message = await event.get_reply_message()
@@ -136,9 +136,7 @@ async def _(event):
             response3 = await conv.get_response()
         except YouBlockedUserError:
             await event.client(functions.contacts.UnblockRequest("@Sangmatainfo_bot"))
-            await eod(
-                event, "अनब्लॉक किया गया @Sangmatainfo_bot और अब पुनः प्रयास करें"
-            )
+            await eod(event, "Unblocked @Sangmatainfo_bot and try again now")
             return
         if response1.text.startswith("Username History"):
             await lol.edit(response1.text)
@@ -158,8 +156,8 @@ async def _(event):
     pattern="limit(?:\s|$)([\s\S]*)",
     command=("limit", menu_category),
     info={
-        "header": "पाने के लिए आपका खाता सीमित है या नहीं",
-        "description": "यदि आपका खाता सीमित है तो आप उर लिमिटेड तक किसी को भी डीएम नहीं कर सकते इस बॉट सहायता को खोलें। पता लगाने के लिए आपका खाता सीमित है या नहीं,",
+        "header": "Whether your account is limited to receive",
+        "description": "If your account is limited then you cannot DM anyone till ur limited open this bot help. To find out if your account is limited.",
         "usage": [
             "{tr}limit",
         ],
@@ -175,18 +173,18 @@ async def _(event):
             sweetie = yup.text
             if sweetie.startswith("Good"):
                 response = await conv.send_message("Cool, thanks")
-                await eor(event, "बधाई हो, कोई सीमा लागू नहीं है")
+                await eor(event, "Congratulations, there is no limit")
                 await event.client.delete_messages(
                     conv.chat_id, [first.id, yup.id, response.id]
                 )
             elif "automatically" in sweetie:
                 await conv.send_message("I was wrong, please release me now")
                 await eor(
-                    event, f"आपका खाता सीमित है [यह क्लिक करो](https://t.me/spambot)"
+                    event, f"Your account is limited [click here](https://t.me/spambot)"
                 )
             else:
                 await eor(event, sweetie)
         except YouBlockedUserError:
             await event.client(functions.contacts.UnblockRequest("@spambot"))
-            await eor(event, "**हो गया अनब्लॉक @spambot और अब फिर से प्रयास करें**")
+            await eor(event, "**Done unblocked @spambot and try again now**")
             return

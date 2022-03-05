@@ -184,9 +184,9 @@ async def promote(event):
         await event.client(EditAdminRequest(event.chat_id, user.id, new_rights, rank))
     except BadRequestError:
         return await legendevent.edit(NO_PERM)
-    await bot.send_file(
+    await event.client.send_file(
         event.chat_id,
-        "https://te.legra.ph/file/74530a36e7b5e60ced878.jpg",
+        help_pic,
         caption=f"**⚜Promoted ~** [{user.first_name}](tg://user?id={user.id})⚜\n**Successfully In** ~ `{event.chat.title}`!! \n**Admin Tag ~**  `{rank}`",
     )
     await event.delete()
@@ -239,7 +239,7 @@ async def demote(event):
         await event.client(EditAdminRequest(event.chat_id, user.id, newrights, rank))
     except BadRequestError:
         return await legendevent.edit(NO_PERM)
-    await bot.send_file(
+    await event.client.send_file(
         event.chat_id,
         help_pic,
         caption=f"Demoted Successfully\nUser:[{user.first_name}](tg://{user.id})\n Chat: {event.chat.title}",
@@ -288,6 +288,7 @@ async def _ban_person(event):
         return await legendevent.edit(
             "`I dont have message nuking rights! But still he is banned!`"
         )
+    await legendevent.delete()
     if reason:
         await bot.send_file(
             event.chat_id,
@@ -565,12 +566,16 @@ async def endmute(event):
     except Exception as e:
         return await legendevent.edit(NO_PERM + f"\n{e}")
     if reason:
-        await legendevent.edit(
-            f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`\nReason: {reason}"
+        await event.client.send_file(
+            event.chat_id,
+            help_pic,
+            caption=f"Kicked` [{user.first_name}](tg://user?id={user.id})`!`\nReason: {reason}",
         )
     else:
-        await legendevent.edit(
-            f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`"
+        await event.client.send_file(
+            event.chat_id,
+            help_pic,
+            caption=f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`",
         )
     if BOTLOG:
         await event.client.send_message(

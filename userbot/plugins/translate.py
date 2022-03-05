@@ -99,8 +99,8 @@ async def translateme(event):
     try:
         translated = translator.translate(text, dest=lan)
         after_tr_text = translated.text
-        output_str = """**Translated**\nFrom {} to {}
-{}""".format(
+        output_str = """**Translated**\n__From__ {} __to__ {}
+`{}`""".format(
             translated.src, lan, after_tr_text
         )
         await eor(event, output_str)

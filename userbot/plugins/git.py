@@ -45,7 +45,7 @@ async def source(e):
     "Source code link of userbot"
     reply_to_id = await reply_id(e)
     try:
-        legend = await e.client.inline_query(botname, "repo")
+        legend = await e.client.inline_query(Config.BOT_USERNAME, "repo")
         await legend[0].click(e.chat_id, reply_to=reply_to_id, hide_via=True)
         await e.delete()
     except (noin, dedbot):
