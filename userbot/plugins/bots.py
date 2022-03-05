@@ -136,9 +136,7 @@ async def _(event):
             response3 = await conv.get_response()
         except YouBlockedUserError:
             await event.client(functions.contacts.UnblockRequest("@Sangmatainfo_bot"))
-            await eod(
-                event, "Unblocked @Sangmatainfo_bot and try again now"
-            )
+            await eod(event, "Unblocked @Sangmatainfo_bot and try again now")
             return
         if response1.text.startswith("Username History"):
             await lol.edit(response1.text)
