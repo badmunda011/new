@@ -31,9 +31,9 @@ from asyncio.subprocess import PIPE as asyncPIPE
 from urllib.error import HTTPError
 
 from pySmartDL import SmartDL
-from userbot.core.logger import logging
 
 from userbot import legend
+from userbot.core.logger import logging
 
 from ..Config import Config
 from ..core.managers import eor

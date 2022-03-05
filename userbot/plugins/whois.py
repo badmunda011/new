@@ -7,9 +7,9 @@ from requests import get
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.utils import get_input_location
-from userbot.core.logger import logging
 
 from userbot import legend
+from userbot.core.logger import logging
 
 from ..Config import Config
 from ..core.managers import eor
