@@ -49,7 +49,7 @@ async def _(event):
             await event.client(functions.contacts.UnblockRequest("@Rekognition_Bot"))
             await eod("successfully unlocked try again now")
             return
-        if response.text.startswith(""see next message):
+        if response.text.startswith(""see next message"):
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=461083923)
             )
