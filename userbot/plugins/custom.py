@@ -14,6 +14,7 @@ cmdhd = Config.HANDLER
 
 
 vlist = [
+    "ADMIN_PIC",
     "ABUSE",
     "ABUSE_PIC",
     "AFKFWD",
