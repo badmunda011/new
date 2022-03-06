@@ -70,6 +70,6 @@ wand
 wget
 yt_dlp
 youtube-dl>=2021.02.04.1 
-git+https://github.com/ITS-LEGENDBOT/telethon 
+git+https://github.com/Jisan09/Telethon 
 git+https://github.com/goldsmith/Wikipedia
 git+https://github.com/ITS-LEGENDBOT/py-googletrans
