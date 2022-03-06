@@ -93,7 +93,7 @@ async def bad(event):  # sourcery no-metrics
         if cmd == "set":
             if not vinfo and vname == "ALIVE_TEMPLATE":
                 return await eod(
-                    event, "**💠 Visit @LegendBot_OP for alive template types.**", 60
+                    event, "**💠 Visit @LegendBot_Alive for alive template types.**", 60
                 )
             if not vinfo:
                 return await eod(
