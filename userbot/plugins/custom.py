@@ -14,9 +14,9 @@ cmdhd = Config.HANDLER
 
 
 vlist = [
-    "ADMIN_PIC",
     "ABUSE",
     "ABUSE_PIC",
+    "ADMIN_PIC",
     "AFKFWD",
     "ALIVE_PIC",
     "ALIVE_EMOJI",
@@ -27,8 +27,6 @@ vlist = [
     "HELP_TEXT",
     "HELP_IMG",
     "IALIVE_PIC",
-    "IALIVE_EMOJI",
-    "IALIVE_TEXT",
     "PING_PIC",
     "PM_PIC",
     "PM_TEXT",
@@ -93,7 +91,7 @@ async def bad(event):  # sourcery no-metrics
         if cmd == "set":
             if not vinfo and vname == "ALIVE_TEMPLATE":
                 return await eod(
-                    event, "**💠 Visit @LegendBot_OP for alive template types.**", 60
+                    event, "**💠 Visit @LegendBot_Alive for alive template types.**", 60
                 )
             if not vinfo:
                 return await eod(

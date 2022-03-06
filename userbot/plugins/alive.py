@@ -50,6 +50,8 @@ async def amireallyalive(event):
     LEGEND_IMG = (
         gvarstatus("IALIVE_PIC") or "https://telegra.ph/file/144d8ea74fef8ca12253c.jpg"
     )
+    llol = [x for x in LEGEND_IMG.split()]
+    IPIC = random.choice(llol)
     lal = [x for x in EMOJI.split()]
     EMOTES = random.choice(lal)
     tick = [x for x in LOL_TEXT.split(", ")]
@@ -66,9 +68,7 @@ async def amireallyalive(event):
         dbhealth=check_sgnirts,
         ping=ms,
     )
-    if LEGEND_IMG:
-        legend = [x for x in LEGEND_IMG.split()]
-        IPIC = random.choice(legend)
+    if IPIC:
         try:
             await event.client.send_file(
                 event.chat_id, IPIC, caption=caption, reply_to=reply_to_id
