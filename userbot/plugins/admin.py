@@ -146,7 +146,7 @@ async def getbaed(event):
     except Exception as e:
         return await eor(event, f"ERROR - {str(e)}")
     if len(users) > 0:
-        msg = f"✓ **List of banned member in this group** !!\n\n=>>✓ Total : {len(users)}\n"
+        msg = f"✓ **List of banned member in this group** !!\n✓ Total : __{len(users)}__\n\n"
         for user in users:
             if not user.deleted:
                 msg += f"🛡 __[{user.first_name}]({user.id})__\n"
