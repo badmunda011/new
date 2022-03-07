@@ -23,12 +23,12 @@ menu_category = "fun"
 
 
 @legend.legend_cmd(
-    pattern="addchatbot$",
-    command=("addchatbot", menu_category),
+    pattern="addai$",
+    command=("addai", menu_category),
     info={
         "header": "To Start ChatBot.",
         "description": "Reply to user with this cmd so from then his every text and sticker it will reply With Ai Answer messages will be repeated back to him.",
-        "usage": "{tr}addchatbot <reply>",
+        "usage": "{tr}addai <reply>",
     },
 )
 async def echo(event):
@@ -61,12 +61,12 @@ async def echo(event):
 
 
 @legend.legend_cmd(
-    pattern="rmchatbot$",
-    command=("rmchatbot", menu_category),
+    pattern="rmai$",
+    command=("rmai", menu_category),
     info={
         "header": "To stop repeating paticular user messages.",
         "description": "Reply to user with this cmd to stop repeating his messages back.",
-        "usage": "{tr}rmchatbot <reply>",
+        "usage": "{tr}rmai <reply>",
     },
 )
 async def echo(event):
@@ -88,15 +88,15 @@ async def echo(event):
 
 
 @legend.legend_cmd(
-    pattern="delchatbot( -a)?",
-    command=("delchatbot", menu_category),
+    pattern="delai( -a)?",
+    command=("delai", menu_category),
     info={
         "header": "To delete echo in this chat.",
         "description": "To stop Chatbot users messages of all enabled users in the paticular chat or all chats.",
         "flags": {"a": "To stop in all chats"},
         "usage": [
-            "{tr}delchatbot",
-            "{tr}delecho -a",
+            "{tr}delai",
+            "{tr}delai -a",
         ],
     },
 )
@@ -130,16 +130,16 @@ async def chatbot(event):
 
 
 @legend.legend_cmd(
-    pattern="listchatbot( -a)?$",
-    command=("listchatbot", menu_category),
+    pattern="listai( -a)?$",
+    command=("listai", menu_category),
     info={
         "header": "shows the list of users for whom you enabled chatbot",
         "flags": {
             "a": "To list chatbot users in all chats",
         },
         "usage": [
-            "{tr}listchatbot",
-            "{tr}listchatbot -a",
+            "{tr}listai",
+            "{tr}listai -a",
         ],
     },
 )
@@ -156,15 +156,15 @@ async def echo(event):  # sourcery no-metrics
         for chatbot in lsts:
             if chatbot.chat_type == "Personal":
                 if chatbot.user_username:
-                    private_chats += f"☞ [{chatbot.user_name}](https://t.me/{chatbot.user_username})\n"
+                    private_chats += f"✓ [{chatbot.user_name}](https://t.me/{chatbot.user_username})\n"
                 else:
                     private_chats += (
-                        f"☞ [{chatbot.user_name}](tg://user?id={chatbot.user_id})\n"
+                        f"✓ [{chatbot.user_name}](tg://user?id={chatbot.user_id})\n"
                     )
             elif chatbot.user_username:
-                group_chats += f"☞ [{chatbot.user_name}](https://t.me/{chatbot.user_username}) in chat {chatbot.chat_name} of chat id `{chatbot.chat_id}`\n"
+                group_chats += f"✓ [{chatbot.user_name}](https://t.me/{chatbot.user_username}) in chat {chatbot.chat_name} of chat id `{chatbot.chat_id}`\n"
             else:
-                group_chats += f"☞ [{chatbot.user_name}](tg://user?id={chatbot.user_id}) in chat {chatbot.chat_name} of chat id `{chatbot.chat_id}`\n"
+                group_chats += f"✓ [{chatbot.user_name}](tg://user?id={chatbot.user_id}) in chat {chatbot.chat_name} of chat id `{chatbot.chat_id}`\n"
 
         if private_chats != "":
             output_str += "**Private Chats**\n" + private_chats + "\n\n"
@@ -178,11 +178,11 @@ async def echo(event):  # sourcery no-metrics
         for chatbots in lsts:
             if echos.user_username:
                 private_chats += (
-                    f"☞ [{chatbots.user_name}](https://t.me/{chatbots.user_username})\n"
+                    f"✓ [{chatbots.user_name}](https://t.me/{chatbots.user_username})\n"
                 )
             else:
                 private_chats += (
-                    f"☞ [{chatbots.user_name}](tg://user?id={chatbots.user_id})\n"
+                    f"✓ [{chatbots.user_name}](tg://user?id={chatbots.user_id})\n"
                 )
         output_str = "**Chatbot enabled users in this chat are:**\n" + private_chats
 
