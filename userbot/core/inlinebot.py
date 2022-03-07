@@ -294,7 +294,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     [
                         Button.url(
                             "💞 Deploy 💞",
-                            "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FLEGEND-AI%2FLEGENDBOT&template=https%3A%2F%2Fgithub.com%2FLEGEND-AI%2FLEGENDBOT",
+                            "https://heroku.com/deploy?template=https://github.com/LEGEND-AI/LEGENDBOT",
                         )
                     ],
                 ],
