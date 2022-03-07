@@ -58,8 +58,6 @@ mute_pic = "./userbot/resources/pics/mute.jpg"
 ban_pic = "./userbot/resources/pics/ban.jpg"
 
 
-
-
 # channel
 my_channel = Config.YOUR_CHANNEL or "LegendBot_OP"
 my_group = Config.YOUR_GROUP or "LegendBot_AI"
