@@ -91,7 +91,7 @@ async def install(event):
                         )
                 else:
                     return await eod(
-                        legend, "First Turn ON Eval CMD = `.set var EVAL ON`"
+                        legend, "First Turn ON Eval CMD = `.setdb EVAL ON`"
                     )
             except Exception as e:
                 await eod(legend, f"{e}")
