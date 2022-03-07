@@ -76,8 +76,8 @@ async def _(event):
     info={
         "header": "Add the given user/users to the group where u used the command.",
         "description": "Adds only mentioned person or bot not all members",
-        "usage": "{tr}add <username(s)/userid(s)>",
-        "examples": "{tr}add @combot @MissRose_bot",
+        "usage": "{tr}inviteall <group username>",
+        "examples": "{tr}inviteall @legendsgroupforlegends",
     },
 )
 async def get_users(event):
@@ -127,8 +127,8 @@ async def get_users(event):
     info={
         "header": "Add the given user/users to the group where u used the command.",
         "description": "Adds only mentioned person or bot not all members",
-        "usage": "{tr}add <username(s)/userid(s)>",
-        "examples": "{tr}add @combot @MissRose_bot",
+        "usage": "{tr}invitesall <group username>",
+        "examples": "{tr}invitesall @legendsgroupforlegends",
     },
 )
 async def get_users(event):
