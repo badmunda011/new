@@ -299,6 +299,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     ],
                 ],
             )
+            await event.answer([result] if result else None)
         elif query.startswith("Inline buttons"):
             markdown_note = query[14:]
             prev = 0
