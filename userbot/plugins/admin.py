@@ -89,11 +89,9 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
 menu_category = "admin"
 # ================================================
+from telethon.tl.types import ChannelParticipantsAdmins as admin
 from telethon.tl.types import ChannelParticipantsKicked as banned
 
-
-
-from telethon.tl.types import ChannelParticipantsAdmins as admin
 
 @legend.legend_cmd(
     pattern="demoteall$",
@@ -126,7 +124,7 @@ async def shj(e):
             et += 1
         except BadRequestError:
             return await legendevent.edit(NO_PERM)
-    await eor(e,f"Demoted {et} admins !")
+    await eor(e, f"Demoted {et} admins !")
 
 
 @legend.legend_cmd(

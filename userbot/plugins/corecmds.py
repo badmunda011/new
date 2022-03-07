@@ -11,14 +11,13 @@ from . import (
     chnl_link,
     eod,
     eor,
+    hmention,
     legend,
     mention,
-    hmention,
     reply_id,
 )
 
 menu_category = "tools"
-from ..sql_helper.globals import gvarstatus
 
 DELETE_TIMEOUT = 5
 thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
