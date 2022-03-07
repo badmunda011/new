@@ -57,6 +57,12 @@ async def install(event):
                             f"**⚠️ WARNING !!** \n\n__Replied plugin file contains some harmful codes__."
                         )
                         return
+                    elif "os.environ" in rd:
+                        os.remove(downloaded_file_name)
+                        await legend.edit(
+                            f"**⚠️ WARNING !!** \n\n__Replied plugin file contains some harmful codes__."
+                        )
+                        return
                     elif "(" not in downloaded_file_name:
                         path1 = Path(downloaded_file_name)
                         shortname = path1.stem
@@ -87,18 +93,19 @@ async def install(event):
                         os.remove(downloaded_file_name)
                         return await eod(
                             legend,
-                            f"**Failed to Install** \n`Error`, Module already installed or unknown format",
+                            f"**Failed to Install** \n`Error`, Module already installed",
                         )
                 else:
                     return await eod(
                         legend, "First Turn ON Eval CMD = `.setdb EVAL ON`"
                     )
             except Exception as e:
+                os.
                 await eod(legend, f"{e}")
-                return os.remove(download_file_name)
+                return
         except Exception as e:
             await eod(legend, f"**Failed to Install** \n`Error`\n{str(e)}")
-            return os.remove(downloaded_file_name)
+            return 
 
 
 @legend.legend_cmd(
