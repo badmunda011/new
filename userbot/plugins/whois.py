@@ -129,7 +129,7 @@ async def _(event):
     caption = """**Info of [{}](tg://user?id={}):
    -🔖ID : **`{}`
    **-**👥**Groups in Common : **`{}`
-   **-**🌏**Data Centre Number : **`{}`
+   **-**🌏**DC Number : **`{}`
    **-**🔏**Restricted by telegram : **`{}`
    **-**🦅{}
    **-**👮‍♂️{}
@@ -147,12 +147,12 @@ async def _(event):
 
 
 @legend.legend_cmd(
-    pattern="whois(?:\s|$)([\s\S]*)",
-    command=("whois", menu_category),
+    pattern="info(?:\s|$)([\s\S]*)",
+    command=("info", menu_category),
     info={
         "header": "Gets info of an user.",
         "description": "User compelete details.",
-        "usage": "{tr}whois <username/userid/reply>",
+        "usage": "{tr}info <username/userid/reply>",
     },
 )
 async def who(event):
