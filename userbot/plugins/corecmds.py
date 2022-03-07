@@ -171,8 +171,8 @@ async def send(event):
 
 
 @legend.legend_cmd(
-    pattern="unload ([\s\S]*)",
-    command=("unload", menu_category),
+    pattern="upload ([\s\S]*)",
+    command=("upload", menu_category),
     info={
         "header": "To unload a plugin temporarily.",
         "description": "You can load this unloaded plugin by restarting or using {tr}load cmd. Useful for cases like seting notes in rose bot({tr}unload markdown).",
