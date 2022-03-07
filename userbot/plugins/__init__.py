@@ -52,6 +52,13 @@ chup_pic = "./userbot/resources/pics/chup.mp4"
 bsdk_pic = "./userbot/resources/pics/bsdk.jpg"
 bsdkwale_pic = "./userbot/resources/pics/bsdk_wale.jpg"
 chutiya_pic = "./userbot/resources/pics/chutiya.jpg"
+promote_pic = "./userbot/resources/pics/promote.jpg"
+demote_pic = "./userbot/resources/pics/demote.jpg"
+mute_pic = "./userbot/resources/pics/mute.jpg"
+ban_pic = "./userbot/resources/pics/ban.jpg"
+
+
+
 
 # channel
 my_channel = Config.YOUR_CHANNEL or "LegendBot_OP"
