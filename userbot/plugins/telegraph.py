@@ -82,10 +82,10 @@ async def _(event):
             ms = (end - start).seconds
             os.remove(downloaded_file_name)
             await legendevent.edit(
-                f"**👉 Uploaded to :-**[telegraph](https://telegra.ph{media_urls[0]})\
-                 \n**👉 Uploaded in {ms} seconds.**\
-                 \n**👉 Uploaded by :-** {mention}\
-                 \n**👉 Telegraph :** `https://telegra.ph{media_urls[0]}`",
+                f"**✓ Uploaded to :-**[telegraph](https://telegra.ph{media_urls[0]})\
+                 \n**✓ Uploaded in {ms} seconds.**\
+                 \n**✓ Uploaded by :-** {mention}\
+                 \n**✓ Telegraph :** `https://telegra.ph{media_urls[0]}`",
                 link_preview=True,
             )
     elif input_str in ["text", "t"]:
@@ -121,9 +121,9 @@ async def _(event):
         ms = (end - start).seconds
         legend = f"https://telegra.ph/{response['path']}"
         await legendevent.edit(
-            f"**👉 Uploaded to :-** [telegraph]({legend})\
-                 \n**👉 Uploaded in {ms} seconds.**\
-                 \n**👉 Uploaded by :-** {mention}\
-                 \n**👉 Telegraph :-** `{legend}`",
+            f"**✓ Uploaded to :-** [telegraph]({legend})\
+                 \n**✓ Uploaded in {ms} seconds.**\
+                 \n**✓ Uploaded by :-** {mention}\
+                 \n**✓ Telegraph :-** `{legend}`",
             link_preview=True,
         )
