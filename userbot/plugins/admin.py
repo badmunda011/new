@@ -464,7 +464,7 @@ async def startmute(event):
             mute(user.id, event.chat_id)
         except Exception as e:
             return await eor(event, f"**Error : **`{e}`", 10)
-            await legendevent.delete()
+    await event.delete()
     if reason:
         await event.client.send_file(
             event.chat_id,
