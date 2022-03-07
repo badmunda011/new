@@ -7,12 +7,9 @@
 import asyncio
 import os
 import random
-import re
 import shutil
-import urllib
 from datetime import datetime
 
-import requests
 from PIL import Image, ImageDraw, ImageFont
 from pySmartDL import SmartDL
 from telethon.tl import functions
