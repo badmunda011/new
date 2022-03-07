@@ -253,6 +253,7 @@ async def demote(event):
         await event.client(EditAdminRequest(event.chat_id, user.id, newrights, rank))
     except BadRequestError:
         return await legendevent.edit(NO_PERM)
+    await legendevent.delete()
     await event.client.send_file(
         event.chat_id,
         dmt_pic,
