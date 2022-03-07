@@ -140,7 +140,7 @@ pm_caption += f"**╭────────────**\n"
 pm_caption += f"┣»»»『{mention}』«««\n"
 pm_caption += f"┣Lêɠêɳ̃dẞø† ~ {legendversion}\n"
 pm_caption += f"┣Lêɠêɳ̃d  ~ [Owner](https://t.me/Legend_K_Boy)\n"
-pm_caption += f"┣Support ~ [G𝖗ουρ](https://t.me/Legend_K_Usebnot)\n"
+pm_caption += f"┣Support ~ [G𝖗ουρ](https://t.me/LegendBot_OP)\n"
 pm_caption += f"┣Řepô    ~ [Rєρο](https://github.com/LEGEND-AI/LEGENDBOT)\n"
 pm_caption += f"**╰────────────**\n"
 
@@ -197,11 +197,9 @@ async def amireallyalive(yes):
     await asyncio.sleep(edit_time)
     ok13 = await borg.edit_message(yes.chat_id, ok12, file=file1)
 
-    await alive.delete()
-
-    """ For .alive command, check if the bot is running.  """
+    await yes.delete()
     await borg.send_file(alive.chat_id, PM_IMG, caption=pm_caption)
-    await alive.delete()
+    await yes.delete()
 
 
 @legend.tgbot.on(CallbackQuery(data=re.compile(b"stats")))
