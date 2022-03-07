@@ -92,7 +92,6 @@ menu_category = "admin"
 from telethon.tl.types import ChannelParticipantsKicked as banned
 
 
-
 @legend.legend_cmd(
     pattern="getbanned$",
     command=("getbanned", menu_category),
@@ -108,19 +107,19 @@ from telethon.tl.types import ChannelParticipantsKicked as banned
 )
 async def getbaed(event):
     try:
-        users = await event.client.get_participants(event.chat_id,filter=banned)
+        users = await event.client.get_participants(event.chat_id, filter=banned)
     except Exception as e:
-        return await eor(event,f"ERROR - {str(e)}")
-    if len(users) > 0 :
-        msg=f"✓ **List of banned member in this group** !!\n\n=>>✓ Total : {len(users)}\n"
+        return await eor(event, f"ERROR - {str(e)}")
+    if len(users) > 0:
+        msg = f"✓ **List of banned member in this group** !!\n\n=>>✓ Total : {len(users)}\n"
         for user in users:
             if not user.deleted:
-                msg+=f"🛡 __[{user.first_name}]({user.id})__\n"
+                msg += f"🛡 __[{user.first_name}]({user.id})__\n"
             else:
                 msg += "☠️ __ Deleted Account__\n"
-        await eor(event,msg)
+        await eor(event, msg)
     else:
-        await eod(event,"No Banned Users !!")
+        await eod(event, "No Banned Users !!")
 
 
 @legend.legend_cmd(
