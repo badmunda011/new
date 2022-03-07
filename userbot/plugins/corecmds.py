@@ -17,10 +17,12 @@ from . import (
 )
 
 menu_category = "tools"
-from ..sql_helper.globals import gvarstatus 
+from ..sql_helper.globals import gvarstatus
+
 DELETE_TIMEOUT = 5
 thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
 EVAL = gvarstatus("EVAL")
+
 
 @legend.legend_cmd(
     pattern="install$",
