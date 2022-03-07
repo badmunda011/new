@@ -126,7 +126,7 @@ def paginate_help(
     HELP_EMOJI = random.choice(lal)
     helpable_plugins = [p for p in loaded_plugins if not p.startswith("_")]
     helpable_plugins = sorted(helpable_plugins)
-    if len(LEL_EMOJI) == 2:
+    if len(LOL_EMOJI) == 2:
         if plugins:
             modules = [
                 Button.inline(
