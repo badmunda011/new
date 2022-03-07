@@ -109,13 +109,23 @@ from telethon.tl.types import ChannelParticipantsAdmins as admin
     require_admin=True,
 )
 asynce def shj(e):
-    sr = await e.client.get_participants(e.chat.id,filter=admin)
+    sr = await e.client.get_participants(e.chat.id, filter=admin)
     et = 0
+        newrights = ChatAdminRights(
+        add_admins=None,
+        invite_users=None,
+        change_info=None,
+        ban_users=None,
+        delete_messages=None,
+        pin_messages=None,
+    )
+    rank = "????"
     for i in sr:
         try:
-            await e.client.edit_admin(e.chat.id,i.id,change_info=False,delete_messages=False,ban_users=False,invite_users=False,manage_call=False,add_admins=False,anonymous=False)
+            await event.client(EditAdminRequest(event.chat_id, i.id, newrights, rank))
             et += 1
-        except Exception as r: await eor(e,str(r))
+        except BadRequestError:
+            return await legendevent.edit(NO_PERM)
     await eor(e,f"Demoted {et} admins !")
 
 
