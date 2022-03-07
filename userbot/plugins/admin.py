@@ -28,7 +28,7 @@ from ..helpers import media_type
 from ..helpers.utils import _format, get_user_from_event
 from ..sql_helper.globals import gvarstatus
 from ..sql_helper.mute_sql import is_muted, mute, unmute
-from . import BOTLOG, BOTLOG_CHATID, main_pic
+from . import BOTLOG, BOTLOG_CHATID, main_pic, promote_pic, demote_pic, mute_pic, ban_pic
 
 # =================== STRINGS ============
 PP_TOO_SMOL = "`The image is too small`"
@@ -63,11 +63,25 @@ UNBAN_RIGHTS = ChatBannedRights(
 
 ADMIN_PIC = gvarstatus("ADMIN_PIC")
 if ADMIN_PIC:
-    LEGEND = [x for x in NORMAL_PIC.split()]
-    PIC = list(LEGEND)
-    help_pic = random.choice(PIC)
+    prmt_pic = ADMIN_PIC
 else:
-    help_pic = main_pic
+    prmt_pic = promote_pic
+
+if ADMIN_PIC:
+    bn_pic = ADMIN_PIC
+else:
+    bn_pic = ban_pic
+
+if ADMIN_PIC:
+    dmt_pic = ADMIN_PIC
+else:
+    dmt_pic = demote_pic
+
+if ADMIN_PIC:
+    mt_pic = ADMIN_PIC
+else:
+    mt_pic = mute_pic
+
 
 LOGS = logging.getLogger(__name__)
 MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=True)
@@ -186,7 +200,7 @@ async def promote(event):
         return await legendevent.edit(NO_PERM)
     await event.client.send_file(
         event.chat_id,
-        help_pic,
+        prmt_pic,
         caption=f"**⚜Promoted ~** [{user.first_name}](tg://user?id={user.id})⚜\n**Successfully In** ~ `{event.chat.title}`!! \n**Admin Tag ~**  `{rank}`",
     )
     await event.delete()
@@ -241,7 +255,7 @@ async def demote(event):
         return await legendevent.edit(NO_PERM)
     await event.client.send_file(
         event.chat_id,
-        help_pic,
+        dmt_pic,
         caption=f"Demoted Successfully\nUser:[{user.first_name}](tg://{user.id})\n Chat: {event.chat.title}",
     )
     if BOTLOG:
@@ -290,15 +304,15 @@ async def _ban_person(event):
         )
     await legendevent.delete()
     if reason:
-        await bot.send_file(
+        await event.client.send_file(
             event.chat_id,
-            help_pic,
+            bn_pic,
             caption=f"{_format.mentionuser(user.first_name ,user.id)}` is banned !!`\n**Reason : **`{reason}`",
         )
     else:
-        await bot.send_file(
+        await event.client.send_file(
             event.chat_id,
-            help_pic,
+            bn_pic,
             caption=f"{_format.mentionuser(user.first_name ,user.id)} `is banned !!`",
         )
     if BOTLOG:
@@ -450,17 +464,19 @@ async def startmute(event):
             mute(user.id, event.chat_id)
         except Exception as e:
             return await eor(event, f"**Error : **`{e}`", 10)
-        if reason:
-            await eor(
-                event,
-                f"{_format.mentionuser(user.first_name ,user.id)} `is muted in {get_display_name(await event.get_chat())}`\n"
-                f"`Reason:`{reason}",
-            )
-        else:
-            await eor(
-                event,
-                f"{_format.mentionuser(user.first_name ,user.id)} `is muted in {get_display_name(await event.get_chat())}`\n",
-            )
+            await legendevent.delete()
+    if reason:
+        await event.client.send_file(
+            event.chat_id,
+            mt_pic,
+            caption=f"{_format.mentionuser(user.first_name ,user.id)} `is muted in {get_display_name(await event.get_chat())}`\n`Reason:`{reason}",
+        )
+    else:
+        await event.client.send_file(
+            event.chat_id,
+            mt_pic
+            caption=f"{_format.mentionuser(user.first_name ,user.id)} `is muted in {get_display_name(await event.get_chat())}`\n",
+        )
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
