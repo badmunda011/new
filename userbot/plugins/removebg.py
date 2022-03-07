@@ -1,4 +1,4 @@
-# ported from uniborg (@spechide)
+
 import os
 
 import requests
@@ -49,7 +49,7 @@ def ReTrieveURL(input_url):
     pattern="(rmbg|srmbg)(?:\s|$)([\s\S]*)",
     command=("rmbg", menu_category),
     info={
-        "header": "To remove background of a image/sticker/image link.",
+        "header": "To remove background of a image/sticker/image link.(remove.bg)",
         "options": {
             "rmbg": "to get output as png format",
             "srmbg": "To get output as webp format(sticker).",
@@ -67,7 +67,7 @@ async def remove_background(event):
     if Config.REM_BG_API_KEY is None:
         return await eod(
             event,
-            "`You have to set REM_BG_API_KEY in Config vars with API token from remove.bg to use this plugin .`",
+            "You have to set `REM_BG_API_KEY` in Config vars with API token from remove.bg to use this plugin .",
             10,
         )
     cmd = event.pattern_match.group(1)
