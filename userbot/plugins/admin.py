@@ -92,6 +92,33 @@ menu_category = "admin"
 from telethon.tl.types import ChannelParticipantsKicked as banned
 
 
+
+from telethon.tl.types import ChannelParticipantsAdmins as admin
+
+@legend.legend_cmd(
+    pattern="demoteall$",
+    command=("demoteall", menu_category),
+    info={
+        "header": "To Demote all members whom u have promoted ",
+        "description": "It Help U to demote all those member whom u have promoted in this chat",
+        "usage": [
+            "{tr}demall",
+        ],
+    },
+    groups_only=True,
+    require_admin=True,
+)
+asynce def shj(e):
+    sr = await e.client.get_participants(e.chat.id,filter=admin)
+    et = 0
+    for i in sr:
+        try:
+            await e.client.edit_admin(e.chat.id,i.id,change_info=False,delete_messages=False,ban_users=False,invite_users=False,manage_call=False,add_admins=False,anonymous=False)
+            et += 1
+        except Exception as r: await eor(e,str(r))
+    await eor(e,f"Demoted {et} admins !")
+
+
 @legend.legend_cmd(
     pattern="getbanned$",
     command=("getbanned", menu_category),
@@ -290,13 +317,6 @@ async def demote(event):
         dmt_pic,
         caption=f"Demoted Successfully\nUser:[{user.first_name}](tg://{user.id})\n Chat: {event.chat.title}",
     )
-    if BOTLOG:
-        await event.client.send_message(
-            BOTLOG_CHATID,
-            f"#DEMOTE\
-            \nUSER: [{user.first_name}](tg://user?id={user.id})\
-            \nCHAT: {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
-        )
 
 
 @legend.legend_cmd(
