@@ -732,9 +732,9 @@ async def _iundlt(event):  # sourcery no-metrics
             ).user
             _media_type = media_type(msg.old)
             if _media_type is None:
-                deleted_msg += f"\n☞ __{msg.old.message}__ **Sent by** {_format.mentionuser(sweet.first_name ,sweet.id)}"
+                deleted_msg += f"\n\n✓ {_format.mentionuser(sweet.first_name ,sweet.id)} : __{msg.old.message}__"
             else:
-                deleted_msg += f"\n☞ __{_media_type}__ **Sent by** {_format.mentionuser(sweet.first_name ,sweet.id)}"
+                deleted_msg += f"\n\n✓ {_format.mentionuser(sweet.first_name ,sweet.id)} :  __{_media_type}__"
             await eor(legendevent, deleted_msg)
     else:
         main_msg = await eor(legendevent, deleted_msg)
@@ -745,10 +745,10 @@ async def _iundlt(event):  # sourcery no-metrics
             _media_type = media_type(msg.old)
             if _media_type is None:
                 await main_msg.reply(
-                    f"{msg.old.message}\n**Sent by** {_format.mentionuser(sweet.first_name ,sweet.id)}"
+                    f"✓ {_format.mentionuser(sweet.first_name ,sweet.id)} :\n __{msg.old.message}__"
                 )
             else:
                 await main_msg.reply(
-                    f"{msg.old.message}\n**Sent by** {_format.mentionuser(sweet.first_name ,sweet.id)}",
+                    f"✓ {_format.mentionuser(sweet.first_name ,sweet.id)} \n __{msg.old.message}__",
                     file=msg.old.media,
                 )
