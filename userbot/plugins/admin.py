@@ -108,7 +108,7 @@ from telethon.tl.types import ChannelParticipantsAdmins as admin
     groups_only=True,
     require_admin=True,
 )
-asynce def shj(e):
+async def shj(e):
     sr = await e.client.get_participants(e.chat.id, filter=admin)
     et = 0
         newrights = ChatAdminRights(
