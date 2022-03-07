@@ -51,7 +51,7 @@ async def _(event):
 @legend.legend_cmd(
     pattern="hping$",
     command=("hping", menu_category),
-    info={"header": "Shows the server ping with extra animation", "usage": "{tr}fping"},
+    info={"header": "Shows the server ping with extra animation", "usage": "{tr}hping"},
 )
 async def _(event):
     "To check ping with animation"
