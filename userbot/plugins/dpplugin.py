@@ -8,17 +8,11 @@ import asyncio
 import os
 import random
 import re
-import urllib
-
-import requests
-from telethon.tl import functions
-
-import asyncio
-import os
-import random
 import shutil
+import urllib
 from datetime import datetime
 
+import requests
 from PIL import Image, ImageDraw, ImageFont
 from pySmartDL import SmartDL
 from telethon.tl import functions
@@ -271,6 +265,7 @@ async def autopic(event):
         except:
             return
 
+
 COLLECTION_STRING = [
     "pokemon-serena-wallpaper",
     "hd-pokemon-iphone-wallpapers",
@@ -311,9 +306,7 @@ async def animepp():
 
 @borg.on(admin_cmd(pattern="anmdp ?(.*)"))
 async def main(event):
-    await event.edit(
-        "**Starting Anime Profile Pic...\n\nDone !!! Check Your DP**"
-    )
+    await event.edit("**Starting Anime Profile Pic...\n\nDone !!! Check Your DP**")
 
     while True:
 
@@ -326,4 +319,3 @@ async def main(event):
         os.system("rm -rf donottouch.jpg")
 
         await asyncio.sleep(600)
-
