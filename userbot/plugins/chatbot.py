@@ -31,11 +31,11 @@ tired_response = [
 
 
 @legend.legend_cmd(
-    pattern="addai$",
-    command=("addai", menu_category),
+    pattern="addchatbot$",
+    command=("addchatbot", menu_category),
     info={
         "header": "To add ai chatbot to replied account.",
-        "usage": "{tr}addai <reply>",
+        "usage": "{tr}addchatbot <reply>",
     },
 )
 async def add_chatbot(event):
@@ -68,11 +68,11 @@ async def add_chatbot(event):
 
 
 @legend.legend_cmd(
-    pattern="rmai$",
-    command=("rmai", menu_category),
+    pattern="rmchatbot$",
+    command=("rmchatbot", menu_category),
     info={
         "header": "To stop ai for that user messages.",
-        "usage": "{tr}rmai <reply>",
+        "usage": "{tr}rmchatbot <reply>",
     },
 )
 async def remove_chatbot(event):
@@ -94,15 +94,15 @@ async def remove_chatbot(event):
 
 
 @legend.legend_cmd(
-    pattern="delai( -a)?",
-    command=("delai", menu_category),
+    pattern="delchatbot( -a)?",
+    command=("delchatbot", menu_category),
     info={
         "header": "To delete ai in this chat.",
         "description": "To stop ai for all enabled users in this chat only..",
         "flags": {"a": "To stop in all chats"},
         "usage": [
-            "{tr}delai",
-            "{tr}delai -a",
+            "{tr}delchatbot",
+            "{tr}delchatbot -a",
         ],
     },
 )
@@ -136,16 +136,16 @@ async def delete_chatbot(event):
 
 
 @legend.legend_cmd(
-    pattern="listai( -a)?$",
-    command=("listai", menu_category),
+    pattern="listchatbot( -a)?$",
+    command=("listchatbot", menu_category),
     info={
         "header": "shows the list of users for whom you enabled ai",
         "flags": {
             "a": "To list ai enabled users in all chats",
         },
         "usage": [
-            "{tr}listai",
-            "{tr}listai -a",
+            "{tr}listchatbot",
+            "{tr}listchatbot -a",
         ],
     },
 )
