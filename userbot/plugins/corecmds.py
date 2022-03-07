@@ -100,12 +100,11 @@ async def install(event):
                         legend, "First Turn ON Eval CMD = `.setdb EVAL ON`"
                     )
             except Exception as e:
-                os.
                 await eod(legend, f"{e}")
-                return
+                return os.remove(downloaded_file_name)
         except Exception as e:
             await eod(legend, f"**Failed to Install** \n`Error`\n{str(e)}")
-            return 
+            return os.remove(downloaded_file_name)
 
 
 @legend.legend_cmd(
