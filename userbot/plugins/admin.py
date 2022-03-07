@@ -120,10 +120,10 @@ async def shj(e):
     rank = "????"
     for i in sr:
         try:
-            await event.client(EditAdminRequest(event.chat_id, i.id, newrights, rank))
+            await e.client(EditAdminRequest(event.chat_id, i.id, newrights, rank))
             et += 1
         except BadRequestError:
-            return await legendevent.edit(NO_PERM)
+            return await eod(e, NO_PERM)
     await eor(e, f"Demoted {et} admins !")
 
 
