@@ -106,6 +106,7 @@ async def get_imposter_img(text: str) -> str:
     },
 )
 async def sayliecmd(event):
+    "Try With Ur Self"
     text = event.pattern_match.group(1)
     reply_to = await reply_id(event)
     reply = await event.get_reply_message()
