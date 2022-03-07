@@ -120,7 +120,7 @@ async def shj(e):
     rank = "????"
     for i in sr:
         try:
-            await e.client(EditAdminRequest(event.chat_id, i.id, newrights, rank))
+            await e.client(EditAdminRequest(e.chat_id, i.id, newrights, rank))
             et += 1
         except BadRequestError:
             return await eod(e, NO_PERM)
