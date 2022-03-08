@@ -85,7 +85,9 @@ async def endecrypt(event):
             except Exception as e:
                 return await eor(event, e)
         elif mediatype is None:
-            result = base64.b64encode(bytes(f"{reply_msg.message}", "utf-8")).decode("utf-8")
+            result = base64.b64encode(bytes(f"{reply_msg.message}", "utf-8")).decode(
+                "utf-8"
+            )
             results = f"**Encoded : **\n\n`{result}`"
         else:
             legendevent = await eor(event, "`Encoding ...`")
