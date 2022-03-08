@@ -1,7 +1,14 @@
 import asyncio
 import random
 from datetime import datetime
+import random
+import re
+from datetime import datetime
 
+from telethon import Button, functions
+from telethon.events import CallbackQuery
+from telethon.utils import get_display_name
+from ..sql_helper import gban_sql_helper
 from telethon import events
 from telethon.errors import BadRequestError
 from telethon.tl.functions.channels import EditAdminRequest
@@ -17,7 +24,6 @@ from userbot import legend
 
 from ..core.managers import eod, eor
 from ..helpers.utils import _format
-from ..sql_helper.gban_sql_helper import all_gbanned, gbaner, is_gbanned, ungbaner
 from ..sql_helper.globals import gvarstatus
 from ..sql_helper.mute_sql import is_muted, mute, unmute
 from . import (
@@ -237,90 +243,77 @@ async def _(legendevent):
 )
 async def lolgban(event):  # sourcery no-metrics
     "To ban user in every group where you are admin."
+    start_date = str(datetime.now().strftime("%B %d, %Y"))
     legend = await eor(event, "`Gbanning...`")
-    reason = ""
-    await event.get_reply_message()
-    if event.reply_to_msg_id:
-        userid = (await event.get_reply_message()).sender_id
-        try:
-            reason = event.text.split(" ", maxsplit=1)[1]
-        except IndexError:
-            reason = ""
-    elif event.pattern_match.group(1):
-        usr = event.text.split(" ", maxsplit=2)[1]
-        userid = await get_user_id(usr)
-        try:
-            reason = event.text.split(" ", maxsplit=2)[2]
-        except IndexError:
-            reason = ""
-    elif event.is_private:
-        userid = (await event.get_chat()).id
-        try:
-            reason = event.text.split(" ", maxsplit=1)[1]
-        except IndexError:
-            reason = ""
+    if event.is_private:
+        user = await event.get_chat()
+        reason = event.pattern_match.group(2)
     else:
-        return await eod(
-            legend, "**To gban a user i need a userid or reply to his/her message!!**"
-        )
-    name = (await event.client.get_entity(userid)).first_name
+        user, reason = await get_user_from_event(event, secondgroup=True)
+        if not user:
+            return
+    if not reason:
+        reason = "Not mentioned"
     chats = 0
-    if userid == 5122474448:
+    if user.id == 5122474448:
         return await eod(legend, "🥴 **Nashe me hai kya lawde ‽**")
-    if is_gbanned(userid):
-        return await eor(
-            legend,
-            "This kid is already gbanned and added to my **Gban Watch!!**",
+    if not gban_sql_helper.is_gbanned(user.id):
+        async for gfuck in event.client.iter_dialogs():
+            if gfuck.is_group or gfuck.is_channel:
+                try:
+                    await event.client.edit_permissions(
+                        gfuck.id, user.id, view_messages=False
+                    )
+                    chats += 1
+                    await legend.edit(f"**Gbanning...** \n**Chats :** __{chats}__")
+                except BaseException:
+                    pass
+        gban_sql_helper.gban(         
+            user.id, get_display_name(user), start_date, user.username, reason
         )
-    async for gfuck in event.client.iter_dialogs():
-        if gfuck.is_group or gfuck.is_channel:
-            try:
-                await event.client.edit_permissions(
-                    gfuck.id, userid, view_messages=False
-                )
-                chats += 1
-                await legend.edit(f"**Gbanning...** \n**Chats :** __{chats}__")
-            except BaseException:
-                pass
-    gbaner(userid)
-    a = gvarstatus("ABUSE_PIC")
-    if a is not None:
-        b = a.split(" ")
-        c = []
-        for d in b:
-            c.append(d)
-        gbpic = random.choice(c)
+        a = gvarstatus("ABUSE_PIC")
+        if a is not None:
+            b = a.split(" ")
+            c = []
+            for d in b:
+                 c.append(d)
+                 gbpic = random.choice(c)
+        else:
+            gbpic = gban_pic
+        gmsg = f"🥴 [{user.first_name}](tg://user?id={user.id}) **Gbanned** By {mention} \n\n📍 Added to Gban Watch!!\n**🔰 Total Chats :**  `{chats}`"
+        if reason != "":
+            gmsg += f"\n**🔰 Reason :**  `{reason}`"
+        ogmsg = f"[{user.first_name}](tg://user?id={user.id}) **Is now GBanned by** {mention} **in**  `{chats}`  **Chats!! 😏**\n\n**📍 Also Added to Gban Watch!!**"
+        if reason != "":
+            ogmsg += f"\n**🔰 Reason :**  `{reason}`"
+        if gvarstatus("ABUSE") == "ON":
+            await event.client.send_file(event.chat_id, gbpic, caption=gmsg)
+            await legend.delete()
+        else:
+            await legend.edit(ogmsg)
+        if reason:
+            await event.client.send_message(
+                BOTLOG_CHATID,
+                f"#GBAN\
+                \nGlobal Ban\
+                \n**User : **[{user.first_name}](tg://user?id={user.id})\
+                \n**ID : **`{user.id}`\
+                \n**Reason :** `{reason}`\
+                \n__Banned in {chats} groups__",
+            )
+        else:
+            await event.client.send_message(
+                BOTLOG_CHATID,
+                f"#GBAN\
+                \nGlobal Ban\
+                \n**User : **[{user.first_name}](tg://user?id={user.id})\
+                \n**ID : **`{user.id}`\
+                \n__Banned in {chats} groups__",
+             )
     else:
-        gbpic = gban_pic
-    gmsg = f"🥴 [{name}](tg://user?id={userid}) **Gbanned** By {mention} \n\n📍 Added to Gban Watch!!\n**🔰 Total Chats :**  `{chats}`"
-    if reason != "":
-        gmsg += f"\n**🔰 Reason :**  `{reason}`"
-    ogmsg = f"[{name}](tg://user?id={userid}) **Is now GBanned by** {mention} **in**  `{chats}`  **Chats!! 😏**\n\n**📍 Also Added to Gban Watch!!**"
-    if reason != "":
-        ogmsg += f"\n**🔰 Reason :**  `{reason}`"
-    if gvarstatus("ABUSE") == "ON":
-        await event.client.send_file(event.chat_id, gbpic, caption=gmsg)
-        await legend.delete()
-    else:
-        await legend.edit(ogmsg)
-    if reason:
-        await event.client.send_message(
-            BOTLOG_CHATID,
-            f"#GBAN\
-            \nGlobal Ban\
-            \n**User : **[{name}](tg://user?id={userid})\
-            \n**ID : **`{userid}`\
-            \n**Reason :** `{reason}`\
-            \n__Banned in {chats} groups__",
-        )
-    else:
-        await event.client.send_message(
-            BOTLOG_CHATID,
-            f"#GBAN\
-            \nGlobal Ban\
-            \n**User : **[{name}](tg://user?id={userid})\
-            \n**ID : **`{userid}`\
-            \n__Banned in {chats} groups__",
+        await eod(
+            event,
+            f"[{user.first_name}](tg://user?id={user.id}) __is already in gbanned list__",
         )
 
 
@@ -344,42 +337,50 @@ async def get_user_id(ids):
 async def lolgban(event):
     "To unban the person from every group where you are admin."
     legend = await eor(event, "`Ungban in progress...`")
-    if event.reply_to_msg_id:
-        userid = (await event.get_reply_message()).sender_id
-    elif event.pattern_match.group(1):
-        userid = await get_user_id(event.pattern_match.group(1))
-    elif event.is_private:
-        userid = (await event.get_chat()).id
+    if event.is_private:
+        user = await event.get_chat()
+        reason = event.pattern_match.group(2)
+
     else:
-        return await eor(legend, "`Reply to a user or give their userid... `")
-    name = (await event.client.get_entity(userid)).first_name
+        reason = event.pattern_match.group(2)
+        if reason != "all":
+            user, reason = await get_user_from_event(event, secondgroup=True)
+            if not user:
+                return
+    if reason == "all":
+        gban_sql_helper.ungban_all()
+        return await eod(event, "__Ok! I have ungbanned everyone successfully.__")
     chats = 0
-    if not is_gbanned(userid):
-        return await eor(legend, "`User is not gbanned.`")
-    async for gfuck in event.client.iter_dialogs():
-        if gfuck.is_group or gfuck.is_channel:
-            try:
-                await event.client.edit_permissions(
-                    gfuck.id, userid, view_messages=True
-                )
-                chats += 1
-                await legend.edit(
-                    f"**Ungban in progress...** \n**Chats :** __{chats}__"
-                )
-            except BaseException:
-                pass
-    ungbaner(userid)
-    await legend.edit(
-        f"📍 [{name}](tg://user?id={userid}) **is now Ungbanned from `{chats}` chats and removed from Gban Watch!!**",
-    )
-    await event.client.send_message(
-        BOTLOG_CHATID,
-        f"#UNGBAN\
-        \nGlobal Unban\
-        \n**User : **[{name}](tg://user?id={userid})\
-        \n**ID : **`{userid}`\
-        \n__Unbanned in {chats} groups__",
-    )
+    if gban_sql_helper.is_gbanned(user.id):
+        gban_sql_helper.gbanned(user.id)
+        async for gfuck in event.client.iter_dialogs():
+            if gfuck.is_group or gfuck.is_channel:
+                try:
+                    await event.client.edit_permissions(
+                        gfuck.id, user.id, view_messages=True
+                    )
+                    chats += 1
+                    await legend.edit(
+                        f"**Ungban in progress...** \n**Chats :** __{chats}__"
+                    )
+                except BaseException:
+                    pass
+        await legend.edit(
+            f"📍 [{user.first_name}](tg://user?id={user.id}) **is now Ungbanned from `{chats}` chats and removed from Gban Watch!!**",
+        )
+        await event.client.send_message(
+            BOTLOG_CHATID,
+            f"#UNGBAN\
+            \nGlobal Unban\
+            \n**User : **[{user.first_name}](tg://user?id={user.id})\
+            \n**ID : **`{user.id}`\
+            \n__Unbanned in {chats} groups__",
+        )
+    else:
+        await eod(
+            event,
+            f"[{user.first_name}](tg://user?id={user.id}) __is not yet gbanned__",
+        )
 
 
 @legend.legend_cmd(
@@ -393,21 +394,19 @@ async def lolgban(event):
 async def gablist(event):
     "Shows you the list of all gbanned users by you."
     hmm = await eor(event, "`Fetching Gbanned users...`")
-    gbanned_users = all_gbanned()
-    GBANNED_LIST = "**Gbanned Users :**\n"
+    gbanned_users = gban_sql_helper.get_all_gbanned()
+    GBANNED_PMs = "**Current gbanned**\n\n"
     if len(gbanned_users) > 0:
         for user in gbanned_users:
-            hel = user.chat_id
-            legend = int(hel)
-            try:
-                tity = await event.client.get_entity(legend)
-                name = tity.first_name
-            except ValueError:
-                name = "User"
-            GBANNED_LIST += f"📍 [{name}](tg://user?id={legend}) (`{legend}`)\n"
+            GBANNED_PMs += f"• 👤 {_format.mentionuser(user.first_name , user.user_id)}\n**ID:** `{user.user_id}`\n**UserName:** @{user.username}\n**Date: **__{user.date}__\n**Reason: **__{user.reason}__\n\n"
     else:
-        GBANNED_LIST = "No Gbanned Users!!"
-    await hmm.edit(GBANNED_LIST)
+        GBANNED_PMs = "`You haven't approved anyone yet`"
+    await eor(
+        event,
+        GBANNED_PMs,
+        file_name="gbanneduser.txt",
+        caption="`Current Gbanned Users`",
+    )
 
 
 @bot.on(events.ChatAction)
@@ -415,7 +414,7 @@ async def _(event):
     if event.user_joined or event.added_by:
         user = await event.get_user()
         chat = await event.get_chat()
-        if is_gbanned(str(user.id)):
+        if gban_sql_helper(str(user.id)):
             if chat.admin_rights:
                 try:
                     await event.client.edit_permissions(
