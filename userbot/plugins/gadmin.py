@@ -17,7 +17,7 @@ from userbot import legend
 
 from ..core.managers import eod, eor
 from ..helpers.utils import _format
-from ..helpers.utils.events get_user_from_event
+from ..helpers.utils.events import get_user_from_event
 from ..sql_helper import gban_sql_helper
 from ..sql_helper.globals import gvarstatus
 from ..sql_helper.mute_sql import is_muted, mute, unmute
@@ -388,7 +388,7 @@ async def gablist(event):
     GBANNED_PMs = "**Current gbanned**\n\n"
     if len(gbanned_users) > 0:
         for user in gbanned_users:
-            GBANNED_PMs += f"• 👤 {_format.mentionuser(user.first_name , user.user_id)}\n**ID:** `{user.user_id}`\n**UserName:** @{user.username}\n**Date: **__{user.date}__\n**Reason: **__{user.reason}__\n\n"
+            GBANNED_PMs += f"• 📜 {_format.mentionuser(user.first_name , user.user_id)}\n**ID:** `{user.user_id}`\n**UserName:** @{user.username}\n**Date: **__{user.date}__\n**Reason: **__{user.reason}__\n\n"
     else:
         GBANNED_PMs = "`You haven't approved anyone yet`"
     await eor(
