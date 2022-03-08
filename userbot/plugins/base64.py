@@ -53,7 +53,7 @@ async def gethash(hash_q):
 
 
 @legend.legend_cmd(
-    pattern="base (en|de)(?:\s|$)([\s\S]*)",
+    pattern="base(?:\s|$)([\s\S]*)",
     command=("base", menu_category),
     info={
         "header": "Find the base64 encoding or decoding of the given string.",
