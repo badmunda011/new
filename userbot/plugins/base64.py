@@ -73,13 +73,13 @@ async def endecrypt(event):
     if reply_msg:
         tol = reply_msg.text
     else:
-        tol = event.text[8:]
+        tol = event.text[9:]
     if tol == "":
         return await eod(event, "I need something to encode \ncheck `.help base`")
     if "-e" in type:
         if tol:
             try:
-                result = base64.b64encode(bytes(f"{tol}", "utf-8")).decode("utf-8")
+                result = base64.b64encode(bytes(tol, "utf-8")).decode("utf-8")
                 results = f"**Encoded : **\n\n`{result}`"
                 return await eor(event, results)
             except Exception as e:
@@ -105,7 +105,7 @@ async def endecrypt(event):
             os.remove(downloaded_file_name)
         await eor(event, results, file_name="encodedfile.txt", caption="It's Encoded")
         return
-    elif type == "-d":
+    elif "-d" in type:
         try:
             lething = str(base64.b64decode(bytes(tol, "utf-8"), validate=True))[2:]
             await eor(event, "**Decoded  :**\n\n`" + lething[:-1] + "`")
