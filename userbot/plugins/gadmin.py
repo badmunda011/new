@@ -16,7 +16,8 @@ from telethon.utils import get_display_name
 from userbot import legend
 
 from ..core.managers import eod, eor
-from ..helpers.utils import _format, get_user_from_event
+from ..helpers.utils import _format
+from ..helpers.utils.events get_user_from_event
 from ..sql_helper import gban_sql_helper
 from ..sql_helper.globals import gvarstatus
 from ..sql_helper.mute_sql import is_muted, mute, unmute
@@ -313,7 +314,7 @@ async def get_user_id(ids):
 
 
 @legend.legend_cmd(
-    pattern="ungban(?:\s|$)([\s\S]*)",
+    pattern="(ungban|unglobalban)(?:\s|$)([\s\S]*)",
     command=("ungban", menu_category),
     info={
         "header": "To unban the person from every group where you are admin.",
