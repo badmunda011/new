@@ -68,7 +68,7 @@ async def gethash(hash_q):
 async def endecrypt(event):
     "To encode or decode the string using base64"
     reply_msg = await event.get_reply_message()
-    legendevent = event
+    mediatype = media_type(reply_msg)
     type = event.text[5:7]
     if reply_msg:
         tol = reply_msg.text
@@ -78,12 +78,13 @@ async def endecrypt(event):
     if tol == "":
         return await eod(event, "I need something to encode")
     if type == "en":
-        result = base64.b64encode(bytes(tol, "utf-8")).decode("utf-8")
-        result = f"**Encoded : **\n\n`{result}`"
-        mediatype = media_type(reply_msg)
-        if mediatype is None:
+        if tol:
+            result = base64.b64encode(bytes(tol, "utf-8")).decode("utf-8")
+            results = f"**Encoded : **\n\n`{result}`"
+            await eor(event, results)
+        elif mediatype is None:
             result = base64.b64encode(bytes(reply_msg.message, "utf-8")).decode("utf-8")
-            result = f"**Encoded : **\n\n`{result}`"
+            results = f"**Encoded : **\n\n`{result}`"
         else:
             legendevent = await eor(event, "`Encoding ...`")
             c_time = time.time()
@@ -96,10 +97,10 @@ async def endecrypt(event):
             )
             legendevent = await eor(event, "`Encoding ...`")
             with open(downloaded_file_name, "rb") as image_file:
-                result = base64.b64encode(image_file.read()).decode("utf-8")
+                results = base64.b64encode(image_file.read()).decode("utf-8")
             os.remove(downloaded_file_name)
         await eor(
-            legendevent, result, file_name="encodedfile.txt", caption="It's Encoded"
+            legendevent, results, file_name="encodedfile.txt", caption="It's Encoded"
         )
     elif type == "de":
         try:
