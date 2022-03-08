@@ -16,18 +16,12 @@ from telethon.utils import get_display_name
 from userbot import legend
 
 from ..core.managers import eod, eor
-from ..helpers.utils import _format
+from ..helpers.utils import _format, get_user_from_event
 from ..sql_helper import gban_sql_helper
 from ..sql_helper.globals import gvarstatus
 from ..sql_helper.mute_sql import is_muted, mute, unmute
-from . import (
-    BOTLOG,
-    BOTLOG_CHATID,
-    admin_groups,
-    gban_pic,
-    mention,
-)
-from ..helpers.utils import _format, get_user_from_event, reply_id
+from . import BOTLOG, BOTLOG_CHATID, admin_groups, gban_pic, mention
+
 menu_category = "admin"
 
 BANNED_RIGHTS = ChatBannedRights(
