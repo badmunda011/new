@@ -72,10 +72,9 @@ async def endecrypt(event):
     type = event.text[7:9]
     if reply_msg:
         tol = reply_msg.text
-        file = reply_msg.media
+        reply_msg.media
     else:
         tol = event.text[9:]
-        file = None
     if tol == "":
         return await eod(event, "I need something to encode")
     if type == "en":
@@ -104,11 +103,7 @@ async def endecrypt(event):
         )
     elif type == "de":
         try:
-            lething = str(
-                base64.b64decode(
-                    bytes(tol, "utf-8"), validate=True
-                )
-            )[2:]
+            lething = str(base64.b64decode(bytes(tol, "utf-8"), validate=True))[2:]
             await eor(event, "**Decoded  :**\n\n`" + lething[:-1] + "`")
         except Exception as e:
             await eod(event, f"**Error:**\n__{e}__")
