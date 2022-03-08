@@ -100,7 +100,7 @@ SHRUG = [
 
 
 @legend.legend_cmd(
-    pattern="gender ([\s\S]*)",
+    pattern="gender$",
     command=("gender", menu_category),
     info={
         "header": "try out yourself to see",
@@ -113,7 +113,7 @@ async def metoo(e):
 
 
 @legend.legend_cmd(
-    pattern="shrug ([\s\S]*)",
+    pattern="shrug$",
     command=("shrug", menu_category),
     info={
         "header": "try out yourself to see",
@@ -126,7 +126,7 @@ async def metoo(e):
 
 
 @legend.legend_cmd(
-    pattern="dome ([\s\S]*)",
+    pattern="dome$",
     command=("dome", menu_category),
     info={
         "header": "try out yourself to see",
@@ -139,7 +139,7 @@ async def metoo(e):
 
 
 @legend.legend_cmd(
-    pattern="mesed ([\s\S]*)",
+    pattern="mesed$",
     command=("mesed", menu_category),
     info={
         "header": "try out yourself to see",
@@ -152,7 +152,7 @@ async def metoo(e):
 
 
 @legend.legend_cmd(
-    pattern="medead ([\s\S]*)",
+    pattern="medead$",
     command=("medead", menu_category),
     info={
         "header": "try out yourself to see",
@@ -165,7 +165,7 @@ async def metoo(e):
 
 
 @legend.legend_cmd(
-    pattern="confused ([\s\S]*)",
+    pattern="confused$",
     command=("confused", menu_category),
     info={
         "header": "try out yourself to see",
@@ -178,7 +178,7 @@ async def metoo(e):
 
 
 @legend.legend_cmd(
-    pattern="lobb ([\s\S]*)",
+    pattern="lobb$",
     command=("lobb", menu_category),
     info={
         "header": "try out yourself to see",
@@ -191,7 +191,7 @@ async def metoo(e):
 
 
 @legend.legend_cmd(
-    pattern="wut ([\s\S]*)",
+    pattern="wut$",
     command=("wut", menu_category),
     info={
         "header": "try out yourself to see",
@@ -204,7 +204,7 @@ async def metoo(e):
 
 
 @legend.legend_cmd(
-    pattern="wave ([\s\S]*)",
+    pattern="wave$",
     command=("wave", menu_category),
     info={
         "header": "try out yourself to see",
@@ -217,7 +217,7 @@ async def metoo(e):
 
 
 @legend.legend_cmd(
-    pattern="hehe ([\s\S]*)",
+    pattern="hehe$",
     command=("hehe", menu_category),
     info={
         "header": "try out yourself to see",
