@@ -53,7 +53,7 @@ async def gethash(hash_q):
 
 
 @legend.legend_cmd(
-    pattern="base (en|de) ([\s\S]*)",
+    pattern="base (en|de)(?:\s|$)([\s\S]*)",
     command=("base", menu_category),
     info={
         "header": "Find the base64 encoding or decoding of the given string.",
@@ -67,42 +67,47 @@ async def gethash(hash_q):
 )
 async def endecrypt(event):
     "To encode or decode the string using base64"
-    string = "".join(event.text.split(maxsplit=2)[2:])
+    reply_msg = await event.get_reply_message()
     legendevent = event
-    if event.pattern_match.group(1) == "en":
-        if string:
-            result = base64.b64encode(bytes(string, "utf-8")).decode("utf-8")
+        reply_msg = await event.get_reply_message()
+    type = event.text[7:9]
+    if reply_msg:
+        tol = reply_msg.text
+        file = reply_msg.media
+    else:
+        tol = event.text[9:]
+        file = None
+    if tol == "":
+        return await eod(event, "I need something to encode")
+    if type == "en":
+        result = base64.b64encode(bytes(tol, "utf-8")).decode("utf-8")
+        result = f"**Encoded : **\n\n`{result}`"
+        mediatype = media_type(reply_msg)
+        if mediatype is None:
+            result = base64.b64encode(bytes(reply_msg.message, "utf-8")).decode("utf-8")
             result = f"**Encoded : **\n\n`{result}`"
         else:
-            reply = await event.get_reply_message()
-            if not reply:
-                return await eod(event, "`What should i encode`")
-            mediatype = media_type(reply)
-            if mediatype is None:
-                result = base64.b64encode(bytes(reply.message, "utf-8")).decode("utf-8")
-                result = f"**Encoded : **\n\n`{result}`"
-            else:
-                legendevent = await eor(event, "`Encoding ...`")
-                c_time = time.time()
-                downloaded_file_name = await event.client.download_media(
-                    reply,
-                    Config.TMP_DOWNLOAD_DIRECTORY,
-                    progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                        progress(d, t, legendevent, c_time, "trying to download")
-                    ),
-                )
-                legendevent = await eor(event, "`Encoding ...`")
-                with open(downloaded_file_name, "rb") as image_file:
-                    result = base64.b64encode(image_file.read()).decode("utf-8")
-                os.remove(downloaded_file_name)
+            legendevent = await eor(event, "`Encoding ...`")
+            c_time = time.time()
+            downloaded_file_name = await event.client.download_media(
+                reply_msg,
+                Config.TMP_DOWNLOAD_DIRECTORY,
+                progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                    progress(d, t, legendevent, c_time, "trying to download")
+                ),
+            )
+            legendevent = await eor(event, "`Encoding ...`")
+            with open(downloaded_file_name, "rb") as image_file:
+                result = base64.b64encode(image_file.read()).decode("utf-8")
+            os.remove(downloaded_file_name)
         await eor(
             legendevent, result, file_name="encodedfile.txt", caption="It's Encoded"
         )
-    else:
+    elif type == "de":
         try:
             lething = str(
                 base64.b64decode(
-                    bytes(event.pattern_match.group(2), "utf-8"), validate=True
+                    bytes(tol, "utf-8"), validate=True
                 )
             )[2:]
             await eor(event, "**Decoded  :**\n\n`" + lething[:-1] + "`")
