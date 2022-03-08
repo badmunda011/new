@@ -331,12 +331,14 @@ async def loban(event):
     else:
         reason = event.pattern_match.group(2)
         if reason != "all":
-            user, reason = await get_user_from_event(event)
+            user, reason = await get_user_from_event(event, secondgroup=True)
             if not user:
                 return
     if reason == "all":
         gban_sql_helper.ungban_all()
         return await eod(event, "__Ok! I have ungbanned everyone successfully.__")
+    if not reason:
+        reason = "Not Mentioned."
     chats = 0
     if gban_sql_helper.is_gbanned(user.id):
         gban_sql_helper.gbanned(user.id)
