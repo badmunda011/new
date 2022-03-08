@@ -104,7 +104,7 @@ SHRUG = [
     command=("gender", menu_category),
     info={
         "header": "try out yourself to see",
-        "usage": "{tr}gender",
+        "usage": "{tr}gender <ur name first letter>",
     },
 )
 async def metoo(e):
@@ -117,7 +117,7 @@ async def metoo(e):
     command=("shrug", menu_category),
     info={
         "header": "try out yourself to see",
-        "usage": "{tr}shrug",
+        "usage": "{tr}shrug <ur name first letter>",
     },
 )
 async def metoo(e):
@@ -130,7 +130,7 @@ async def metoo(e):
     command=("dome", menu_category),
     info={
         "header": "try out yourself to see",
-        "usage": "{tr}dome",
+        "usage": "{tr}dome <ur name first letter>",
     },
 )
 async def metoo(e):
@@ -143,7 +143,7 @@ async def metoo(e):
     command=("mesed", menu_category),
     info={
         "header": "try out yourself to see",
-        "usage": "{tr}mesed",
+        "usage": "{tr}mesed <ur name first letter>",
     },
 )
 async def metoo(e):
@@ -156,7 +156,7 @@ async def metoo(e):
     command=("medead", menu_category),
     info={
         "header": "try out yourself to see",
-        "usage": "{tr}medead",
+        "usage": "{tr}medead <ur name first letter>",
     },
 )
 async def metoo(e):
@@ -169,7 +169,7 @@ async def metoo(e):
     command=("confused", menu_category),
     info={
         "header": "try out yourself to see",
-        "usage": "{tr}confused",
+        "usage": "{tr}confused <ur name first letter>",
     },
 )
 async def metoo(e):
@@ -182,7 +182,7 @@ async def metoo(e):
     command=("lobb", menu_category),
     info={
         "header": "try out yourself to see",
-        "usage": "{tr}lobb",
+        "usage": "{tr}lobb <ur name first letter>",
     },
 )
 async def metoo(e):
@@ -195,7 +195,7 @@ async def metoo(e):
     command=("wut", menu_category),
     info={
         "header": "try out yourself to see",
-        "usage": "{tr}wut",
+        "usage": "{tr}wut <ur name first letter>",
     },
 )
 async def metoo(e):
@@ -208,7 +208,7 @@ async def metoo(e):
     command=("wave", menu_category),
     info={
         "header": "try out yourself to see",
-        "usage": "{tr}wave",
+        "usage": "{tr}wavea <ur name first letter>",
     },
 )
 async def metoo(e):
@@ -221,7 +221,7 @@ async def metoo(e):
     command=("hehe", menu_category),
     info={
         "header": "try out yourself to see",
-        "usage": "{tr}hehe",
+        "usage": "{tr}hehe <ur name first letter>",
     },
 )
 async def metoo(e):
