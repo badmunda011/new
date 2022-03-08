@@ -1,14 +1,7 @@
 import asyncio
 import random
 from datetime import datetime
-import random
-import re
-from datetime import datetime
 
-from telethon import Button, functions
-from telethon.events import CallbackQuery
-from telethon.utils import get_display_name
-from ..sql_helper import gban_sql_helper
 from telethon import events
 from telethon.errors import BadRequestError
 from telethon.tl.functions.channels import EditAdminRequest
@@ -24,6 +17,7 @@ from userbot import legend
 
 from ..core.managers import eod, eor
 from ..helpers.utils import _format
+from ..sql_helper import gban_sql_helper
 from ..sql_helper.globals import gvarstatus
 from ..sql_helper.mute_sql import is_muted, mute, unmute
 from . import (
@@ -268,7 +262,7 @@ async def lolgban(event):  # sourcery no-metrics
                     await legend.edit(f"**Gbanning...** \n**Chats :** __{chats}__")
                 except BaseException:
                     pass
-        gban_sql_helper.gban(         
+        gban_sql_helper.gban(
             user.id, get_display_name(user), start_date, user.username, reason
         )
         a = gvarstatus("ABUSE_PIC")
@@ -276,8 +270,8 @@ async def lolgban(event):  # sourcery no-metrics
             b = a.split(" ")
             c = []
             for d in b:
-                 c.append(d)
-                 gbpic = random.choice(c)
+                c.append(d)
+                gbpic = random.choice(c)
         else:
             gbpic = gban_pic
         gmsg = f"🥴 [{user.first_name}](tg://user?id={user.id}) **Gbanned** By {mention} \n\n📍 Added to Gban Watch!!\n**🔰 Total Chats :**  `{chats}`"
@@ -309,7 +303,7 @@ async def lolgban(event):  # sourcery no-metrics
                 \n**User : **[{user.first_name}](tg://user?id={user.id})\
                 \n**ID : **`{user.id}`\
                 \n__Banned in {chats} groups__",
-             )
+            )
     else:
         await eod(
             event,
@@ -393,7 +387,7 @@ async def lolgban(event):
 )
 async def gablist(event):
     "Shows you the list of all gbanned users by you."
-    hmm = await eor(event, "`Fetching Gbanned users...`")
+    await eor(event, "`Fetching Gbanned users...`")
     gbanned_users = gban_sql_helper.get_all_gbanned()
     GBANNED_PMs = "**Current gbanned**\n\n"
     if len(gbanned_users) > 0:
