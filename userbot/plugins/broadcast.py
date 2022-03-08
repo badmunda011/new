@@ -93,7 +93,7 @@ async def _(event):
     elif type == "-g":
         omk = "Groups"
     await hol.edit(
-        f"**Gcast Executed Successfully !!** \n\n** Sent in :** `{lol} {omk}`\n**📍 Failed in :** `{sed} {omk}`\n**📍 Total :** `{UwU} {omk}`"
+        f"**Gcast Executed Successfully !!** \n\n** Sent in :** `{lol} {omk}`\n**✓ Failed in :** `{sed} {omk}`\n**✓ Total :** `{UwU} {omk}`"
     )
 
 
@@ -107,7 +107,7 @@ async def _(event):
             "{tr}msgto <username/userid/chatid/chatusername> reply to message",
             "{tr}msgto <username/userid/chatid/chatusername> <text>",
         ],
-        "examples": "{tr}msgto @LegendUserBotot just a testmessage",
+        "examples": "{tr}msgto @LegendBot_AI just a testmessage",
     },
 )
 async def legendbroadcast_add(event):
