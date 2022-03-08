@@ -53,7 +53,7 @@ async def gethash(hash_q):
 
 
 @legend.legend_cmd(
-    pattern="base([\s\S]*)",
+    pattern="base(?: |$)([\s\S]*)",
     command=("base", menu_category),
     info={
         "header": "Find the base64 encoding or decoding of the given string.",
@@ -70,7 +70,7 @@ async def endecrypt(event):
     reply_msg = await event.get_reply_message()
     mediatype = media_type(reply_msg)
     type = event.text[5:7]
-    if event.reply_to_msg.id:
+    if event.reply_msg.id:
         tol = reply_msg.text
     else:
         tol = event.text[7:]
