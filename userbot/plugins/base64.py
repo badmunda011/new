@@ -69,7 +69,6 @@ async def endecrypt(event):
     "To encode or decode the string using base64"
     reply_msg = await event.get_reply_message()
     legendevent = event
-        reply_msg = await event.get_reply_message()
     type = event.text[7:9]
     if reply_msg:
         tol = reply_msg.text
