@@ -80,7 +80,7 @@ async def endecrypt(event):
         if tol:
             result = base64.b64encode(bytes(tol, "utf-8")).decode("utf-8")
             results = f"**Encoded : **\n\n`{result}`"
-            return await eor(event, results) 
+            return await eor(event, results)
         if mediatype is None:
             result = base64.b64encode(bytes(reply_msg.message, "utf-8")).decode("utf-8")
             results = f"**Encoded : **\n\n`{result}`"
@@ -98,9 +98,7 @@ async def endecrypt(event):
             with open(downloaded_file_name, "rb") as image_file:
                 results = base64.b64encode(image_file.read()).decode("utf-8")
             os.remove(downloaded_file_name)
-        await eor(
-            event, results, file_name="encodedfile.txt", caption="It's Encoded"
-        )
+        await eor(event, results, file_name="encodedfile.txt", caption="It's Encoded")
         return
     elif type == "-d":
         try:
