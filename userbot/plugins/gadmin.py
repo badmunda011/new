@@ -404,7 +404,7 @@ async def _(event):
     if event.user_joined or event.added_by:
         user = await event.get_user()
         chat = await event.get_chat()
-        if gban_sql_helper(str(user.id)):
+        if gban_sql_helper.is_gbanned(str(user.id)):
             if chat.admin_rights:
                 try:
                     await event.client.edit_permissions(
