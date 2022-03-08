@@ -53,16 +53,16 @@ async def gethash(hash_q):
 
 
 @legend.legend_cmd(
-    pattern="base(?:\s|$)([\s\S]*)",
+    pattern="base([\s\S]*)",
     command=("base", menu_category),
     info={
         "header": "Find the base64 encoding or decoding of the given string.",
         "flags": {
-            "en": "Use this to encode the given text.",
-            "de": "use this to decode the given text.",
+            "-e": "Use this to encode the given text.",
+            "-d": "use this to decode the given text.",
         },
-        "usage": ["{tr}base en <text to encode>", "{tr}base de <encoded text>"],
-        "examples": ["{tr}base en Legenduserbot", "{tr}base de TGVnZW5kQm90"],
+        "usage": ["{tr}base -e <text to encode>", "{tr}base de <encoded text>"],
+        "examples": ["{tr}base -d Legenduserbot", "{tr}base de TGVnZW5kQm90"],
     },
 )
 async def endecrypt(event):
@@ -70,7 +70,7 @@ async def endecrypt(event):
     reply_msg = await event.get_reply_message()
     mediatype = media_type(reply_msg)
     type = event.text[5:7]
-    if reply_msg:
+    if event.reply_to_msg.id:
         tol = reply_msg.text
     else:
         tol = event.text[7:]
@@ -78,11 +78,14 @@ async def endecrypt(event):
         return await eod(event, "I need something to encode")
     if type == "-e":
         if tol:
-            result = base64.b64encode(bytes(tol, "utf-8")).decode("utf-8")
-            results = f"**Encoded : **\n\n`{result}`"
-            return await eor(event, results)
-        if mediatype is None:
-            result = base64.b64encode(bytes(reply_msg.message, "utf-8")).decode("utf-8")
+            try:
+                result = base64.b64encode(bytes(f"{tol}", "utf-8")).decode("utf-8")
+                results = f"**Encoded : **\n\n`{result}`"
+                return await eor(event, results)
+            except Exception as e:
+                return await eor(event, e)
+        elif mediatype is None:
+            result = base64.b64encode(bytes(f"{reply_msg.message}", "utf-8")).decode("utf-8")
             results = f"**Encoded : **\n\n`{result}`"
         else:
             legendevent = await eor(event, "`Encoding ...`")
@@ -106,3 +109,5 @@ async def endecrypt(event):
             await eor(event, "**Decoded  :**\n\n`" + lething[:-1] + "`")
         except Exception as e:
             await eod(event, f"**Error:**\n__{e}__")
+    else:
+        await eod(event, "give me flags")
