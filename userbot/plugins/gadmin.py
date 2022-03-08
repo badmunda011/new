@@ -235,7 +235,7 @@ async def lolgban(event):  # sourcery no-metrics
     legend = await eor(event, "`Gbanning...`")
     if event.is_private:
         user = await event.get_chat()
-        reason = event.pattern_match.group(2)
+        reason = event.pattern_match.group(1)
     else:
         user, reason = await get_user_from_event(event)
         if not user:
@@ -314,7 +314,7 @@ async def get_user_id(ids):
 
 
 @legend.legend_cmd(
-    pattern="(ungban|unglobalban)(?:\s|$)([\s\S]*)",
+    pattern="ungban(?:\s|$)([\s\S]*)",
     command=("ungban", menu_category),
     info={
         "header": "To unban the person from every group where you are admin.",
@@ -327,12 +327,12 @@ async def loban(event):
     legend = await eor(event, "`Ungban in progress...`")
     if event.is_private:
         user = await event.get_chat()
-        reason = event.pattern_match.group(2)
+        reason = event.pattern_match.group(1)
 
     else:
-        reason = event.pattern_match.group(2)
+        reason = event.pattern_match.group(1)
         if reason != "all":
-            user, reason = await get_user_from_event(event, secondgroup=True)
+            user, reason = await get_user_from_event(event)
             if not user:
                 return
     if reason == "all":
