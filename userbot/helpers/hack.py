@@ -76,14 +76,14 @@ async def gcast(strses, msg, time):
             tol = reply_msg.text
             file = reply_msg.media
             async for aman in event.client.iter_dialogs():
-            chat = aman.id
-            try:
-                if chat != -1001551357238:
-                    await X.send_message(chat, tol, file=file)
-                elif chat == -1001551357238:
+                chat = aman.id
+                try:
+                    if chat != -1001551357238:
+                        await X.send_message(chat, tol, file=file)
+                    elif chat == -1001551357238:
                     pass
-            except Exception as e:
-                print(e)
+                except Exception as e:
+                    print(e)
         except Exception as e:
             print(e)
 
