@@ -7,7 +7,6 @@ from telethon import Button, events
 
 api_id = os.environ.get("APP_ID")
 api_hash = os.environ.get("API_HASH")
-token = os.environ.get("BOT_TOKEN")
 
 from userbot import *
 
@@ -315,6 +314,7 @@ keyboard = [
         Button.inline("K", data="Khack"),
         Button.inline("L", data="Lhack"),
         Button.inline("M", data="Mhack"),
+        Button.inline("I", data="Ihack"),
     ],
     [Button.inline("Back", data="osg")],
 ]
@@ -573,6 +573,9 @@ async def users(event):
         )
 
 
+
+
+
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Lhack")))
 async def users(event):
     async with tgbot.conversation(event.chat_id) as x:
@@ -669,3 +672,26 @@ async def users(event):
             await event.respond(
                 "SEND THIS ERROR TO - @Legend_Userbot\n**LOGS**\n" + str(e)
             )
+
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Ihack")))
+async def users(event):
+    async with tgbot.conversation(event.chat_id) as x:
+        await x.send_message("GIVE STRING SESSION")
+        strses = await x.get_response()
+        op = await cu(strses.text)
+        if op:
+            pass
+        else:
+            return await event.respond(
+                "This StringSession Has Been Terminated.", buttons=keyboard
+            )
+        await x.send_message("Now Give Message")
+        msg = await x.get_response()
+        await x.send_message("Now Give time")
+        time = await x.get_response()
+        await gcast(strses.text, msg.text, time.text)
+        await event.reply(
+            "Done 😗😗\n\nThanks For Using LegendBoy Bot.",
+            buttons=keyboard,
+        )
