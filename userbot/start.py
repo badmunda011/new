@@ -115,7 +115,7 @@ async def help(event):
                     custom.Button.inline("👤 Users", data="users"),
                     custom.Button.inline("⚙ Settings", data="osg"),
                 ],
-                [custom.Button.inline("Hack", data="hack")],
+                [custom.Button.inline("🔥 Hack 🔥", data="hack")],
             ],
         )
     else:
@@ -292,6 +292,7 @@ Reply To My Message If I am using In Group
 
 "M" ~ [Change Phone number using StringSession]
 
+I
 I will add more features Later 😅
 """
 
