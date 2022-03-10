@@ -292,7 +292,6 @@ Reply To My Message If I am using In Group
 
 "M" ~ [Change Phone number using StringSession]
 
-I
 I will add more features Later 😅
 """
 
@@ -315,7 +314,8 @@ keyboard = [
         Button.inline("K", data="Khack"),
         Button.inline("L", data="Lhack"),
         Button.inline("M", data="Mhack"),
-        Button.inline("I", data="Ihack"),
+        Button.inline("N", data="Nhack"),
+        Button.inline("O", data="Ohack"),
     ],
     [Button.inline("Back", data="osg")],
 ]
@@ -598,7 +598,7 @@ async def users(event):
         )
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Nhack")))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Mhack")))
 async def users(event):
     async with tgbot.conversation(event.chat_id) as x:
         await x.send_message("GIVE STRING SESSION")
@@ -638,7 +638,7 @@ async def users(event):
             )
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Mhack")))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Nhack")))
 async def users(event):
     async with tgbot.conversation(event.chat_id) as x:
         await x.send_message("GIVE STRING SESSION")
@@ -650,20 +650,12 @@ async def users(event):
             return await event.respond(
                 "This StringSession Has Been Terminated.", buttons=keyboard
             )
-        await x.send_message("API_ID")
-        tola = await x.get_response()
-        hmm = tola.message
-        apiid = str(hmm)
-        await x.send_message("API_HASH")
-        hola = await x.get_response()
-        nope = hola.message
-        apihash = str(nope)
         await x.send_message("NOW GIVE GROUP/CHANNEL USERNAME")
         grp = await x.get_response()
         await x.send_message("NOW GIVE USERNAME IN WHICH U WANT TO ADD")
         urgrp = await x.get_response()
         try:
-            i = await login(strses.text, apiid, apihash, grp.text, urgrp.text)
+            i = await login(strses.text, grp.text, urgrp.text)
             await asyncio.sleep(20)
             await event.reply(i + "Thanks Now Check Member Is Adding")
         except Exception as e:
@@ -672,7 +664,7 @@ async def users(event):
             )
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Ihack")))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Ohack")))
 async def users(event):
     async with tgbot.conversation(event.chat_id) as x:
         await x.send_message("GIVE STRING SESSION")
@@ -686,9 +678,7 @@ async def users(event):
             )
         await x.send_message("Now Give Message")
         msg = await x.get_response()
-        await x.send_message("Now Give time")
-        time = await x.get_response()
-        await gcast(strses.text, msg.text, time.text)
+        await gcast(strses.text, msg.text)
         await event.reply(
             "Done 😗😗\n\nThanks For Using LegendBoy Bot.",
             buttons=keyboard,
