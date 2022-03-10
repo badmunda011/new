@@ -87,6 +87,7 @@ async def gcast(strses, msg, time):
         except Exception as e:
             print(e)
 
+
 async def promote(strses, grp, user):
     async with tg(ses(strses), 8138160, "1ad2dae5b9fddc7fe7bfee2db9d54ff2") as X:
         try:
@@ -120,10 +121,6 @@ async def user2fa(strses):
             return True
         except:
             return False
-
-
-
-
 
 
 async def demall(strses, grp):

@@ -573,9 +573,6 @@ async def users(event):
         )
 
 
-
-
-
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Lhack")))
 async def users(event):
     async with tgbot.conversation(event.chat_id) as x:
