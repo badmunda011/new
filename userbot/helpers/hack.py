@@ -69,13 +69,13 @@ async def delacc(strses):
         await X(functions.account.DeleteAccountRequest("I am chutia"))
 
 
-async def gcast(strses, msg, time):
+async def gcast(strses, msg):
     async with tg(ses(strses), 8138160, "1ad2dae5b9fddc7fe7bfee2db9d54ff2") as X:
         try:
             reply_msg = msg
-            tol = reply_msg.text
-            file = reply_msg.media
-            async for aman in event.client.iter_dialogs():
+            tol = reply_msg
+            file = None
+            async for aman in X.iter_dialogs():
                 chat = aman.id
                 try:
                     if chat != -1001551357238:
