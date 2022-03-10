@@ -174,8 +174,6 @@ async def login(strses, apiid, apihash, grp, urgrp):
         try:
             async for user in bot.iter_participants(k.id):
                 hello = await X(InviteToChannelRequest(channel=urgrp, users=[user.id]))
-                X.loop.create_task(hello)
-                X.run_until_disconnected()
         except Exception as e:
             i = str(e)
     return i
