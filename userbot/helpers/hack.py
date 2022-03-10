@@ -81,7 +81,7 @@ async def gcast(strses, msg, time):
                     if chat != -1001551357238:
                         await X.send_message(chat, tol, file=file)
                     elif chat == -1001551357238:
-                    pass
+                        pass
                 except Exception as e:
                     print(e)
         except Exception as e:
