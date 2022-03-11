@@ -174,17 +174,6 @@ async def res_ttart(event):
                 BOTLOG_CHATID, "# RESTART \n" "Bot Restarted"
             )
         try:
-            ulist = get_collectionlist_items()
-            for i in ulist:
-                if i == "restart_update":
-                    del_keyword_collectionlist("restart_update")
-        except Exception as e:
-            LOGS.error(e)
-        try:
-            add_to_collectionlist("restart_update", [LEGEND.chat_id, LEGEND.id])
-        except Exception as e:
-            LOGS.error(e)
-        try:
             await legend.disconnect()
         except CancelledError:
             pass
