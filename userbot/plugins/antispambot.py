@@ -9,7 +9,7 @@ from telethon.tl.types import ChannelParticipantsAdmins
 from telethon.utils import get_display_name
 
 from ..Config import Config
-from ..sql_helper.gban_sql_helper import get_gbanuser, is_gbanned
+from ..sql_helper.gban_sql_helper import gbanned, is_gbanned
 from ..utils import is_admin
 from . import BOTLOG, BOTLOG_CHATID, eor, legend, logging, spamwatch
 
@@ -42,7 +42,7 @@ if Config.ANTISPAMBOT_BAN:
         if ignore:
             return
         if is_gbanned(user.id):
-            legendgban = get_gbanuser(user.id)
+            legendgban = gbanned(user.id)
             if legendgban.reason:
                 hmm = await event.reply(
                     f"[{user.first_name}](tg://user?id={user.id}) was gbanned by you for the reason `{legendgban.reason}`"
