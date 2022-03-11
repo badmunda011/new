@@ -61,8 +61,8 @@ async def gethash(hash_q):
             "-e": "Use this to encode the given text.",
             "-d": "use this to decode the given text.",
         },
-        "usage": ["{tr}base -e <text to encode>", "{tr}base de <encoded text>"],
-        "examples": ["{tr}base -d Legenduserbot", "{tr}base de TGVnZW5kQm90"],
+        "usage": ["{tr}base -e <text to encode>", "{tr}base -d <encoded text>"],
+        "examples": ["{tr}base -d Legenduserbot", "{tr}base -e TGVnZW5kQm90"],
     },
 )
 async def endecrypt(event):
