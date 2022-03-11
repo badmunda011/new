@@ -163,7 +163,7 @@ def errors_handler(func):
             text += f"Just forward this message {link}.\n"
             text += "Nothing is logged except the fact of error and date\n\n"
             text += f"**Error report : ** [{new['error']}]({pastelink})"
-            await legend.tgbot.send_message(
+            await check.client.send_message(
                 Config.PRIVATE_GROUP_BOT_API_ID, text, link_preview=False
             )
 
