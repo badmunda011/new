@@ -59,7 +59,7 @@ async def _(event):
     },
 )
 async def _(event):
-    name = event.pattern_match.group(1)
+    name = event.text[4:]
     animation_interval = 0.5
     animation_ttl = range(6)
     event = await eor(event, "✌️")
