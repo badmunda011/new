@@ -1,6 +1,6 @@
 import asyncio
 import base64
-from . import useless
+
 from telethon.tl import functions, types
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
@@ -12,7 +12,7 @@ from ..core.managers import eod, eor
 from ..helpers.tools import media_type
 from ..helpers.utils import _legendutils
 from ..sql_helper.globals import addgvar, gvarstatus
-from . import BOTLOG, BOTLOG_CHATID
+from . import BOTLOG, BOTLOG_CHATID, useless
 
 menu_category = "extra"
 
