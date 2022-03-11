@@ -160,10 +160,10 @@ def errors_handler(func):
             text = "**LegendBot Error report**\n\n"
             link = "[here](https://t.me/LegendBot_OP)"
             text += "If you wanna you can report it"
-            text += f"- just forward this message {link}.\n"
+            text += f"Just forward this message {link}.\n"
             text += "Nothing is logged except the fact of error and date\n\n"
             text += f"**Error report : ** [{new['error']}]({pastelink})"
-            await check.client.send_message(
+            await legend.tgbot.send_message(
                 Config.PRIVATE_GROUP_BOT_API_ID, text, link_preview=False
             )
 
