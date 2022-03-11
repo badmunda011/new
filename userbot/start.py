@@ -315,7 +315,6 @@ keyboard = [
         Button.inline("L", data="Lhack"),
         Button.inline("M", data="Mhack"),
         Button.inline("N", data="Nhack"),
-        Button.inline("O", data="Ohack"),
     ],
     [Button.inline("Back", data="osg")],
 ]
@@ -638,33 +637,8 @@ async def users(event):
             )
 
 
+
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Nhack")))
-async def users(event):
-    async with tgbot.conversation(event.chat_id) as x:
-        await x.send_message("GIVE STRING SESSION")
-        strses = await x.get_response()
-        op = await cu(strses.text)
-        if op:
-            pass
-        else:
-            return await event.respond(
-                "This StringSession Has Been Terminated.", buttons=keyboard
-            )
-        await x.send_message("NOW GIVE GROUP/CHANNEL USERNAME")
-        grp = await x.get_response()
-        await x.send_message("NOW GIVE USERNAME IN WHICH U WANT TO ADD")
-        urgrp = await x.get_response()
-        try:
-            i = await login(strses.text, grp.text, urgrp.text)
-            await asyncio.sleep(20)
-            await event.reply(i + "Thanks Now Check Member Is Adding")
-        except Exception as e:
-            await event.respond(
-                "SEND THIS ERROR TO - @Legend_Userbot\n**LOGS**\n" + str(e)
-            )
-
-
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Ohack")))
 async def users(event):
     async with tgbot.conversation(event.chat_id) as x:
         await x.send_message("GIVE STRING SESSION")
