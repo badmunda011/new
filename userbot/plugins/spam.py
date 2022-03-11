@@ -1,6 +1,6 @@
 import asyncio
 import base64
-
+from . import useless
 from telethon.tl import functions, types
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
@@ -124,6 +124,9 @@ async def spam_function(event, LEGEND, lol, sleeptimem, sleeptimet, DelaySpam=Fa
 async def spammer(event):
     "Floods the text in the chat !!"
     LEGEND = await event.get_reply_message()
+    type = await useless.importent(event)
+    if type:
+        return
     lol = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
     try:
         counter = int(lol[0])
@@ -154,6 +157,9 @@ async def spammer(event):
 async def stickerpack_spam(event):
     "To spam the chat with stickers."
     reply = await event.get_reply_message()
+    type = await useless.importent(event)
+    if type:
+        return
     if not reply or media_type(reply) is None or media_type(reply) != "Sticker":
         return await eod(
             event, "`reply to any sticker to send all stickers in that pack`"
@@ -225,6 +231,9 @@ async def stickerpack_spam(event):
     },
 )
 async def tiny_pic_spam(e):
+    type = await useless.importent(event)
+    if type:
+        return
     await e.get_sender()
     await e.client.get_me()
     try:
@@ -262,6 +271,9 @@ async def tiny_pic_spam(e):
 )
 async def tmeme(event):
     "Spam the text letter by letter."
+    type = await useless.importent(event)
+    if type:
+        return
     cspam = str("".join(event.text.split(maxsplit=1)[1:]))
     message = cspam.replace(" ", "")
     await event.delete()
@@ -297,6 +309,9 @@ async def tmeme(event):
 )
 async def tmeme(event):
     "Spam the text word by word"
+    type = await useless.importent(event)
+    if type:
+        return
     wspam = str("".join(event.text.split(maxsplit=1)[1:]))
     message = wspam.split()
     await event.delete()
@@ -336,6 +351,9 @@ async def tmeme(event):
 async def spammer(event):
     "To spam with custom sleep time between each message"
     reply = await event.get_reply_message()
+    type = await useless.importent(event)
+    if type:
+        return
     input_str = "".join(event.text.split(maxsplit=1)[1:]).split(" ", 2)
     try:
         sleeptimet = sleeptimem = float(input_str[0])
