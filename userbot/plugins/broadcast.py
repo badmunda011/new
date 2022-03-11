@@ -83,7 +83,7 @@ async def _(event):
                     sed += 1
     else:
         return await hol.edit(
-            "Please give a flag to Gcast message. \n\n**Available flags are :** \n• -all : To Gcast in all chats. \n• -pvt : To Gcast in private chats. \n• -grp : To Gcast in groups."
+            "Please give a flag to Gcast message. \n\n**Available flags are :** \n• -a : To Gcast in all chats. \n• -p : To Gcast in private chats. \n• -g : To Gcast in groups."
         )
     UwU = sed + lol
     if type == "-a":
