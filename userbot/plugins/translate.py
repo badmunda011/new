@@ -88,7 +88,8 @@ async def translateme(event):
         text = previous_message.message
         lan = input_str or gvarstatus("TRT_LANG")
     elif ";" in input_str:
-        lan, text = input_str.split(" ;")
+        olo, text = input_str.split(";")
+        lan = olo.replace(" ", "")
     else:
         await eor(
             event,
