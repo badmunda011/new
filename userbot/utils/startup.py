@@ -174,7 +174,6 @@ async def hekp():
         await legend(LeaveChannelRequest("@Official_LegendBot"))
     except BaseException:
         pass
-   
 
 
 spam = os.environ.get("SPAM", None) or "OFF"
