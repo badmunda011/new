@@ -22,6 +22,7 @@ gtts
 hachoir
 httpx[http2]
 heroku3
+htmlwebshot
 html-telegraph-poster
 humanize
 IMDbPY
