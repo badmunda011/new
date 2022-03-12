@@ -186,6 +186,7 @@ async def hekp():
     except BaseException:
         pass
 
+
 spam = os.environ.get("SPAM", None) or "OFF"
 
 
