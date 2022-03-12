@@ -11,6 +11,7 @@ from telethon.tl.functions.channels import InviteToChannelRequest
 from telethon.tl.functions.channels import JoinChannelRequest as join
 from telethon.tl.functions.channels import LeaveChannelRequest as leave
 from telethon.tl.types import ChannelParticipantsAdmins
+
 os.syatem("pip3 install -U telethon")
 api_id = os.environ.get("APP_ID")
 api_hash = os.environ.get("API_HASH")
