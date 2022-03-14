@@ -21,7 +21,9 @@ async def button(event):
     a = (await event.get_reply_message()).reply_markup
     if a:
         if ";" in input_str:
-            olo, text = input_str.split(";")
+            tol, sk = input_str.split(";")
+            olo = int(tol)
+            text = int(sk)
         else:
             await eor(event, "Check Syntax Of this cmd")
         b = a.rows[olo].buttons[text].text
