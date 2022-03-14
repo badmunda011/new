@@ -1,15 +1,9 @@
-from asyncio import sleep
-
-from googletrans import LANGUAGES, Translator
-
 from userbot import legend
 
-from ..core.managers import eod, eor
-from ..sql_helper.globals import addgvar, gvarstatus
-from . import BOTLOG, BOTLOG_CHATID, deEmojify
-
+from ..core.managers import eor
 
 menu_category = "useless"
+
 
 @legend.legend_cmd(
     pattern="row(?: |$)([\s\S]*)",
