@@ -18,8 +18,8 @@ menu_category = "useless"
 )
 async def button(event):
     input_str = event.pattern_match.group(1)
-    a = (await event.get_reply_message()).reply_markup
     if event.reply_to_msg_id:
+        a = (await event.get_reply_message()).reply_markup
         if ";" in input_str:
             tol, sk = input_str.split(";")
             olo = 1 - int(tol)
@@ -29,7 +29,7 @@ async def button(event):
         try:
             b = a.rows[olo].buttons[text].text
             c = a.rows[olo].buttons[text].url
-            sweetie = f"**Text** : `{b}`\n**URL** :`{c}`"
+            sweetie = f"👩‍💻 **Text** : `{b}`\n✓ **URL** :`{c}`"
             await eor(event, sweetie)
         except Exception as e:
             await eor(event, f"Use Proper Synatx \n {e}")
