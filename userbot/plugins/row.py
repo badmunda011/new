@@ -22,8 +22,8 @@ async def button(event):
     if a:
         if ";" in input_str:
             tol, sk = input_str.split(";")
-            olo += int(tol)
-            text += int(sk)
+            olo = 1 - int(tol)
+            text = 1 - int(sk)
         else:
             await eor(event, "Check Syntax Of this cmd")
         b = a.rows[olo].buttons[text].text
