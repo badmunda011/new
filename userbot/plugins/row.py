@@ -12,7 +12,7 @@ menu_category = "useless"
         "header": "...",
         "note": "..",
         "usage": [
-            "{tr}trt <row> ; <button>",
+            "{tr}row <row> ; <button>",
         ],
     },
 )
@@ -24,8 +24,8 @@ async def button(event):
             olo, text = input_str.split(";")
         else:
             await eor(event, "Check Syntax Of this cmd")
-        b = f"a.rows[{olo}].buttons[{text}].text"
-        c = f"a.rows[{olo}].buttons[{text}].url"
+        b = a.rows[olo].buttons[text].text
+        c = a.rows[olo].buttons[text].url
         sweetie = f"**Text** : {b}\n**URL** :{c}"
         await eor(event, sweetie)
     else:
