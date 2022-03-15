@@ -455,7 +455,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(jsondata, open(hide, "w"))
             else:
                 json.dump(newhide, open(hide, "w"))
-        elif query == "help":
+        elif string == "help":
             oso = gvarstatus("HELP_IMG")
             if oso is None:
                 help_pic = "https://telegra.ph/file/144d8ea74fef8ca12253c.jpg"
@@ -486,7 +486,6 @@ async def inline_handler(event):  # sourcery no-metrics
                     buttons=_result[1],
                     link_preview=False,
                 )
-            await event.answer([result] if result else None)
         elif str_y[0].lower() == "ytdl" and len(str_y) == 2:
             link = get_yt_video_id(str_y[1].strip())
             found_ = True
