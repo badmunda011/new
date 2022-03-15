@@ -618,7 +618,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     buttons=buttons,
                 )
             await event.answer([result] if result else None)
-        elif string == " ":
+        elif query == "":
             buttons = [
                 (
                     Button.url("Source code", "https://github.com/LEGEND-AI/LEGENDBOT"),
