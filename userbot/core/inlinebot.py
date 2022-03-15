@@ -654,6 +654,7 @@ async def inline_handler(event):  # sourcery no-metrics
             pass
         await event.answer([result] if result else None)
 
+
 @legend.tgbot.on(CallbackQuery(data=re.compile(b"clise")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
