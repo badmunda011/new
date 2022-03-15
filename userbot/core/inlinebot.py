@@ -72,7 +72,7 @@ async def on_plug_in_callback_query_handler(event):
         ),
         (Button.inline(f"👨‍💻 Main Menu", data="mainmenu"),),
     ]
-    await event.edit(
+    await event.client.edit(
         f"💝『{mention}』💝",
         buttons=buttons,
         link_preview=False,
@@ -456,7 +456,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(jsondata, open(hide, "w"))
             else:
                 json.dump(newhide, open(hide, "w"))
-        elif string == "help":
+        elif query == "help":
             oso = gvarstatus("HELP_IMG")
             if oso is None:
                 help_pic = "https://telegra.ph/file/144d8ea74fef8ca12253c.jpg"
@@ -618,7 +618,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     buttons=buttons,
                 )
             await event.answer([result] if result else None)
-        elif query == "":
+        elif query == " ":
             buttons = [
                 (
                     Button.url("Source code", "https://github.com/LEGEND-AI/LEGENDBOT"),
