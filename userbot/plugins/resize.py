@@ -11,8 +11,8 @@ menu_category = "fun"
     pattern="size$",
     command=("size", menu_category),
     info={
-        "header": "Showing Indian Flag",
-        "usage": "{tr}indflag",
+        "header": "It Help You To Get The Size Of Image",
+        "usage": "{tr}size <reply to image>",
     },
 )
 async def size(e):
@@ -34,8 +34,9 @@ async def size(e):
     pattern="resize(?:\s|$)([\s\S]*)",
     command=("resize", menu_category),
     info={
-        "header": "Showing Indian Flag",
-        "usage": "{tr}resize",
+        "header": "It Help You To Resize The Image",
+        "note": "You Must Reply To Media File To Get This Module Work.",
+        "usage": "{tr}resize <height> <width> <reply to media>",
     },
 )
 async def size(e):
