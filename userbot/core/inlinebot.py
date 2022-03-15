@@ -51,7 +51,6 @@ def ibuild_keyboard(buttons):
 
 
 @legend.tgbot.on(CallbackQuery(data=re.compile(b"help_k_minu")))
-@check_owner
 async def on_plug_in_callback_query_handler(event):
     buttons = [
         (
@@ -72,7 +71,7 @@ async def on_plug_in_callback_query_handler(event):
         ),
         (Button.inline(f"👨‍💻 Main Menu", data="mainmenu"),),
     ]
-    await event.client.send_message(
+    await event.edit(
         f"💝『{mention}』💝",
         buttons=buttons,
         link_preview=False,
