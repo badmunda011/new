@@ -99,7 +99,7 @@ async def _(event):
             resp = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=986872829)
             )
-            lol = await event.client.send_message(chat, "Shota")
+            await event.client.send_message(chat, "Shota")
             response = await resp
         except YouBlockedUserError:
             await event.edit("```Unblock @LoliHeavenBot```")
@@ -109,7 +109,8 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        
+
+
 @legend.legend_cmd(
     pattern="hvideo$",
     command=("hvideo ", menu_category),
@@ -132,7 +133,7 @@ async def _(event):
             resp = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=986872829)
             )
-            lol = await event.client.send_message(chat, "Hentai Videos")
+            await event.client.send_message(chat, "Hentai Videos")
             response = await resp
         except YouBlockedUserError:
             await event.edit("```Unblock @LoliHeavenBot```")
@@ -142,7 +143,7 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        
+
 
 @legend.legend_cmd(
     pattern="hoppai$",
@@ -166,7 +167,7 @@ async def _(event):
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=986872829)
             )
-            lol = await event.client.send_message(chat, "Oppai")
+            await event.client.send_message(chat, "Oppai")
             response = await resp
         except YouBlockedUserError:
             await event.edit("```Unblock @LoliHeavenBot```")
@@ -176,7 +177,7 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        
+
 
 @legend.legend_cmd(
     pattern="htrap$",
@@ -200,7 +201,7 @@ async def _(event):
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=986872829)
             )
-            lol = await event.client.send_message(chat, "Trap")
+            await event.client.send_message(chat, "Trap")
             response = await resp
         except YouBlockedUserError:
             await event.edit("```Unblock @LoliHeavenBot```")
@@ -210,7 +211,7 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        
+
 
 @legend.legend_cmd(
     pattern="hbdsm$",
@@ -234,7 +235,7 @@ async def _(event):
             resp = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=986872829)
             )
-            lol = await event.client.send_message(chat, "BDSM")
+            await event.client.send_message(chat, "BDSM")
             response = await resp
         except YouBlockedUserError:
             await event.edit("```Unblock @LoliHeavenBot```")
@@ -244,7 +245,8 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        
+
+
 @legend.legend_cmd(
     pattern="hfurry$",
     command=("hfurry", menu_category),
@@ -267,7 +269,7 @@ async def _(event):
             resp = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=986872829)
             )
-            lol = await event.client.send_message(chat, "Furry")
+            await event.client.send_message(chat, "Furry")
             response = await resp
         except YouBlockedUserError:
             await event.edit("```Unblock @LoliHeavenBot```")
@@ -277,7 +279,7 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        
+
 
 @legend.legend_cmd(
     pattern="hgif$",
@@ -301,7 +303,7 @@ async def _(event):
             resp = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=986872829)
             )
-            lol = await event.client.send_message(chat, "GIF Hentai")
+            await event.client.send_message(chat, "GIF Hentai")
             response = await resp
         except YouBlockedUserError:
             await event.edit("```Unblock @LoliHeavenBot```")
@@ -311,7 +313,7 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        
+
 
 @legend.legend_cmd(
     pattern="hcosplay$",
@@ -335,7 +337,7 @@ async def _(event):
             resp = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=986872829)
             )
-            lol = await event.client.send_message(chat, "Cosplay")
+            await event.client.send_message(chat, "Cosplay")
             response = await resp
         except YouBlockedUserError:
             await event.edit("```Unblock @LoliHeavenBot```")
@@ -345,4 +347,3 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        
