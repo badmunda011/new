@@ -198,11 +198,12 @@ async def help(event):
                     custom.Button.inline("Tutorial", data="LOGED"),
                 ],
                 [
-                    Button.url("Github Repo ❓", "https://github.com/LEGEND-AI/LEGENDBOT"),
+                    Button.url(
+                        "Github Repo ❓", "https://github.com/LEGEND-AI/LEGENDBOT"
+                    ),
                 ],
             ],
         )
-
 
 
 @legend.bot_cmd(incoming=True, func=lambda e: e.is_private)
