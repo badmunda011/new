@@ -117,7 +117,7 @@ async def metoo(e):
     command=("shrug", menu_category),
     info={
         "header": "try out yourself to see",
-        "usage": "{tr}shrug <ur name first letter>",
+        "usage": "{tr}shrug",
     },
 )
 async def metoo(e):
