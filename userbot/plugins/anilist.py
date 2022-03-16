@@ -28,7 +28,6 @@ from ..helpers.functions import (
     get_filler_episodes,
     getBannerLink,
     memory_file,
-    replace_text,
     search_in_animefiller,
     weekdays,
 )
@@ -391,6 +390,7 @@ async def get_anime(event):
             reply_to=reply_to,
         )
 
+
 """
 @legend.legend_cmd(
     pattern="char(?:\s|$)([\s\S]*)",
@@ -448,6 +448,7 @@ async def character(event):
         reply_to=reply_to,
     )
 """
+
 
 @legend.legend_cmd(
     pattern="a(kaizoku|kayo|indi)(?: |$)([\S\s]*)",
