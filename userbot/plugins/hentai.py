@@ -28,15 +28,15 @@ async def _(event):
         return
     async with event.client.conversation(chat) as conv:
         try:
-            await conv.send_message("/start")
-            await conv.get_response()
-            lol = await conv.send_message(chat, "Lolis")
-            response = await conv.get_response()
+            resp = conv.wait_event(
+                events.NewMessage(incoming=True, from_users=986872829)
+            )
+            lol = await event.client.send_message(chat, "Lolis")
+            response = await resp
         except YouBlockedUserError:
-            await event.reply("```unblock @LoliHeavenBot```")
-            return
+            await event.edit("```Unblock @LoliHeavenNot```")
         if response.text.startswith("I can't find that"):
-            await event.edit("😐 I Cant Find It")
+            await event.edit("😐 I Cant Find that")
         else:
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
