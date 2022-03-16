@@ -34,7 +34,7 @@ async def _(event):
             await event.client.send_message(chat, "Lolis")
             response = await resp
         except YouBlockedUserError:
-            await event.edit("```Unblock @LoliHeavenNot```")
+            await event.edit("```Unblock @LoliHeavenBot```")
         if response.text.startswith("I can't find that"):
             await event.edit("😐 I Cant Find that")
         else:
@@ -109,9 +109,7 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
-
-
+        
 @legend.legend_cmd(
     pattern="hvideo$",
     command=("hvideo ", menu_category),
@@ -144,8 +142,7 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
-
+        
 
 @legend.legend_cmd(
     pattern="hoppai$",
@@ -179,8 +176,7 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
-
+        
 
 @legend.legend_cmd(
     pattern="htrap$",
@@ -214,8 +210,7 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
-
+        
 
 @legend.legend_cmd(
     pattern="hbdsm$",
@@ -249,9 +244,7 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
-
-
+        
 @legend.legend_cmd(
     pattern="hfurry$",
     command=("hfurry", menu_category),
@@ -284,8 +277,7 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
-
+        
 
 @legend.legend_cmd(
     pattern="hgif$",
@@ -319,8 +311,7 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
-
+        
 
 @legend.legend_cmd(
     pattern="hcosplay$",
@@ -354,4 +345,4 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
+        
