@@ -109,7 +109,7 @@ async def bot_start(event):
             buttons = [
                 (
                     Button.inline("🔰Rules🔰 ", data="rules"),
-                    Button.inline(" Deploy 🚀", data="deploy"),
+                    Button.inline(" Deploy 🚀", data="depy"),
                 ),
                 (Button.url(" 🔱Support🔱 ", "https://t.me/LegendBot_OP"),),
             ]
@@ -180,22 +180,29 @@ async def users(event):
         )
 
 
-@legend.tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"deploy")))
+@legend.tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"depy")))
 async def help(event):
     if event.query.user_id == bot.uid:
+        await event.answer(
+            "Wait ... Sorry U are Not My Owmer So, U Cant Acesss It",
+            cache_time=0,
+            alert=True,
+        )
+    else:
         await tgbot.send_message(
             event.chat_id,
             message="You Can Deploy LegendBot In Heroku By Following Steps Bellow, You Can See Some Quick Guides On Support Channel Or On Your Own Assistant Bot. \nThank You For Contacting Me.",
             link_preview=False,
             buttons=[
-                (Button.inline("Tutorial", data="LOGED"),),
-                (
-                    Button.url(
-                        "Github Repo ❓", "https://github.com/LEGEND-AI/LEGENDBOT"
-                    ),
-                ),
+                [
+                    custom.Button.inline("Tutorial", data="LOGED"),
+                ],
+                [
+                    Button.url("Github Repo ❓", "https://github.com/LEGEND-AI/LEGENDBOT"),
+                ],
             ],
         )
+
 
 
 @legend.bot_cmd(incoming=True, func=lambda e: e.is_private)
