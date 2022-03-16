@@ -28,7 +28,7 @@ async def _(event):
         return
     async with event.client.conversation(chat) as conv:
         try:
-            first = await conv.send_message("/start")
+            await conv.send_message("/start")
             await conv.get_response()
             lol = await conv.send_message(chat, "Lolis")
             response = await conv.get_response()
