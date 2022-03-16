@@ -10,7 +10,7 @@ menu_category = "useless"
 
 
 @legend.legend_cmd(
-    pattern="hpic ([\s\S]*)",
+    pattern="hpic$",
     command=("hpic", menu_category),
     info={
         "header": "This Is 18+ Plugin",
@@ -28,11 +28,10 @@ async def _(event):
         return
     async with event.client.conversation(chat) as conv:
         try:
-            resp = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=986872829)
-            )
-            lol = await event.client.send_message(chat, "Lolis")
-            response = await resp
+            first = await conv.send_message("/start")
+            await conv.get_response()
+            lol = await conv.send_message(chat, "Lolis")
+            response = await conv.get_response()
         except YouBlockedUserError:
             await event.reply("```unblock @LoliHeavenBot```")
             return
@@ -41,7 +40,7 @@ async def _(event):
         else:
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
-            await unsave_gif(xxxx)
+            await unsave_gif(event, xxxx)
         await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
 
 
