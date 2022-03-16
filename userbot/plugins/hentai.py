@@ -31,7 +31,7 @@ async def _(event):
             resp = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=986872829)
             )
-            lol = await event.client.send_message(chat, "Lolis")
+            await event.client.send_message(chat, "Lolis")
             response = await resp
         except YouBlockedUserError:
             await event.edit("```Unblock @LoliHeavenNot```")
@@ -41,6 +41,7 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
+
 
 @legend.legend_cmd(
     pattern="hfutanari$",
@@ -64,7 +65,7 @@ async def _(event):
             resp = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=986872829)
             )
-            lol = await event.client.send_message(chat, "Futanari")
+            await event.client.send_message(chat, "Futanari")
             response = await resp
         except YouBlockedUserError:
             await event.edit("```Unblock @LoliHeavenBot```")
