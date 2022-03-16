@@ -36,16 +36,22 @@ async def _(event):
             gvarstatus("PING_PIC")
             or "https://telegra.ph/file/e15a2fe1430358e26713c.jpg"
         )
-        legendevent = await eor(event, "<b><i>⚡ **Pong!** ⚡</b></i>", "html")
-        end = datetime.now()
-        ms = (end - start).microseconds / 1000
-        await legendevent.delete()
-        await event.client.send_file(
-            event.chat_id,
-            sweetie,
-            caption=f"<b><i>👨‍💻 Pong </b></i>\n\n   🚩 {ms} <b><i>ms\n   Bot : {hmention}</b></i>",
-            parse_mode="html",
-        )
+        if sweetie == "OFF":
+            legendevent = await eor(event, "<b><i>⚡ **Pong!** ⚡</b></i>", "html")
+            end = datetime.now()
+            ms = (end - start).microseconds / 1000
+            await legendevent.edit(f"<b><i>👨‍💻 Pong </b></i>\n\n   🚩 {ms} <b><i>ms\n   Bot : {hmention}</b></i>", parse_mode="html")
+        else:
+            legendevent = await eor(event, "<b><i>⚡ **Pong!** ⚡</b></i>", "html")
+            end = datetime.now()
+            ms = (end - start).microseconds / 1000
+            await legendevent.delete()
+            await event.client.send_file(
+                event.chat_id,
+                sweetie,
+                caption=f"<b><i>👨‍💻 Pong </b></i>\n\n   🚩 {ms} <b><i>ms\n   Bot : {hmention}</b></i>",
+                parse_mode="html",
+            )
 
 
 @legend.legend_cmd(
