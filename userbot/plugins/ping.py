@@ -40,7 +40,10 @@ async def _(event):
             legendevent = await eor(event, "<b><i>⚡ **Pong!** ⚡</b></i>", "html")
             end = datetime.now()
             ms = (end - start).microseconds / 1000
-            await legendevent.edit(f"<b><i>👨‍💻 Pong </b></i>\n\n   🚩 {ms} <b><i>ms\n   Bot : {hmention}</b></i>", parse_mode="html")
+            await legendevent.edit(
+                f"<b><i>👨‍💻 Pong </b></i>\n\n   🚩 {ms} <b><i>ms\n   Bot : {hmention}</b></i>",
+                parse_mode="html",
+            )
         else:
             legendevent = await eor(event, "<b><i>⚡ **Pong!** ⚡</b></i>", "html")
             end = datetime.now()
