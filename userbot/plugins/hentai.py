@@ -41,11 +41,9 @@ async def _(event):
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
-        await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
-
 
 @legend.legend_cmd(
-    pattern="hfutanari ([\s\S]*)",
+    pattern="hfutanari$",
     command=("hfutanari", menu_category),
     info={
         "header": "Just a art command try out yourself to see",
@@ -75,12 +73,11 @@ async def _(event):
         else:
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
-            await unsave_gif(xxxx)
-        await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
+            await unsave_gif(event, xxxx)
 
 
 @legend.legend_cmd(
-    pattern="hshota ([\s\S]*)",
+    pattern="hshota$",
     command=("hshota", menu_category),
     info={
         "header": "Just a art command try out yourself to see",
@@ -110,12 +107,12 @@ async def _(event):
         else:
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
-            await unsave_gif(xxxx)
+            await unsave_gif(event, xxxx)
         await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
 
 
 @legend.legend_cmd(
-    pattern="hvideo ([\s\S]*)",
+    pattern="hvideo$",
     command=("hvideo ", menu_category),
     info={
         "header": "Just a art command try out yourself to see",
@@ -145,12 +142,12 @@ async def _(event):
         else:
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
-            await unsave_gif(xxxx)
+            await unsave_gif(event, xxxx)
         await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
 
 
 @legend.legend_cmd(
-    pattern="hoppai ([\s\S]*)",
+    pattern="hoppai$",
     command=("hoppai", menu_category),
     info={
         "header": "Just a art command try out yourself to see",
@@ -180,12 +177,12 @@ async def _(event):
         else:
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
-            await unsave_gif(xxxx)
+            await unsave_gif(event, xxxx)
         await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
 
 
 @legend.legend_cmd(
-    pattern="htrap ([\s\S]*)",
+    pattern="htrap$",
     command=("htrap", menu_category),
     info={
         "header": "Just a art command try out yourself to see",
@@ -215,12 +212,12 @@ async def _(event):
         else:
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
-            await unsave_gif(xxxx)
+            await unsave_gif(event, xxxx)
         await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
 
 
 @legend.legend_cmd(
-    pattern="hbdsm ([\s\S]*)",
+    pattern="hbdsm$",
     command=("hbdsm", menu_category),
     info={
         "header": "Just a art command try out yourself to see",
@@ -250,12 +247,12 @@ async def _(event):
         else:
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
-            await unsave_gif(xxxx)
+            await unsave_gif(event, xxxx)
         await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
 
 
 @legend.legend_cmd(
-    pattern="hfurry ([\s\S]*)",
+    pattern="hfurry$",
     command=("hfurry", menu_category),
     info={
         "header": "Just a art command try out yourself to see",
@@ -285,12 +282,12 @@ async def _(event):
         else:
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
-            await unsave_gif(xxxx)
+            await unsave_gif(event, xxxx)
         await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
 
 
 @legend.legend_cmd(
-    pattern="hgif ([\s\S]*)",
+    pattern="hgif$",
     command=("hgif", menu_category),
     info={
         "header": "Just a art command try out yourself to see",
@@ -320,12 +317,12 @@ async def _(event):
         else:
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
-            await unsave_gif(xxxx)
+            await unsave_gif(event, xxxx)
         await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
 
 
 @legend.legend_cmd(
-    pattern="hcosplay ([\s\S]*)",
+    pattern="hcosplay$",
     command=("hcosplay", menu_category),
     info={
         "header": "Just a art command try out yourself to see",
@@ -355,5 +352,5 @@ async def _(event):
         else:
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
-            await unsave_gif(xxxx)
+            await unsave_gif(event, xxxx)
         await event.client.delete_message(conv.chat_id, [resp.id, lol.id])
