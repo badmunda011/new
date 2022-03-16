@@ -28,7 +28,7 @@ vlist = [
     "HELP_TEXT",
     "HELP_IMG",
     "IALIVE_PIC",
-    "PING_PIC",
+    "PING_IMG",
     "PM_PIC",
     "PM_TEXT",
     "PM_BLOCK",
