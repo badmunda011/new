@@ -33,7 +33,7 @@ async def _(event):
         await legendevent.edit(f"**👨‍💻 Average Pong!**\n➥ {ms} ms")
     else:
         sweetie = (
-            gvarstatus("PING_PIC")
+            gvarstatus("PING_IMG")
             or "https://telegra.ph/file/e15a2fe1430358e26713c.jpg"
         )
         if sweetie == "OFF":
