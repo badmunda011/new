@@ -391,7 +391,7 @@ async def get_anime(event):
             reply_to=reply_to,
         )
 
-
+"""
 @legend.legend_cmd(
     pattern="char(?:\s|$)([\s\S]*)",
     command=("char", menu_category),
@@ -447,7 +447,7 @@ async def character(event):
         caption=replace_text(caption),
         reply_to=reply_to,
     )
-
+"""
 
 @legend.legend_cmd(
     pattern="a(kaizoku|kayo|indi)(?: |$)([\S\s]*)",
