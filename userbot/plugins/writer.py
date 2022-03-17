@@ -58,7 +58,7 @@ async def f2i(e):
 
 
 @legend.legend_cmd(
-    pattern="write$",
+    pattern="write(?:\s|$)([\s\S]*)",
     command=("write", menu_category),
     info={
         "header": "It will write on a paper.",
@@ -67,11 +67,11 @@ async def f2i(e):
 )
 async def writer(e):
     lol = e.text
-    if e.reply_to:
+    if e.reply_to_msg_id:
         reply = await e.get_reply_message()
         text = reply.message
     elif lol:
-        text = lol[5:]
+        text = lol[6:]
     else:
         return await eod(e, "Give me Text")
     k = await eor(e, "Processing")
