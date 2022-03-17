@@ -61,7 +61,7 @@ async def _(event):
         "header": "To Get Data From Holy Bible",
         "description": "Random Select From Holy Bible",
         "usage": [
-            "{tr}bbl",
+            "{tr}bels",
         ],
     },
 )
@@ -1232,7 +1232,7 @@ async def _(event):
         "header": "To Get Data From Facts",
         "description": "Random Select From Facts",
         "usage": [
-            "{tr}bbl",
+            "{tr}facts",
         ],
     },
 )
