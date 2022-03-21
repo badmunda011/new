@@ -25,7 +25,7 @@ from .core.logger import logging
 from .core.session import legend, tgbot
 
 LOGS = logging.getLogger("LegendUserBot")
-LEGEND_PIC = "https://telegra.ph/file/e753315316673cff51085.mp4"
+LEGEND_PIC = "https://te.legra.ph/file/d3785d49b2c5e6f00bc67.jpg"
 
 onbot = "start - Check if I am Alive \nhack - Hack Anyone Through String Session\nping - Pong!\nunban - userid/username \ntr - <lang-code> \nbroadcast - Sends Message To all Users In Bot \nid - Shows ID of User And Media. \naddnote - Add Note \nnotes - Shows Notes \nspam - spam value text (value < 100)\nbigspam - spam value text (value > 100) \nraid - Raid value Reply to Anyone \nreplyraid - Reply To Anyone \ndreplyraid - Reply To Anyone \nrmnote - Remove Note \nalive - Am I Alive? \nbun - Works In Group , Bans A User. \nunbun - Unbans A User in Group \nprumote - Promotes A User \ndemute - Demotes A User \npin - Pins A Message \nstats - Shows Total Users In Bot \npurge - Reply It From The Message u Want to Delete (Your Bot Should be Admin to Execute It) \ndel - Reply a Message Tht Should Be Deleted (Your Bot Should be Admin to Execute It)"
 
