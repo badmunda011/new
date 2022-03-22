@@ -120,10 +120,33 @@ async def add_sudo_user(event):
     sudousers[str(replied_user.id)] = userdata
     sql.del_collection("sudousers_list")
     sql.add_collection("sudousers_list", sudousers, {})
+    sudocmds = sudo_enabled_cmds()
+    legendevent = await eor(event, "__Enabling all safe cmds for sudo....__")
+    totalcmds = CMD_INFO.keys()
+    typecmds = (
+        PLG_INFO["botcontrols"]
+        + PLG_INFO["autoprofile"]
+        + PLG_INFO["evaluators"]
+        + PLG_INFO["execmod"]
+        + PLG_INFO["heroku"]
+        + PLG_INFO["profile"]
+        + PLG_INFO["pmpermit"]
+        + PLG_INFO["custom"]
+        + PLG_INFO["blacklistchats"]
+        + PLG_INFO["corecmds"]
+        + PLG_INFO["groupactions"]
+        + PLG_INFO["sudo"]
+        + PLG_INFO["transfer_channel"]
+        + ["gauth"]
+        + ["greset"]
+    )
+    loadcmds = list(set(totalcmds) - set(typecmds))
+    if len(sudocmds) > 0:
+        sqllist.del_keyword_list("sudo_enabled_cmds")
     output = f"{mentionuser(userdata['chat_name'],userdata['chat_id'])} __is Added to your sudo users.__\n"
     output += "**Bot is reloading to apply the changes. Please wait for a minute**"
     msg = await eor(event, output)
-    await event.client.reload(msg)
+    await event.client.reload(msg) 
 
 
 @legend.legend_cmd(
