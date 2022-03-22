@@ -24,6 +24,64 @@ async def _(event):
         f"**Carry ➥ {name} .**\n\n                     ⣤⣶⣶⣶⣦⣤⣄⡀\n⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀\n⠀⠀⠀⢀⣾⣿⣿⣿⠿⠿⠟⠻⠿⢿⣿⣿⣿⡆\n⠀⠀⠀⢰⣿⣿⡿⠂⠀⠀⠀⠀⠀⠀ ⠈⠉⢻⡇ \n⠀⠀⠀⠈⠿⣿⣇⣠⠤⠤⠤⢤⣀⣤⠤⠤⣺⡏ \n⠀⠀⠀⠀⠐⢉⣯⠹⣀⣀⣢⡸⠉⢏⡄⣀⣯⠁ \n⠀⠀⠀⠀⠡⠀⢹⣆⠀⠀⠀⣀⡀⡰⠀⢠⠖⠂ \n⠀⠀⠀⠀⠀⠈⠙⣿⣿⠀⠠⠚⢋⡁⠀⡜ \n⠀⠀⠀⠀⠀⠀⢸⠈⠙⠦⣤⣀⣤⣤⡼⠁  \n⠀⠀⠀ ⠀⢀⡌⠀⠀⠀⠀ ⠉⢏⡉  \n⠀⠀⠀⣀⣴⣿⣷⣶⣤⣤⣤⣴⣾⣷⣶⣦⡀ \n⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣄ \n⠚⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛",
     )
 
+@legend.legend_cmd(
+    pattern="🤬$",
+    command=("🤬", menu_category),
+    info={
+        "header": "To Show Ur Angry In Angry Mode",
+        "usage": "{tr}🤬",
+    },
+)
+async def _(event):
+    event = await eor(event, "𝙸 𝚊𝚖 𝚊𝚗𝚐𝚛𝚢 ")
+    deq = deque(list("😡🔥🤬🔥😡🔥🤬🔥😡🔥"))
+    for _ in range(20):
+        await asyncio.sleep(0.5)
+        await event.edit("".join(deq))
+        deq.rotate(1)
+
+@legend.legend_cmd(
+    pattern="🤣$",
+    command=("🤣", menu_category),
+    info={
+        "header": "To Show Ur Laugh In Laugh Rotate Mode",
+        "usage": "{tr}🤣",
+    },
+)
+async def _(event):
+    event = await eor(event, "Lots Of Laugh")
+    deq = deque(list("😂🤣😂🤣😂🤣"))
+    for _ in range(20):
+        await asyncio.sleep(0.5)
+        await event.edit("".join(deq))
+        deq.rotate(1)
+
+@legend.legend_cmd(
+    pattern="✅$",
+    command=("✅", menu_category),
+    info={
+        "header": "To Confuse True Or False",
+        "usage": "{tr}✅",
+    },
+)
+async def _(event):
+    event = await eor(event, "Confusion")
+    deq = deque(list("✅❌✅❌✅❌✅❌"))
+    for _ in range(20):
+        await asyncio.sleep(0.5)
+        await event.edit("".join(deq))
+        deq.rotate(1)
+
+@legend.legend_cmd(
+    pattern="bakwas$",
+    command=("bakwas", menu_category),
+    info={
+        "header": "To Make Joke",
+        "usage": "{tr}bakwas ",
+    },
+)
+async def gn(event):
+    await event.edit("Your message has been read and Ignored successfully ┐(´∀｀)┌ 😂😂😂")
 
 @legend.legend_cmd(
     pattern="ded(?:\s|$)([\s\S]*)",
