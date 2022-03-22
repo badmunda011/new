@@ -9,7 +9,6 @@ import nekos
 import requests
 from fake_useragent import UserAgent
 from PIL import Image
-from simplejson.errors import JSONDecodeError
 
 from ..core.managers import eod, eor
 from ..helpers.functions import age_verification
@@ -56,6 +55,7 @@ async def _(event):
     await _legendutils.unsavegif(event, nohorny)
     await legendevent.delete()
 
+
 """
 @legend.legend_cmd(
     pattern="dva$",
@@ -84,6 +84,7 @@ async def dva(event):
     await event.delete()
 
 """
+
 
 @legend.legend_cmd(
     pattern="nsfw$",
