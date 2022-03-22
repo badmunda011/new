@@ -53,10 +53,10 @@ async def _(event):
         async for aman in event.client.iter_dialogs():
             chat = aman.id
             try:
-                if chat != -1001551357238:
+                if chat != -1001368578667:
                     await event.client.send_message(chat, tol, file=file)
                     lol += 1
-                elif chat == -1001551357238:
+                elif chat == -1001368578667:
                     pass
             except BaseException:
                 sed += 1
@@ -74,10 +74,10 @@ async def _(event):
             if sweetie.is_group:
                 chat = sweetie.id
                 try:
-                    if chat != -1001551357238:
+                    if chat != -1001368578667:
                         await event.client.send_message(chat, tol, file=file)
                         lol += 1
-                    elif chat == -1001551357238:
+                    elif chat == -1001368578667:
                         pass
                 except BaseException:
                     sed += 1
