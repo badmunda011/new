@@ -198,7 +198,7 @@ async def _(event):
         sudousers = {}
     if len(sudochats) == 0:
         return await eod(event, "__There are no sudo users for your Legenduserbot.__")
-    result = "**The list of sudo users for your Legenduserbot are :**\n\n"
+    result = "**The list of sudo users for your LegendUserbot are :**\n\n"
     for chat in sudochats:
         result += f"☞ **Name:** {mentionuser(sudousers[str(chat)]['chat_name'],sudousers[str(chat)]['chat_id'])}\n"
         result += f"**Chat Id :** `{chat}`\n"
