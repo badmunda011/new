@@ -24,6 +24,7 @@ async def _(event):
         f"**Carry ➥ {name} .**\n\n                     ⣤⣶⣶⣶⣦⣤⣄⡀\n⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀\n⠀⠀⠀⢀⣾⣿⣿⣿⠿⠿⠟⠻⠿⢿⣿⣿⣿⡆\n⠀⠀⠀⢰⣿⣿⡿⠂⠀⠀⠀⠀⠀⠀ ⠈⠉⢻⡇ \n⠀⠀⠀⠈⠿⣿⣇⣠⠤⠤⠤⢤⣀⣤⠤⠤⣺⡏ \n⠀⠀⠀⠀⠐⢉⣯⠹⣀⣀⣢⡸⠉⢏⡄⣀⣯⠁ \n⠀⠀⠀⠀⠡⠀⢹⣆⠀⠀⠀⣀⡀⡰⠀⢠⠖⠂ \n⠀⠀⠀⠀⠀⠈⠙⣿⣿⠀⠠⠚⢋⡁⠀⡜ \n⠀⠀⠀⠀⠀⠀⢸⠈⠙⠦⣤⣀⣤⣤⡼⠁  \n⠀⠀⠀ ⠀⢀⡌⠀⠀⠀⠀ ⠉⢏⡉  \n⠀⠀⠀⣀⣴⣿⣷⣶⣤⣤⣤⣴⣾⣷⣶⣦⡀ \n⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣄ \n⠚⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛",
     )
 
+
 @legend.legend_cmd(
     pattern="🤬$",
     command=("🤬", menu_category),
@@ -39,6 +40,7 @@ async def _(event):
         await asyncio.sleep(0.5)
         await event.edit("".join(deq))
         deq.rotate(1)
+
 
 @legend.legend_cmd(
     pattern="🤣$",
@@ -56,6 +58,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
+
 @legend.legend_cmd(
     pattern="✅$",
     command=("✅", menu_category),
@@ -72,6 +75,7 @@ async def _(event):
         await event.edit("".join(deq))
         deq.rotate(1)
 
+
 @legend.legend_cmd(
     pattern="bakwas$",
     command=("bakwas", menu_category),
@@ -82,6 +86,7 @@ async def _(event):
 )
 async def gn(event):
     await event.edit("Your message has been read and Ignored successfully ┐(´∀｀)┌ 😂😂😂")
+
 
 @legend.legend_cmd(
     pattern="ded(?:\s|$)([\s\S]*)",
