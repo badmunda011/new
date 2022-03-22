@@ -121,7 +121,6 @@ async def add_sudo_user(event):
     sql.del_collection("sudousers_list")
     sql.add_collection("sudousers_list", sudousers, {})
     sudocmds = sudo_enabled_cmds()
-    await eor(event, "__Enabling all safe cmds for sudo....__")
     totalcmds = CMD_INFO.keys()
     typecmds = (
         PLG_INFO["botcontrols"]
