@@ -56,7 +56,7 @@ async def _(event):
     await _legendutils.unsavegif(event, nohorny)
     await legendevent.delete()
 
-
+"""
 @legend.legend_cmd(
     pattern="dva$",
     command=("dva", menu_category),
@@ -83,6 +83,7 @@ async def dva(event):
     await event.client.send_file(event.chat_id, file=url, reply_to=reply_to)
     await event.delete()
 
+"""
 
 @legend.legend_cmd(
     pattern="nsfw$",
