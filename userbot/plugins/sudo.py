@@ -139,9 +139,11 @@ async def add_sudo_user(event):
         + ["gauth"]
         + ["greset"]
     )
-    list(set(totalcmds) - set(typecmds))
+    loadcmds = list(set(totalcmds) - set(typecmds))
     if len(sudocmds) > 0:
         sqllist.del_keyword_list("sudo_enabled_cmds")
+    for cmd in loadcmds:
+        sqllist.add_to_list("sudo_enabled_cmds", cmd)
     output = f"{mentionuser(userdata['chat_name'],userdata['chat_id'])} __is Added to your sudo users.__\n"
     output += "**Bot is reloading to apply the changes. Please wait for a minute**"
     msg = await eor(event, output)
