@@ -9,10 +9,9 @@ menu_category = "useless"
     pattern="gencc(?:\s|$)([\s\S]*)",
     command=("gencc", menu_category),
     info={
-        "header": "Carbon generators for given text (Fixed style)",
+        "header": "To Make Fake Credit Card in short help u to generate fake cc",
         "usage": [
-            "{tr}carbon <text>",
-            "{tr}carbon <reply to text>",
+            "{tr}gencc",
         ],
     },
 )
