@@ -90,9 +90,9 @@ async def get_users(event):
     sender = await event.get_sender()
     me = await event.client.get_me()
     if not sender.id == me.id:
-        await LEGEND.edit(event, "`processing...`")
+        await LEGEND.edit("`processing...`")
     else:
-        await LEGEND.edit(event, "`processing...`")
+        await LEGEND.edit("`processing...`")
     if event.is_private:
         return await LEGEND.edit("`Sorry, Cant add users here`")
     s = 0
@@ -142,9 +142,9 @@ async def get_users(event):
     sender = await event.get_sender()
     me = await event.client.get_me()
     if not sender.id == me.id:
-        await LEGEND.edit(event, "`processing...`")
+        await LEGEND.edit("`processing...`")
     else:
-        await LEGEND.edit(event, "`processing...`")
+        await LEGEND.edit("`processing...`")
     if event.is_private:
         return await LEGEND.edit("`Sorry, Cant add users here`")
     s = 0
