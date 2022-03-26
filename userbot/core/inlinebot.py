@@ -255,9 +255,9 @@ async def inline_handler(event):  # sourcery no-metrics
             ALIVE_PIC = gvarstatus("ALIVE_PIC")
             if ALIVE_PIC is None:
                 I_IMG = "https://telegra.ph/file/a4a6a40205873ae7f7ceb.jpg"
-            elif not IALIVE_PIC:
-                legend = [x for x in ALIVE_PIC.split()]
-                PIC = list(legend)
+            else:
+                lol = [x for x in ALIVE_PIC.split()]
+                PIC = list(lol)
                 I_IMG = random.choice(PIC)
             if I_IMG and I_IMG.endswith((".jpg", ".png")):
                 result = builder.photo(
