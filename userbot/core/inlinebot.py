@@ -254,7 +254,7 @@ async def inline_handler(event):  # sourcery no-metrics
             ]
             ALIVE_PIC = gvarstatus("ALIVE_PIC")
             IALIVE_PIC = gvarstatus("IALIVE_PIC")
-            if IALIVE_PIC:
+            if ALIVE_PIC:
                 legend = [x for x in IALIVE_PIC.split()]
                 PIC = list(legend)
                 I_IMG = random.choice(PIC)
@@ -462,7 +462,8 @@ async def inline_handler(event):  # sourcery no-metrics
                 help_pic = "https://telegra.ph/file/144d8ea74fef8ca12253c.jpg"
             else:
                 lol = [x for x in oso.split()]
-                help_pic = random.choice(lol)
+                PIC = list(lol)
+                help_pic = random.choice(PIC)
             _result = main_menu()
             if oso == "OFF":
                 result = builder.article(
