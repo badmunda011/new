@@ -6,7 +6,7 @@ import re
 import time
 from uuid import uuid4
 
-from telethon import Button, types
+from telethon import Button, custom, types
 from telethon.errors import QueryIdInvalidError
 from telethon.events import CallbackQuery, InlineQuery
 from youtubesearchpython import VideosSearch
