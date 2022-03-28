@@ -196,7 +196,7 @@ async def sareply(event):
     ):
         loll = event.text
         sweetie = loll.replace(" ", "%20")
-        url = f"https://www.kukiapi.xyz/api/message={sweetie}"
+        url = f"https://kukiapi.xyz/api/apikey=1356469075-KUKIkq4WMg5FV4/LegendBoyAssistance/LegendBoy/message={sweetie}"
         request = requests.get(url)
         results = json.loads(request.text)
         boyresult = f"{results['reply']}"
