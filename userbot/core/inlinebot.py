@@ -49,10 +49,15 @@ def ibuild_keyboard(buttons):
             keyb.append([Button.url(btn[0], btn[1])])
     return keyb
 
-
+"""
 @legend.tgbot.on(CallbackQuery(data=re.compile(b"help_k_minu")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
+"""
+
+def main_menu():
+    tol = gvarstatus("BOT_USERNAME")
+    text = f"⚜ {mention}  ⚜"
     buttons = [
         (
             Button.inline(f"Admin ({len(GRP_INFO['admin'])})", data="admin_menu"),
@@ -72,6 +77,9 @@ async def on_plug_in_callback_query_handler(event):
         ),
         (Button.inline(f"👨‍💻 Main Menu", data="mainmenu"),),
     ]
+    return text, buttons
+
+"""
     await event.edit(
         f"💝『{mention}』💝",
         buttons=buttons,
@@ -96,6 +104,7 @@ def main_menu():
     ]
     return text, buttons
 
+"""
 
 def command_in_category(cname):
     cmds = 0
