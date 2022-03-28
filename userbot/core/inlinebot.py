@@ -6,7 +6,7 @@ import re
 import time
 from uuid import uuid4
 
-from telethon import Button, custom, types
+from telethon import Button, types
 from telethon.errors import QueryIdInvalidError
 from telethon.events import CallbackQuery, InlineQuery
 from youtubesearchpython import VideosSearch
@@ -49,14 +49,16 @@ def ibuild_keyboard(buttons):
             keyb.append([Button.url(btn[0], btn[1])])
     return keyb
 
+
 """
 @legend.tgbot.on(CallbackQuery(data=re.compile(b"help_k_minu")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
 """
 
+
 def main_menu():
-    tol = gvarstatus("BOT_USERNAME")
+    gvarstatus("BOT_USERNAME")
     text = f"⚜ {mention}  ⚜"
     buttons = [
         (
@@ -78,6 +80,7 @@ def main_menu():
         (Button.inline(f"👨‍💻 Main Menu", data="mainmenu"),),
     ]
     return text, buttons
+
 
 """
     await event.edit(
@@ -105,6 +108,7 @@ def main_menu():
     return text, buttons
 
 """
+
 
 def command_in_category(cname):
     cmds = 0
