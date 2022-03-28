@@ -279,9 +279,8 @@ async def shazamcmd(event):
         open(thumb_name, "wb").write(thumb.content)
         duration = results[0]["duration"]
         views = results[0]["views"]
-
     except Exception:
-        m.edit("𝐒𝐨𝐧𝐠 𝐍𝐨𝐭 𝐅𝐨𝐮𝐧𝐝.")
+        await m.edit("𝐒𝐨𝐧𝐠 𝐍𝐨𝐭 𝐅𝐨𝐮𝐧𝐝.")
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
@@ -292,7 +291,7 @@ async def shazamcmd(event):
             dur += int(dur_arr[i]) * secmul
             secmul *= 60
     except Exception as e:
-        m.edit("**𝐘𝐨𝐮𝐭𝐮𝐛𝐞  𝐄𝐫𝐫𝐨𝐫 **")
+        await m.edit("**𝐘𝐨𝐮𝐭𝐮𝐛𝐞  𝐄𝐫𝐫𝐨𝐫 **")
         print(e)
     await event.client.send_file(
         event.chat_id,
