@@ -658,7 +658,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     reply_markup=markup, message=text, entities=msg_entities
                 ),
             )
-        await event.answer([result] if result else None)
+            await event.answer([result] if result else None)
         else:
             pass
 
