@@ -660,7 +660,7 @@ async def lol(args):
     user = await args.client.get_me()
     userid = user.id
     if message and message.media:
-        if "video/mp4" in message.media.document.mime_type:
+        if message.media.document.mime_type.startswith("video/"):
             legendevent = await eor(args, "__⌛ Downloading..__")
             sticker = await animator(message, args, legendevent)
             await eor(legendevent, f"`{random.choice(KANGING_STR)}`")
