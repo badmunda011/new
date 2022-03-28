@@ -2,7 +2,7 @@
 Created by  LegendBoy.  tg @Legend_K_Boy
 Plugin for LegendUserBot
 """
-
+from collections import deque
 from . import eor, legend, mention
 
 menu_category = "fun"
