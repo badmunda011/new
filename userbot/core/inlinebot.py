@@ -96,6 +96,7 @@ def main_menu():
     ]
     return text, buttons
 
+
 def command_in_category(cname):
     cmds = 0
     for i in GRP_INFO[cname]:
