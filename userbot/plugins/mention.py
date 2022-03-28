@@ -1,5 +1,5 @@
 from telethon.tl.types import ChannelParticipantsAdmins
-
+import random
 from userbot import legend
 
 from ..helpers.utils import get_user_from_event, reply_id
@@ -48,7 +48,7 @@ async def _(event):
     mentions = input_str or "@all"
     chat = await event.get_input_chat()
     async for x in event.client.iter_participants(chat, 100):
-        sweetie += f"[{x.first_name}](tg://user?id={x.id})"  # [\u2063]
+        sweetie = f"[{x.first_name}](tg://user?id={x.id})"  # [\u2063]
         lol = [y for y in sweetie.split()]
         mentions += random.choice(lol)
     await event.client.send_message(event.chat_id, mentions, reply_to=reply_to_id)
