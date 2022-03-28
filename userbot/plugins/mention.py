@@ -29,6 +29,7 @@ async def _(event):
     await event.client.send_message(event.chat_id, mentions, reply_to=reply_to_id)
     await event.delete()
 
+
 @legend.legend_cmd(
     pattern="(luckydraw|ld)(?:\s|$)([\s\S]*)",
     command=("luckydraw", menu_category),
@@ -50,6 +51,7 @@ async def _(event):
         mentions += f"[{x.first_name}](tg://user?id={x.id})"  # [\u2063]
     await event.client.send_message(event.chat_id, mentions, reply_to=reply_to_id)
     await event.delete()
+
 
 @legend.legend_cmd(
     pattern="report$",
