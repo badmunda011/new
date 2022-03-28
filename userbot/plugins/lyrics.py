@@ -42,7 +42,7 @@ async def lyrics(event):  # sourcery no-metrics
     if GENIUS is None:
         return await eor(
             event,
-            "`Set genius access token in heroku vars for functioning of this command`",
+            "`Set genius access token in heroku vars for functioning of this command\n》 VAR :- GENIUS_API_TOKEN\n》 Generate From:- https://genius.com/developers`",
         )
     match = event.pattern_match.group(1)
     songno = re.findall(r"-n\d+", match)
