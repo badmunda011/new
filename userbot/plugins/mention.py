@@ -25,7 +25,7 @@ async def _(event):
     mentions = input_str or "@all"
     chat = await event.get_input_chat()
     async for x in event.client.iter_participants(chat, 100):
-        mentions += f"[\u2063](tg://user?id={x.id})"
+        mentions += f" \n[x.first_name](tg://user?id={x.id})" #[\u2063]
     await event.client.send_message(event.chat_id, mentions, reply_to=reply_to_id)
     await event.delete()
 
@@ -61,7 +61,7 @@ async def _(event):
             "{tr}men username/userid text",
             "text (username/mention)[custom text] text",
         ],
-        "examples": ["{tr}men @LEGEND_K_BOY hi", "Hi @LEGEND_K_BOY[How are you?]"],
+        "examples": ["{tr}men @LegendBoy_XD hi", "Hi @LegendBoy_XD[How are you?]"],
     },
 )
 async def _(event):
