@@ -36,7 +36,7 @@ def progress(current, total):
     groups_only=True,
 )
 async def _(event):
-    hell = await eor(event, "Hmm..")
+    sweetie = await eor(event, "Hmm..")
     BASE_URL = "http://images.google.com"
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
@@ -76,7 +76,7 @@ async def _(event):
         img_size_div = soup.find(id="jHnbRc")
         img_size = img_size_div.find_all("div")
         OUTPUT_STR = """/protecc {prs_text}""".format(**locals())
-    await hell.edit(OUTPUT_STR, parse_mode="HTML", link_preview=False)
+        await sweetie.edit(OUTPUT_STR, parse_mode="HTML", link_preview=False)
 
 
 @legend.legend_cmd(incoming=True, edited=False)
