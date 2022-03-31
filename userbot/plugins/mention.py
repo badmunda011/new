@@ -49,10 +49,8 @@ async def _(event):
     input_str = event.pattern_match.group(2)
     mentions = input_str or "@all"
     chat = await event.get_input_chat()
-    async for x in event.client.iter_participants(chat, 100):
-        sweetie = f"[{x.first_name}](tg://user?id={x.id})"  # [\u2063]
-        lol = [y for y in sweetie.split()]
-        mentions += random.choice(lol)
+    async for x in event.client.iter_participants(chat, 1):
+        mentions+ = f"[{x.first_name}](tg://user?id={x.id})"  # [\u2063]
     await event.client.send_message(event.chat_id, mentions, reply_to=reply_to_id)
     await event.delete()
 
