@@ -44,13 +44,13 @@ async def _(event):
     animation_chars = [
         "**Hello!👋**",
         "**Lets Start Dance **",
-        "🕺"
-        "💃",
+        "🕺" "💃",
         "🕺",
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 5], link_preview=True)
+
 
 @legend.legend_cmd(
     pattern="birthday$",
