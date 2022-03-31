@@ -45,10 +45,10 @@ async def _(event):
     "To tag all."
     reply_to_id = await reply_id(event)
     event.pattern_match.group(2)
-    mentions = "**Our Lucky Draw Person Name**"
+    mentions = "💝 **Our Lucky Draw Person Name** 💝"
     chat = await event.get_input_chat()
     async for x in event.client.iter_participants(chat, 2):
-        mentions += f" \n\n[{x.first_name}](tg://user?id={x.id})"  # [\u2063]
+        mentions += f"\n☞ [{x.first_name}](tg://user?id={x.id})"  # [\u2063]
     await event.client.send_file(
         event.chat_id,
         "https://telegra.ph/file/071765255640f7c40c506.jpg",
