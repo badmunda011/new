@@ -36,6 +36,8 @@ async def _(event):
             gvarstatus("PING_IMG")
             or "https://telegra.ph/file/e15a2fe1430358e26713c.jpg"
         )
+        llol = [x for x in sweetie.split()]
+        IPIC = random.choice(llol) 
         if sweetie == "OFF":
             legendevent = await eor(event, "<b><i>⚡ **Pong!** ⚡</b></i>", "html")
             end = datetime.now()
@@ -51,7 +53,7 @@ async def _(event):
             await legendevent.delete()
             await event.client.send_file(
                 event.chat_id,
-                sweetie,
+                IPIC,
                 caption=f"<b><i>👨‍💻 Pong </b></i>\n\n   🚩 {ms} <b><i>ms\n   Bot : {hmention}</b></i>",
                 parse_mode="html",
             )
