@@ -30,10 +30,33 @@ async def _(event):
 
 
 @legend.legend_cmd(
+    pattern="dance$",
+    command=("dance", menu_category),
+    info={
+        "header": "Dancing animation interval of 5 seconds",
+        "usage": "{tr}dance",
+    },
+)
+async def _(event):
+    animation_interval = 5
+    animation_ttl = range(5)
+    await event.edit("Starting...")
+    animation_chars = [
+        "**Hello!👋**",
+        "**Lets Start Dance **",
+        "🕺"
+        "💃",
+        "🕺",
+    ]
+    for i in animation_ttl:
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 5], link_preview=True)
+
+@legend.legend_cmd(
     pattern="birthday$",
     command=("birthday", menu_category),
     info={
-        "header": "Showing Indian Flag",
+        "header": "Birthday animation",
         "usage": "{tr}birthday",
     },
 )
@@ -47,7 +70,7 @@ async def _(event):
         f"**Happy Birthday**"
         "[Happy Birthday](http://2.bp.blogspot.com/-WGLaIVbpK6U/WT4sr0LG2TI/AAAAAAAAVX0/1t0F3gECRh4okN6zJzq6fMwQ7dA4Qw8AwCLcB/s1600/happy-birthday-to-you.png)",
         "**Wishing you 👈 a 👌 day 🌞 filled 😏 with 👏 happiness and 👏 a 👌 year 🎉 filled 😏 with 👏 joy 😁.**",
-        "**Sending you 👈 smiles 😀 for  every 👏 moment 🏆 of your special 😲 day 🌞*",
+        "**Sending you 👈 smiles 😀 for  every 👏 moment 🏆 of your special 😲 day 🌞**",
         "**Have 👏 a 👌 wonderful 😊 time 🕐 and a very 👌 happy 😊 birthday 🎂!**",
         "**Count your 👏 life 👤 by 😈 smiles, 😀 not 🚫 tears. 😭 Count your 👏 age 👵 by 😈 friends, 👫 not 🚫 years. 📅 Happy 😊 birthday 🎂!**",
         "**I hope 🙏 all 💯 your 👏 birthday 🎂 wishes and 👏 dreams 🔚 come true. 💯**",
