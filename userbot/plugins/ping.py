@@ -37,7 +37,7 @@ async def _(event):
             or "https://telegra.ph/file/e15a2fe1430358e26713c.jpg"
         )
         llol = [x for x in sweetie.split()]
-        IPIC = random.choice(llol) 
+        IPIC = random.choice(llol)
         if sweetie == "OFF":
             legendevent = await eor(event, "<b><i>⚡ **Pong!** ⚡</b></i>", "html")
             end = datetime.now()
