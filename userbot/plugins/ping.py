@@ -1,6 +1,6 @@
 import asyncio
 from datetime import datetime
-
+import random
 from ..core.managers import eor
 from ..sql_helper.globals import gvarstatus
 from . import hmention, legend
