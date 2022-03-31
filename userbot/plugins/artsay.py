@@ -2,8 +2,9 @@
 Created by  LegendBoy.  tg @Legend_K_Boy
 Plugin for LegendUserBot
 """
+import asyncio
 from collections import deque
-import asyncio 
+
 from . import eor, legend, mention
 
 menu_category = "fun"
