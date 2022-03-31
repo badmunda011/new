@@ -13,7 +13,7 @@ from userbot import legend
 from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import eor
-from . import BOTLOG, BOTLOG_CHATID, mention
+from . import mention
 
 LOGS = logging.getLogger(__name__)
 menu_category = "utils"
