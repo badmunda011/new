@@ -51,11 +51,6 @@ def resize_image(image):
 async def _(event):
     "To get telegraph link."
     legendevent = await eor(event, "`processing........`")
-    if BOTLOG:
-        await event.client.send_message(
-            BOTLOG_CHATID,
-            f"Created New Telegraph account {auth_url} for the current session. \n**Do not give this url to anyone, even if they say they are from Telegram!**",
-        )
     optional_title = event.pattern_match.group(5)
     if not event.reply_to_msg_id:
         return await legendevent.edit(
