@@ -44,7 +44,8 @@ async def _(event):
     animation_chars = [
         "**Hello!👋**",
         "**Lets Start Dance **",
-        "🕺" "💃",
+        "🕺",
+        "💃",
         "🕺",
     ]
     for i in animation_ttl:
