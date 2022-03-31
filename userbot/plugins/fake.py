@@ -216,8 +216,8 @@ async def gbun(event):
 
 
 @legend.legend_cmd(
-    pattern="fgben$",
-    command=("fgben", menu_category),
+    pattern="fgban$",
+    command=("fgban", menu_category),
     info={
         "header": "Fun animation for fucking fake Gban",
         "description": "An animation that shows  globally Banning all in Group to him that he is gbanned(fake gban)",
@@ -319,7 +319,7 @@ async def _(event):
 
 
 @legend.legend_cmd(
-    pattern="fungben$",
+    pattern="fungban$",
     command=("fungben", menu_category),
     info={
         "header": "Fun animation for fucking fake unGban",
