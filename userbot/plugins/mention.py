@@ -1,5 +1,3 @@
-import random
-
 from telethon.tl.types import ChannelParticipantsAdmins
 
 from userbot import legend
