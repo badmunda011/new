@@ -869,17 +869,6 @@ async def block_p_m(event):
             event,
             f"__Turn on pmpermit by doing __`{cmdhd}pmguard on` __for working of this plugin__",
         )
-    if event.is_private:
-        user = await event.get_chat()
-        reason = event.pattern_match.group(1)
-    else:
-        user, reason = await get_user_from_event(event)
-        if not user:
-            return
-    if user.id == 5122474448:
-        return await eor(event, "I Cant Block My Creator")
-    if not reason:
-        reason = "Not Mentioned."
     try:
         PM_WARNS = sql.get_collection("pmwarns").json
     except AttributeError:
@@ -914,7 +903,7 @@ async def block_p_m(event):
                 sed += 1
     await eod(
         event,
-        f"Successfully Blocked :- {lol}\nFail To Block :- {sed}\nReason :- {reason}",
+        f"♦️ Successfully Blocked :- {lol}\n🚩 Fail To Block :- {sed}",
     )
 
 
