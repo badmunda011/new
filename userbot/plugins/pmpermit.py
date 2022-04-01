@@ -852,6 +852,73 @@ async def block_p_m(event):
 
 
 @legend.legend_cmd(
+    pattern="blockall(?:\s|$)([\s\S]*)",
+    command=("blockall", menu_category),
+    info={
+        "header": "To block user to direct message you.",
+        "usage": [
+            "{tr}blockall <username/reply reason> in group",
+            "{tr}blockall <reason> in pm",
+        ],
+    },
+)
+async def block_p_m(event):
+    "To block user to direct message you."
+    if gvarstatus("pmpermit") is None:
+        return await eod(
+            event,
+            f"__Turn on pmpermit by doing __`{cmdhd}pmguard on` __for working of this plugin__",
+        )
+    if event.is_private:
+        user = await event.get_chat()
+        reason = event.pattern_match.group(1)
+    else:
+        user, reason = await get_user_from_event(event)
+        if not user:
+            return
+    if user.id == 5122474448:
+        return await eor(event, "I Cant Block My Creator")
+    if not reason:
+        reason = "Not Mentioned."
+    try:
+        PM_WARNS = sql.get_collection("pmwarns").json
+    except AttributeError:
+        PM_WARNS = {}
+    try:
+        PMMESSAGE_CACHE = sql.get_collection("pmmessagecache").json
+    except AttributeError:
+        PMMESSAGE_CACHE = {}
+    if str(user.id) in PM_WARNS:
+        del PM_WARNS[str(user.id)]
+    if str(user.id) in PMMESSAGE_CACHE:
+        try:
+            await event.client.delete_messages(user.id, PMMESSAGE_CACHE[str(user.id)])
+        except Exception as e:
+            LOGS.info(str(e))
+        del PMMESSAGE_CACHE[str(user.id)]
+    if pmpermit_sql.is_approved(user.id):
+        pmpermit_sql.disapprove(user.id)
+    sql.del_collection("pmwarns")
+    sql.del_collection("pmmessagecache")
+    sql.add_collection("pmwarns", PM_WARNS, {})
+    sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
+    sed = 0
+    lol = 0
+    async for krishna in event.client.iter_dialogs():
+        if krishna.is_user and not krishna.entity.bot:
+            sweetie = krishna.id
+            try:
+                await event.client(functions.contacts.BlockRequest(sweetie.id))
+                lol += 1
+            except BaseException:
+                sed += 1
+    await eod(
+        event,
+        f"Successfully Blocked :- {lol}\nFail To Block :- {sed}\nReason :- {reason}",
+    )
+
+
+@legend.legend_cmd(
     pattern="unblock(?:\s|$)([\s\S]*)",
     command=("unblock", menu_category),
     info={
