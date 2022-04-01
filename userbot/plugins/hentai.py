@@ -34,7 +34,7 @@ async def _(event):
             await event.client.send_message(chat, "Lolis")
             response = await resp
         except YouBlockedUserError:
-            await event.edit("```Unblock @LoliHeavenBot```")
+            return await event.edit("```Unblock @LoliHeavenBot```")
         if response.text.startswith("I can't find that"):
             await event.edit("😐 I Cant Find that")
         else:
@@ -70,7 +70,7 @@ async def _(event):
         except YouBlockedUserError:
             await event.edit("```Unblock @LoliHeavenBot```")
         if response.text.startswith("I can't find that"):
-            await event.edit("😐 I Cant Find that")
+            return await event.edit("😐 I Cant Find that")
         else:
             await event.delete()
             xxxx = await event.client.send_file(event.chat_id, response.message)
@@ -102,7 +102,7 @@ async def _(event):
             await event.client.send_message(chat, "Shota")
             response = await resp
         except YouBlockedUserError:
-            await event.edit("```Unblock @LoliHeavenBot```")
+            return await event.edit("```Unblock @LoliHeavenBot```")
         if response.text.startswith("I can't find that"):
             await event.edit("😐")
         else:
@@ -136,7 +136,7 @@ async def _(event):
             await event.client.send_message(chat, "Hentai Videos")
             response = await resp
         except YouBlockedUserError:
-            await event.edit("```Unblock @LoliHeavenBot```")
+            return await event.edit("```Unblock @LoliHeavenBot```")
         if response.text.startswith("I can't find that"):
             await event.edit("😐")
         else:
@@ -170,7 +170,7 @@ async def _(event):
             await event.client.send_message(chat, "Oppai")
             response = await resp
         except YouBlockedUserError:
-            await event.edit("```Unblock @LoliHeavenBot```")
+            return await event.edit("```Unblock @LoliHeavenBot```")
         if response.text.startswith("I can't find that"):
             await event.edit("😐")
         else:
@@ -204,7 +204,7 @@ async def _(event):
             await event.client.send_message(chat, "Trap")
             response = await resp
         except YouBlockedUserError:
-            await event.edit("```Unblock @LoliHeavenBot```")
+            return await event.edit("```Unblock @LoliHeavenBot```")
         if response.text.startswith("I can't find that"):
             await event.edit("😐")
         else:
@@ -238,7 +238,7 @@ async def _(event):
             await event.client.send_message(chat, "BDSM")
             response = await resp
         except YouBlockedUserError:
-            await event.edit("```Unblock @LoliHeavenBot```")
+            return await event.edit("```Unblock @LoliHeavenBot```")
         if response.text.startswith("I can't find that"):
             await event.edit("😐")
         else:
@@ -272,7 +272,7 @@ async def _(event):
             await event.client.send_message(chat, "Furry")
             response = await resp
         except YouBlockedUserError:
-            await event.edit("```Unblock @LoliHeavenBot```")
+            return await event.edit("```Unblock @LoliHeavenBot```")
         if response.text.startswith("I can't find that"):
             await event.edit("😐")
         else:
@@ -306,7 +306,7 @@ async def _(event):
             await event.client.send_message(chat, "GIF Hentai")
             response = await resp
         except YouBlockedUserError:
-            await event.edit("```Unblock @LoliHeavenBot```")
+            return await event.edit("```Unblock @LoliHeavenBot```")
         if response.text.startswith("I can't find that"):
             await event.edit("😐")
         else:
@@ -340,7 +340,7 @@ async def _(event):
             await event.client.send_message(chat, "Cosplay")
             response = await resp
         except YouBlockedUserError:
-            await event.edit("```Unblock @LoliHeavenBot```")
+            return await event.edit("```Unblock @LoliHeavenBot```")
         if response.text.startswith("I can't find that"):
             await event.edit("😐")
         else:
