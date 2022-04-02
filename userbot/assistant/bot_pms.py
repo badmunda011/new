@@ -91,6 +91,13 @@ async def bot_start(event):
     if chat.id != Config.OWNER_ID:
         customstrmsg = gvarstatus("START_TEXT") or None
         if customstrmsg is not None:
+            buttons = [
+                (
+                    Button.inline("🔰Rules🔰 ", data="rules"),
+                    Button.inline(" Deploy 🚀", data="depy"),
+                ),
+                (Button.url(" 🔱Support🔱 ", "https://t.me/LegendBot_OP"),),
+            ]
             start_msg = customstrmsg.format(
                 mention=mention,
                 first=first,
@@ -183,24 +190,17 @@ async def users(event):
 @legend.tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"depy")))
 async def help(event):
     if event.query.user_id == bot.uid:
-        await event.answer(
-            "Wait ... Sorry U are Not My Owmer So, U Cant Acesss It",
-            cache_time=0,
-            alert=True,
-        )
+        await event.answer("This Is Not For U My Master", cache_time=0, alert=True)
     else:
         await tgbot.send_message(
-            event.chat_id,
-            message="You Can Deploy LegendBot In Heroku By Following Steps Bellow, You Can See Some Quick Guides On Support Channel Or On Your Own Assistant Bot. \nThank You For Contacting Me.",
+            message="You Can Deploy/Install LegendBot In Heroku By Following Steps Bellow, You Can See Some Quick Guides On Support Channel Or On Your Own Assistant Bot. \nThank You For Contacting Me.",
             link_preview=False,
             buttons=[
                 [
-                    custom.Button.inline("Tutorial", data="LOGED"),
+                    Button.url("Tutorial", "https://youtu.be/9CtOErUFmrQ"),
                 ],
                 [
-                    Button.url(
-                        "Github Repo ❓", "https://github.com/LEGEND-AI/LEGENDBOT"
-                    ),
+                    Button.url("Github Repo ❓", "https://github.com/LEGEND-AI/LEGENDBOT"),
                 ],
             ],
         )
