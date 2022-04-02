@@ -25,7 +25,7 @@ menu_category="extra"
         "header": "Just to say hi to other user.",
         "description": "input string along with cmd will be added to your hi text",
         "usage": "{tr}hilegend <text>",
-        "examples": "{tr}hulegend how are you bro",
+        "examples": "{tr}hilegend how are you bro",
     },
 )
 async def hi_legend(event):
