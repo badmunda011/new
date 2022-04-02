@@ -277,8 +277,8 @@ async def lolgban(event):  # sourcery no-metrics
         if gvarstatus("ABUSE") == "ON":
             try:
                 await event.client.send_file(event.chat_id, gbpic, caption=gmsg)
-            except Exception as e:
-                 await lel.edit(ogmsg)
+            except Exception:
+                await lel.edit(ogmsg)
         else:
             await lel.edit(ogmsg)
         if reason:
