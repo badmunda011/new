@@ -1,35 +1,13 @@
 import asyncio
-import glob
-import io
 import os
-import pathlib
-import re
+import time
 from datetime import datetime
 from time import time
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl import types
-from telethon.utils import get_attributes
-from wget import download
-from youtube_dl import YoutubeDL
-from youtube_dl.utils import (
-    ContentTooShortError,
-    DownloadError,
-    ExtractorError,
-    GeoRestrictedError,
-    MaxDownloadsReached,
-    PostProcessingError,
-    UnavailableVideoError,
-    XAttrMetadataError,
-)
-
-import asyncio
-import json
-import math
-import os
-import time
-
 from telethon.tl.types import DocumentAttributeAudio
+from telethon.utils import get_attributes
 from youtube_dl import YoutubeDL
 from youtube_dl.utils import (
     ContentTooShortError,
@@ -41,17 +19,13 @@ from youtube_dl.utils import (
     UnavailableVideoError,
     XAttrMetadataError,
 )
-from youtube_search import YoutubeSearch
-
-
 
 from userbot import legend
 
-from ..core import pool
 from ..core.logger import logging
 from ..core.managers import eod, eor
-from ..helpers import progress, reply_id
-from ..helpers.functions.utube import _mp3Dl, get_yt_video_id, get_ytthumb, ytsearch
+from ..helpers import progress
+from ..helpers.functions.utube import ytsearch
 from ..helpers.utils import _format
 from . import hmention
 
@@ -172,7 +146,7 @@ async def fix_attributes(
     },
 )
 async def download_video(v_url):
-    """ For .yta/ytv command, download media from YouTube and many other sites. """
+    """For .yta/ytv command, download media from YouTube and many other sites."""
     url = v_url.pattern_match.group(2)
     type = v_url.pattern_match.group(1).lower()
     await eor(v_url, "`Preparing to download...`")
@@ -299,6 +273,7 @@ async def download_video(v_url):
         )
         os.remove(f"{ytdl_data['id']}.mp4")
         await v_url.delete()
+
 
 @legend.legend_cmd(
     pattern="yts(?: |$)(\d*)? ?([\s\S]*)",
