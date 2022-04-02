@@ -200,7 +200,9 @@ async def help(event):
                     Button.url("Tutorial", "https://youtu.be/9CtOErUFmrQ"),
                 ],
                 [
-                    Button.url("Github Repo ❓", "https://github.com/LEGEND-AI/LEGENDBOT"),
+                    Button.url(
+                        "Github Repo ❓", "https://github.com/LEGEND-AI/LEGENDBOT"
+                    ),
                 ],
             ],
         )
