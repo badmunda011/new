@@ -232,7 +232,7 @@ async def _(legendevent):
 async def lolgban(event):  # sourcery no-metrics
     "To ban user in every group where you are admin."
     start_date = str(datetime.now().strftime("%B %d, %Y"))
-    legend = await eor(event, "`Gbanning...`")
+    lel = await eor(event, "`Gbanning...`")
     if event.is_private:
         user = await event.get_chat()
         reason = event.pattern_match.group(1)
@@ -244,7 +244,7 @@ async def lolgban(event):  # sourcery no-metrics
         reason = "Not mentioned"
     chats = 0
     if user.id == 5122474448:
-        return await eod(legend, "🥴 **Nashe me hai kya lawde ‽**")
+        return await eod(lel, "🥴 **Nashe me hai kya lawde ‽**")
     if not gban_sql_helper.is_gbanned(user.id):
         async for gfuck in event.client.iter_dialogs():
             if gfuck.is_group or gfuck.is_channel:
@@ -253,7 +253,7 @@ async def lolgban(event):  # sourcery no-metrics
                         gfuck.id, user.id, view_messages=False
                     )
                     chats += 1
-                    await legend.edit(f"**Gbanning...** \n**Chats :** __{chats}__")
+                    await lel.edit(f"**Gbanning...** \n**Chats :** __{chats}__")
                 except BaseException:
                     pass
         gban_sql_helper.gban(
@@ -275,10 +275,12 @@ async def lolgban(event):  # sourcery no-metrics
         if reason != "":
             ogmsg += f"\n**🔰 Reason :**  `{reason}`"
         if gvarstatus("ABUSE") == "ON":
-            await event.client.send_file(event.chat_id, gbpic, caption=gmsg)
-            await legend.delete()
+            try:
+                await event.client.send_file(event.chat_id, gbpic, caption=gmsg)
+            except Exception as e:
+                 await lel.edit(ogmsg)
         else:
-            await legend.edit(ogmsg)
+            await lel.edit(ogmsg)
         if reason:
             await event.client.send_message(
                 BOTLOG_CHATID,
