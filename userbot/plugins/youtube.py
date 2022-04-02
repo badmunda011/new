@@ -2,7 +2,6 @@ import asyncio
 import os
 import time
 from datetime import datetime
-from time import time
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl import types
