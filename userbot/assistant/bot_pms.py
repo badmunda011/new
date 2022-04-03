@@ -69,7 +69,7 @@ async def check_bot_started_users(user, event):
 @legend.bot_cmd(
     pattern=f"^/start({botusername})?([\s]+)?$",
     incoming=True,
-    func=lambda e: e.is_private,
+    func=lambda e: e.sender_id == legend.uid,
 )
 async def bot_start(event):
     chat = await event.get_chat()
