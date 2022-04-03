@@ -26,12 +26,9 @@ async def bot_start(event):
     GOOD = [[Button.url("⚜ Lêɠêɳ̃dẞø† ⚜", "https://t.me/LegendBot_XD")]]
     LEGEND_IMG = gvarstatus("BOT_PING_PIC")
     start = datetime.now()
-    await event.client.send_file(
-        event.chat_id, LEGEND_IMG, caption="Checking LegendBot Ping...", buttons=GOOD
-    )
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     LegendBoy = f"**꧁•⊹٭Ping٭⊹•꧂**\n\n   ⚜ {ms}\n   ⚜ ❝𝐌𝐲 𝐌𝐚𝐬𝐭𝐞𝐫❞ ~『{mention}』"
-    await event.client.edit_message(
-        event.chat_id, LEGEND_IMG, caption=LegendBoy, buttons=GOOD
+    await event.client.send_file(
+        chat.id, LEGEND_IMG, caption=LegendBoy, buttons=GOOD
     )
