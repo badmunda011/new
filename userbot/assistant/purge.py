@@ -1,42 +1,17 @@
 import asyncio
-import io
-import re
-from collections import defaultdict
-from datetime import datetime
-from typing import Optional, Union
-
-from telethon import Button, events
-from telethon.errors import UserIsBlockedError
-from telethon.events import CallbackQuery, StopPropagation
-from telethon.utils import get_display_name
 
 from userbot import Config, legend
 
-from ..core import check_owner, pool
 from ..core.logger import logging
 from ..core.session import tgbot
-from ..helpers import reply_id
-from ..helpers.utils import _format
-from ..sql_helper.bot_blacklists import check_is_black_list
-from ..sql_helper.bot_pms_sql import (
-    add_user_to_db,
-    get_user_id,
-    get_user_logging,
-    get_user_reply,
-)
-from ..sql_helper.bot_starters import add_starter_to_db, get_starter_details
-from ..sql_helper.globals import delgvar, gvarstatus
-from ..sql_helper.idaddar import get_all_users
-from . import BOTLOG, BOTLOG_CHATID
-from .botmanagers import ban_user_from_bot
 
 LOGS = logging.getLogger(__name__)
 
 menu_category = "bot"
 botusername = Config.BOT_USERNAME
-from telethon import events
 from telethon.errors.rpcerrorlist import MessageDeleteForbiddenError
 from telethon.tl.types import ChannelParticipantsAdmins
+
 
 async def is_administrator(user_id: int, message):
     admin = False
@@ -47,6 +22,7 @@ async def is_administrator(user_id: int, message):
             admin = True
             break
     return admin
+
 
 @legend.bot_cmd(
     pattern=f"^/purge({botusername})?([\s]+)?$",
@@ -109,9 +85,3 @@ async def delete_msg(event):
     chat = await event.get_input_chat()
     rm = [msg, to_delete]
     await event.delete.delete_messages(chat, rm)
-
-
-
-
-
-
