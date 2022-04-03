@@ -15,7 +15,7 @@ botusername = Config.BOT_USERNAME
 
 
 @legend.bot_cmd(
-    pattern=f"^/start({botusername})?([\s]+)?$",
+    pattern=f"^/ping({botusername})?([\s]+)?$",
     incoming=True,
 )
 async def bot_start(event):
