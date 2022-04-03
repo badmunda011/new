@@ -52,7 +52,6 @@ pm_caption += f"       »»» [『Lêɠêɳ̃dẞø†』](https://t.me/Legend_U
 @legend.bot_cmd(
     pattern=f"^/alive({botusername})?([\s]+)?$",
     incoming=True,
-    func=lambda,
 )
 async def bot_start(event):
     chat = await event.get_chat()
