@@ -23,7 +23,7 @@ async def bot_start(event):
     await legend.get_me()
     if check_is_black_list(chat.id):
         return
-        GOOD = [[Button.url("⚜ Lêɠêɳ̃dẞø† ⚜", "https://t.me/LegendBot_XD")]]
+    GOOD = [[Button.url("⚜ Lêɠêɳ̃dẞø† ⚜", "https://t.me/LegendBot_XD")]]
     LEGEND_IMG = gvarstatus("BOT_PING_PIC")
     start = datetime.now()
     await event.client.send_file(
