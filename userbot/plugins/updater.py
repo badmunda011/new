@@ -2,8 +2,9 @@ import asyncio
 import os
 import sys
 from asyncio.exceptions import CancelledError
-import requests
+
 import heroku3
+import requests
 import urllib3
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
