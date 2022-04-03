@@ -27,8 +27,7 @@ async def aexec(code, event):
 
 @legend.bot_cmd(
     pattern=f"^/eval({botusername})(?: |$)([\s\S]*)",
-    incoming=True,
-    # func=lambda e: e.sender_id == bot.uid,
+    func=lambda e: e.sender_id == bot.uid,
 )
 async def bot_ll(event):
     chat = await event.get_chat()
