@@ -1,7 +1,7 @@
 from telethon import Button
 
-from userbot import Config, legend
-from userbot import legendversion
+from userbot import Config, legend, legendversion
+
 from ..core.logger import logging
 from ..helpers import reply_id
 from ..plugins import mention
