@@ -6,7 +6,7 @@ from userbot import Config, legend
 
 from ..core.logger import logging
 from ..sql_helper.bot_blacklists import check_is_black_list
-
+from userbot import bot 
 LOGS = logging.getLogger(__name__)
 
 menu_category = "bot"
@@ -28,7 +28,7 @@ async def aexec(code, event):
 @legend.bot_cmd(
     pattern=f"^/eval({botusername})?([\s]+)?$",
     incoming=True,
-    func=lambda e: e.sender_id == legend.uid,
+    #func=lambda e: e.sender_id == bot.uid,
 )
 async def bot_ll(event):
     chat = await event.get_chat()
