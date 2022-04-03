@@ -855,7 +855,7 @@ async def block_p_m(event):
     pattern="blockall(?:\s|$)([\s\S]*)",
     command=("blockall", menu_category),
     info={
-        "header": "To block user to direct message you.",
+        "header": "To block all the user to direct messaged you.",
         "usage": [
             "{tr}blockall <username/reply reason> in group",
             "{tr}blockall <reason> in pm",
