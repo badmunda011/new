@@ -26,9 +26,9 @@ async def aexec(code, event):
 
 
 @legend.bot_cmd(
-    pattern=f"^/eval({botusername})(?:\s|$)([\s\S])",
+    pattern=f"^/eval({botusername})(?:\s|$)([\s\S]*)",
     incoming=True,
-    # func=lambda e: e.sender_id == bot.uid,
+    func=lambda e: e.sender_id == bot.uid,
 )
 async def bot_ll(event):
     chat = await event.get_chat()
@@ -74,7 +74,7 @@ async def bot_ll(event):
         with io.BytesIO(str.encode(final_output)) as out_file:
             out_file.name = "eval.text"
             await event.client.send_file(
-                event.chat_id,
+                chat.id,
                 out_file,
                 force_document=True,
                 allow_cache=False,
