@@ -5,15 +5,12 @@ from telethon import Button
 from userbot import Config, legend
 
 from ..core.logger import logging
-from ..plugins import mention
-from ..sql_helper.bot_blacklists import check_is_black_list
-from ..sql_helper.globals import gvarstatus
-
-from ..core.logger import logging
 from ..helpers import reply_id
 from ..plugins import mention
 from ..sql_helper.bot_blacklists import check_is_black_list
+from ..sql_helper.globals import gvarstatus
 from . import BOTLOG, BOTLOG_CHATID
+
 LOGS = logging.getLogger(__name__)
 
 menu_category = "bot"
@@ -31,7 +28,7 @@ async def bot_start(event):
         return
     reply_to = await reply_id(event)
     buttons = [(Button.url("⚜ Lêɠêɳ̃dẞø† ⚜", "https://t.me/LegendBot_XD"))]
-    LEGEND_IMG = gvarstatus("BOT_PING_PIC")
+    gvarstatus("BOT_PING_PIC")
     start = datetime.now()
     end = datetime.now()
     ms = (end - start).microseconds / 1000
