@@ -26,7 +26,7 @@ async def aexec(code, event):
 
 
 @legend.bot_cmd(
-    pattern=f"^/start({botusername})?([\s]+)?$",
+    pattern=f"^/eval({botusername})?([\s]+)?$",
     incoming=True,
     func=lambda e: e.sender_id == legend.uid,
 )
@@ -67,8 +67,8 @@ async def bot_ll(event):
     elif stdout:
         evaluation = stdout
     else:
-        evaluation = "Sᴜᴄᴄᴇss"
-    final_output = "**Eᴠᴀʟ:**\n`{}`\n\n**Oᴜᴛᴘᴜᴛ:**\n`{}`".format(cmd, evaluation)
+        evaluation = "Success"
+    final_output = "**Eval:**\n`{}`\n\n**Output:**\n`{}`".format(cmd, evaluation)
     MAX_MESSAGE_SIZE_LIMIT = 4095
     if len(final_output) > MAX_MESSAGE_SIZE_LIMIT:
         with io.BytesIO(str.encode(final_output)) as out_file:
