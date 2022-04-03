@@ -18,6 +18,15 @@ from ..sql_helper.global_collection import (
     del_keyword_collectionlist,
     get_collectionlist_items,
 )
+lb_info = "https://raw.githubusercontent.com/ITS-LEGENDBOT/LEGENDBOT/master/LegendBoy-info.json"
+async def ld_info(lb_info):
+    infos = requests.get(lb_info).json()
+    _version = infos["LEGENDBOT-INFO"]["version"]
+    _release = infos["LEGENDBOT-INFO"]["release-date"]
+    _branch = infos["LEGENDBOT-INFO"]["branch"]
+    _author = infos["LEGENDBOT-INFO"]["author"]
+    _auturl = infos["LEGENDBOT-INFO"]["author-url"]
+    return _version, _release, _branch, _author, _auturl
 
 menu_category = "tools"
 cmdhd = Config.HANDLER
@@ -106,7 +115,7 @@ async def update(event, repo, ups_rem, ac_br):
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
     LEGEND = await event.edit(
-        "`Successfully Updated!\n" "Bot is restarting... Wait for a minute!`"
+        "`✅ Successfully Updated LegendBot!\n" "Bot is restarting... Wait for a minute!`"
     )
     await event.client.reload(LEGEND)
 
@@ -119,7 +128,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
     if APP_NAME is None:
         await event.edit(
             "`Please set up the` **APP_NAME** `Var`"
-            " to be able to deploy your userbot...`"
+            " to be able to deploy your Lêɠêɳ̃dẞο†...`"
         )
         repo.__del__()
         return
@@ -162,7 +171,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
     build_status = heroku_app.builds(order_by="created_at", sort="desc")[0]
     if build_status.status == "failed":
         return await eod(
-            event, "`Build failed!\n" "Cancelled or there were some errors...`"
+            event, "`Build failed ⚠️!\n" "Cancelled or there were some errors...`"
         )
     try:
         remote.push("master:main", force=True)
@@ -200,15 +209,15 @@ async def upstream(event):
     conf = event.pattern_match.group(1).strip()
     event = await eor(event, "`Checking for updates, please wait....`")
     off_repo = UPSTREAM_REPO_URL
+    _version, _release, _branch, _author, _auturl = await ld_info(lb_info)
     force_update = False
     if API_KEY is None or APP_NAME is None:
-        return await eor(event, "`Set the required vars first to update the bot`")
+        return await eor(event, "`👨‍💻 Set the required vars first to Update the [Lêɠêɳ̃dẞø†](https://t.me/LegendBot_AI/292)`")
     try:
         txt = (
             "`Oops.. Updater cannot continue due to "
             + "some problems occured`\n\n**LOGTRACE:**\n"
         )
-
         repo = Repo()
     except NoSuchPathError as error:
         await event.edit(f"{txt}\n`directory {error} is not found`")
@@ -248,17 +257,21 @@ async def upstream(event):
     # Special case for deploy
     if changelog == "" and not force_update:
         await event.edit(
+        f"<b><i>Lêɠêɳ̃dẞø† Is __UP-TO-DATE__ !!</b></i> \n\n<b><i><u>Update Information :</b></i></u> \n<b>• Branch :</b> {_branch} \n<b>• Release Date :</b> {_release} \n<b>• Version :</b> {_version} \n<b>• Author :</b> <a href='{_auturl}'>{_author}</a>",
+        link_preview=False,
+        parse_mode="HTML",
+        )
+        """await event.edit(
             "\n`LegendUserBot is`  **up-to-date**  `with`  "
             f"**{UPSTREAM_REPO_BRANCH}**\n"
-        )
+        )"""
         return repo.__del__()
     if conf == "" and not force_update:
         await print_changelogs(event, ac_br, changelog)
         await event.delete()
         return await event.respond(
-            f"do `{cmdhd}update deploy` to update the LegendUserBot"
+            f"👨‍💻 To __UP-TO-DATE__ Lêɠêɳ̃dẞø† do `{cmdhd}update deploy` "
         )
-
     if force_update:
         await event.edit(
             "`Force-Syncing to latest stable userbot code, please wait...`"
