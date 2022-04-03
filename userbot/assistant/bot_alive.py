@@ -60,11 +60,8 @@ async def bot_start(event):
         return
     reply_to = await reply_id(event)
     buttons = [
-            (
-                Button.inline("🔰Rules🔰 ", data="rules"),
-                Button.inline(" Deploy 🚀", data="depy"),
-            ),
-            (Button.url(" 🔱Support🔱 ", "https://t.me/LegendBot_OP"),),
+        (
+            Button.url("🔱 Repo 🔱", "https://github.com/LEGEND-AI/LEGENDBOT"),),
         ]
     try:
         await event.client.send_file(
