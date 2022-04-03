@@ -18,7 +18,10 @@ from ..sql_helper.global_collection import (
     del_keyword_collectionlist,
     get_collectionlist_items,
 )
+
 lb_info = "https://raw.githubusercontent.com/ITS-LEGENDBOT/LEGENDBOT/master/LegendBoy-info.json"
+
+
 async def ld_info(lb_info):
     infos = requests.get(lb_info).json()
     _version = infos["LEGENDBOT-INFO"]["version"]
@@ -27,6 +30,7 @@ async def ld_info(lb_info):
     _author = infos["LEGENDBOT-INFO"]["author"]
     _auturl = infos["LEGENDBOT-INFO"]["author-url"]
     return _version, _release, _branch, _author, _auturl
+
 
 menu_category = "tools"
 cmdhd = Config.HANDLER
@@ -115,7 +119,8 @@ async def update(event, repo, ups_rem, ac_br):
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
     LEGEND = await event.edit(
-        "`✅ Successfully Updated LegendBot!\n" "Bot is restarting... Wait for a minute!`"
+        "`✅ Successfully Updated LegendBot!\n"
+        "Bot is restarting... Wait for a minute!`"
     )
     await event.client.reload(LEGEND)
 
@@ -212,7 +217,10 @@ async def upstream(event):
     _version, _release, _branch, _author, _auturl = await ld_info(lb_info)
     force_update = False
     if API_KEY is None or APP_NAME is None:
-        return await eor(event, "`👨‍💻 Set the required vars first to Update the [Lêɠêɳ̃dẞø†](https://t.me/LegendBot_AI/292)`")
+        return await eor(
+            event,
+            "`👨‍💻 Set the required vars first to Update the [Lêɠêɳ̃dẞø†](https://t.me/LegendBot_AI/292)`",
+        )
     try:
         txt = (
             "`Oops.. Updater cannot continue due to "
@@ -257,9 +265,9 @@ async def upstream(event):
     # Special case for deploy
     if changelog == "" and not force_update:
         await event.edit(
-        f"<b><i>Lêɠêɳ̃dẞø† Is __UP-TO-DATE__ !!</b></i> \n\n<b><i><u>Update Information :</b></i></u> \n<b>• Branch :</b> {_branch} \n<b>• Release Date :</b> {_release} \n<b>• Version :</b> {_version} \n<b>• Author :</b> <a href='{_auturl}'>{_author}</a>",
-        link_preview=False,
-        parse_mode="HTML",
+            f"<b><i>Lêɠêɳ̃dẞø† Is __UP-TO-DATE__ !!</b></i> \n\n<b><i><u>Update Information :</b></i></u> \n<b>• Branch :</b> {_branch} \n<b>• Release Date :</b> {_release} \n<b>• Version :</b> {_version} \n<b>• Author :</b> <a href='{_auturl}'>{_author}</a>",
+            link_preview=False,
+            parse_mode="HTML",
         )
         """await event.edit(
             "\n`LegendUserBot is`  **up-to-date**  `with`  "
