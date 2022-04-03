@@ -193,7 +193,7 @@ async def help(event):
         await event.answer("This Is Not For U My Master", cache_time=0, alert=True)
     else:
         await event.client.send_message(
-            event.chat_id
+            event.chat_id,
             message="You Can Deploy/Install LegendBot In Heroku By Following Steps Bellow, You Can See Some Quick Guides On Support Channel Or On Your Own Assistant Bot. \nThank You For Contacting Me.",
             link_preview=False,
             buttons=[
