@@ -29,6 +29,4 @@ async def bot_start(event):
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     LegendBoy = f"**꧁•⊹٭Ping٭⊹•꧂**\n\n   ⚜ {ms}\n   ⚜ ❝𝐌𝐲 𝐌𝐚𝐬𝐭𝐞𝐫❞ ~『{mention}』"
-    await event.client.send_file(
-        chat.id, LEGEND_IMG, caption=LegendBoy, buttons=GOOD
-    )
+    await event.client.send_file(chat.id, LEGEND_IMG, caption=LegendBoy, buttons=GOOD)
