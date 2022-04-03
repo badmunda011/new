@@ -2,7 +2,7 @@ import io
 import sys
 import traceback
 
-from userbot import Config, bot, legend
+from userbot import Config, legend
 
 from ..core.logger import logging
 from ..sql_helper.bot_blacklists import check_is_black_list
