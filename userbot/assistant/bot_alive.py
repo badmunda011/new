@@ -3,7 +3,7 @@ import re
 from collections import defaultdict
 from datetime import datetime
 from typing import Optional, Union
-
+from ..plugins import mention
 from telethon import Button, events
 from telethon.errors import UserIsBlockedError
 from telethon.events import CallbackQuery, StopPropagation
@@ -37,16 +37,16 @@ botusername = Config.BOT_USERNAME
 
 PM_IMG = "https://telegra.ph/file/c26fc61e904476083baa7.jpg"
 pm_caption = f"⚜『Lêɠêɳ̃dẞø†』Is Ôñĺîne⚜ \n\n"
-pm_caption += f"Ôwñêř ~ 『{legend_mention}』\n"
+pm_caption += f"Ôwñêř ~ 『{mention}』\n"
 pm_caption += f"**╭───────────**\n"
 pm_caption += f"┣Ťêlethon ~ `1.15.0` \n"
 pm_caption += f"┣『Lêɠêɳ̃dẞø†』~ `{LEGENDversion}` \n"
-pm_caption += f"┣Çhâññel ~ [Channel](https://t.me/Its_LegendBot)\n"
-pm_caption += f"┣**License** ~ [License v3.0](github.com/The-LegendBot/LEGENBOT/blob/master/LICENSE)\n"
-pm_caption += f"┣Copyright ~ By [『Lêɠêɳ̃dẞø†』 ](https://t.me/Legend_Userbot)\n"
-pm_caption += f"┣Assistant ~ By [『Lêɠêɳ̃dẞøy』 ](https://t.me/Its_LegendBoy)\n"
+pm_caption += f"┣Çhâññel ~ [Channel](https://t.me/LegendBot_AI)\n"
+pm_caption += f"┣**License** ~ [License v3.0](github.com/LEGEND-AI/LEGENBOT/blob/master/LICENSE)\n"
+pm_caption += f"┣Copyright ~ By [『Lêɠêɳ̃dẞø†』 ](https://t.me/LegendBot_OP)\n"
+pm_caption += f"┣Assistant ~ By [『Lêɠêɳ̃dẞøy』 ](https://t.me/LegendBoy_XD)\n"
 pm_caption += f"╰────────────\n"
-pm_caption += f"       »»» [『Lêɠêɳ̃dẞø†』](https://t.me/Legend_Userbot) «««"
+pm_caption += f"       »»» [『Lêɠêɳ̃dẞø†』](https://t.me/LegendBot_XD) «««"
 
 
 @legend.bot_cmd(
@@ -67,7 +67,7 @@ async def bot_start(event):
         await event.client.send_file(
             chat.id,
             PM_IMG,
-            caption=pm_caption
+            caption=pm_caption,
             link_preview=False,
             buttons=buttons,
             reply_to=reply_to,
