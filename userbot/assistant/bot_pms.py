@@ -154,7 +154,7 @@ async def help(event):
     if event.query.user_id == bot.uid:
         await event.answer("This Is Not For U My Master", cache_time=0, alert=True)
     else:
-        await tgbot.send_message(
+        await event.client.send_message(
             event.chat_id,
             message="🔰Rᴇᴀᴅ Tʜᴇ Rᴜʟᴇꜱ Tᴏᴏ🔰\n\n🔹 Dᴏɴ'ᴛ Sᴩᴀᴍ\n🔹 ᴛᴀʟᴋ Fʀɪᴇɴᴅʟy\n🔹 Dᴏɴ'ᴛ Bᴇ Rᴜᴅᴇ\n🔹 Sᴇɴᴅ Uʀ Mᴇꜱꜱᴀɢᴇꜱ Hᴇʀᴇ\n🔹 Nᴏ Pᴏʀɴᴏɢʀᴀᴘʜʏ\n🔹 Dᴏɴ'ᴛ Wʀɪᴛᴇ Bᴀᴅ Wᴏʀᴅs.\n\nWʜᴇɴ I Gᴇᴛ Fʀᴇᴇ Tɪᴍᴇ , I'ʟʟ Rᴇᴩʟy U 💯✅",
             buttons=[
@@ -172,7 +172,7 @@ async def users(event):
             users_list += ("==> {} \n").format(int(starked.chat_id))
         with io.BytesIO(str.encode(users_list)) as tedt_file:
             tedt_file.name = "userlist.txt"
-            await tgbot.send_file(
+            await event.client.send_file(
                 event.chat_id,
                 tedt_file,
                 force_document=True,
@@ -192,7 +192,7 @@ async def help(event):
     if event.query.user_id == bot.uid:
         await event.answer("This Is Not For U My Master", cache_time=0, alert=True)
     else:
-        await tgbot.send_message(
+        await event.client.send_message(
             message="You Can Deploy/Install LegendBot In Heroku By Following Steps Bellow, You Can See Some Quick Guides On Support Channel Or On Your Own Assistant Bot. \nThank You For Contacting Me.",
             link_preview=False,
             buttons=[
