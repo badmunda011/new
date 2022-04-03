@@ -23,9 +23,7 @@ async def bot_start(event):
     await legend.get_me()
     if check_is_black_list(chat.id):
         return
-    LEGEND_IMG = gvarstatus(
-        "BOT_PING_PIC", "https://telegra.ph/file/a9f6a3c160977352dd595.jpg"
-    )
+    LEGEND_IMG = gvarstatus("BOT_PING_PIC")
     start = datetime.now()
     await event.client.send_file(
         event.chat_id, LEGEND_IMG, caption="Checking LegendBot Ping...", buttons=GOOD
