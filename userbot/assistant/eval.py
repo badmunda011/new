@@ -2,44 +2,16 @@ import io
 import sys
 import traceback
 
-from telethon import events
-from telethon.errors import *
-from telethon.tl.types import *
-import io
-import re
-from collections import defaultdict
-from datetime import datetime
-from typing import Optional, Union
-
-from telethon import Button, events
-from telethon.errors import UserIsBlockedError
-from telethon.events import CallbackQuery, StopPropagation
-from telethon.utils import get_display_name
-
 from userbot import Config, legend
 
-from ..core import check_owner, pool
 from ..core.logger import logging
-from ..core.session import tgbot
-from ..helpers import reply_id
-from ..helpers.utils import _format
 from ..sql_helper.bot_blacklists import check_is_black_list
-from ..sql_helper.bot_pms_sql import (
-    add_user_to_db,
-    get_user_id,
-    get_user_logging,
-    get_user_reply,
-)
-from ..sql_helper.bot_starters import add_starter_to_db, get_starter_details
-from ..sql_helper.globals import delgvar, gvarstatus
-from ..sql_helper.idaddar import get_all_users
-from . import BOTLOG, BOTLOG_CHATID
-from .botmanagers import ban_user_from_bot
 
 LOGS = logging.getLogger(__name__)
 
 menu_category = "bot"
 botusername = Config.BOT_USERNAME
+
 
 async def aexec(code, event):
     exec(
@@ -51,7 +23,7 @@ async def aexec(code, event):
     )
 
     return await locals()["__aexec"](event, event.client)
-  
+
 
 @legend.bot_cmd(
     pattern=f"^/start({botusername})?([\s]+)?$",
@@ -60,7 +32,7 @@ async def aexec(code, event):
 )
 async def bot_ll(event):
     chat = await event.get_chat()
-    user = await legend.get_me()
+    await legend.get_me()
     if check_is_black_list(chat.id):
         return
     rk = await event.reply("`....`")
