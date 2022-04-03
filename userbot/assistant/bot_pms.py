@@ -121,7 +121,7 @@ async def bot_start(event):
                 (Button.url(" 🔱Support🔱 ", "https://t.me/LegendBot_OP"),),
             ]
     else:
-        start_msg = "Hey Master!\nHow can i help you ?"
+        start_msg = "Hey {mention} I am your {my_mention}'s assistant bot.\nI Am Here To Help U \n\nPowered By [LegendBot](https://t.me/LegendBot_OP)"
         buttons = [
             (
                 Button.url(" Support ", "https://t.me/LegendBot_OP"),
