@@ -34,10 +34,10 @@ async def _(event):
     pattern="(luckydraw|ld)(?:\s|$)([\s\S]*)",
     command=("luckydraw", menu_category),
     info={
-        "header": "tags recent 100 persons in the group may not work for all",
+        "header": "To Get Luckydraw in group",
         "usage": [
-            "{tr}all <text>",
-            "{tr}tagall",
+            "{tr}ld",
+            "{tr}luckydraw",
         ],
     },
 )
