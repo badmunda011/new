@@ -1,7 +1,7 @@
 from telethon import Button
 
 from userbot import Config, legend
-
+from userbot import legendversion
 from ..core.logger import logging
 from ..helpers import reply_id
 from ..plugins import mention
@@ -19,7 +19,7 @@ pm_caption = f"⚜『Lêɠêɳ̃dẞø†』Is Ôñĺîne⚜ \n\n"
 pm_caption += f"Ôwñêř ~ 『{mention}』\n"
 pm_caption += f"**╭───────────**\n"
 pm_caption += f"┣Ťêlethon ~ `1.15.0` \n"
-pm_caption += f"┣『Lêɠêɳ̃dẞø†』~ `{LEGENDversion}` \n"
+pm_caption += f"┣『Lêɠêɳ̃dẞø†』~ `{legendversion}` \n"
 pm_caption += f"┣Çhâññel ~ [Channel](https://t.me/LegendBot_AI)\n"
 pm_caption += f"┣**License** ~ [License v3.0](github.com/LEGEND-AI/LEGENBOT/blob/master/LICENSE)\n"
 pm_caption += f"┣Copyright ~ By [『Lêɠêɳ̃dẞø†』 ](https://t.me/LegendBot_OP)\n"
