@@ -3,7 +3,7 @@ from datetime import datetime
 from telethon import Button
 
 from userbot import Config, legend
-
+from ..plugins import mention
 from ..core.logger import logging
 from ..sql_helper.bot_blacklists import check_is_black_list
 from ..sql_helper.globals import gvarstatus
