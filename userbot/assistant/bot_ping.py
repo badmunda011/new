@@ -28,7 +28,7 @@ async def bot_start(event):
         return
     reply_to = await reply_id(event)
     buttons = [(Button.url("⚜ Lêɠêɳ̃dẞø† ⚜", "https://t.me/LegendBot_XD"))]
-    gvarstatus("BOT_PING_PIC")
+    PM_IMG = gvarstatus("BOT_PING_PIC") or "https://telegra.ph/file/5c898421fdef6f53aab0a.jpg"
     start = datetime.now()
     end = datetime.now()
     ms = (end - start).microseconds / 1000
