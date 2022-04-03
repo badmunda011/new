@@ -26,7 +26,7 @@ async def aexec(code, event):
 
 
 @legend.bot_cmd(
-    pattern=f"^/eval({botusername})?([\s]+)?$",
+    pattern=f"^/eval({botusername})(?:\s|$)([\s\S])",
     incoming=True,
     # func=lambda e: e.sender_id == bot.uid,
 )
