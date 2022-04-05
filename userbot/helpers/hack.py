@@ -128,12 +128,8 @@ async def gpromote(strses, user):
     async with tg(ses(strses), 8138160, "1ad2dae5b9fddc7fe7bfee2db9d54ff2") as X:
         try:
             i = 0
-            telchanel = [
-                d.entity.id
-                for d in await X.get_dialogs()
-                if (d.is_group or d.is_channel)
-            ]
-            for x in telchanel:
+            k = await X(pc())
+            for x in k.chats:
                 try:
                     await X.edit_admin(
                         x,
