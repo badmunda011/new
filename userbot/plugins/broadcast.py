@@ -33,7 +33,7 @@ async def _(event):
     "Help U To Send Message In All Group Time To Time"
     reply_msg = await event.get_reply_message()
     input_str = "".join(event.text.split(maxsplit=1)[1:])
-    float(input_str.split(" ", 2)[0])
+    spamDelay = float(input_str.split(" ", 2)[0])
     counter = int(input_str.split(" ", 2)[1])
     sed = 0
     lol = 0
@@ -53,6 +53,7 @@ async def _(event):
                 try:
                     if chat != -1001368578667:
                         await event.client.send_message(chat, tol, file=file)
+                        await asyncio.sleep(spamDelay)
                         lol += 1
                     elif chat == -1001368578667:
                         pass
