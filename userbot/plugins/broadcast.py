@@ -33,7 +33,7 @@ LOGS = logging.getLogger(__name__)
 async def _(event):
     "Help U To Send Message In All Group Time To Time"
     reply_msg = await event.get_reply_message()
-    input_str = "".join(e.text.split(maxsplit=1)[1:])
+    input_str = "".join(event.text.split(maxsplit=1)[1:])
     spamDelay = float(input_str.split(" ", 2)[0])
     counter = int(input_str.split(" ", 2)[1])
     str(input_str.split(" ", 2)[2])
