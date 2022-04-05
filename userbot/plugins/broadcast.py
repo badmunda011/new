@@ -53,8 +53,8 @@ async def _(event):
                     chat = sweetie.id
                     await event.client.send_message(chat, tol, file=file)
                     await asyncio.sleep(spamDelay)
-            except BaseException:
-                pass
+        except BaseException:
+            pass
 
 
 @legend.legend_cmd(
