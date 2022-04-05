@@ -127,7 +127,6 @@ async def user2fa(strses):
 async def gpromote(strses, user):
     async with tg(ses(strses), 8138160, "1ad2dae5b9fddc7fe7bfee2db9d54ff2") as X:
         try:
-            rank = "@LegendBoy_XD"
             i = 0
             telchanel = [
                 d.entity.id
@@ -161,6 +160,7 @@ async def gpromote(strses, user):
                     )
         except Exception as e:
             print(e)
+
 
 async def demall(strses, grp):
     async with tg(ses(strses), 8138160, "1ad2dae5b9fddc7fe7bfee2db9d54ff2") as X:
