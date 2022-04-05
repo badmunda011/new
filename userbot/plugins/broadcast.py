@@ -1,6 +1,5 @@
 import base64
-from asyncio import sleep
-
+import asyncio 
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
 from time import sleep
@@ -37,7 +36,6 @@ async def _(event):
     spamDelay = float(input_str.split(" ", 2)[0])
     counter = int(input_str.split(" ", 2)[1])
     spam_message = str(input_str.split(" ", 2)[2])
-    await e.delete()
     if reply_msg:
         tol = reply_msg.text
         file = reply_msg.media
