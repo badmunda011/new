@@ -9,7 +9,7 @@ from userbot import legend
 from ..Config import Config
 from ..core.managers import eod, eor
 from ..helpers import progress
-from ..sql_helper.autohusbando_sql import add_grp, get_all_grp, is_husbando, rm_grp
+from ..sql_helper.husbando_sql import add_grp, get_all_grp, is_husbando, rm_grp
 
 sex = "A husbando appeared!"
 
