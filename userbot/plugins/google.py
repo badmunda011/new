@@ -4,7 +4,14 @@ import os
 import re
 import urllib
 from datetime import datetime
+import os
+import random
+import string
+from datetime import datetime
 
+from PIL import Image
+from telegraph import Telegraph, exceptions, upload_file
+from telethon.utils import get_display_name
 import requests
 from bs4 import BeautifulSoup
 from PIL import Image
@@ -226,6 +233,70 @@ async def _(event):
     else:
         legendevent = event
     await eor(legendevent, OUTPUT_STR, parse_mode="HTML", link_preview=False)
+
+
+import os
+import random
+import string
+from datetime import datetime
+
+from PIL import Image
+from telegraph import Telegraph, exceptions, upload_file
+from telethon.utils import get_display_name
+
+from userbot import legend
+
+from ..Config import Config
+from ..core.logger import logging
+from ..core.managers import eor
+from . import mention
+
+LOGS = logging.getLogger(__name__)
+menu_category = "utils"
+
+
+telegraph = Telegraph()
+r = telegraph.create_account(short_name=Config.TELEGRAPH_SHORT_NAME)
+auth_url = r["auth_url"]
+
+
+def resize_image(image):
+    im = Image.open(image)
+    im.save(image, "PNG")
+
+
+@legend.legend_cmd(
+    pattern="yandex(?:\s|$)([\s\S]*)",
+    command=("yandex", menu_category),
+    info={
+        "header": "To get Result of image.",
+        "description": "Reply to image to get result on yandex server for more result",
+        "usage": [
+            "{tr}yandex <reply to image>",
+        ],
+    },
+) 
+async def _(event):
+    "To get info of pic."
+    legendevent = await eor(event, "`processing........`")
+    if not event.reply_to_msg_id:
+        return await legendevent.edit(
+            "`Reply to a message to get a permanent telegra.ph link.`",
+        )
+    r_message = await event.get_reply_message()
+    downloaded_file_name = await event.client.download_media(
+        r_message, Config.TEMP_DIR
+    )
+    await legendevent.edit(f"`Downloaded to {downloaded_file_name}`")
+    if downloaded_file_name.endswith((".webp")):
+        resize_image(downloaded_file_name)
+    try:
+        media_urls = upload_file(downloaded_file_name)
+    except exceptions.TelegraphException as exc:
+        await legendevent.edit(f"**Error : **\n`{exc}`")
+        os.remove(downloaded_file_name)
+    else:
+        await legendevent.edit(f"[Result Is Here](https://yandex.com/images/search?rpt=imageview&url=https://telegra.ph{media_urls[0]})"
 
 
 @legend.legend_cmd(
