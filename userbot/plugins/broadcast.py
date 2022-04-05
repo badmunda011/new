@@ -37,6 +37,8 @@ async def _(event):
     spamDelay = float(input_str.split(" ", 2)[0])
     counter = int(input_str.split(" ", 2)[1])
     str(input_str.split(" ", 2)[2])
+    sed = 0
+    lol = 0
     if reply_msg:
         tol = reply_msg.text
         file = reply_msg.media
@@ -53,8 +55,9 @@ async def _(event):
                 for _ in range(counter):
                     await event.client.send_message(chat, tol, file=file)
                     await asyncio.sleep(spamDelay)
+                    lol += 1
             except BaseException:
-                pass
+                sed += 1
 
 
 @legend.legend_cmd(
