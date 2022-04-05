@@ -3,6 +3,8 @@ from asyncio import sleep
 
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
+from time import sleep
+
 from .. import legend
 from ..core.logger import logging
 from ..core.managers import eod, eor
@@ -14,13 +16,57 @@ menu_category = "tools"
 
 LOGS = logging.getLogger(__name__)
 
+@legend.legend_cmd(
+    pattern="dgcast(?:\s|$)([\s\S]*)",
+    command=("dgcast", menu_category),
+    info={
+        "header": "To Send A Message/Media In All Group Time Time.",
+        "description": "It Can Help U To Send Message/Media To All Group At Time To Time",
+        "usage": [
+            "{tr}dgcast <type> <message>",
+        ],
+        "examples": [
+            "{tr}dgcast 5 100 LegendBot",
+        ],
+    },
+)
+async def _(event):
+    "Help U To Send Message In All Group Time To Time"
+    reply_msg = await event.get_reply_message()
+    input_str = "".join(e.text.split(maxsplit=1)[1:])
+    spamDelay = float(input_str.split(" ", 2)[0])
+    counter = int(input_str.split(" ", 2)[1])
+    spam_message = str(input_str.split(" ", 2)[2])
+    await e.delete()
+    if reply_msg:
+        tol = reply_msg.text
+        file = reply_msg.media
+    else:
+        tol = event.text[9:]
+        file = None
+    if tol == "":
+        return await eod(event, "I need something to Gcast.")
+    hol = await eor(event, "`Gcasting message Time To Time Start...`")
+    async for sweetie in event.client.iter_dialogs():
+        if sweetie.is_group:
+            chat = sweetie.id
+            try:
+                if chat != -1001368578667:
+                    for _ in range(counter):
+                        await event.client.send_message(chat, tol, file=file)
+                        await asyncio.sleep(spamDelay)
+                elif chat == -1001368578667:
+                    pass
+            except BaseException:
+
+
 
 @legend.legend_cmd(
     pattern="gcast(?:\s|$)([\s\S]*)",
     command=("gcast", menu_category),
     info={
         "header": "To Send A Message/Media In All.",
-        "description": "It Can Help U Ti Send Message/Media To All Group/usee According to type",
+        "description": "It Can Help U To Send Message/Media To All Group/usee According to type",
         "flags": {
             "-a": "To Send Message In All User & Group",
             "-g": "To Send Message In All Group",
