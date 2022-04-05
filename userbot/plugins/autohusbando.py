@@ -15,6 +15,7 @@ sex = "A husbando appeared!"
 
 menu_category = "useless"
 
+
 def progress(current, total):
     logger.info(
         "Downloaded {} of {}\nCompleted {}".format(
@@ -104,7 +105,7 @@ async def _(event):
                     loc,
                     headers={
                         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:58.0) Gecko/20100101 Firefox/58.0"
-                    }, 
+                    },
                 )
                 qtt = BeautifulSoup(response.text, "html.parser")
                 div = qtt.find_all("div", {"class": "r5a77d"})[0]
