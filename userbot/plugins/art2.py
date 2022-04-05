@@ -13,7 +13,7 @@ menu_category = "useless"
     },
 )
 async def lon(frog):
-    "
+    "Fun art command"
     name = frog.pattern_match.group(1)
     D = (
         f"**{ALIVE_NAME} ~> {name} .\n\n**"
