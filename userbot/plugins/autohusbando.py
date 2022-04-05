@@ -25,12 +25,12 @@ def progress(current, total):
 
 
 @legend.legend_cmd(
-    pattern="at$",
-    command=("at", menu_category),
+    pattern="ah$",
+    command=("ah", menu_category),
     info={
-        "header": "Auto Protecc the Husbando.",
+        "header": "Auto Protecc the Replied Husbando Pic",
         "usage": [
-            "{tr}at",
+            "{tr}at <reply to pic>",
         ],
     },
     groups_only=True,
@@ -183,8 +183,8 @@ async def _(event):
 
 
 @legend.legend_cmd(
-    pattern="aw$",
-    command=("aw", menu_category),
+    pattern="listah$",
+    command=("listah", menu_category),
     info={
         "header": "List Of All Chats Auto Husbando Enabled",
         "description": "Gives the list of all chats with Auto Husbando enabled.",
