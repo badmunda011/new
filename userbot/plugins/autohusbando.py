@@ -25,8 +25,8 @@ def progress(current, total):
 
 
 @legend.legend_cmd(
-    pattern="ah$",
-    command=("ah", menu_category),
+    pattern="at$",
+    command=("at", menu_category),
     info={
         "header": "Auto Protecc the Replied Husbando Pic",
         "usage": [
@@ -36,7 +36,7 @@ def progress(current, total):
     groups_only=True,
 )
 async def _(event):
-    sweetie = await eor(event, "Hmm..")
+    sweetie = await eor(event, "Hmm.. Reply To Husbando Pic")
     BASE_URL = "http://images.google.com"
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
