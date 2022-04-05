@@ -36,7 +36,6 @@ async def _(event):
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     spamDelay = float(input_str.split(" ", 2)[0])
     counter = int(input_str.split(" ", 2)[1])
-    str(input_str.split(" ", 2)[2])
     if reply_msg:
         tol = reply_msg.text
         file = reply_msg.media
@@ -46,15 +45,15 @@ async def _(event):
     if tol == "":
         return await eod(event, "I need something to Gcast.")
     await eor(event, "`Gcasting message Time To Time Start...`")
-    async for sweetie in event.client.iter_dialogs():
-        try:
-            if sweetie.is_group:
-                for _ in range(counter):
+    for _ in range(counter):
+        async for sweetie in event.client.iter_dialogs():
+            try:
+                if sweetie.is_group:
                     chat = sweetie.id
                     await event.client.send_message(chat, tol, file=file)
                     await asyncio.sleep(spamDelay)
-        except BaseException:
-            pass
+            except BaseException:
+                pass
 
 
 @legend.legend_cmd(
