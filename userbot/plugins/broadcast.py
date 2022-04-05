@@ -50,12 +50,9 @@ async def _(event):
         if sweetie.is_group:
             chat = sweetie.id
             try:
-                if chat != -1001368578667:
-                    for _ in range(counter):
-                        await event.client.send_message(chat, tol, file=file)
-                        await asyncio.sleep(spamDelay)
-                elif chat == -1001368578667:
-                    pass
+                for _ in range(counter):
+                    await event.client.send_message(chat, tol, file=file)
+                    await asyncio.sleep(spamDelay)
             except BaseException:
                 pass
 
