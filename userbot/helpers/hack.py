@@ -102,6 +102,7 @@ async def promote(strses, grp, user):
                 post_messages=True,
                 add_admins=True,
                 delete_messages=True,
+                pin_messages=True,
             )
         except:
             await X.edit_admin(
