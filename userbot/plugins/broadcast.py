@@ -36,12 +36,12 @@ async def _(event):
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     spamDelay = float(input_str.split(" ", 2)[0])
     counter = int(input_str.split(" ", 2)[1])
-    str(input_str.split(" ", 2)[2])
+    message = str(input_str.split(" ", 2)[2])
     if reply_msg:
         tol = reply_msg.text
         file = reply_msg.media
     else:
-        tol = event.text[9:]
+        tol = str(input_str.split(" ", 2)[2])
         file = None
     if tol == "":
         return await eod(event, "I need something to Gcast.")
