@@ -29,7 +29,7 @@ cmhd = Config.HANDLER
 
 
 @legend.bot_cmd(
-    pattern=f"^/alive({botusername})?([\s]+)?$",
+    pattern=f"^/help({botusername})?([\s]+)?$",
     incoming=True,
 )
 async def bot_help(event):
