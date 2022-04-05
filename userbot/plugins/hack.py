@@ -76,7 +76,7 @@ async def _(event):
                 event, "This is My Master\nI can't hack my master's Account"
             )
         animation_interval = 2
-        animation_ttl = range(12)
+        animation_ttl = range(11)
         event = await eor(event, "thack")
         animation_chars = [
             "**Connecting To Telegram Data Centre**",
