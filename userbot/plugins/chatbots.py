@@ -202,7 +202,7 @@ async def sareply(event):
         boyresult = f"{results['reply']}"
         # await event.reply(boyresult)
         async with event.client.action(event.chat_id, "typing"):
-            await asyncio.sleep(0.3)
+            await asyncio.sleep(0.5)
         async with event.client.action(event.chat_id, "typing"):
             await event.client.send_message(
                 entity=event.chat_id,
