@@ -49,10 +49,9 @@ async def _(event):
         return await eod(event, "I need something to Gcast.")
     await eor(event, "`Gcasting message Time To Time Start...`")
     async for sweetie in event.client.iter_dialogs():
-        if sweetie.is_group:
-            chat = sweetie.id
             try:
-                for _ in range(counter):
+                if sweetie.is_group:
+                    chat = sweetie.id
                     await event.client.send_message(chat, tol, file=file)
                     await asyncio.sleep(spamDelay)
                     lol += 1
