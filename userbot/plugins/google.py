@@ -4,19 +4,13 @@ import os
 import re
 import urllib
 from datetime import datetime
-import os
-import random
-import string
-from datetime import datetime
 
-from PIL import Image
-from telegraph import Telegraph, exceptions, upload_file
-from telethon.utils import get_display_name
 import requests
 from bs4 import BeautifulSoup
 from PIL import Image
 from search_engine_parser import BingSearch, GoogleSearch, YahooSearch
 from search_engine_parser.core.exceptions import NoResultsOrTrafficError
+from telegraph import Telegraph, exceptions, upload_file
 
 from userbot import legend
 
@@ -236,20 +230,16 @@ async def _(event):
 
 
 import os
-import random
-import string
 from datetime import datetime
 
 from PIL import Image
 from telegraph import Telegraph, exceptions, upload_file
-from telethon.utils import get_display_name
 
 from userbot import legend
 
 from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import eor
-from . import mention
 
 LOGS = logging.getLogger(__name__)
 menu_category = "utils"
@@ -275,7 +265,7 @@ def resize_image(image):
             "{tr}yandex <reply to image>",
         ],
     },
-) 
+)
 async def _(event):
     "To get info of pic."
     legendevent = await eor(event, "`processing........`")
@@ -284,9 +274,7 @@ async def _(event):
             "`Reply to a message to get a permanent telegra.ph link.`",
         )
     r_message = await event.get_reply_message()
-    downloaded_file_name = await event.client.download_media(
-        r_message, Config.TEMP_DIR
-    )
+    downloaded_file_name = await event.client.download_media(r_message, Config.TEMP_DIR)
     await legendevent.edit(f"`Downloaded to {downloaded_file_name}`")
     if downloaded_file_name.endswith((".webp")):
         resize_image(downloaded_file_name)
@@ -296,7 +284,9 @@ async def _(event):
         await legendevent.edit(f"**Error : **\n`{exc}`")
         os.remove(downloaded_file_name)
     else:
-        await legendevent.edit(f"[Result Is Here](https://yandex.com/images/search?rpt=imageview&url=https://telegra.ph{media_urls[0]})")
+        await legendevent.edit(
+            f"[Result Is Here](https://yandex.com/images/search?rpt=imageview&url=https://telegra.ph{media_urls[0]})"
+        )
 
 
 @legend.legend_cmd(
