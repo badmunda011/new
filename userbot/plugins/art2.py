@@ -35,6 +35,7 @@ async def lon(frog):
     )
     await eor(frog, D)
 
+
 P = (
     "╭━━━┳╮╱╱╭╮╱╭━━━┳━━━╮\n"
     "┃╭━╮┃┃╱╭╯╰╮┃╭━╮┃╭━╮┃\n"
@@ -43,6 +44,7 @@ P = (
     "┃╰━╯┃┃┃┃┃╰╮┃╰━╯┃╰━╯┃\n"
     "╰━━━┻╯╰┻┻━╯╰━━━┻━━━╯\n"
 )
+
 
 @legend.legend_cmd(
     pattern="shitos$",
@@ -55,6 +57,7 @@ P = (
 async def bluedevilshitos(shitos):
     "fun art command"
     await eor(shitos, P)
+
 
 R = (
     "███████▄▄███████████▄\n"
@@ -71,6 +74,7 @@ R = (
     "░░░░░░░░░░░█░░█\n"
     "░░░░░░░░░░░░▀▀\n"
 )
+
 
 @legend.legend_cmd(
     pattern="dislike$",
