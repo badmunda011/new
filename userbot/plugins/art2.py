@@ -5,7 +5,7 @@ menu_category = "useless"
 
 
 @legend.legend_cmd(
-    pattern="dead$",
+    pattern="dead ([\s\S]*)",
     command=("dead", menu_category),
     info={
         "header": "Just a art command try out yourself to see",
@@ -13,6 +13,7 @@ menu_category = "useless"
     },
 )
 async def lon(frog):
+    "
     name = frog.pattern_match.group(1)
     D = (
         f"**{ALIVE_NAME} ~> {name} .\n\n**"
@@ -34,6 +35,14 @@ async def lon(frog):
     )
     await eor(frog, D)
 
+P = (
+    "╭━━━┳╮╱╱╭╮╱╭━━━┳━━━╮\n"
+    "┃╭━╮┃┃╱╭╯╰╮┃╭━╮┃╭━╮┃\n"
+    "┃╰━━┫╰━╋╮╭╯┃┃╱┃┃╰━━╮\n"
+    "╰━━╮┃╭╮┣┫┃╱┃┃╱┃┣━━╮┃\n"
+    "┃╰━╯┃┃┃┃┃╰╮┃╰━╯┃╰━╯┃\n"
+    "╰━━━┻╯╰┻┻━╯╰━━━┻━━━╯\n"
+)
 
 @legend.legend_cmd(
     pattern="shitos$",
@@ -47,6 +56,21 @@ async def bluedevilshitos(shitos):
     "fun art command"
     await eor(shitos, P)
 
+R = (
+    "███████▄▄███████████▄\n"
+    "▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n"
+    "▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n"
+    "▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n"
+    "▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n"
+    "▓▓▓▓▓▓█░░░░░░░░░░░░░░█\n"
+    "▓▓▓▓▓▓███░░░░░░░░░░░░█\n"
+    "██████▀░░█░░░░██████▀\n"
+    "░░░░░░░░░█░░░░█\n"
+    "░░░░░░░░░░█░░░█\n"
+    "░░░░░░░░░░░█░░█\n"
+    "░░░░░░░░░░░█░░█\n"
+    "░░░░░░░░░░░░▀▀\n"
+)
 
 @legend.legend_cmd(
     pattern="dislike$",
@@ -62,7 +86,7 @@ async def bluedislike(dislike):
 
 
 @legend.legend_cmd(
-    pattern="sthink$",
+    pattern="sthink ([\s\S]*)",
     command=("sthink", menu_category),
     info={
         "header": "Just a art command try out yourself to see",
@@ -96,7 +120,7 @@ async def legedjjd(think):
 
 
 @legend.legend_cmd(
-    pattern="frog$",
+    pattern="frog ([\s\S]*)",
     command=("frog", menu_category),
     info={
         "header": "Just a art command try out yourself to see",
@@ -104,7 +128,7 @@ async def legedjjd(think):
     },
 )
 async def lisj(frogsay):
-    name = frogsay.pattern_match.group(1)
+    name = frogsay.pattern_match.group(1) or "No Mention"
     C = (
         f"**{ALIVE_NAME} ~> {name} .\n\n**"
         "⠄⠄⠄⠄⠄⣀⣀⣤⣶⣿⣿⣶⣶⣶⣤⣄⣠⣴⣶⣿⣶⣦⣄⠄\n"
