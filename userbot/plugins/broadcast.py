@@ -35,8 +35,6 @@ async def _(event):
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     spamDelay = float(input_str.split(" ", 2)[0])
     counter = int(input_str.split(" ", 2)[1])
-    sed = 0
-    lol = 0
     if reply_msg:
         tol = reply_msg.text
         file = reply_msg.media
