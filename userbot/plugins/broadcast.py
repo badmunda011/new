@@ -56,7 +56,7 @@ async def _(event):
                 elif chat == -1001368578667:
                     pass
             except BaseException:
-
+                pass
 
 
 @legend.legend_cmd(
