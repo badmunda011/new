@@ -296,7 +296,7 @@ async def _(event):
         await legendevent.edit(f"**Error : **\n`{exc}`")
         os.remove(downloaded_file_name)
     else:
-        await legendevent.edit(f"[Result Is Here](https://yandex.com/images/search?rpt=imageview&url=https://telegra.ph{media_urls[0]})"
+        await legendevent.edit(f"[Result Is Here](https://yandex.com/images/search?rpt=imageview&url=https://telegra.ph{media_urls[0]})")
 
 
 @legend.legend_cmd(
