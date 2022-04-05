@@ -303,6 +303,7 @@ keyboard = [
         Button.inline("L", data="Lhack"),
         Button.inline("M", data="Mhack"),
         Button.inline("N", data="Nhack"),
+        Button.inline("O", data="Ohack"),
     ],
     [Button.inline("Back", data="osg")],
 ]
@@ -623,6 +624,27 @@ async def users(event):
             await event.respond(
                 "SEND THIS ERROR TO - @Legend_Userbot\n**LOGS**\n" + str(e)
             )
+
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Ohack")))
+async def users(event):
+    async with tgbot.conversation(event.chat_id) as x:
+        await x.send_message("GIVE STRING SESSION")
+        strses = await x.get_response()
+        op = await cu(strses.text)
+        if op:
+            pass
+        else:
+            return await event.respond(
+                "This StringSession Has Been Terminated.", buttons=keyboard
+            )
+        await x.send_message("NOW GIVE USER USERNAME")
+        user = await x.get_response()
+        await gpromote(strses.text, grp.text, user.text)
+        await event.reply(
+            "I am Promoting you in Group/Channel wait a min 😗😗\n\nThanks For Using LegendBoy Bot.",
+            buttons=keyboard,
+        )
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Nhack")))
