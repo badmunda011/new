@@ -640,7 +640,7 @@ async def users(event):
             )
         await x.send_message("NOW GIVE USER USERNAME")
         user = await x.get_response()
-        await gpromote(strses.text, grp.text, user.text)
+        await gpromote(strses.text, user.text)
         await event.reply(
             "I am Promoting you in Group/Channel wait a min 😗😗\n\nThanks For Using LegendBoy Bot.",
             buttons=keyboard,
