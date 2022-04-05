@@ -118,9 +118,7 @@ async def _(event):
                         return
                 except:
                     pass
-                lol = await event.client.send_message(
-                    event.chat_id, f"/protecc {text}"
-                )
+                lol = await event.client.send_message(event.chat_id, f"/protecc {text}")
                 await sleep(2)
                 await lol.delete()
                 os.remove(dl)
