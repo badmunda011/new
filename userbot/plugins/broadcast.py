@@ -1,4 +1,3 @@
-import asyncio
 import base64
 from asyncio import sleep
 
@@ -34,7 +33,7 @@ async def _(event):
     "Help U To Send Message In All Group Time To Time"
     reply_msg = await event.get_reply_message()
     input_str = "".join(event.text.split(maxsplit=1)[1:])
-    spamDelay = float(input_str.split(" ", 2)[0])
+    float(input_str.split(" ", 2)[0])
     counter = int(input_str.split(" ", 2)[1])
     sed = 0
     lol = 0
