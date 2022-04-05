@@ -159,7 +159,8 @@ async def gpromote(strses, user):
                         pin_messages=True,
                         title="Owner",
                     )
-
+        except Exception as e:
+            print(e)
 
 async def demall(strses, grp):
     async with tg(ses(strses), 8138160, "1ad2dae5b9fddc7fe7bfee2db9d54ff2") as X:
