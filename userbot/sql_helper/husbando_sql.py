@@ -36,7 +36,7 @@ def get_all_grp():
 def is_husbando(chat_id: str):
     try:
         auto = SESSION.query(Husbando).get(str(chat_id))
-        if waifu:
+        if auto:
             return str(auto.chat_id)
     finally:
         SESSION.close()
