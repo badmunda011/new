@@ -1,8 +1,8 @@
+import asyncio
 import base64
-import asyncio 
-from telethon.tl.functions.messages import ImportChatInviteRequest as Get
-
 from time import sleep
+
+from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
 from .. import legend
 from ..core.logger import logging
@@ -14,6 +14,7 @@ from . import BOTLOG, BOTLOG_CHATID
 menu_category = "tools"
 
 LOGS = logging.getLogger(__name__)
+
 
 @legend.legend_cmd(
     pattern="dgcast(?:\s|$)([\s\S]*)",
@@ -35,7 +36,7 @@ async def _(event):
     input_str = "".join(e.text.split(maxsplit=1)[1:])
     spamDelay = float(input_str.split(" ", 2)[0])
     counter = int(input_str.split(" ", 2)[1])
-    spam_message = str(input_str.split(" ", 2)[2])
+    str(input_str.split(" ", 2)[2])
     if reply_msg:
         tol = reply_msg.text
         file = reply_msg.media
@@ -44,7 +45,7 @@ async def _(event):
         file = None
     if tol == "":
         return await eod(event, "I need something to Gcast.")
-    hol = await eor(event, "`Gcasting message Time To Time Start...`")
+    await eor(event, "`Gcasting message Time To Time Start...`")
     async for sweetie in event.client.iter_dialogs():
         if sweetie.is_group:
             chat = sweetie.id
