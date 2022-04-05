@@ -53,13 +53,11 @@ async def _(event):
                 try:
                     if chat != -1001368578667:
                         await event.client.send_message(chat, tol, file=file)
-                        await sleep(spamDelay)
-                        lol += 1
                     elif chat == -1001368578667:
                         pass
                 except BaseException:
-                    sed += 1
-    await sleep(spamDelay)
+                    pass
+                await sleep(spamDelay)
     await hol.edit(
         "**Gcast Executed Successfully !!** \n\n** Sent in :** `{lol} {omk}`\n**✓ Failed in :** `{sed} {omk}`\n**✓ Total :** `{UwU} {omk}`"
     )
