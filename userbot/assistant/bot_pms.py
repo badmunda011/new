@@ -66,11 +66,6 @@ async def check_bot_started_users(user, event):
         await event.client.send_message(BOTLOG_CHATID, notification)
 
 
-@client.on(events.NewMessage(pattern="/start", func=lambda x: x.is_group))
-async def op(event):
-    legendboy = [[Button.inline("👨‍💻 Click Here", data="start")]]
-    await event.reply("Click Below To Start", buttons=legendboy)
-
 
 @legend.bot_cmd(
     pattern=f"^/start({botusername})?([\s]+)?$",
