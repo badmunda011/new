@@ -135,7 +135,7 @@ async def help(event):
                 ],
                 [
                     custom.Button.inline("🗒 Var", data="strvar"),
-                    custom.Button.inline("👨‍💻 Commmands", data="gibcmd"),
+                    custom.Button.inline("👨‍💻 Commmands", data="gi"),
                 ],
                 [custom.Button.inline("✨ Back ✨", data="start")],
             ],
@@ -231,19 +231,6 @@ async def users(event):
         )
     else:
         await event.answer("Sorry This Button Only My Master", cache_time=0, alert=True)
-
-
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"gibcmd")))
-async def users(event):
-    if event.query.user_id == bot.uid:
-        grabon = "Hello Here Are Some Commands \n➤ /start - Check if I am Alive \n➤ /ping - Pong! \n➤ /tr <lang-code> \n➤ /broadcast - Sends Message To all Users In Bot \n➤ /id - Shows ID of User And Media. \n➤ /addnote - Add Note \n➤ /notes - Shows Notes \n➤ /rmnote - Remove Note \n➤ /alive - Am I Alive? \n➤ /bun - Works In Group , Bans A User. \n➤ /unbun - Unbans A User in Group \n➤ /prumote - Promotes A User \n➤ /demute - Demotes A User \n➤ /pin - Pins A Message \n➤ /stats - Shows Total Users In Bot \n➤ /purge - Reply It From The Message u Want to Delete (Your Bot Should be Admin to Execute It) \n➤ /del - Reply a Message Tht Should Be Deleted (Your Bot Should be Admin to Execute It)"
-        await tgbot.send_message(event.chat_id, grabon)
-    else:
-        await event.answer(
-            "Wait A Min, U Are Not My Master So How Dare U Trying To Touch This Button",
-            cache_time=0,
-            alert=True,
-        )
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
