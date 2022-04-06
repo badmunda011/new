@@ -63,7 +63,8 @@ async def check_bot_started_users(user, event):
     except Exception as e:
         LOGS.error(str(e))
     if BOTLOG:
-        await event.client.send_message(BOTLOG_CHATID, notification
+        await event.client.send_message(BOTLOG_CHATID, notification)
+
 
 
 @legend.bot_cmd(
