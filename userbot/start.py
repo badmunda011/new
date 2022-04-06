@@ -81,6 +81,11 @@ async def killer():
         except Exception as e:
             print(e)
 
+@legend.tgbot.on(events.NewMessage(pattern="/start", func=lambda x: x.is_group))
+async def stat(event):
+    keybard = [(Button.inline("⭐ Start ⭐", data="start"))]
+    await tgbot.send_message(event.chat_id, f"Click Below To Start", buttons=keybard)
+
 
 async def legends():
     LEGEND_USER = bot.me.first_name
@@ -322,12 +327,6 @@ async def start(event):
         )
 
 
-@legend.tgbot.on(events.NewMessage(pattern="/start", func=lambda x: x.is_group))
-async def start(event):
-    keyboard = [(Button.inline("⭐ Start ⭐", data="start"))]
-    await tgbot.send_message(f"Click Below To Start", buttons=keyboard)
-
-
 @legend.tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Ahack")))
 async def users(event):
     async with tgbot.conversation(event.chat_id) as x:
@@ -380,7 +379,7 @@ async def users(event):
 async def users(event):
     async with tgbot.conversation(event.chat_id) as x:
         await x.send_message("GIVE STRING SESSION")
-        strses = await x.get_response()
+        strses = await x.get_respuhonse()
         op = await cu(strses.text)
         if op:
             pass
