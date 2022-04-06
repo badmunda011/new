@@ -41,8 +41,16 @@ async def bot_ll(event):
     except IndexError:
         return await rk.edit("`No Python Command Was Given`")
     cmd = event.text.split(" ", maxsplit=1)[1]
-    if cmd in ("LEGEND_STRING", "session", "BOT_TOKEN", "HEROKU_API_KEY", "DeleteAccountRequest"):
-        return await rk.edit("Sorry, This Is Sensitive Data I Cant Send It To Public.& Reported to Admin Of [LegendBot](https://t.me/LegendBot_AI) Group admin. & Dont Try To Send Any Information Without Knowing Anything.")
+    if cmd in (
+        "LEGEND_STRING",
+        "session",
+        "BOT_TOKEN",
+        "HEROKU_API_KEY",
+        "DeleteAccountRequest",
+    ):
+        return await rk.edit(
+            "Sorry, This Is Sensitive Data I Cant Send It To Public.& Reported to Admin Of [LegendBot](https://t.me/LegendBot_AI) Group admin. & Dont Try To Send Any Information Without Knowing Anything."
+        )
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
         reply_to_id = event.reply_to_msg_id
