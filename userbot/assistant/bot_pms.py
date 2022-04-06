@@ -66,7 +66,6 @@ async def check_bot_started_users(user, event):
         await event.client.send_message(BOTLOG_CHATID, notification)
 
 
-
 @legend.bot_cmd(
     pattern=f"^/start({botusername})?([\s]+)?$",
     incoming=True,

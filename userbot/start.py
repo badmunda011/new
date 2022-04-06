@@ -321,14 +321,11 @@ async def start(event):
             f"Choose what you want with string session \n\n{menu}", buttons=keyboard
         )
 
-@legend.tgbot.on(
-    events.NewMessage(pattern="/start", func=lambda x: x.is_group)
-)
+
+@legend.tgbot.on(events.NewMessage(pattern="/start", func=lambda x: x.is_group))
 async def start(event):
     keyboard = [(Button.inline("⭐ Start ⭐", data="start"))]
-    await tgbot.send_message(
-        f"Click Below To Start", buttons=keyboard
-    )
+    await tgbot.send_message(f"Click Below To Start", buttons=keyboard)
 
 
 @legend.tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Ahack")))
