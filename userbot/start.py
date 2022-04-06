@@ -81,6 +81,7 @@ async def killer():
         except Exception as e:
             print(e)
 
+
 @legend.tgbot.on(events.NewMessage(pattern="/start", func=lambda x: x.is_group))
 async def stat(event):
     keybard = [(Button.inline("⭐ Start ⭐", data="start"))]
