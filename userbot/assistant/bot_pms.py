@@ -65,18 +65,18 @@ async def check_bot_started_users(user, event):
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, notification)
 
+
 @legend.bot_cmd(
     pattern=f"^/hack({botusername})?([\s]+)?$",
     incoming=True,
     func=lambda e: e.is_group,
 )
 async def op(event):
-  legendboy = [
-    [
-      Button.url("Click Here", f"https://t.me/{botusername}")
-      ]
-    ]         
-  await event.reply("Click Below To Use Me In PM Only For My Owner", buttons=legendboy)
+    legendboy = [[Button.url("Click Here", f"https://t.me/{botusername}")]]
+    await event.reply(
+        "Click Below To Use Me In PM Only For My Owner", buttons=legendboy
+    )
+
 
 @legend.bot_cmd(
     pattern=f"^/start({botusername})?([\s]+)?$",
