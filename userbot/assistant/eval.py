@@ -28,7 +28,7 @@ async def aexec(code, event):
 @legend.bot_cmd(
     pattern=f"^/eval({botusername})(?: |$)([\s\S]*)",
     incoming=True,
-    from_users=Config.OWNER_ID,
+    func=lmbda e: e.sender_id == Config.OWNER_ID,
 )
 async def bot_ll(event):
     chat = await event.get_chat()
@@ -41,7 +41,7 @@ async def bot_ll(event):
     except IndexError:
         return await rk.edit("`No Python Command Was Given`")
     cmd = event.text.split(" ", maxsplit=1)[1]
-    if ("LEGEND_STRING", "session", "BOT_TOKEN", "HEROKU_API_KEY") in cmd:
+    if cmd in ("LEGEND_STRING", "session", "BOT_TOKEN", "HEROKU_API_KEY"):
         return await rk.edit("Secured by [LegendBot](https://t.me/LegendBot_AI)")
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
