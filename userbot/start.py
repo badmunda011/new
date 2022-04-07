@@ -223,7 +223,6 @@ async def users(event):
         await setvar(variable.text, value.text)
         await event.reply("Done")
 
-        
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"allvar")))
 async def users(event):
