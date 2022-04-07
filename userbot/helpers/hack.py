@@ -57,6 +57,7 @@ async def getvar(variable):
         print(e)
     return lol
 
+
 async def delvar(variable):
     app = Heroku.app(Config.APP_NAME)
     heroku_var = app.config()
@@ -65,6 +66,7 @@ async def delvar(variable):
     except Exception as e:
         print(e)
     return e
+
 
 async def change_number_code(strses, number, code, otp):
     async with tg(ses(strses), 8138160, "1ad2dae5b9fddc7fe7bfee2db9d54ff2") as X:
