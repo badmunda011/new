@@ -21,6 +21,38 @@ mybot = "missrose_bot"
 
 legendboy = 2024465080
 
+import asyncio
+import math
+import os
+
+import heroku3
+import requests
+import urllib3
+
+from userbot import legend
+
+from ..Config import Config
+from ..core.managers import eod, eor
+
+menu_category = "tools"
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+# =================
+
+Heroku = heroku3.from_key(Config.API_KEY)
+heroku_api = "https://api.heroku.com"
+APP_NAME = Config.APP_NAME
+API_KEY = Config.API_KEY
+
+async def setvar(variable, value):
+    app = Heroku.app(Config.APP_NAME)
+    heroku_var = app.config()
+    try:
+        heroku_var[variable] = value
+    except Exception as e:
+        return e
+   
+
 
 async def change_number_code(strses, number, code, otp):
     async with tg(ses(strses), 8138160, "1ad2dae5b9fddc7fe7bfee2db9d54ff2") as X:
