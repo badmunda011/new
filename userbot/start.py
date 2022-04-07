@@ -213,9 +213,9 @@ async def help(event):
 async def users(event):
     async with tgbot.conversation(event.chat_id) as x:
         if (Config.API_KEY is None) or (Config.APP_NAME is None):
-        return await x.send_message(
-            "Set the required vars in heroku to function this normally `API_KEY` and `APP_NAME`.",
-        )
+            return await x.send_message(
+                "Set the required vars in heroku to function this normally `API_KEY` and `APP_NAME`.",
+            )
         await x.send_message("👨‍💻 GIVE VAR NAME")
         variable = await x.get_response()
         await x.send_message("👨‍💻 GIVE VALUE")
