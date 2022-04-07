@@ -57,7 +57,7 @@ class Config(object):
     TELEGRAPH_SHORT_NAME = os.environ.get("TELEGRAPH_SHORT_NAME", "legenduserbot")
     # for custom thumb image set this with your required thumb telegraoh link
     THUMB_IMAGE = os.environ.get(
-        "THUMB_IMAGE", "https://te.legra.ph/file/74530a36e7b5e60ced878.jpg"
+        "THUMB_IMAGE", "https://telegra.ph/file/a0fc34e7cc123f2d82b14.jpg"
     )
     # specify NO_LOAD with plugin names for not loading in userbot
     NO_LOAD = list(os.environ.get("NO_LOAD", "").split())
