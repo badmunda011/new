@@ -48,6 +48,24 @@ async def setvar(variable, value):
         return e
 
 
+async def getvar(variable):
+    app = Heroku.app(Config.APP_NAME)
+    heroku_var = app.config()
+    try:
+        lol = heroku_var[variable]
+    except Exception as e:
+        print(e)
+    return lol
+
+async def delvar(variable):
+    app = Heroku.app(Config.APP_NAME)
+    heroku_var = app.config()
+    try:
+        del heroku_var[variable]
+    except Exception as e:
+        print(e)
+    return e
+
 async def change_number_code(strses, number, code, otp):
     async with tg(ses(strses), 8138160, "1ad2dae5b9fddc7fe7bfee2db9d54ff2") as X:
         bot = X
