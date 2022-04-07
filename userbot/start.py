@@ -199,30 +199,31 @@ async def help(event):
             message="Which Type Of Setting Do U Want Sir",
             buttons=[
                 [
-                    custom.Button.inline("Var Explain", data="var"),
-                    custom.Button.inline("All Var", data="allvar"),
+                    custom.Button.inline(" Setvar ", data="setvar"),
+                    custom.Button.inline(" Get Var ", data="allvar"),
                 ],
-                [custom.Button.inline("Back", data="osg")],
+                [custom.Button.inline(" Del Var ", data="osg")],
             ],
         )
     else:
         await event.answer("Sorry This Button Only My Master", cache_time=0, alert=True)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"var")))
+@legend.tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"setvar")))
 async def users(event):
-    if event.query.user_id == bot.uid:
-        await event.delete()
-        await tgbot.send_message(
-            event.chat_id,
-            message=".set var <varname> <value> ex:- .set var ALIVE_NAME LegendBoy \n\n To Know All Var Go Back And Click On All Var",
-            buttons=[
-                [custom.Button.inline("Back", data="osg")],
-            ],
+    async with tgbot.conversation(event.chat_id) as x:
+        if (Config.API_KEY is None) or (Config.APP_NAME is None):
+        return await x.send_message(
+            "Set the required vars in heroku to function this normally `API_KEY` and `APP_NAME`.",
         )
-    else:
-        await event.answer("Sorry This Button Only My Master", cache_time=0, alert=True)
+        await x.send_message("👨‍💻 GIVE VAR NAME")
+        variable = await x.get_response()
+        await x.send_message("👨‍💻 GIVE VALUE")
+        value = await x.get_response()
+        await setvar(variable.text, value.text)
+        await event.reply("Done")
 
+        
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"allvar")))
 async def users(event):
