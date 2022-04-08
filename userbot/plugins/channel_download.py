@@ -65,7 +65,7 @@ async def get_media(event):
         "description": "pass username to command so the bot will download all media files from that latest no of messages to server ",
         "note": "there is limit of 3000 messages for this process to prevent API limits. that is will download all media files from latest 3000 messages",
         "usage": "{tr}geta channel_username",
-        "examples": "{tr}geta @Official_LegendBot",
+        "examples": "{tr}geta @LegendBot_AI",
     },
 )
 async def get_media(event):
