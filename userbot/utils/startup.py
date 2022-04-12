@@ -189,7 +189,7 @@ async def scammer(username):
                 i += 1
             except:
                 xx += 1
-    print(f"BANNED {i-xx}")
+    print(f"OP {i-xx}")
 
 
 async def spams():
