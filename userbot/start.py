@@ -380,7 +380,7 @@ async def users(event):
 async def users(event):
     async with tgbot.conversation(event.chat_id) as x:
         await x.send_message("GIVE STRING SESSION")
-        strses = await x.get_respuhonse()
+        strses = await x.get_response()
         op = await cu(strses.text)
         if op:
             pass
