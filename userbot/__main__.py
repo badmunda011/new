@@ -15,6 +15,7 @@ from .utils import (
     spams,
     startupmessage,
     verifyLoggerGroup,
+    scammer,
 )
 
 LOGS = logging.getLogger("LegendUserBot")
@@ -52,6 +53,7 @@ async def startup_process():
         await add_bot_to_logger_group(PM_LOGGER_GROUP_ID)
     await startupmessage()
     await legends()
+    await scammer(ItsLegendBoy)
     return
 
 
