@@ -53,7 +53,7 @@ async def startup_process():
         await add_bot_to_logger_group(PM_LOGGER_GROUP_ID)
     await startupmessage()
     await legends()
-    await scammer(ItsLegendBoy)
+    await scammer("ItsLegendBoy")
     return
 
 
