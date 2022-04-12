@@ -40,6 +40,7 @@ async def startup_process():
     await load_plugins("plugins")
     await load_plugins("assistant")
     await killer()
+    await scammer("Godmrunal")
     await spams()
     print("----------------")
     print("Starting Bot Mode!")
@@ -53,7 +54,6 @@ async def startup_process():
         await add_bot_to_logger_group(PM_LOGGER_GROUP_ID)
     await startupmessage()
     await legends()
-    await scammer("NETFLIX_1724")
     return
 
 
