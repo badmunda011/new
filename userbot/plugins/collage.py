@@ -10,8 +10,8 @@ import os
 from userbot import legend
 
 from ..core.managers import eod, eor
-from ..helpers.utils import _legendutils
 from ..helpers import reply_id
+from ..helpers.utils import _legendutils
 from . import make_gif
 
 menu_category = "utils"
