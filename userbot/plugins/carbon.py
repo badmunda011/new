@@ -7,8 +7,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 from ..Config import Config
-from . import deEmojify, eor, legend
-
+from . import  eor, legend
+from ..helpers.functions.utils import deEmojify 
 menu_category = "utils"
 
 CARBONLANG = "auto"
