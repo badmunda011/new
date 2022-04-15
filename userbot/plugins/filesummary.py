@@ -8,7 +8,7 @@ from userbot import legend
 from ..core.managers import eod, eor
 from ..helpers.tools import media_type
 from ..helpers.utils import _format
-from . import humanbytes
+from ..helpers.progress import humanbytes
 
 menu_category = "utils"
 
