@@ -6,9 +6,9 @@ from prettytable import PrettyTable
 from userbot import legend
 
 from ..core.managers import eod, eor
+from ..helpers.progress import humanbytes
 from ..helpers.tools import media_type
 from ..helpers.utils import _format
-from ..helpers.progress import humanbytes
 
 menu_category = "utils"
 
