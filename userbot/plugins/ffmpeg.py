@@ -9,8 +9,9 @@ from userbot import legend
 
 from ..Config import Config
 from ..core.managers import eod, eor
-from ..helpers import _legendtools, media_type, progress, reply_id
-
+from ..helpers.utils import _legendtools
+from ..helpers import media_type, reply_id
+from ..helpers.progress import progress
 menu_category = "utils"
 
 
