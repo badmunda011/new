@@ -1,8 +1,8 @@
 import pyfiglet
 
+from ..helpers.functions.utils import deEmojify
 from ..helpers.utils import _format
 from . import _format, eod, eor, legend
-from ..helpers.functions.utils import deEmojify
 
 menu_category = "extra"
 
