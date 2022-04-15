@@ -6,7 +6,8 @@ from userbot import legend
 
 from ..core.managers import eod, eor
 from ..sql_helper.globals import addgvar, gvarstatus
-from . import BOTLOG, BOTLOG_CHATID, deEmojify
+from . import BOTLOG, BOTLOG_CHATID
+from ..helpers.functions.utils import deEmojify
 
 menu_category = "utils"
 
