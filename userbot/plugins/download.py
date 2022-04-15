@@ -14,7 +14,7 @@ from userbot import legend
 
 from ..Config import Config
 from ..core.managers import eod, eor
-from ..helpers import humanbytes, progress
+from ..helpers.progress import humanbytes, progress
 from ..helpers.utils import _format
 
 menu_category = "misc"
