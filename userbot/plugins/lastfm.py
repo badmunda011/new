@@ -19,9 +19,10 @@ from userbot import legend
 from ..Config import Config
 from ..core.logger import logging
 from ..helpers.functions import hide_inlinebot
+from ..helpers.functions.utils import deEmojify
 from ..helpers.utils import reply_id
 from . import BOTLOG, BOTLOG_CHATID, DEFAULT_BIO
-from ..helpers.functions.utils import deEmojify
+
 LOGS = logging.getLogger(__name__)
 menu_category = "extra"
 
