@@ -10,7 +10,7 @@ from userbot import legend
 from ..Config import Config
 from ..core.managers import eod, eor
 from ..helpers.utils import _format, _legendutils
-from . import humanbytes
+from ..helpers.progress import humanbytes
 
 menu_category = "utils"
 
