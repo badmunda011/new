@@ -5,9 +5,9 @@ from googletrans import LANGUAGES, Translator
 from userbot import legend
 
 from ..core.managers import eod, eor
+from ..helpers.functions.utils import deEmojify
 from ..sql_helper.globals import addgvar, gvarstatus
 from . import BOTLOG, BOTLOG_CHATID
-from ..helpers.functions.utils import deEmojify
 
 menu_category = "utils"
 
