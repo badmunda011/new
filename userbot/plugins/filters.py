@@ -6,7 +6,7 @@ from telethon.utils import get_display_name
 from userbot import legend
 
 from ..core.managers import eor
-from ..sql_helper.filter_sql import (
+from ..sql_helper.filters_sql import (
     add_filter,
     get_filters,
     remove_all_filters,
