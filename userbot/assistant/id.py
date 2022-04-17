@@ -11,8 +11,9 @@ botusername = Config.BOT_USERNAME
 
 
 @legend.bot_cmd(
-    pattern=f"^/id({botusername})?([\s]+)?$",
+    pattern=f"^/id$",
     incoming=True,
+    func=lambda e: e.is_group,
 )
 async def bot_start(event):
     "To get id of the group or user."
@@ -41,7 +42,7 @@ async def bot_start(event):
         if r_msg.media:
             bot_api_file_id = pack_bot_file_id(r_msg.media)
             await event.reply(
-                f"**Current Chat ID : **`{event.chat_id}`\n**From User ID: **`{r_msg.sender_id}`\n**Media File ID: **`{bot_api_file_id}`",
+                f"❇ **Current Chat ID : **`{event.chat_id}`\n❇ **From User ID: **`{r_msg.sender_id}`\n**Media File ID: **`{bot_api_file_id}`",
             )
 
         else:
