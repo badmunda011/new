@@ -1,54 +1,10 @@
-import os
-import re
-import io
-import re
-from collections import defaultdict
-from datetime import datetime
-from typing import Optional, Union
-
-from telethon import Button, events
-from telethon.errors import UserIsBlockedError
-from telethon.events import CallbackQuery, StopPropagation
-from telethon.utils import get_display_name
+from telethon.utils import get_extension
 
 from userbot import Config, legend
 
-from ..core import check_owner, pool
-from ..core.logger import logging
-from ..core.session import tgbot
-from ..helpers import reply_id
-from ..helpers.utils import _format
-from ..sql_helper.bot_blacklists import check_is_black_list
-from ..sql_helper.bot_pms_sql import (
-    add_user_to_db,
-    get_user_id,
-    get_user_logging,
-    get_user_reply,
-)
-from ..sql_helper.bot_starters import add_starter_to_db, get_starter_details
-from ..sql_helper.globals import delgvar, gvarstatus
-from ..sql_helper.idaddar import get_all_users
-from . import BOTLOG, BOTLOG_CHATID
-from .botmanagers import ban_user_from_bot
-
-
-import pygments
-import requests
-from pygments.formatters import ImageFormatter
-from pygments.lexers import Python3Lexer
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.utils import get_extension
-from urlextract import URLExtract
-
-from userbot import legend
-
 from ..Config import Config
-from ..core.events import MessageEdited
-from ..core.logger import logging
-from ..core.managers import eod, eor
 from ..helpers.tools import media_type
-from ..helpers.utils import pastetext, reply_id
-
+from ..helpers.utils import pastetext
 
 
 @legend.bot_cmd(
