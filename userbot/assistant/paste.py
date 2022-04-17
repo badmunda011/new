@@ -55,7 +55,7 @@ from ..helpers.utils import pastetext, reply_id
     pattern=f"^/paste({botusername})?([\s]+)?$",
     incoming=True,
 )
-async def pasta(event);
+async def pasta(event):
     reply = await event.get_reply_message()
     pastetype = "p"
     try:
