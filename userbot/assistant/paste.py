@@ -8,7 +8,7 @@ from ..helpers.utils import pastetext
 
 
 @legend.bot_cmd(
-    pattern=f"^/paste$",
+    pattern=f"^/paste({botusername})?([\s]+)?$",
     incoming=True,
 )
 async def pasta(event):
