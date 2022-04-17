@@ -11,7 +11,7 @@ botusername = Config.BOT_USERNAME
 
 
 @legend.bot_cmd(
-    pattern=f"^/id$",
+    pattern=f"^/id({botusername})?([\s]+)?$",
     incoming=True,
     func=lambda e: e.is_group,
 )
