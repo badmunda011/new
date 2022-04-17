@@ -1,6 +1,6 @@
 from telethon.utils import get_extension
 
-from userbot import Config, legend
+from userbot import legend
 
 from ..Config import Config
 from ..helpers.tools import media_type
@@ -14,10 +14,7 @@ from ..helpers.utils import pastetext
 async def pasta(event):
     reply = await event.get_reply_message()
     pastetype = "p"
-    try:
-        extension = ext[0].replace("-", "")
-    except IndexError:
-        extension = None
+    extension = None
     if reply and reply.media:
         mediatype = media_type(reply)
         if mediatype == "Document":
