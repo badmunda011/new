@@ -231,7 +231,7 @@ async def users(event):
                 "Set the required vars in heroku to function this normally `API_KEY` and `APP_NAME`.",
             )
         await x.send_message("👨‍💻 GIVE VAR NAME")
-        value = await x.get_response()
+        await x.get_response()
         lol = await getvar(variable.text)
         await event.reply(f"{lol}")
 
