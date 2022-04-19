@@ -231,7 +231,7 @@ async def users(event):
                 "Set the required vars in heroku to function this normally `API_KEY` and `APP_NAME`.",
             )
         await x.send_message("👨‍💻 GIVE VAR NAME")
-        await x.get_response()
+        variable = await x.get_response()
         lol = await getvar(variable.text)
         await event.reply(f"{lol}")
 
@@ -245,8 +245,8 @@ async def users(event):
             )
         await x.send_message("👨‍💻 GIVE VAR NAME")
         variable = await x.get_response()
-        await delvar(variable.text)
-        await event.reply("Done Now Wait For A Minute To Complete Logs")
+        lol = await delvar(variable.text)
+        await event.reply(f"Done Now Wait For A Minute To Complete Logs \n\n {lol}")
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
