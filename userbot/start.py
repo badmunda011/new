@@ -110,7 +110,7 @@ async def help(event):
         await event.delete()
         await tgbot.send_message(
             event.chat_id,
-            message=f"f"Hey, I am your {bot_id}'s assistant bot.\nI Am Here To Help U \n\nPowered By [LegendBot](https://t.me/LegendBot_OP)",
+            message=f"Hey, I am your {bot_id}'s assistant bot.\nI Am Here To Help U \n\nPowered By [LegendBot](https://t.me/LegendBot_OP)",
             buttons=[
                 [
                     Button.url(" Support ", "https://t.me/LegendBot_OP"),
