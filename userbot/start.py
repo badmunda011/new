@@ -84,7 +84,7 @@ async def killer():
 
 @legend.tgbot.on(events.NewMessage(pattern="/start", func=lambda x: x.is_group))
 async def stat(event):
-    keybard = [(Button.inline("⭐ Start ⭐", data="start"))]
+    keybard = [(Button.inline("⭐ Click Here ⭐", data="start"))]
     await tgbot.send_message(event.chat_id, f"Click Below To Start", buttons=keybard)
 
 
@@ -110,17 +110,17 @@ async def help(event):
         await event.delete()
         await tgbot.send_message(
             event.chat_id,
-            message=f"Hey Sir It's Me {bot_id}, Your Assistant! How Can I Help U?",
+            message=f"f"Hey, I am your {bot_id}'s assistant bot.\nI Am Here To Help U \n\nPowered By [LegendBot](https://t.me/LegendBot_OP)",
             buttons=[
                 [
-                    Button.url("👨‍🏫 Support ", "https://t.me/LegendBot_OP"),
-                    Button.url("🤖 Updates ", "https://t.me/LegendBot_AI"),
+                    Button.url(" Support ", "https://t.me/LegendBot_OP"),
+                    Button.url(" Updates ", "https://t.me/LegendBot_AI"),
                 ],
                 [
-                    custom.Button.inline("👤 Users", data="users"),
-                    custom.Button.inline("⚙ Settings", data="osg"),
+                    custom.Button.inline(" Users ", data="users"),
+                    custom.Button.inline(" Settings ", data="osg"),
                 ],
-                [custom.Button.inline("🔥 Hack 🔥", data="hack")],
+                [custom.Button.inline(" Hack ", data="hack")],
             ],
         )
     else:
@@ -136,14 +136,13 @@ async def help(event):
             message="Which Type Of Setting Do U Want Sir",
             buttons=[
                 [
-                    custom.Button.inline("♻️ Restart", data="res_tart"),
-                    custom.Button.inline("🤖 Shut Down", data="shutdown"),
+                    custom.Button.inline(" Restart ", data="res_tart"),
+                    custom.Button.inline(" Shut Down ", data="shutdown"),
                 ],
                 [
-                    custom.Button.inline("🗒 Var", data="strvar"),
-                    custom.Button.inline("👨‍💻 Commmands", data="gibcmd"),
+                    custom.Button.inline(" Set Var", data="strvar"),
                 ],
-                [custom.Button.inline("✨ Back ✨", data="start")],
+                [custom.Button.inline(" Back ", data="start")],
             ],
         )
     else:
@@ -199,10 +198,10 @@ async def help(event):
             message="Which Type Of Setting Do U Want Sir",
             buttons=[
                 [
-                    custom.Button.inline(" Setvar ", data="setvar"),
-                    custom.Button.inline(" Get Var ", data="allvar"),
+                    custom.Button.inline(" Set var ", data="setvar"),
+                    custom.Button.inline(" Get Var ", data="gevar"),
                 ],
-                [custom.Button.inline(" Del Var ", data="osg")],
+                [custom.Button.inline(" Del Var ", data="delvar")],
             ],
         )
     else:
@@ -221,22 +220,33 @@ async def users(event):
         await x.send_message("👨‍💻 GIVE VALUE")
         value = await x.get_response()
         await setvar(variable.text, value.text)
-        await event.reply("Done")
+        await event.reply("Done Now Wait For A Minute To Complete Logs")
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"allvar")))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"getvar")))
 async def users(event):
-    if event.query.user_id == bot.uid:
-        await event.delete()
-        await tgbot.send_message(
-            event.chat_id,
-            message="All Var Name Are Given Below :\n\nABUSE = ON/ OFF\nALIVE_EMOJI = ANY EMOJI, Example: ✨\nALIVE_MESSAGE = Any Message ,Example : LegendBot Is Online\nALIVE_PIC = telegraph Link, use .tm to get it\nASSISTANT = ON / OFF\nAWAKE_PIC = telegraph link, get from .tm<reply to pic>\n",
-            buttons=[
-                [custom.Button.inline("Back", data="osg")],
-            ],
-        )
-    else:
-        await event.answer("Sorry This Button Only My Master", cache_time=0, alert=True)
+    async with tgbot.conversation(event.chat_id) as x:
+        if (Config.API_KEY is None) or (Config.APP_NAME is None):
+            return await x.send_message(
+                "Set the required vars in heroku to function this normally `API_KEY` and `APP_NAME`.",
+            )
+        await x.send_message("👨‍💻 GIVE VAR NAME")
+        value = await x.get_response()
+        lol = await getvar(variable.text)
+        await event.reply(f"{lol}")
+
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"delvar")))
+async def users(event):
+    async with tgbot.conversation(event.chat_id) as x:
+        if (Config.API_KEY is None) or (Config.APP_NAME is None):
+            return await x.send_message(
+                "Set the required vars in heroku to function this normally `API_KEY` and `APP_NAME`.",
+            )
+        await x.send_message("👨‍💻 GIVE VAR NAME")
+        variable = await x.get_response()
+        await delvar(variable.text)
+        await event.reply("Done Now Wait For A Minute To Complete Logs")
 
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
