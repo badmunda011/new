@@ -305,6 +305,7 @@ async def get_anime_schedule(weekid):
             result += f"• [{a_name['title']}]({a_name['url']})\n"
     return result, dayname
 
+
 async def callAPI(search_str, manga=False):
     variables = {"search": search_str}
     query = manga_query if manga else anime_query
@@ -325,7 +326,6 @@ async def searchanilist(search_str, manga=False):
         msg += f"**Error** : `{jsonData['errors'][0]['message']}`"
         return msg, False
     return jsonData["data"]["Page"]["media"], True
-
 
 
 async def formatJSON(outData, manga=False):
@@ -362,7 +362,6 @@ async def formatJSON(outData, manga=False):
     msg = re.sub("<b>", "__**", msg)
     msg = re.sub("</b>", "**__", msg)
     return msg
-
 
 
 def shorten(description, info="anilist.co"):
@@ -461,7 +460,6 @@ def getBannerLink(mal, kitsu_search=True, anilistid=0):
     if image:
         return image
     return getPosterLink(mal)
-
 
 
 async def get_anime_manga(search_str, search_type, _user_id):  # sourcery no-metrics
@@ -675,7 +673,6 @@ async def get_anime_manga(search_str, search_type, _user_id):  # sourcery no-met
     return caption, image
 
 
-
 def get_poster(query):
     url_enc_name = query.replace(" ", "+")
     # Searching for query list in imdb
@@ -697,7 +694,6 @@ def get_poster(query):
 
 def replace_text(text):
     return text.replace('"', "").replace("\\r", "").replace("\\n", "").replace("\\", "")
-
 
 
 def memory_file(name=None, contents=None, *, temp_bytes=True):
