@@ -190,7 +190,7 @@ async def ban_botpms(event):
         return await event.reply(f"**Error:**\n`{e}`")
     if user_id == Config.OWNER_ID:
         return await event.reply("I can't ban you master")
-    if check := check_is_black_list(user.id)
+    if check := check_is_black_list(user.id):
         return await event.client.send_message(
             event.chat_id,
             f"#Already_banned\
