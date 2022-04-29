@@ -143,14 +143,15 @@ async def bot_start(event):
                 link_preview=False,
                 buttons=buttons,
                 reply_to=reply_to,
-            )
+                )
         else:
             await event.client.send_message(
                 chat.id,
                 start_msg,
                 link_preview=False,
                 buttons=buttons,
-                reply_to=reply_to,            
+                reply_to=reply_to,   
+                )         
     except Exception as e:
         if BOTLOG:
             await event.client.send_message(
