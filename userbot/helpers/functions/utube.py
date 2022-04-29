@@ -4,9 +4,9 @@ import urllib.request
 from collections import defaultdict
 
 import ujson
-import youtube_dl
+import yt_dlp
 from telethon import Button
-from youtube_dl.utils import DownloadError, ExtractorError, GeoRestrictedError
+from yt_dlp.utils import DownloadError, ExtractorError, GeoRestrictedError
 from youtubesearchpython import VideosSearch
 
 from ...Config import Config
@@ -23,19 +23,19 @@ YOUTUBE_REGEX = re.compile(
 )
 PATH = "./userbot/cache/ytsearch.json"
 
-song_dl = "youtube-dl --force-ipv4 --write-thumbnail --add-metadata --embed-thumbnail -o './temp/%(title)s.%(ext)s' --extract-audio --audio-format mp3 --audio-quality {QUALITY} {video_link}"
-thumb_dl = "youtube-dl --force-ipv4 -o './temp/%(title)s.%(ext)s' --write-thumbnail --skip-download {video_link}"
-video_dl = "youtube-dl --force-ipv4 --write-thumbnail  --add-metadata --embed-thumbnail -o './temp/%(title)s.%(ext)s' -f '[filesize<20M]' {video_link}"
+song_dl = "yt-dlp --force-ipv4 --write-thumbnail --add-metadata --embed-thumbnail -o './temp/%(title)s.%(ext)s' --extract-audio --audio-format mp3 --audio-quality {QUALITY} {video_link}"
+thumb_dl = "yt-dlp --force-ipv4 -o './temp/%(title)s.%(ext)s' --write-thumbnail --skip-download {video_link}"
+video_dl = "yt-dlp --force-ipv4 --write-thumbnail  --add-metadata --embed-thumbnail -o './temp/%(title)s.%(ext)s' -f '[filesize<20M]' {video_link}"
 name_dl = (
-    "youtube-dl --force-ipv4 --get-filename -o './temp/%(title)s.%(ext)s' {video_link}"
+    "yt-dlp --force-ipv4 --get-filename -o './temp/%(title)s.%(ext)s' {video_link}"
 )
 
 
-async def yt_search(legend):
+async def yt_search(swt):
     try:
-        legend = urllib.parse.quote(legend)
+        swt = urllib.parse.quote(swt)
         html = urllib.request.urlopen(
-            "https://www.youtube.com/results?search_query=" + swt
+            f"https://www.youtube.com/results?search_query={swt}"
         )
         user_data = re.findall(r"watch\?v=(\S{11})", html.read().decode())
         video_link = []
@@ -86,12 +86,12 @@ class YT_Search_X:
 
 ytsearch_data = YT_Search_X()
 
-
-async def yt_data(legend):
+"""
+async def yt_data(swt):
     params = {"format": "json", "url": swt}
     url = "https://www.youtube.com/oembed"  # https://stackoverflow.com/questions/29069444/returning-the-urls-as-a-list-from-a-youtube-search-query
     query_string = urllib.parse.urlencode(params)
-    url = url + "?" + query_string
+    url = f"{url}?{query_string}"
     with urllib.request.urlopen(url) as response:
         response_text = response.read()
         data = ujson.loads(response_text.decode())
@@ -117,8 +117,7 @@ async def get_ytthumb(videoid: str):
 
 def get_yt_video_id(url: str):
     # https://regex101.com/r/c06cbV/1
-    match = YOUTUBE_REGEX.search(url)
-    if match:
+    if match := YOUTUBE_REGEX.search(url)
         return match.group(1)
 
 
@@ -128,19 +127,19 @@ def get_choice_by_id(choice_id, media_type: str):
         # default format selection
         choice_str = "bestvideo+bestaudio/best"
         disp_str = "best(video+audio)"
+    elif choice_id == "mp3":
+        choice_str = "320"
+        disp_str = "320 Kbps"
     elif choice_id == "mp4":
         # Download best Webm / Mp4 format available or any other best if no mp4
         # available
         choice_str = "bestvideo[ext=webm]+251/bestvideo[ext=mp4]+(258/256/140/bestaudio[ext=m4a])/bestvideo[ext=webm]+(250/249)/best"
         disp_str = "best(video+audio)[webm/mp4]"
-    elif choice_id == "mp3":
-        choice_str = "320"
-        disp_str = "320 Kbps"
     else:
         disp_str = str(choice_id)
         if media_type == "v":
             # mp4 video quality + best compatible audio
-            choice_str = disp_str + "+(258/256/140/bestaudio[ext=m4a])/best"
+            choice_str = f"{disp_str}+(258/256/140/bestaudio[ext=m4a])/best"
         else:  # Audio
             choice_str = disp_str
     return choice_str, disp_str
