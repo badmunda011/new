@@ -70,7 +70,6 @@ def rand_key():
     return str(uuid4())[:8]
 
 
-
 async def sanga_seperator(sanga_list):
     for i in sanga_list:
         if i.startswith("🔗"):
@@ -90,8 +89,6 @@ async def covidindia(state):
     url = "https://www.mohfw.gov.in/data/datanew.json"
     req = requests.get(url).json()
     return next((req[states.index(i)] for i in states if i == state), None)
-
-
 
 
 async def age_verification(event, reply_to_id):
@@ -144,6 +141,7 @@ async def animator(media, mainevent, textevent):
     sticker = "animate.webm"
     return sticker
 
+
 async def hide_inlinebot(borg, bot_name, text, chat_id, reply_to_id, c_lick=0):
     sticcers = await borg.inline_query(bot_name, f"{text}.")
     cat = await sticcers[c_lick].click("me", hide_via=True)
@@ -166,6 +164,7 @@ async def delete_conv(event, chat, from_message):
     await event.client.delete_messages(chat, msgs)
     await event.client.send_read_acknowledge(chat)
 
+
 # --------------------------------------------------------------------------------------------------------------------#
 
 
@@ -174,7 +173,6 @@ async def delete_conv(event, chat, from_message):
 # https://www.tutorialspoint.com/How-do-you-split-a-list-into-evenly-sized-chunks-in-Python
 def sublists(input_list: list, width: int = 3):
     return [input_list[x : x + width] for x in range(0, len(input_list), width)]
-
 
 
 def ellipse_create(filename, size, border):
@@ -217,6 +215,7 @@ async def unzip(downloaded_file_name):
     downloaded_file_name = os.path.splitext(downloaded_file_name)[0]
     return f"{downloaded_file_name}.gif"
 
+
 async def clippy(borg, msg, chat_id, reply_to_id):
     chat = "@clippy"
     async with borg.conversation(chat) as conv:
@@ -235,7 +234,6 @@ async def clippy(borg, msg, chat_id, reply_to_id):
     await borg.delete_messages(conv.chat_id, [msg.id, pic.id])
 
 
-
 # https://github.com/ssut/py-googletrans/issues/234#issuecomment-722379788
 async def getTranslate(text, **kwargs):
     translator = Translator()
@@ -249,7 +247,6 @@ async def getTranslate(text, **kwargs):
     return result
 
 
-
 def reddit_thumb_link(preview, thumb=None):
     for i in preview:
         if "width=216" in i:
@@ -258,7 +255,6 @@ def reddit_thumb_link(preview, thumb=None):
     if not thumb:
         thumb = preview.pop()
     return thumb.replace("\u0026", "&")
-
 
 
 def higlighted_text(
