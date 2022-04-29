@@ -16,6 +16,8 @@ from ..core.managers import eod, eor
 from ..core.session import legend
 from ..helpers import *
 from ..helpers.utils import _format, _legendtools, _legendutils, install_pip, reply_id
+from ..sql_helper.globals import gvarstatus 
+
 
 # =================== CONSTANT ===================
 bot = legend
@@ -77,11 +79,7 @@ PM_START = []
 PMMESSAGE_CACHE = {}
 PMMENU = "pmpermit_menu" not in Config.NO_LOAD
 
-# Gdrive
-G_DRIVE_CLIENT_ID = Config.G_DRIVE_CLIENT_ID
-G_DRIVE_CLIENT_SECRET = Config.G_DRIVE_CLIENT_SECRET
-G_DRIVE_DATA = Config.G_DRIVE_DATA
-G_DRIVE_FOLDER_ID = Config.G_DRIVE_FOLDER_ID
+
 TMP_DOWNLOAD_DIRECTORY = Config.TMP_DOWNLOAD_DIRECTORY
 
 # spamwatch support
