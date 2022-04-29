@@ -28,7 +28,7 @@ async def get_user_from_event(
     noedits=False,
 ):  # sourcery no-metrics
     if catevent is None:
-        catevent = event
+        pass
     if nogroup is False:
         if secondgroup:
             args = event.pattern_match.group(2).split(" ", 1)
