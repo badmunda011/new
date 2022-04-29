@@ -139,7 +139,7 @@ async def bot_start(event):
             await event.client.send_message(
                 chat.id,
                 file=custompic,
-                start_msg,
+                caption=start_msg,
                 link_preview=False,
                 buttons=buttons,
                 reply_to=reply_to,
