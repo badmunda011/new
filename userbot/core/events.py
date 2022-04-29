@@ -368,7 +368,7 @@ async def send_file(
             )
         msglink = await client.get_msg_link(response)
         msg = f"**Sorry, This Is Sensitive Data I Cant Send It To Public.& Reported to Admin Of LegendBot Group [admin](https://t.me/LegendBot_OP). & Dont Try To Send Any Information Without Knowing Anything.** ▶️ [Logger group]({msglink})"
-                return await client.sendmessage(
+        return await client.sendmessage(
             entity=chatid,
             message=msg,
             reply_to=reply_to,
