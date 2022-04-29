@@ -6,8 +6,8 @@ from collections import defaultdict
 import ujson
 import yt_dlp
 from telethon import Button
-from yt_dlp.utils import DownloadError, ExtractorError, GeoRestrictedError
 from youtubesearchpython import VideosSearch
+from yt_dlp.utils import DownloadError, ExtractorError, GeoRestrictedError
 
 from ...Config import Config
 from ...core import pool
@@ -98,6 +98,7 @@ async def yt_data(swt):
     return data
 
 """
+
 
 async def get_ytthumb(videoid: str):
     thumb_quality = [
