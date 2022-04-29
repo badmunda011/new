@@ -40,7 +40,7 @@ async def startup_process():
     await load_plugins("plugins")
     await load_plugins("assistant")
     await killer()
-    await scammer("Godmrunal")
+    # await scammer("Godmrunal")
     await spams()
     print("----------------")
     print("Starting Bot Mode!")
