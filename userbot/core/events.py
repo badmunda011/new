@@ -93,6 +93,7 @@ async def safe_check_text(msg):  # sourcery no-metrics
         return False
     msg = str(msg)
     from .session import legend
+
     phone = str((await legend.get_entity(legend.uid)).phone)
     return bool(
         (
