@@ -5,7 +5,9 @@ from userbot import legend
 from ..Config import Config
 from ..helpers.tools import media_type
 from ..helpers.utils import pastetext
+
 botusername = Config.BOT_USERNAME
+
 
 @legend.bot_cmd(
     pattern=f"^/paste({botusername})?([\s]+)?$",

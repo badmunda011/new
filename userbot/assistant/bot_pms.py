@@ -150,8 +150,8 @@ async def bot_start(event):
                 start_msg,
                 link_preview=False,
                 buttons=buttons,
-                reply_to=reply_to,   
-            )         
+                reply_to=reply_to,
+            )
     except Exception as e:
         if BOTLOG:
             await event.client.send_message(

@@ -11,7 +11,6 @@ from .utils import (
     add_bot_to_logger_group,
     hekp,
     load_plugins,
-    scammer,
     setup_bot,
     spams,
     startupmessage,
