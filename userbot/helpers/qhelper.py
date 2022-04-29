@@ -38,6 +38,7 @@ COLORS = [
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
+
 def file_check():
     regular = "./temp/Roboto-Regular.ttf"
     medium = "./temp/Roboto-Medium.ttf"
