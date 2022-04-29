@@ -242,6 +242,7 @@ async def send_message(
     return await client.sendmessage(
         entity=chatid,
         message=msg,
+        send_as=send_as,
         reply_to=reply_to,
         attributes=attributes,
         parse_mode=parse_mode,
