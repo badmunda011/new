@@ -97,6 +97,7 @@ async def yt_data(swt):
         data = ujson.loads(response_text.decode())
     return data
 
+"""
 
 async def get_ytthumb(videoid: str):
     thumb_quality = [
@@ -117,7 +118,7 @@ async def get_ytthumb(videoid: str):
 
 def get_yt_video_id(url: str):
     # https://regex101.com/r/c06cbV/1
-    if match := YOUTUBE_REGEX.search(url)
+    if match := YOUTUBE_REGEX.search(url):
         return match.group(1)
 
 
@@ -208,7 +209,7 @@ def yt_search_btns(
 @pool.run_in_thread
 def download_button(vid: str, body: bool = False):  # sourcery no-metrics
     try:
-        vid_data = youtube_dl.YoutubeDL({"no-playlist": True}).extract_info(
+        vid_data = yt_dlp.YoutubeDL({"no-playlist": True}).extract_info(
             BASE_YT_URL + vid, download=False
         )
     except ExtractorError:
@@ -228,20 +229,20 @@ def download_button(vid: str, body: bool = False):  # sourcery no-metrics
     audio_dict = {}
     # ------------------------------------------------ #
     for video in vid_data["formats"]:
-
-        fr_note = video.get("format_note")
-        fr_id = int(video.get("format_id"))
-        fr_size = video.get("filesize")
-        if video.get("ext") == "mp4":
-            for frmt_ in qual_list:
-                if fr_note in (frmt_, frmt_ + "60"):
-                    qual_dict[frmt_][fr_id] = fr_size
-        if video.get("acodec") != "none":
-            bitrrate = int(video.get("abr", 0))
-            if bitrrate != 0:
-                audio_dict[
-                    bitrrate
-                ] = f"🎵 {bitrrate}Kbps ({humanbytes(fr_size) or 'N/A'})"
+        if video.get("filesize"):
+            fr_note = video.get("format_note")
+            fr_id = int(video.get("format_id"))
+            fr_size = video.get("filesize")
+            if video.get("ext") == "mp4":
+                for frmt_ in qual_list:
+                    if fr_note in (frmt_, f"{frmt_}60"):
+                        qual_dict[frmt_][fr_id] = fr_size
+            if video.get("acodec") != "none":
+                bitrrate = int(video.get("abr", 0))
+                if bitrrate != 0:
+                    audio_dict[
+                        bitrrate
+                    ] = f"🎵 {bitrrate}Kbps ({humanbytes(fr_size) or 'N/A'})"
 
     video_btns = []
     for frmt in qual_list:
@@ -293,7 +294,7 @@ def _tubeDl(url: str, starttime, uid: str):
         "quiet": True,
     }
     try:
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             x = ydl.download([url])
     except DownloadError as e:
         LOGS.error(e)
@@ -327,7 +328,7 @@ def _mp3Dl(url: str, starttime, uid: str):
         "quiet": True,
     }
     try:
-        with youtube_dl.YoutubeDL(_opts) as ytdl:
+        with yt_dlp.YoutubeDL(_opts) as ytdl:
             dloader = ytdl.download([url])
     except Exception as y_e:
         LOGS.exception(y_e)
