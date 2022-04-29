@@ -31,7 +31,7 @@ async def age_verification_true(event: CallbackQuery):
     try:
         addgvar("ALLOW_NSFW", "true")
         await event.edit(
-            text="Done Now Use Again",
+            text="Done Now U Can Use NSFW Plugin /n/n To Disable Use .deldb ALLOW_NSFW",
             file="https://telegra.ph/file/85f3071c31279bcc280ef.jpg",
             buttons=buttons,
         )
