@@ -60,7 +60,7 @@ async def startup_process():
 legend.loop.run_until_complete(startup_process())
 legend.loop.create_task(hekp())
 
-if len(sys.argv) not in (1, 3, 4):
+if len(sys.argv) in (1, 3, 4):
     try:
         legend.run_until_disconnected()
     except ConnectionError:
