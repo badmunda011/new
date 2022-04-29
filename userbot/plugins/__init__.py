@@ -16,8 +16,7 @@ from ..core.managers import eod, eor
 from ..core.session import legend
 from ..helpers import *
 from ..helpers.utils import _format, _legendtools, _legendutils, install_pip, reply_id
-from ..sql_helper.globals import gvarstatus 
-
+from ..sql_helper.globals import gvarstatus
 
 # =================== CONSTANT ===================
 bot = legend
