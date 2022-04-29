@@ -28,6 +28,7 @@ from .logger import logging
 
 LOGS = logging.getLogger(__name__)
 
+MEDIA_PATH_REGEX = re.compile(r"(:?\<\bmedia:(:?(?:.*?)+)\>)")
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
 tr = Config.HANDLER
 
@@ -300,6 +301,11 @@ async def inline_handler(event):  # sourcery no-metrics
             prev = 0
             note_data = ""
             buttons = []
+            media = None
+            legendmedia = MEDIA_PATH_REGEX.search(markdown_note)
+            if legendmedia:
+                media = legendmedia.group(2)
+                markdown_note = markdown_note.replace(legendmedia.group(0), "")
             for match in BTN_URL_REGEX.finditer(markdown_note):
                 n_escapes = 0
                 to_check = match.start(1) - 1
@@ -321,12 +327,26 @@ async def inline_handler(event):  # sourcery no-metrics
                 note_data += markdown_note[prev:]
             message_text = note_data.strip()
             tl_ib_buttons = ibuild_keyboard(buttons)
-            result = builder.article(
-                title="Inline creator",
-                text=message_text,
-                buttons=tl_ib_buttons,
-                link_preview=False,
-            )
+            if media and media.endswith((".jpg", ".png")):
+                result = builder.photo(
+                    media,
+                    text=message_text,
+                    buttons=tl_ib_buttons,
+                )
+            elif media:
+                result = builder.document(
+                    media,
+                    title="Inline creator",
+                    text=message_text,
+                    buttons=tl_ib_buttons,
+                )
+            else:
+                result = builder.article(
+                    title="Inline creator",
+                    text=message_text,
+                    buttons=tl_ib_buttons,
+                    link_preview=False,
+                )
             await event.answer([result] if result else None)
         elif match:
             query = query[7:]
