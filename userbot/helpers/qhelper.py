@@ -80,7 +80,6 @@ def file_check():
 
 
 async def process(msg, user, client, reply, event, replied=None):  # sourcery no-metrics
-async def process(msg, user, client, reply, event, replied=None):  # sourcery no-metrics
     file_check()
     # Importıng fonts and gettings the size of text
     font = ImageFont.truetype("./temp/Roboto-Medium.ttf", 41, encoding="utf-16")
