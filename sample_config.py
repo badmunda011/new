@@ -58,6 +58,16 @@ class Config(object):
     )
     # specify NO_LOAD with plugin names for not loading in userbot
     NO_LOAD = list(os.environ.get("NO_LOAD", "").split())
+    # for custom pic for .digitalpfp
+    DIGITAL_PIC = os.environ.get("DIGITAL_PIC", None)
+    # your default pic telegraph link
+    DEFAULT_PIC = os.environ.get("DEFAULT_PIC", None)
+    # set this with your default bio
+    DEFAULT_BIO = os.environ.get("DEFAULT_BIO", None)
+    # set this with your deafult name
+    DEFAULT_NAME = os.environ.get("DEFAULT_NAME", None)
+    # specify command handler that should be used for the plugins
+    # this should be a valid "regex" pattern
     HANDLER = os.environ.get("HANDLER", r".")
     SUDO_HANDLER = os.environ.get("SUDO_HANDLER", r".")
     # set this with required folder path to act as download folder
