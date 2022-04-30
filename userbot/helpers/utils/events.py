@@ -27,7 +27,7 @@ async def get_user_from_event(
     nogroup=False,
     noedits=False,
 ):  # sourcery no-metrics
-    if catevent is None:
+    if legendevent is None:
         pass
     if nogroup is False:
         if secondgroup:
