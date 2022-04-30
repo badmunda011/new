@@ -280,6 +280,40 @@ async def inline_handler(event):  # sourcery no-metrics
                     buttons=buttons,
                 )
             await event.answer([result] if result else None)
+        if query.startswith("HI"):
+            buttons = [
+                (Button.url(f"{ALIVE_NAME}", f"tg://openmessage?user_id={USERID}"),),
+                (
+                    Button.inline("Stats", data="stats"),
+                    Button.url("Repo", "https://github.com/ITS-LEGENDBOT/LEGENDBOT"),
+                ),
+            ]
+            ALIVE_PIC = gvarstatus("ALIVE_PIC")
+            if ALIVE_PIC is None:
+                I_IMG = "https://telegra.ph/file/a4a6a40205873ae7f7ceb.jpg"
+            else:
+                PIC = list(ALIVE_PIC.split())
+                I_IMG = random.choice(PIC)
+            if I_IMG and I_IMG.endswith((".jpg", ".png")):
+                result = builder.photo(
+                    I_IMG,
+                    text=query,
+                    buttons=buttons,
+                )
+            elif I_IMG:
+                result = builder.document(
+                    I_IMG,
+                    title="Alive Legend",
+                    text=query,
+                    buttons=buttons,
+                )
+            else:
+                result = builder.article(
+                    title="Alive Legend",
+                    text=query,
+                    buttons=buttons,
+                )
+            await event.answer([result] if result else None)
         elif query == "repo":
             result = builder.article(
                 title="Repository",
