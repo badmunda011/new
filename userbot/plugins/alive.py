@@ -73,7 +73,7 @@ async def amireallyalive(event):
         pyver=python_version(),
         dbhealth=check_sgnirts,
         ping=ms,
-    )")
+    ))"
     if IPIC:
         try:
             results = await event.client.inline_query(Config.BOT_USERNAME, caption)
