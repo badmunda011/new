@@ -280,16 +280,18 @@ async def inline_handler(event):  # sourcery no-metrics
                     buttons=buttons,
                 )
             await event.answer([result] if result else None)
-        if query.startswith("LegendBot"):
+        if query.startswith("⚜ LegendBot"):
+            grp_username = gvarstatus("GROUP_USERNAME") or "LegendBot_OP"
+            chnl_username = gvarstatus("CHANNEL_USERNAME") or "LegendBot_AI"
             buttons = [
                 (Button.url(f"{ALIVE_NAME}", f"tg://openmessage?user_id={USERID}"),),
                 (
-                    Button.inline("Stats", data="stats"),
-                    Button.url("Repo", "https://github.com/ITS-LEGENDBOT/LEGENDBOT"),
+                    Button.inline("Group", f"t.me/{grp_username}),
+                    Button.url("Channel", f"t.me/{chnl_username}"),
                 ),
             ]
-            ALIVE_PIC = gvarstatus("ALIVE_PIC")
-            if ALIVE_PIC is None:
+            LEGEND_IMG = gvarstatus("IALIVE_PIC") 
+            if LEGEND_IMG is None:
                 I_IMG = "https://telegra.ph/file/a4a6a40205873ae7f7ceb.jpg"
             else:
                 PIC = list(ALIVE_PIC.split())
