@@ -57,12 +57,12 @@ async def amireallyalive(event):
     EMOTES = random.choice(lal)
     tick = list(LOL_TEXT.split(", "))
     ALIVE_TEXT = random.choice(tick)
-    sweetie_caption = gvarstatus("ALIVE_TEMPLATE") or temp
+    sweetie_caption = f"LegendBot {gvarstatus('ALIVE_TEMPLATE')}" or temp
     ANIME = None
     if "ANIME" in sweetie_caption:
         data = requests.get("https://animechan.vercel.app/api/random").json()
         ANIME = f"**“{data['quote']}” - {data['character']} ({data['anime']})**"
-    caption = f"LegendBot (sweetie_caption.format(
+    caption = sweetie_caption.format(
         ALIVE_TEXT=ALIVE_TEXT,
         EMOTES=EMOTES,
         ANIME=ANIME,
@@ -73,7 +73,7 @@ async def amireallyalive(event):
         pyver=python_version(),
         dbhealth=check_sgnirts,
         ping=ms,
-    ))"
+    )
     if IPIC:
         try:
             results = await event.client.inline_query(Config.BOT_USERNAME, caption)
