@@ -57,14 +57,14 @@ async def zip_file(event):
     filepath = os.path.join(
         Config.TMP_DOWNLOAD_DIRECTORY, os.path.basename(Path(input_str))
     )
-    zip_file = zipfile.ZipFile(filepath + ".zip", "w")
+    zip_file = zipfile.ZipFile(f"{filepath}.zip", "w")
     with zip_file:
         for file in filePaths:
             zip_file.write(file)
     end = datetime.now()
     ms = (end - start).seconds
     await mone.edit(
-        f"Zipped the path `{input_str}` into `{filepath+'.zip'}` in __{ms}__ Seconds"
+        f"Zipped the path `{input_str}` into `{filepath}.zip` in __{ms}__ Seconds"
     )
 
 
@@ -82,8 +82,7 @@ async def zip_file(event):
 )
 async def tar_file(event):
     "To create tar file"
-    input_str = event.pattern_match.group(1)
-    if not input_str:
+    if not input_str := event.pattern_match.group(1):
         return await eod(event, "`Provide file path to compress`")
     if not os.path.exists(Path(input_str)):
         return await eor(
@@ -122,9 +121,8 @@ async def tar_file(event):
     },
 )
 async def zip_file(event):  # sourcery no-metrics
-    "To unpack the zip file"
-    input_str = event.pattern_match.group(1)
-    if input_str:
+    "To unpack the zip file" 
+    if input_str := event.pattern_match.group(1):
         path = Path(input_str)
         if os.path.exists(path):
             start = datetime.now()
