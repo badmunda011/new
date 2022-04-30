@@ -82,7 +82,8 @@ async def zip_file(event):
 )
 async def tar_file(event):
     "To create tar file"
-    if not input_str := event.pattern_match.group(1):
+    input_str = event.pattern_match.group(1)
+    if not input_str:
         return await eod(event, "`Provide file path to compress`")
     if not os.path.exists(Path(input_str)):
         return await eor(
