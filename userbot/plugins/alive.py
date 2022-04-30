@@ -47,25 +47,15 @@ async def amireallyalive(event):
     ms = (end - start).microseconds / 1000
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI = gvarstatus("ALIVE_EMOJI") or "✥"
-    LOL_TEXT = gvarstatus("ALIVE_TEXT") or "**⚜ LegendBot Is Online ⚜**"
-    LEGEND_IMG = (
-        gvarstatus("IALIVE_PIC") or "https://telegra.ph/file/117dd3d4fd2a88979b809.jpg"
-    )
-    llol = list(LEGEND_IMG.split())
-    IPIC = random.choice(llol)
+    LOL_TEXT = gvarstatus("ALIVE_TEXT")
     lal = list(EMOJI.split())
     EMOTES = random.choice(lal)
     tick = list(LOL_TEXT.split(", "))
     ALIVE_TEXT = random.choice(tick)
-    sweetie_caption = f"LegendBot {gvarstatus('ALIVE_TEMPLATE')}" or temp
-    ANIME = None
-    if "ANIME" in sweetie_caption:
-        data = requests.get("https://animechan.vercel.app/api/random").json()
-        ANIME = f"**“{data['quote']}” - {data['character']} ({data['anime']})**"
+    sweetie_caption = f"**⚜ LegendBot Is Online ⚜**\n\n {gvarstatus('ALIVE_TEMPLATE')}"
     caption = sweetie_caption.format(
         ALIVE_TEXT=ALIVE_TEXT,
         EMOTES=EMOTES,
-        ANIME=ANIME,
         mention=mention,
         uptime=uptime,
         telever=version.__version__,
@@ -74,30 +64,25 @@ async def amireallyalive(event):
         dbhealth=check_sgnirts,
         ping=ms,
     )
-    if IPIC:
-        try:
-            results = await event.client.inline_query(Config.BOT_USERNAME, caption)
-            await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
-            await event.delete()
-        except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
-            return await eor(
-                legendevent,
-                f"**Media Value Error!!**\n__Change the link by __`.setdv`\n\n**__Can't get media from this link :-**__ `{LEGEND_IMG}`",
-            )
-    else:
-        await eor(
+    try:
+        results = await event.client.inline_query(Config.BOT_USERNAME, caption)
+        await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
+        await event.delete()
+    except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
+        return await eor(
             legendevent,
-            caption,
+            f"**Media Value Error!!**\n__Change the link by __`.setdv`\n\n**__Can't get media from this link :-**__ `{LEGEND_IMG}`",
         )
 
-
-temp = """{ALIVE_TEXT}
+"""
+temp = {ALIVE_TEXT}
 **{EMOTES} Master:** {mention}
 **{EMOTES} Uptime :** `{uptime}`
 **{EMOTES} Telethon Version :** `{telever}`
 **{EMOTES} Legenduserbot Version :** `{legendver}`
 **{EMOTES} Python Version :** `{pyver}`
-**{EMOTES} Database :** `{dbhealth}`"""
+**{EMOTES} Database :** `{dbhealth}`
+"""
 
 
 @legend.legend_cmd(
