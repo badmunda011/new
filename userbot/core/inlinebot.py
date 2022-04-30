@@ -290,7 +290,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     Button.url("Channel", f"t.me/{chnl_username}"),
                 ),
             ]
-            LEGEND_IMG = gvarstatus("IALIVE_PIC") 
+            LEGEND_IMG = gvarstatus("IALIVE_PIC")
             if LEGEND_IMG is None:
                 I_IMG = "https://telegra.ph/file/a4a6a40205873ae7f7ceb.jpg"
             else:
