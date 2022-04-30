@@ -1,5 +1,5 @@
-from asyncio import sleep
 import contextlib
+
 from telethon.errors import (
     BadRequestError,
     ImageProcessFailedError,
@@ -11,7 +11,6 @@ from telethon.tl.functions.channels import (
     EditBannedRequest,
     EditPhotoRequest,
 )
-from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import (
     ChatAdminRights,
     ChatBannedRights,
@@ -22,6 +21,7 @@ from telethon.utils import get_display_name
 
 from userbot import legend
 
+from ..core.data import _sudousers_list
 from ..core.logger import logging
 from ..core.managers import eod, eor
 from ..helpers import media_type
@@ -29,8 +29,6 @@ from ..helpers.utils import _format, get_user_from_event
 from ..sql_helper.globals import gvarstatus
 from ..sql_helper.mute_sql import is_muted, mute, unmute
 from . import BOTLOG, BOTLOG_CHATID, ban_pic, demote_pic, mute_pic, promote_pic
-from ..core.data import _sudousers_list
-
 
 # =================== STRINGS ============
 PP_TOO_SMOL = "`The image is too small`"
