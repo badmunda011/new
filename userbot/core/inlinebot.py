@@ -257,9 +257,8 @@ async def inline_handler(event):  # sourcery no-metrics
             if ALIVE_PIC is None:
                 I_IMG = "https://telegra.ph/file/a4a6a40205873ae7f7ceb.jpg"
             else:
-                lol = [x for x in ALIVE_PIC.split()]
-                PIC = list(lol)
-                I_IMG = random.choice(PIC)
+                lol = list(ALIVE_PIC.split())
+                I_IMG = random.choice(lol)
             if I_IMG and I_IMG.endswith((".jpg", ".png")):
                 result = builder.photo(
                     I_IMG,
@@ -290,21 +289,21 @@ async def inline_handler(event):  # sourcery no-metrics
                     Button.url("Channel", f"t.me/{chnl_username}"),
                 ),
             ]
-            LEGEND_IMG = gvarstatus("IALIVE_PIC")
-            if LEGEND_IMG is None:
-                I_IMG = "https://telegra.ph/file/a4a6a40205873ae7f7ceb.jpg"
+            ALIVE_PIC = gvarstatus("ALIVE_PIC")
+            if ALIVE_PIC is None:
+                IMG = "https://telegra.ph/file/a4a6a40205873ae7f7ceb.jpg"
             else:
                 PIC = list(ALIVE_PIC.split())
-                I_IMG = random.choice(PIC)
-            if I_IMG and I_IMG.endswith((".jpg", ".png")):
+                IMG = random.choice(PIC)
+            if IMG and IMG.endswith((".jpg", ".png")):
                 result = builder.photo(
-                    I_IMG,
+                    IMG,
                     text=query,
                     buttons=buttons,
                 )
-            elif I_IMG:
+            elif IMG:
                 result = builder.document(
-                    I_IMG,
+                    IMG,
                     title="Alive Legend",
                     text=query,
                     buttons=buttons,
