@@ -48,7 +48,9 @@ async def amireallyalive(event):
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI = gvarstatus("ALIVE_EMOJI") or "✥"
     LOL_TEXT = gvarstatus("ALIVE_TEXT") or "**⚜ LegendBot Is Online ⚜**"
-    LEGEND_IMG = gvarstatus("IALIVE_PIC") or "https://telegra.ph/file/117dd3d4fd2a88979b809.jpg"
+    LEGEND_IMG = (
+        gvarstatus("IALIVE_PIC") or "https://telegra.ph/file/117dd3d4fd2a88979b809.jpg"
+    )
     llol = list(LEGEND_IMG.split())
     IPIC = random.choice(llol)
     lal = list(EMOJI.split())
