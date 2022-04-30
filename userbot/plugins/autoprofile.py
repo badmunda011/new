@@ -27,10 +27,8 @@ from ..sql_helper.global_list import (
 )
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from . import (
-    AUTONAME,
     BOTLOG,
     BOTLOG_CHATID,
-    DEFAULT_BIO,
     _legendutils,
     eod,
     legend,
@@ -38,9 +36,11 @@ from . import (
 )
 
 menu_category = "tools"
-DEFAULTUSERBIO = DEFAULT_BIO or " ᗯᗩᏆᎢᏆᑎᏀ ᏞᏆᏦᗴ ᎢᏆᗰᗴ  "
-DEFAULTUSER = AUTONAME or Config.ALIVE_NAME
+DEFAULTUSERBIO = gvarstatus("DEFAULT_BIO") or " ᗯᗩᏆᎢᏆᑎᏀ ᏞᏆᏦᗴ ᎢᏆᗰᗴ  "
+DEFAULTUSER = gvarstatus("AUTONAME") or Config.ALIVE_NAME
 LOGS = logging.getLogger(__name__)
+CHANGE_TIME = int(gvarstatus("CHANGE_TIME")) if gvarstatus("CHANGE_TIME") else 60
+
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
 
@@ -48,7 +48,7 @@ autopic_path = os.path.join(os.getcwd(), "userbot", "original_pic.png")
 digitalpic_path = os.path.join(os.getcwd(), "userbot", "digital_pic.png")
 autophoto_path = os.path.join(os.getcwd(), "userbot", "photo_pfp.png")
 
-digitalpfp = Config.DIGITAL_PIC or "https://telegra.ph/file/aeaebe33b1f3988a0b690.jpg"
+digitalpfp = gvarstatus("DIGITAL_PIC") or "https://telegra.ph/file/aeaebe33b1f3988a0b690.jpg"
 
 COLLECTION_STRINGS = {
     "batmanpfp_strings": [
@@ -73,7 +73,7 @@ async def autopicloop():
         if BOTLOG:
             return await legend.send_message(
                 BOTLOG_CHATID,
-                "**Error**\n`For functing of autopic you need to set DEFAULT_PIC var in Heroku vars`",
+                "**Error**\n`For functing of autopic you need to set DEFAULT_PIC var in Heroku  Var `",
             )
         return
     if gvarstatus("autopic") is not None:
@@ -101,7 +101,7 @@ async def autopicloop():
             await legend(functions.photos.UploadProfilePhotoRequest(file))
             os.remove(autophoto_path)
             counter += counter
-            await asyncio.sleep(Config.CHANGE_TIME)
+            await asyncio.sleep(CHANGE_TIME)
         except BaseException:
             return
         AUTOPICSTART = gvarstatus("autopic") == "true"
@@ -127,7 +127,7 @@ async def custompfploop():
             i += 1
             await legend(functions.photos.UploadProfilePhotoRequest(file))
             os.remove("donottouch.jpg")
-            await asyncio.sleep(Config.CHANGE_TIME)
+            await asyncio.sleep(CHANGE_TIME)
         except BaseException:
             return
         CUSTOMPICSTART = gvarstatus("CUSTOM_PFP") == "true"
@@ -208,7 +208,7 @@ async def bloom_pfploop():
         try:
             await legend(functions.photos.UploadProfilePhotoRequest(file))
             os.remove(autophoto_path)
-            await asyncio.sleep(Config.CHANGE_TIME)
+            await asyncio.sleep(CHANGE_TIME)
         except BaseException:
             return
         BLOOMSTART = gvarstatus("bloom") == "true"
@@ -226,7 +226,7 @@ async def autoname_loop():
         except FloodWaitError as ex:
             LOGS.warning(str(ex))
             await asyncio.sleep(ex.seconds)
-        await asyncio.sleep(Config.CHANGE_TIME)
+        await asyncio.sleep(CHANGE_TIME)
         AUTONAMESTART = gvarstatus("autoname") == "true"
 
 
@@ -242,7 +242,7 @@ async def autobio_loop():
         except FloodWaitError as ex:
             LOGS.warning(str(ex))
             await asyncio.sleep(ex.seconds)
-        await asyncio.sleep(Config.CHANGE_TIME)
+        await asyncio.sleep(CHANGE_TIME)
         AUTOBIOSTART = gvarstatus("autobio") == "true"
 
 
@@ -283,7 +283,7 @@ async def autopfp_start():
         i += 1
         await legend(functions.photos.UploadProfilePhotoRequest(file))
         await _legendutils.runcmd("rm -rf donottouch.jpg")
-        await asyncio.sleep(Config.CHANGE_TIME)
+        await asyncio.sleep(CHANGE_TIME)
         AUTOPFP_START = gvarstatus("autopfp_strings") is not None
 
 
@@ -293,7 +293,7 @@ async def autopfp_start():
     info={
         "header": "Changes profile pic with random batman pics every 1 minute",
         "description": "Changes your profile pic every 1 minute with random batman pics.\
-        If you like to change the time then set CHANGE_TIME var in Heroku with time (in seconds) between each change of profilepic.",
+        If you like to change the time then set CHANGE_TIME var in Database Var with time (in seconds) between each change of profilepic.",
         "note": "To stop this do '.end batmanpfp'",
         "usage": "{tr}batmanpfp",
     },
@@ -314,7 +314,7 @@ async def _(event):
     info={
         "header": "Changes profile pic with random thor pics every 1 minute",
         "description": "Changes your profile pic every 1 minute with random thor pics.\
-        If you like to change the time then set CHANGE_TIME var in Heroku with time(in seconds) between each change of profilepic.",
+        If you like to change the time then set CHANGE_TIME var in Database with time(in seconds) between each change of profilepic.",
         "note": "To stop this do '.end thorpfp'",
         "usage": "{tr}thorpfp",
     },
@@ -335,10 +335,10 @@ async def _(event):
     info={
         "header": "Changes profile pic every 1 minute with the custom pic with time",
         "description": "If you like to change the time interval for every new pic change \
-            then set CHANGE_TIME var in Heroku with time(in seconds) between each change of profilepic.",
+            then set CHANGE_TIME var in Database with time(in seconds) between each change of profilepic.",
         "options": "you can give integer input with cmd like 40,55,75 ..etc.\
              So that your profile pic will rotate with that specific angle",
-        "note": "For functioning of this cmd you need to set DEFAULT_PIC var in heroku. \
+        "note": "For functioning of this cmd you need to set DEFAULT_PIC var in Heroku Var. \
             To stop this do '.end autopic'",
         "usage": [
             "{tr}autopic",
@@ -381,7 +381,7 @@ async def _(event):
     info={
         "header": "Updates your profile pic every 1 minute with time on it",
         "description": "Deletes old profile pic and Update profile pic with new image with time on it.\
-             You can change this image by setting DIGITAL_PIC var in heroku with telegraph image link",
+             You can change this image by setting DIGITAL_PIC var in Database  with telegraph image link",
         "note": "To stop this do '.end digitalpfp'",
         "usage": "{tr}digitalpfp",
     },
@@ -405,8 +405,8 @@ async def _(event):
     info={
         "header": "Changes profile pic every 1 minute with the random colour pic with time on it",
         "description": "If you like to change the time interval for every new pic chnage \
-            then set CHANGE_TIME var in Heroku with time(in seconds) between each change of profilepic.",
-        "note": "For functioning of this cmd you need to set DEFAULT_PIC var in heroku. \
+            then set CHANGE_TIME var in Database with time(in seconds) between each change of profilepic.",
+        "note": "For functioning of this cmd you need to set DEFAULT_PIC Heroku var in. \
             To stop this do '.end bloom'",
         "usage": "{tr}bloom",
     },
