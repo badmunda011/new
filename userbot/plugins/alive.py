@@ -62,7 +62,7 @@ async def amireallyalive(event):
     if "ANIME" in sweetie_caption:
         data = requests.get("https://animechan.vercel.app/api/random").json()
         ANIME = f"**“{data['quote']}” - {data['character']} ({data['anime']})**"
-    caption = sweetie_caption.format(
+    caption = f"LegendBot (sweetie_caption.format(
         ALIVE_TEXT=ALIVE_TEXT,
         EMOTES=EMOTES,
         ANIME=ANIME,
@@ -73,7 +73,7 @@ async def amireallyalive(event):
         pyver=python_version(),
         dbhealth=check_sgnirts,
         ping=ms,
-    )
+    )")
     if IPIC:
         try:
             results = await event.client.inline_query(Config.BOT_USERNAME, caption)
@@ -82,7 +82,7 @@ async def amireallyalive(event):
         except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
             return await eor(
                 legendevent,
-                f"**Media Value Error!!**\n__Change the link by __`.setdv`\n\n**__Can't get media from this link :-**__ `{PIC}`",
+                f"**Media Value Error!!**\n__Change the link by __`.setdv`\n\n**__Can't get media from this link :-**__ `{LEGEND_IMG}`",
             )
     else:
         await eor(
@@ -91,7 +91,7 @@ async def amireallyalive(event):
         )
 
 
-temp = """Hi {ALIVE_TEXT}
+temp = """{ALIVE_TEXT}
 **{EMOTES} Master:** {mention}
 **{EMOTES} Uptime :** `{uptime}`
 **{EMOTES} Telethon Version :** `{telever}`
