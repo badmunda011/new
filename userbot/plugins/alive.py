@@ -48,9 +48,7 @@ async def amireallyalive(event):
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI = gvarstatus("ALIVE_EMOJI") or "✥"
     LOL_TEXT = gvarstatus("ALIVE_TEXT") or "**⚜ LegendBot Is Online ⚜**"
-    LEGEND_IMG = (
-        gvarstatus("IALIVE_PIC") or "https://telegra.ph/file/144d8ea74fef8ca12253c.jpg"
-    )
+    LEGEND_IMG = gvarstatus("IALIVE_PIC") or "https://telegra.ph/file/117dd3d4fd2a88979b809.jpg"
     llol = list(LEGEND_IMG.split())
     IPIC = random.choice(llol)
     lal = list(EMOJI.split())
@@ -76,10 +74,9 @@ async def amireallyalive(event):
     )
     if IPIC:
         try:
-            await event.client.send_file(
-                event.chat_id, IPIC, caption=caption, reply_to=reply_to_id
-            )
-            await legendevent.delete()
+            results = await event.client.inline_query(Config.BOT_USERNAME, caption)
+            await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
+            await event.delete()
         except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
             return await eor(
                 legendevent,
@@ -92,7 +89,7 @@ async def amireallyalive(event):
         )
 
 
-temp = """{ALIVE_TEXT}
+temp = """Hi {ALIVE_TEXT}
 **{EMOTES} Master:** {mention}
 **{EMOTES} Uptime :** `{uptime}`
 **{EMOTES} Telethon Version :** `{telever}`
