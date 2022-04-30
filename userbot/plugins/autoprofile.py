@@ -26,14 +26,7 @@ from ..sql_helper.global_list import (
     rm_from_list,
 )
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
-from . import (
-    BOTLOG,
-    BOTLOG_CHATID,
-    _legendutils,
-    eod,
-    legend,
-    logging,
-)
+from . import BOTLOG, BOTLOG_CHATID, _legendutils, eod, legend, logging
 
 menu_category = "tools"
 DEFAULTUSERBIO = gvarstatus("DEFAULT_BIO") or " ᗯᗩᏆᎢᏆᑎᏀ ᏞᏆᏦᗴ ᎢᏆᗰᗴ  "
@@ -48,7 +41,9 @@ autopic_path = os.path.join(os.getcwd(), "userbot", "original_pic.png")
 digitalpic_path = os.path.join(os.getcwd(), "userbot", "digital_pic.png")
 autophoto_path = os.path.join(os.getcwd(), "userbot", "photo_pfp.png")
 
-digitalpfp = gvarstatus("DIGITAL_PIC") or "https://telegra.ph/file/aeaebe33b1f3988a0b690.jpg"
+digitalpfp = (
+    gvarstatus("DIGITAL_PIC") or "https://telegra.ph/file/aeaebe33b1f3988a0b690.jpg"
+)
 
 COLLECTION_STRINGS = {
     "batmanpfp_strings": [
