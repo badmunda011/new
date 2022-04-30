@@ -5,7 +5,6 @@ import time
 from datetime import datetime
 from platform import python_version
 
-import requests
 from telethon import version
 from telethon.errors.rpcerrorlist import (
     MediaEmptyError,
@@ -73,6 +72,7 @@ async def amireallyalive(event):
             legendevent,
             f"**Media Value Error!!**\n__Change the link by __`.setdv`\n\n**__Can't get media from this link :-**__ `{LEGEND_IMG}`",
         )
+
 
 """
 temp = {ALIVE_TEXT}
