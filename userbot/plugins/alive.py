@@ -45,12 +45,10 @@ async def amireallyalive(event):
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     _, check_sgnirts = check_data_base_heal_th()
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT")
     EMOJI = gvarstatus("ALIVE_EMOJI") or "✥"
-    LOL_TEXT = gvarstatus("ALIVE_TEXT")
     lal = list(EMOJI.split())
     EMOTES = random.choice(lal)
-    tick = list(LOL_TEXT.split(", "))
-    ALIVE_TEXT = random.choice(tick)
     sweetie_caption = f"**⚜ LegendBot Is Online ⚜**\n\n {gvarstatus('ALIVE_TEMPLATE')}"
     caption = sweetie_caption.format(
         ALIVE_TEXT=ALIVE_TEXT,
