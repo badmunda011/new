@@ -286,7 +286,7 @@ async def inline_handler(event):  # sourcery no-metrics
             buttons = [
                 (Button.url(f"{ALIVE_NAME}", f"tg://openmessage?user_id={USERID}"),),
                 (
-                    Button.inline("Group", f"t.me/{grp_username}),
+                    Button.inline("Group", f"t.me/{grp_username}"),
                     Button.url("Channel", f"t.me/{chnl_username}"),
                 ),
             ]
