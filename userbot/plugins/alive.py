@@ -50,16 +50,21 @@ async def amireallyalive(event):
     LEGEND_IMG = (
         gvarstatus("IALIVE_PIC") or "https://telegra.ph/file/144d8ea74fef8ca12253c.jpg"
     )
-    llol = [x for x in LEGEND_IMG.split()]
+    llol = list(LEGEND_IMG.split())
     IPIC = random.choice(llol)
-    lal = [x for x in EMOJI.split()]
+    lal = list(EMOJI.split())
     EMOTES = random.choice(lal)
-    tick = [x for x in LOL_TEXT.split(", ")]
+    tick = list(LOL_TEXT.split(", "))
     ALIVE_TEXT = random.choice(tick)
-    hell_caption = gvarstatus("ALIVE_TEMPLATE") or temp
-    caption = hell_caption.format(
+    sweetie_caption = gvarstatus("ALIVE_TEMPLATE") or temp
+    ANIME = None
+    if "ANIME" in sweetie_caption:
+        data = requests.get("https://animechan.vercel.app/api/random").json()
+        ANIME = f"**“{data['quote']}” - {data['character']} ({data['anime']})**"
+    caption = sweetie_caption.format(
         ALIVE_TEXT=ALIVE_TEXT,
         EMOTES=EMOTES,
+        ANIME=ANIME,
         mention=mention,
         uptime=uptime,
         telever=version.__version__,
@@ -111,8 +116,8 @@ async def amireallyalive(event):
     reply_to_id = await reply_id(event)
     uptime = await get_readable_time((time.time() - StartTime))
     a = gvarstatus("ALIVE_EMOJI") or "✥"
-    Legend = [x for x in a.split()]
-    EMOJI = random.choice(Legend)
+    kiss = list(a.split())
+    EMOJI = random.choice(kiss)
     legend_caption = "**LegendBot Is Online**\n\n"
     legend_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
     legend_caption += f"**{EMOJI} Legenduserbot Version :** `{legendversion}`\n"
