@@ -280,7 +280,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     buttons=buttons,
                 )
             await event.answer([result] if result else None)
-        if query.startswith("⚜ LegendBot"):
+        if query.startswith("**⚜ LegendBot"):
             grp_username = gvarstatus("GROUP_USERNAME") or "LegendBot_OP"
             chnl_username = gvarstatus("CHANNEL_USERNAME") or "LegendBot_AI"
             buttons = [
