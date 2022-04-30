@@ -23,9 +23,9 @@ async def kakashi(event):
     "Get latest Magisk releases"
     magisk_repo = "https://raw.githubusercontent.com/topjohnwu/magisk-files/"
     magisk_dict = {
-        "⦁ **Stable**": magisk_repo + "master/stable.json",
-        "⦁ **Beta**": magisk_repo + "master/beta.json",
-        "⦁ **Canary**": magisk_repo + "master/canary.json",
+        "⦁ **Stable**": f"{magisk_repo}master/stable.json",
+        "⦁ **Beta**": f"{magisk_repo}master/beta.json",
+        "⦁ **Canary**": f"{magisk_repo}master/canary.json",
     }
     releases = "**Latest Magisk Releases**\n\n"
     for name, release_url in magisk_dict.items():
@@ -60,14 +60,13 @@ async def device_info(event):
             "https://raw.githubusercontent.com/androidtrackers/certified-android-devices/master/by_device.json"
         ).text
     )
-    results = data.get(codename)
-    if results:
+    if results := data.get(codename):
         reply = f"**Search results for {codename}**:\n\n"
         for item in results:
             reply += (
-                f"**Brand**: {item['brand']}\n"
-                f"**Name**: {item['name']}\n"
-                f"**Model**: {item['model']}\n\n"
+                f"**Brand**: `{item['brand']}`\n"
+                f"**Name**: `{item['name']}`\n"
+                f"**Model**: `{item['model']}`\n\n"
             )
     else:
         reply = f"`Couldn't find info about {codename}!`\n"
@@ -106,12 +105,11 @@ async def codename_info(event):
     devices = devices_lower.get(brand)
     if not devices:
         return await eor(event, f"__I couldn't find {brand}.__")
-    results = [
+    if results := [
         i
         for i in devices
         if i["name"].lower() == device.lower() or i["model"].lower() == device.lower()
-    ]
-    if results:
+    ]:
         reply = f"**Search results for {brand} {device}**:\n\n"
         if len(results) > 8:
             results = results[:8]
@@ -178,7 +176,7 @@ async def devices_specifications(event):
     reply = ""
     for url in device_page_url:
         info = BeautifulSoup(get(url).content, "lxml")
-        reply = "\n" + info.title.text.split("-")[0].strip() + "\n"
+        reply = "\n\n" + info.title.text.split("-")[0].strip() + "\n"
         info = info.find("div", {"id": "model-brief-specifications"})
         specifications = re.findall(r"<b>.*?<br/>", str(info))
         for item in specifications:
