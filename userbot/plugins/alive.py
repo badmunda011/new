@@ -49,7 +49,7 @@ async def amireallyalive(event):
     EMOJI = gvarstatus("ALIVE_EMOJI") or "✥"
     lal = list(EMOJI.split())
     EMOTES = random.choice(lal)
-    sweetie_caption = f"**⚜ LegendBot Is Online ⚜**\n\n {gvarstatus('ALIVE_TEMPLATE')}"
+    sweetie_caption = "**⚜ LegendBot Is Online ⚜**\n\n" + f"{gvarstatus('ALIVE_TEMPLATE')}" or "Set Your ALIVE_TEMPLATE By .setdb ALIVE_TEMPLATE from @LegendBot_Ailve"
     caption = sweetie_caption.format(
         ALIVE_TEXT=ALIVE_TEXT,
         EMOTES=EMOTES,
