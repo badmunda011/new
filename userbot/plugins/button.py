@@ -5,10 +5,10 @@
 import os
 import re
 
-from ..helpers.functions.functions import make_inline
 from telethon import Button
 
 from ..Config import Config
+from ..helpers.functions.functions import make_inline
 from . import eod, legend, reply_id
 
 menu_category = "tools"
