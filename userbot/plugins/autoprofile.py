@@ -1,4 +1,3 @@
-# batmanpfp and thorpfp by @Nihinivi
 
 import asyncio
 import base64
@@ -26,14 +25,13 @@ from ..sql_helper.global_list import (
     rm_from_list,
 )
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
-from . import BOTLOG, BOTLOG_CHATID, _legendutils, eod, legend, logging
+from . import BOTLOG, BOTLOG_CHATID, _catutils, catub, edit_delete, logging
 
-menu_category = "tools"
+plugin_category = "tools"
 DEFAULTUSERBIO = gvarstatus("DEFAULT_BIO") or " ᗯᗩᏆᎢᏆᑎᏀ ᏞᏆᏦᗴ ᎢᏆᗰᗴ  "
-DEFAULTUSER = gvarstatus("AUTONAME") or Config.ALIVE_NAME
+DEFAULTUSER = gvarstatus("DEFAULT_NAME") or Config.ALIVE_NAME
 LOGS = logging.getLogger(__name__)
 CHANGE_TIME = int(gvarstatus("CHANGE_TIME")) if gvarstatus("CHANGE_TIME") else 60
-
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
 
@@ -142,10 +140,10 @@ async def digitalpicloop():
         current_time = datetime.now().strftime("%H:%M")
         img = Image.open(autophoto_path)
         drawn_text = ImageDraw.Draw(img)
-        legend = str(
+        leg = str(
             base64.b64decode("dXNlcmJvdC9oZWxwZXJzL3N0eWxlcy9kaWdpdGFsLnR0Zg==")
         )[2:36]
-        fnt = ImageFont.truetype(legend, 200)
+        fnt = ImageFont.truetype(leg, 200)
         drawn_text.text((350, 100), current_time, font=fnt, fill=(124, 252, 0))
         img.save(autophoto_path)
         file = await legend.upload_file(autophoto_path)
@@ -244,10 +242,10 @@ async def autobio_loop():
 async def animeprofilepic(collection_images):
     rnd = random.randint(0, len(collection_images) - 1)
     pack = collection_images[rnd]
-    pc = requests.get("http://getwallpapers.com/collection/" + pack).text
+    pc = requests.get(f"http://getwallpapers.com/collection/{pack}").text
     f = re.compile(r"/\w+/full.+.jpg")
     f = f.findall(pc)
-    fy = "http://getwallpapers.com" + random.choice(f)
+    fy = f"http://getwallpapers.com{random.choice(f)}"
     if not os.path.exists("f.ttf"):
         urllib.request.urlretrieve(
             "https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf",
@@ -430,7 +428,7 @@ async def _(event):
     command=("custompfp", menu_category),
     info={
         "header": "Set Your Custom pfps",
-        "description": "Set links of pic to use them as auto profile. You can use cpfp or custompp as command",
+        "description": "Set links of pic to use them as auto profile. You can use cpfp or custompfp as command",
         "flags": {
             "a": "To add links for custom pfp",
             "r": "To remove links for custom pfp",
@@ -519,7 +517,7 @@ async def useless(event):  # sourcery no-metrics
     command=("autoname", menu_category),
     info={
         "header": "Changes your name with time",
-        "description": "Updates your profile name along with time. Set AUTONAME var in heroku with your profile name,",
+        "description": "Updates your profile name along with time. Set DEFAULT_USER var in Database with your profile name,",
         "note": "To stop this do '.end autoname'",
         "usage": "{tr}autoname",
     },
