@@ -66,7 +66,7 @@ async def _(event):
         "usage": "{tr}revert",
     },
 )
-async def _(event):
+async def revert(event):
     "To reset your original details"
     firstname = DEFAULTUSER
     lastname = gvarstatus("LAST_NAME") or ""
