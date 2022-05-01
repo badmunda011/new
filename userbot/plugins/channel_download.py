@@ -5,7 +5,7 @@ usage: .geta channel_username [will  get all media from channel, tho there is li
 By: @Legend_K_Boy
 """
 
-
+import contextlib
 import os
 import subprocess
 
@@ -31,12 +31,12 @@ async def get_media(event):
     limit = int(sweetie.split(" ")[0])
     channel_username = str(sweetie.split(" ")[1])
     tempdir = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, channel_username)
-    try:
+    with contextlib.suppress(BaseException):
         os.makedirs(tempdir)
     except BaseException:
         pass
     event = await eor(event, "`Downloading Media From this Channel.`")
-    msgs = await event.client.get_messages(channel_username, limit=int(limit))
+    msgs = await event.client.get_messages(channel_username, limit=limit)
     i = 0
     for msg in msgs:
         mediatype = media_type(msg)
@@ -71,7 +71,7 @@ async def get_media(event):
 async def get_media(event):
     channel_username = event.pattern_match.group(1)
     tempdir = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, channel_username)
-    try:
+    with contextlib.suppress(BaseException):
         os.makedirs(tempdir)
     except BaseException:
         pass
