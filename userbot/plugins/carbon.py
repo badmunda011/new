@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.options import Options
 
 from ..Config import Config
 from ..helpers.functions.utils import deEmojify
-from . import eor, legend, eod
+from . import eod, eor, legend
 
 menu_category = "utils"
 
@@ -38,7 +38,8 @@ async def carbon_api(event):
         pcode = str(textx.message)
     else:
         return await eod(
-            event, "`No text is given. Either pass text along with cmd or reply to text`"
+            event,
+            "`No text is given. Either pass text along with cmd or reply to text`",
         )
     pcode = deEmojify(pcode)
     code = quote_plus(pcode)
@@ -119,7 +120,8 @@ async def carbon_api(event):
         skeme = None
     else:
         return await eod(
-            event, "`No text is given. Either pass text along with cmd or reply to text`"
+            event,
+            "`No text is given. Either pass text along with cmd or reply to text`",
         )
     pcode = pcode.strip()
     if skeme:
@@ -196,7 +198,8 @@ async def carbon_api(event):
         pcode = str(textx.message)
     else:
         return await eod(
-            event, "`No text is given. Either pass text along with cmd or reply to text`"
+            event,
+            "`No text is given. Either pass text along with cmd or reply to text`",
         )
     code = quote_plus(pcode)
     url = CARBON.format(code=code, lang=CARBONLANG)
@@ -267,7 +270,8 @@ async def carbon_api(event):
         pcode = str(textx.message)
     else:
         return await eod(
-            event, "`No text is given. Either pass text along with cmd or reply to text`"
+            event,
+            "`No text is given. Either pass text along with cmd or reply to text`",
         )
     code = quote_plus(pcode)
     url = CARBON.format(code=code, lang=CARBONLANG)
@@ -338,7 +342,8 @@ async def carbon_api(event):
         pcode = str(textx.message)
     else:
         return await eod(
-            event, "`No text is given. Either pass text along with cmd or reply to text`"
+            event,
+            "`No text is given. Either pass text along with cmd or reply to text`",
         )
     code = quote_plus(pcode)
     url = CARBON.format(code=code, lang=CARBONLANG)
@@ -410,7 +415,8 @@ async def carbon_api(event):
         pcode = str(textx.message)
     else:
         return await eod(
-            event, "`No text is given. Either pass text along with cmd or reply to text`"
+            event,
+            "`No text is given. Either pass text along with cmd or reply to text`",
         )
     code = quote_plus(pcode)
     url = CARBON.format(code=code, lang=CARBONLANG)
@@ -516,7 +522,8 @@ async def carbon_api(event):
         pcode = str(textx.message)
     else:
         return await eod(
-            event, "`No text is given. Either pass text along with cmd or reply to text`"
+            event,
+            "`No text is given. Either pass text along with cmd or reply to text`",
         )
     code = quote_plus(pcode)
     url = CARBON.format(code=code, R=RED, G=GREEN, B=BLUE, T=The, lang=CARBONLANG)
