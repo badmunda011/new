@@ -1,5 +1,6 @@
-from validators.url import url
 from telegraph import upload_file
+from validators.url import url
+
 from userbot import legend
 from userbot.core.logger import logging
 
@@ -317,4 +318,3 @@ async def custom_catuserbot(event):
             f"#DEL_DATAVAR\
                     \n**{input_str}** is deleted from database",
         )
-
