@@ -179,9 +179,7 @@ async def bad(event):  # sourcery no-metrics
             )
         if cmd == "get":
             var_data = gvarstatus(vname)
-            await eod(
-                event, f"📑 Value of **{vname}** is  ```{var_data}```", time=20
-            )
+            await eod(event, f"📑 Value of **{vname}** is  ```{var_data}```", time=20)
         elif cmd == "del":
             if vname == "DEFAULT_USER":
                 delgvar("FIRST_NAME")
@@ -305,13 +303,9 @@ async def custom_ksks(event):
         delgvar("pmpermit_pic")
     if input_str == "startmsg":
         if gvarstatus("START_TEXT") is None:
-            return await eod(
-                event, "__You haven't customzied your start msg in bot.__"
-            )
+            return await eod(event, "__You haven't customzied your start msg in bot.__")
         delgvar("START_TEXT")
-    await eor(
-        event, f"__successfully deleted your customization of {input_str}.__"
-    )
+    await eor(event, f"__successfully deleted your customization of {input_str}.__")
     if BOTLOG_CHATID:
         await event.client.send_message(
             BOTLOG_CHATID,
