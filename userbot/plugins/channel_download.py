@@ -33,8 +33,6 @@ async def get_media(event):
     tempdir = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, channel_username)
     with contextlib.suppress(BaseException):
         os.makedirs(tempdir)
-    except BaseException:
-        pass
     event = await eor(event, "`Downloading Media From this Channel.`")
     msgs = await event.client.get_messages(channel_username, limit=limit)
     i = 0
@@ -73,8 +71,6 @@ async def get_media(event):
     tempdir = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, channel_username)
     with contextlib.suppress(BaseException):
         os.makedirs(tempdir)
-    except BaseException:
-        pass
     event = await eor(event, "`Downloading All Media From this Channel.`")
     msgs = await event.client.get_messages(channel_username, limit=3000)
     i = 0
