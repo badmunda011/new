@@ -5,6 +5,7 @@
 import os
 import re
 
+from ..helpers.functions.functions import make_inline
 from telethon import Button
 
 from ..Config import Config
@@ -92,8 +93,9 @@ async def _(event):
         "options": "If you button to be in same row as other button then follow this <buttonurl:link:same> in 2nd button.",
         "usage": [
             "{tr}ibutton <text> [Name on button]<buttonurl:link you want to open>",
+            "{tr}ibutton <text> <media:media_path> [Name on button]<buttonurl:link you want to open>",
         ],
-        "examples": "{tr}ibutton test [google]<buttonurl:https://www.google.com> [LegendUserBot]<buttonurl:https://t.me/LegendBot_OP17:same> [support]<buttonurl:https://t.me/LegendBot_AI>",
+        "examples": "{tr}ibutton test <media:downloads/thumb_image.jpg> [google]<buttonurl:https://www.google.com> [LegendBot]<buttonurl:https://t.me/LegendBot_AI:same> [support]<buttonurl:https://t.me/LegendBot_op>",
     },
 )
 async def _(event):
@@ -106,10 +108,8 @@ async def _(event):
     else:
         markdown_note = "".join(event.text.split(maxsplit=1)[1:])
     if not markdown_note:
-        return await eod(event, "`what text should i use in button post`")
-    legendinput = "Inline buttons " + markdown_note
-    results = await event.client.inline_query(Config.BOT_USERNAME, legendinput)
-    await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
+        return await edit_delete(event, "`What text should i use in button post`")
+    await make_inline(markdown_note, event.client, event.chat_id, reply_to_id)
     await event.delete()
 
 
