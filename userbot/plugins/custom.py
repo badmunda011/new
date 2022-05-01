@@ -88,7 +88,7 @@ async def bad(event):  # sourcery no-metrics
     vname = event.pattern_match.group(2)
     vnlist = "".join(f"{i}. `{each}`\n" for i, each in enumerate(vlist, start=1))
     if not vname:
-        return await edit_delete(
+        return await eod(
             event, f"**📑 Give correct var name from the list :\n\n**{vnlist}", time=60
         )
     vinfo = None
@@ -149,9 +149,9 @@ async def bad(event):  # sourcery no-metrics
                     if vname == "DEFAULT_PIC" and not url(i):
                         return await eod(event, "**Give me a correct link...**")
                     elif vname == "DIGITAL_PIC" and not url(i):
-                        return await edit_delete(event, "**Give me a correct link...**")
+                        return await eod(event, "**Give me a correct link...**")
                     elif (("PIC" in vname) or ("pic" in vname)) and not url(i):
-                        return await edit_delete(event, "**Give me a correct link...**")
+                        return await eod(event, "**Give me a correct link...**")
                     elif (
                         vname == "DIGITAL_PIC"
                         or vname == "DEFAULT_PIC"
@@ -162,7 +162,7 @@ async def bad(event):  # sourcery no-metrics
                     elif not "PIC" in vname:
                         break
                 if vname == "DEFAULT_BIO" and len(vinfo) > 70:
-                    return await edit_or_reply(
+                    return await eor(
                         event,
                         f"No of characters in your bio must not exceed 70 so compress it and set again\n`{vinfo}`",
                     )
@@ -174,12 +174,12 @@ async def bad(event):  # sourcery no-metrics
                     \n**{vname}** is updated newly in database as below",
                 )
                 await event.client.send_message(BOTLOG_CHATID, vinfo, silent=True)
-            await edit_delete(
+            await eod(
                 event, f"📑 Value of **{vname}** is changed to :- `{vinfo}`", time=20
             )
         if cmd == "get":
             var_data = gvarstatus(vname)
-            await edit_delete(
+            await eod(
                 event, f"📑 Value of **{vname}** is  ```{var_data}```", time=20
             )
         elif cmd == "del":
@@ -199,13 +199,13 @@ async def bad(event):  # sourcery no-metrics
                     f"#DEL_DATAVAR\
                     \n**{vname}** is deleted from database",
                 )
-            await edit_delete(
+            await eod(
                 event,
                 f"📑 Value of **{vname}** is now deleted & set to default.",
                 time=20,
             )
     else:
-        await edit_delete(
+        await eod(
             event, f"**📑 Give correct var name from the list :\n\n**{vnlist}", time=60
         )
 
@@ -288,28 +288,28 @@ async def custom_LegendUserBot(event):
         "NOTE": "You can set,fetch or delete these by `{tr}setdb` , `{tr}getdb` & `{tr}deldb` as well.",
     },
 )
-async def custom_catuserbot(event):
+async def custom_ksks(event):
     "To delete costomization of your CatUserbot."
     input_str = event.pattern_match.group(1)
     if input_str == "pmpermit":
         if gvarstatus("pmpermit_txt") is None:
-            return await edit_delete(event, "__You haven't customzied your pmpermit.__")
+            return await eod(event, "__You haven't customzied your pmpermit.__")
         delgvar("pmpermit_txt")
     if input_str == "pmblock":
         if gvarstatus("pmblock") is None:
-            return await edit_delete(event, "__You haven't customzied your pmblock.__")
+            return await eod(event, "__You haven't customzied your pmblock.__")
         delgvar("pmblock")
     if input_str == "pmpic":
         if gvarstatus("pmpermit_pic") is None:
-            return await edit_delete(event, "__You haven't customzied your pmpic.__")
+            return await eod(event, "__You haven't customzied your pmpic.__")
         delgvar("pmpermit_pic")
     if input_str == "startmsg":
         if gvarstatus("START_TEXT") is None:
-            return await edit_delete(
+            return await eod(
                 event, "__You haven't customzied your start msg in bot.__"
             )
         delgvar("START_TEXT")
-    await edit_or_reply(
+    await eor(
         event, f"__successfully deleted your customization of {input_str}.__"
     )
     if BOTLOG_CHATID:
