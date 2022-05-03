@@ -187,6 +187,8 @@ async def _(event):  # sourcery no-metrics
 async def _(event):  # sourcery no-metrics
     pwd = os.getcwd()
     input_str = event.pattern_match.group(3)
+    name = NAME
+    path = None
     if not input_str:
         return await eod(
             event,
@@ -209,10 +211,7 @@ async def _(event):  # sourcery no-metrics
     for attr in getattr(reply.document, "attributes", []):
         if isinstance(attr, types.DocumentAttributeFilename):
             name = attr.file_name
-    if input_str:
-        path = pathlib.Path(os.path.join(location, input_str.strip()))
-    else:
-        path = pathlib.Path(os.path.join(location, name))
+    path = pathlib.Path(os.path.join(location, name))
     ext = get_extension(reply.document)
     if path and not path.suffix and ext:
         path = path.with_suffix(ext)
@@ -220,7 +219,7 @@ async def _(event):  # sourcery no-metrics
         name += "_" + str(getattr(reply.document, "id", reply.id)) + ext
     if path and path.exists():
         if path.is_file():
-            newname = str(path.stem) + "_OLD"
+            newname = f"{str(path.stem)}_OLD"
             path.rename(path.with_name(newname).with_suffix(path.suffix))
             file_name = path
         else:
