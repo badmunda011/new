@@ -96,7 +96,7 @@ async def age_verification(event, reply_to_id):
     if ALLOW_NSFW.lower() == "true":
         return False
     results = await event.client.inline_query(
-        Config.TG_BOT_USERNAME, "age_verification_alert"
+        Config.BOT_USERNAME, "age_verification_alert"
     )
     await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
     await event.delete()
@@ -105,22 +105,22 @@ async def age_verification(event, reply_to_id):
 
 async def fileinfo(file):
     x, y, z, s = await runcmd(f"mediainfo '{file}' --Output=JSON")
-    cat_json = json.loads(x)["media"]["track"]
+    legend_json = json.loads(x)["media"]["track"]
     dic = {
         "path": file,
-        "size": int(cat_json[0]["FileSize"]),
-        "extension": cat_json[0]["FileExtension"],
+        "size": int(legend_json[0]["FileSize"]),
+        "extension": legend_json[0]["FileExtension"],
     }
     try:
         if "VideoCount" or "AudioCount" or "ImageCount" in cat_json[0]:
-            dic["format"] = cat_json[0]["Format"]
-            dic["type"] = cat_json[1]["@type"]
-            if "ImageCount" not in cat_json[0]:
-                dic["duration"] = int(float(cat_json[0]["Duration"]))
-                dic["bitrate"] = int(int(cat_json[0]["OverallBitRate"]) / 1000)
-            if "VideoCount" or "ImageCount" in cat_json[0]:
-                dic["height"] = int(cat_json[1]["Height"])
-                dic["width"] = int(cat_json[1]["Width"])
+            dic["format"] = legend_json[0]["Format"]
+            dic["type"] = legend_json[1]["@type"]
+            if "ImageCount" not in legend_json[0]:
+                dic["duration"] = int(float(legend_json[0]["Duration"]))
+                dic["bitrate"] = int(int(legend_json[0]["OverallBitRate"]) / 1000)
+            if "VideoCount" or "ImageCount" in legend_json[0]:
+                dic["height"] = int(legend_json[1]["Height"])
+                dic["width"] = int(legend_json[1]["Width"])
     except (IndexError, KeyError):
         pass
     return dic
@@ -152,7 +152,7 @@ async def hide_inlinebot(borg, bot_name, text, chat_id, reply_to_id, c_lick=0):
 
 async def make_inline(text, borg, chat_id, reply_to_id):
     catinput = f"Inline buttons {text}"
-    results = await borg.inline_query(Config.TG_BOT_USERNAME, catinput)
+    results = await borg.inline_query(Config.BOT_USERNAME, catinput)
     await results[0].click(chat_id, reply_to=reply_to_id)
 
 
