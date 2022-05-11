@@ -9,8 +9,6 @@ cowpy
 dataclasses
 DateTime
 emoji
-fake_useragent
-faker
 fonttools
 geopy
 gitpython
@@ -20,10 +18,9 @@ google-auth-httplib2
 google-auth-oauthlib
 gtts
 hachoir
-httpx[http2]
 heroku3
-htmlwebshot
 html-telegraph-poster
+httpx[http2]
 humanize
 IMDbPY
 jikanpy
@@ -34,7 +31,7 @@ markdown
 markdown-it-py
 motor
 moviepy
-nekos
+nekos.py
 opencv-python-headless
 Pillow
 prettytable
@@ -71,10 +68,11 @@ vcsi
 wand
 wget
 yt_dlp
-youtube-dl>=2021.02.04.1 
-youtube-search-python>=1.3.2
-youtube_search
+htmlwebshot
+fake_useragent
+faker
 
 git+https://github.com/ITS-LEGENDBOT/Telethon
 git+https://github.com/goldsmith/Wikipedia
 git+https://github.com/ITS-LEGENDBOT/py-googletrans
+git+https://github.com/alexmercerind/youtube-search-python
