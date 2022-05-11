@@ -449,7 +449,7 @@ async def startgmute(event):
             return await eor(event, "`Nashe Me H Kya Lawde`")
         userid = user.id
     try:
-        user = (await event.client(GetFullUserRequest(userid))).user
+        user = await event.client.get_entity(userid)
     except Exception:
         return await eor(event, "`Sorry. I am unable to fetch the user`")
     if is_muted(userid, "gmute"):
@@ -515,7 +515,7 @@ async def endgmute(event):
             return await eor(event, "`Sorry, I can't gmute myself`")
         userid = user.id
     try:
-        user = (await event.client(GetFullUserRequest(userid))).user
+        user = user = await event.client.get_entity(userid)
     except Exception:
         return await eor(event, "`Sorry. I am unable to fetch the user`")
     if not is_muted(userid, "gmute"):
