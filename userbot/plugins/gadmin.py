@@ -5,7 +5,6 @@ from datetime import datetime
 from telethon import events
 from telethon.errors import BadRequestError
 from telethon.tl.functions.channels import EditAdminRequest
-from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import (
     ChatAdminRights,
     ChatBannedRights,
