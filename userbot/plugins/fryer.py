@@ -3,16 +3,14 @@ import os
 from random import randint, uniform
 
 from PIL import Image, ImageEnhance, ImageOps
-from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.types import DocumentAttributeFilename
 
 from userbot import legend
 
-from ..core.managers import eor, eod
+from ..core.managers import eod, eor
 from ..helpers.functions import delete_conv
 from ..helpers.utils import media_to_pic, reply_id
-
 
 menu_category = "extra"
 
@@ -100,9 +98,7 @@ async def frybot(event):
         try:
             msg_flag = await conv.send_message("/start")
         except YouBlockedUserError:
-            await eor(
-                lolevent, "**Error:** Trying to unblock & retry, wait a sec..."
-            )
+            await eor(lolevent, "**Error:** Trying to unblock & retry, wait a sec...")
             await legend(unblock("image_deepfrybot"))
             msg_flag = await conv.send_message("/start")
         await conv.get_response()
