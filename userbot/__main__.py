@@ -6,7 +6,7 @@ from userbot import BOTLOG_CHATID, PM_LOGGER_GROUP_ID
 from .Config import Config
 from .core.logger import logging
 from .core.session import legend
-from .start import killer, legends
+from .start import killer
 from .utils import (
     add_bot_to_logger_group,
     hekp,
@@ -52,7 +52,6 @@ async def startup_process():
     if PM_LOGGER_GROUP_ID != -100:
         await add_bot_to_logger_group(PM_LOGGER_GROUP_ID)
     await startupmessage()
-    await legends()
     return
 
 
