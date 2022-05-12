@@ -103,8 +103,6 @@ async def _(event):
         mentions = "Bots in {} Group: \n".format(input_str)
         try:
             chat = await event.client.get_entity(input_str)
-        try:
-            chat = await event.client.get_entity(input_str)
         except Exception as e:
             return await eor(event, str(e))
     else:
