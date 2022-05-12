@@ -20,7 +20,6 @@ legendboy = 2024465080
 
 from telethon import Button, custom, events
 
-from . import legendversion
 from .core.logger import logging
 from .core.session import legend, tgbot
 

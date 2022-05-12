@@ -15,6 +15,8 @@ from telethon.errors import FloodWaitError
 from telethon.tl import functions
 from urlextract import URLExtract
 
+from userbot import legend
+
 from ..Config import Config
 from ..helpers.utils import _format
 from ..sql_helper.global_list import (
@@ -25,7 +27,7 @@ from ..sql_helper.global_list import (
 )
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from . import BOTLOG, BOTLOG_CHATID, logging
-from userbot import legend 
+
 plugin_category = "tools"
 DEFAULTUSERBIO = gvarstatus("DEFAULT_BIO") or " ᗯᗩᏆᎢᏆᑎᏀ ᏞᏆᏦᗴ ᎢᏆᗰᗴ  "
 DEFAULTUSER = gvarstatus("DEFAULT_NAME") or Config.ALIVE_NAME
@@ -58,6 +60,7 @@ COLLECTION_STRINGS = {
     ],
 }
 menu_category = "tools"
+
 
 async def autopicloop():
     AUTOPICSTART = gvarstatus("autopic") == "true"
