@@ -4,7 +4,7 @@ from telethon.tl import functions
 from telethon.tl.functions.users import GetFullUserRequest
 
 from ..Config import Config
-from . import ALIVE_NAME, BOTLOG, BOTLOG_CHATID, eod, get_user_from_event, legend
+from . import ALIVE_NAME, BOTLOG, BOTLOG_CHATID, eod, get_user_from_event, legend, gvarstatus 
 
 menu_category = "utils"
 DEFAULTUSER = gvarstatus("FIRST_NAME") or ALIVE_NAME
