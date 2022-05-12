@@ -57,7 +57,7 @@ COLLECTION_STRINGS = {
         "thor-wallpaper-hd",
     ],
 }
-
+menu_category = "tools"
 
 async def autopicloop():
     AUTOPICSTART = gvarstatus("autopic") == "true"
