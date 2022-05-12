@@ -669,7 +669,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     buttons=buttons,
                 )
             await event.answer([result] if result else None)
-        elif string == " ":
+        else:
             buttons = [
                 (
                     Button.url("Source code", "https://github.com/LEGEND-AI/LEGENDBOT"),
@@ -701,9 +701,6 @@ async def inline_handler(event):  # sourcery no-metrics
                 ),
             )
             await event.answer([result] if result else None)
-        else:
-            await event.answer([result] if result else None)
-
 
 @legend.tgbot.on(CallbackQuery(data=re.compile(b"clise")))
 @check_owner
