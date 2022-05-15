@@ -26,35 +26,6 @@ async def ghtml(e):
     await e.reply(file="file.html")
 
 
-@legend.legend_cmd(
-    pattern="imagess(?:\s|$)([\s\S]*)",
-    command=("imagess", menu_category),
-    info={
-        "header": "Write a image from html or any text",
-        "usage": "{tr}imagess",
-    },
-)
-async def f2i(e):
-    lol = e.text
-    html = None
-    if e.reply_to:
-        r = await e.get_reply_message()
-        if r.media:
-            html = await e.client.download_media(r.media)
-        elif r.text:
-            html = r.text
-    elif lol:
-        html = lol[7:]
-    if not html:
-        return await eod(e, "`Either reply to any file or give any text`")
-    html = html.replace("\n", "<br>")
-    shot = WebShot(quality=85)
-    css = "body {background: white;} p {color: red;}"
-    pic = await shot.create_pic_async(html=html, css=css)
-    await e.reply(file=pic, force_document=True)
-    os.remove(pic)
-    if os.path.exists(html):
-        os.remove(html)
 
 
 @legend.legend_cmd(
