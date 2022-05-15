@@ -637,16 +637,16 @@ async def inline_handler(event):  # sourcery no-metrics
             buttons = [
                 Button.inline(text="👨‍💻 Open PM Menu 💝", data="show_pmpermit_options"),
             ]
-            PM_PIC = (
-                gvarstatus("PM_PIC")
+            PM_IMG = (
+                gvarstatus("PM_IMG")
                 or "https://telegra.ph/file/69fa26f4659e377dea80e.jpg"
             )
-            if PM_PIC:
+            if PM_IMG == "OFF":
+                LEGEND_IMG = None
+            else:
                 legend = [x for x in PM_PIC.split()]
                 PIC = list(legend)
                 LEGEND_IMG = random.choice(PIC)
-            else:
-                LEGEND_IMG = None
             query = gvarstatus("pmpermit_text")
             if LEGEND_IMG and LEGEND_IMG.endswith((".jpg", ".jpeg", ".png")):
                 result = builder.photo(
