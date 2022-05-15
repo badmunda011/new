@@ -566,7 +566,6 @@ async def legend(carry):
         await eor(carry, "Give Me Some Text")
 
 
-
 @legend.legend_cmd(
     pattern="dead$",
     command=("dead", menu_category),
