@@ -566,7 +566,7 @@ async def legend(carry):
         await eor(carry, "Give Me Some Text")
 
 
-"""
+
 @legend.legend_cmd(
     pattern="dead$",
     command=("dead", menu_category),
@@ -711,4 +711,3 @@ async def bluedevilbye(event):
         lol = "Bye Friends"
         await legend.send_file(event.chat_id, BYE_PIC, caption=lol)
         await event.delete()
-"""
