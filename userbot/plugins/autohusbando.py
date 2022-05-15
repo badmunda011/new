@@ -131,8 +131,8 @@ async def _(event):
 
 
 @legend.legend_cmd(
-    pattern="autohusbando$",
-    command=("autohusbando", menu_category),
+    pattern="ah$",
+    command=("ah", menu_category),
     info={
         "header": "Add The current Group in husbando database",
         "description": "Add the current group to husbando Database.",
