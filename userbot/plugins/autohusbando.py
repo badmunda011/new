@@ -189,7 +189,7 @@ async def _(event):
         "header": "List Of All Chats Auto Husbando Enabled",
         "description": "Gives the list of all chats with Auto Husbando enabled.",
         "usage": [
-            "{tr}aw ",
+            "{tr}listah",
         ],
     },
     groups_only=True,
