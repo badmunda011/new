@@ -185,7 +185,7 @@ async def amireallyalive(yes):
     ok13 = await borg.edit_message(yes.chat_id, ok12, file=file1)
 
     await yes.delete()
-    await borg.send_file(alive.chat_id, PM_IMG, caption=pm_caption)
+    await borg.send_file(yes.chat_id, PM_IMG, caption=pm_caption)
     await yes.delete()
 
 
