@@ -57,7 +57,7 @@ async def legendalive(StartTime):
             "Authorization": f"Bearer {Config.API_KEY}",
             "Accept": "application/vnd.heroku+json; version=3.account-quotas",
         }
-        path = "/accounts/" + user_id + "/actions/get-quota"
+        path = f"/accounts/{user_id}/actions/get-quota"
         r = requests.get(heroku_api + path, headers=headers)
         result = r.json()
         quota = result["account_quota"]
@@ -80,7 +80,12 @@ async def legendalive(StartTime):
             math.floor(App[0]["quota_used"] * 100 / quota)
         AppHours = math.floor(AppQuotaUsed / 60)
         AppMinutes = math.floor(AppQuotaUsed % 60)
-        f"{AppHours}h {AppMinutes}m/{hours}h {minutes}m"
-    except Exception:
-        pass
-    return f"꧁⚜ LegendBot Stats ⚜꧂\n\n༄ Database : {check_sgnirts}\n༄ Sudo : {sudo}\n༄ Uptime : {uptime}"
+        dyno = f"{AppHours}h {AppMinutes}m/{hours}h {minutes}m"
+    except Exception as e:
+        dyno = e
+    return f"꧁ LegendBot Stats ꧂\
+                 \n\n༄ Database : {check_sgnirts}\
+                  \n༄ Sudo : {sudo}\
+                  \n༄ Uptime : {uptime}\
+                  \n༄ Dyno : {dyno}\
+                  "

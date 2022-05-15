@@ -5,22 +5,19 @@ from telethon.tl.functions.users import GetFullUserRequest
 
 from ..Config import Config
 from . import (
-    AUTONAME,
+    ALIVE_NAME,
     BOTLOG,
     BOTLOG_CHATID,
-    DEFAULT_BIO,
-    LEGEND_USER,
     eod,
     get_user_from_event,
+    gvarstatus,
     legend,
 )
 
 menu_category = "utils"
-DEFAULTUSER = str(AUTONAME) if AUTONAME else LEGEND_USER
+DEFAULTUSER = gvarstatus("FIRST_NAME") or ALIVE_NAME
 DEFAULTUSERBIO = (
-    str(DEFAULT_BIO)
-    if DEFAULT_BIO
-    else "I Am Legend Because I Am A User Of @LegendBot_XD"
+    gvarstatus("DEFAULT_BIO") or "I Am Legend Because I Am A User Of @LegendBot_XD"
 )
 
 
@@ -77,19 +74,19 @@ async def _(event):
         "usage": "{tr}revert",
     },
 )
-async def _(event):
+async def revert(event):
     "To reset your original details"
-    name = f"{DEFAULTUSER}"
-    blank = ""
-    bio = f"{DEFAULTUSERBIO}"
+    firstname = DEFAULTUSER
+    lastname = gvarstatus("LAST_NAME") or ""
+    bio = DEFAULTUSERBIO
     await event.client(
         functions.photos.DeletePhotosRequest(
             await event.client.get_profile_photos("me", limit=1)
         )
     )
     await event.client(functions.account.UpdateProfileRequest(about=bio))
-    await event.client(functions.account.UpdateProfileRequest(first_name=name))
-    await event.client(functions.account.UpdateProfileRequest(last_name=blank))
+    await event.client(functions.account.UpdateProfileRequest(first_name=firstname))
+    await event.client(functions.account.UpdateProfileRequest(last_name=lastname))
     await eod(event, "successfully reverted to your account back")
     if BOTLOG:
         await event.client.send_message(

@@ -9,7 +9,7 @@ from .core.session import legend
 from .helpers.utils.utils import runasync
 from .sql_helper.globals import addgvar, delgvar, gvarstatus
 
-__version__ = "α • 2.0"
+__version__ = "α • 2.1"
 __license__ = "GNU Affero General Public License v3.0"
 __author__ = "LegendBot <https://github.com/ITS-LEGENDBOT/LEGENDBOT>"
 __copyright__ = f"LegendBot Copyright (C) 2020 - 2021  { __author__}"
@@ -21,7 +21,7 @@ bot = legend
 
 
 StartTime = time.time()
-legendversion = "α • 2.0"
+legendversion = "α • 2.1"
 
 
 def close_connection(*_):
@@ -61,7 +61,7 @@ if Config.PM_LOGGER_GROUP_ID == 0:
     else:
         Config.PM_LOGGER_GROUP_ID = int(gvarstatus("PM_LOGGER_GROUP_ID"))
 elif str(Config.PM_LOGGER_GROUP_ID)[0] != "-":
-    Config.PM_LOGGER_GROUP_ID = int("-" + str(Config.PM_LOGGER_GROUP_ID))
+    Config.PM_LOGGER_GROUP_ID = int(f"-{str(Config.PM_LOGGER_GROUP_ID)}")
 
 try:
     if Config.API_KEY is not None or Config.APP_NAME is not None:

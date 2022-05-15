@@ -19,7 +19,7 @@ async def on_new_message(event):
     if not legendadmin:
         return
     for snip in snips:
-        pattern = r"( |^|[^\w])" + re.escape(snip) + r"( |$|[^\w])"
+        pattern = f"( |^|[^\\w]){re.escape(snip)}( |$|[^\\w])"
         if re.search(pattern, name, types=re.IGNORECASE):
             try:
                 await event.delete()

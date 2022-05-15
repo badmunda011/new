@@ -45,19 +45,14 @@ async def amireallyalive(event):
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     _, check_sgnirts = check_data_base_heal_th()
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT")
     EMOJI = gvarstatus("ALIVE_EMOJI") or "✥"
-    LOL_TEXT = gvarstatus("ALIVE_TEXT") or "**⚜ LegendBot Is Online ⚜**"
-    LEGEND_IMG = (
-        gvarstatus("IALIVE_PIC") or "https://telegra.ph/file/144d8ea74fef8ca12253c.jpg"
-    )
-    llol = [x for x in LEGEND_IMG.split()]
-    IPIC = random.choice(llol)
-    lal = [x for x in EMOJI.split()]
+    lal = list(EMOJI.split())
     EMOTES = random.choice(lal)
-    tick = [x for x in LOL_TEXT.split(", ")]
-    ALIVE_TEXT = random.choice(tick)
-    hell_caption = gvarstatus("ALIVE_TEMPLATE") or temp
-    caption = hell_caption.format(
+    sweetie_caption = (
+        "**⚜ LegendBot Is Online ⚜**\n\n" + f"{gvarstatus('ALIVE_TEMPLATE')}"
+    )
+    caption = sweetie_caption.format(
         ALIVE_TEXT=ALIVE_TEXT,
         EMOTES=EMOTES,
         mention=mention,
@@ -68,31 +63,26 @@ async def amireallyalive(event):
         dbhealth=check_sgnirts,
         ping=ms,
     )
-    if IPIC:
-        try:
-            await event.client.send_file(
-                event.chat_id, IPIC, caption=caption, reply_to=reply_to_id
-            )
-            await legendevent.delete()
-        except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
-            return await eor(
-                legendevent,
-                f"**Media Value Error!!**\n__Change the link by __`.setdv`\n\n**__Can't get media from this link :-**__ `{PIC}`",
-            )
-    else:
-        await eor(
+    try:
+        results = await event.client.inline_query(Config.BOT_USERNAME, caption)
+        await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
+        await event.delete()
+    except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
+        return await eor(
             legendevent,
-            caption,
+            f"**Media Value Error!!**\n__Change the link by __`.setdv`\n\n**__Can't get media from this link :-**__ `{LEGEND_IMG}`",
         )
 
 
-temp = """{ALIVE_TEXT}
+"""
+temp = {ALIVE_TEXT}
 **{EMOTES} Master:** {mention}
 **{EMOTES} Uptime :** `{uptime}`
 **{EMOTES} Telethon Version :** `{telever}`
 **{EMOTES} Legenduserbot Version :** `{legendver}`
 **{EMOTES} Python Version :** `{pyver}`
-**{EMOTES} Database :** `{dbhealth}`"""
+**{EMOTES} Database :** `{dbhealth}`
+"""
 
 
 @legend.legend_cmd(
@@ -111,8 +101,8 @@ async def amireallyalive(event):
     reply_to_id = await reply_id(event)
     uptime = await get_readable_time((time.time() - StartTime))
     a = gvarstatus("ALIVE_EMOJI") or "✥"
-    Legend = [x for x in a.split()]
-    EMOJI = random.choice(Legend)
+    kiss = list(a.split())
+    EMOJI = random.choice(kiss)
     legend_caption = "**LegendBot Is Online**\n\n"
     legend_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
     legend_caption += f"**{EMOJI} Legenduserbot Version :** `{legendversion}`\n"
@@ -195,7 +185,7 @@ async def amireallyalive(yes):
     ok13 = await borg.edit_message(yes.chat_id, ok12, file=file1)
 
     await yes.delete()
-    await borg.send_file(alive.chat_id, PM_IMG, caption=pm_caption)
+    await borg.send_file(yes.chat_id, PM_IMG, caption=pm_caption)
     await yes.delete()
 
 

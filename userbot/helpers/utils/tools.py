@@ -47,6 +47,12 @@ async def media_to_pic(event, reply, noedits=False):  # sourcery no-metrics
             stdout, stderr = (await runcmd(swtcmd))[:2]
             if stderr:
                 LOGS.info(stdout + stderr)
+        elif legendmedia.endswith(".webm"):
+            clip = VideoFileClip(legendmedia)
+            try:
+                clip = clip.save_frame(swtfile, 0.1)
+            except Exception:
+                clip = clip.save_frame(swtfile, 0)
         elif legendmedia.endswith(".webp"):
             im = Image.open(legendmedia)
             im.save(swtfile)
@@ -54,7 +60,7 @@ async def media_to_pic(event, reply, noedits=False):  # sourcery no-metrics
         await event.client.download_media(reply, swtfile, thumb=-1)
         if not os.path.exists(swtfile):
             legendmedia = await reply.download_media(file="./temp")
-            clip = VideoFileClip(media)
+            clip = VideoFileClip(legendmedia)
             try:
                 clip = clip.save_frame(swtfile, 0.1)
             except Exception:

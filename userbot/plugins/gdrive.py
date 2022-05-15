@@ -29,15 +29,7 @@ from ..core.managers import eod, eor
 from ..helpers import CancelProcess, humanbytes, progress, time_formatter
 from ..helpers.utils import _format
 from ..sql_helper import google_drive_sql as helper
-from . import (
-    BOTLOG,
-    BOTLOG_CHATID,
-    G_DRIVE_CLIENT_ID,
-    G_DRIVE_CLIENT_SECRET,
-    G_DRIVE_DATA,
-    G_DRIVE_FOLDER_ID,
-    TMP_DOWNLOAD_DIRECTORY,
-)
+from . import BOTLOG, BOTLOG_CHATID, TMP_DOWNLOAD_DIRECTORY
 
 LOGS = logging.getLogger(__name__)
 menu_category = "misc"
@@ -48,13 +40,17 @@ menu_category = "misc"
 # =========================================================== #
 #                          STATIC                             #
 # =========================================================== #
+G_DRIVE_CLIENT_ID = Config.G_DRIVE_CLIENT_ID
+G_DRIVE_CLIENT_SECRET = Config.G_DRIVE_CLIENT_SECRET
+G_DRIVE_DATA = Config.G_DRIVE_DATA
+G_DRIVE_FOLDER_ID = Config.G_DRIVE_FOLDER_ID
 GOOGLE_AUTH_URI = "https://accounts.google.com/o/oauth2/auth"
 GOOGLE_TOKEN_URI = "https://oauth2.googleapis.com/token"
 SCOPES = [
     "https://www.googleapis.com/auth/drive",
     "https://www.googleapis.com/auth/drive.metadata",
 ]
-REDIRECT_URI = "urn:ietf:wg:oauth:2.0:oob"
+REDIRECT_URI = "https://localhost"
 # =========================================================== #
 #      STATIC CASE FOR G_DRIVE_FOLDER_ID IF VALUE IS URL      #
 # =========================================================== #

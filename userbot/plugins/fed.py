@@ -1,6 +1,7 @@
 import asyncio
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
+from telethon.tl.functions.contacts import UnblockRequest as unblock
 
 from userbot import BOTLOG, BOTLOG_CHATID, legend
 
@@ -271,7 +272,11 @@ async def quote_search(event):  # sourcery no-metrics
         fedidstoadd = []
         async with event.client.conversation("@MissRose_bot") as conv:
             try:
-                await conv.send_message("/myfeds")
+                try:
+                    await conv.send_message("/myfeds")
+                except YouBlockedUserError:
+                    await legend(unblock("MissRose_bot"))
+                    await conv.send_message("/myfeds")
                 await asyncio.sleep(2)
                 try:
                     response = await conv.get_response()
@@ -302,15 +307,11 @@ async def quote_search(event):  # sourcery no-metrics
                                 pass
                 else:
                     text_lines = response.text.split("`")
-                    for fed_id in text_lines:
-                        if len(fed_id) == 36 and fed_id.count("-") == 4:
-                            fedidstoadd.append(fed_id)
-            except YouBlockedUserError:
-                await eod(
-                    legendevent,
-                    "**Error while fecthing myfeds:**\n__Unblock__ @MissRose_Bot __and try again!__",
-                    10,
-                )
+                    fedidstoadd.extend(
+                        fed_id
+                        for fed_id in text_lines
+                        if len(fed_id) == 36 and fed_id.count("-") == 4
+                    )
             except Exception as e:
                 await eod(legendevent, f"**Error while fecthing myfeds:**\n__{e}__", 10)
             await event.client.send_read_acknowledge(conv.chat_id)
@@ -476,15 +477,13 @@ async def fetch_fedinfo(event):
     legendevent = await eor(event, "`Fetching info about given fed...`")
     async with event.client.conversation(rose) as conv:
         try:
-            await conv.send_message("/fedinfo " + input_str)
+            try:
+                await conv.send_message(f"/fedinfo {input_str}")
+            except YouBlockedUserError:
+                await legend(unblock("MissRose_bot"))
+                await conv.send_message(f"/fedinfo {input_str}")
             response = await conv.get_response()
-            await legendevent.edit(response.text)
-        except YouBlockedUserError:
-            await eod(
-                legendevent,
-                "**Error while fecthing fedinfo:**\n__Unblock__ @MissRose_Bot __and try again!__",
-                10,
-            )
+            await eor(catevent, response.text)
         except Exception as e:
             await eod(legendevent, f"**Error while fecthing fedinfo:**\n__{e}__", 10)
         await event.client.send_read_acknowledge(conv.chat_id)
@@ -510,18 +509,17 @@ async def fetch_fedinfo(event):
     legendevent = await eor(event, "`Fetching admins list of given fed...`")
     async with event.client.conversation(rose) as conv:
         try:
-            await conv.send_message("/fedadmins " + input_str)
+            try:
+                await conv.send_message(f"/fedadmins {input_str}")
+            except YouBlockedUserError:
+                await legend(unblock("MissRose_bot"))
+                await conv.send_message(f"/fedadmins {input_str}")
             response = await conv.get_response()
-            await legendevent.edit(
-                f"**Fedid:** ```{input_str}```\n\n" + response.text
-                if input_str
-                else response.text
-            )
-        except YouBlockedUserError:
-            await eod(
+            await eor(
                 legendevent,
-                "**Error while fecthing fedinfo:**\n__Unblock__ @MissRose_Bot __and try again!__",
-                10,
+                f"**Fedid:** ```{input_str}```\n\n{response.text}"
+                if input_str
+                else response.text,
             )
         except Exception as e:
             await eod(legendevent, f"**Error while fecthing fedinfo:**\n__{e}__", 10)
@@ -543,7 +541,11 @@ async def myfeds_fedinfo(event):
     replyid = await reply_id(event)
     async with event.client.conversation(rose) as conv:
         try:
-            await conv.send_message("/myfeds")
+            try:
+                await conv.send_message("/myfeds")
+            except YouBlockedUserError:
+                await legend(unblock("MissRose_bot"))
+                await conv.send_message("/myfeds")
             response = await conv.get_response()
             if "can only" in response.text:
                 return await eod(legendevent, f"__{response.text}__")
@@ -560,13 +562,7 @@ async def myfeds_fedinfo(event):
                 )
                 await legendevent.delete()
                 return
-            await legendevent.edit(response.text)
-        except YouBlockedUserError:
-            await eod(
-                legendevent,
-                "**Error while fecthing myfeds:**\n__Unblock__ @MissRose_Bot __and try again!__",
-                10,
-            )
+            await eor(legendevent, response.text)
         except Exception as e:
             await eod(legendevent, f"**Error while fecthing myfeds:**\n__{e}__", 10)
         await event.client.send_read_acknowledge(conv.chat_id)
@@ -600,7 +596,11 @@ async def fstat_rose(event):
     replyid = await reply_id(event)
     async with event.client.conversation(rose) as conv:
         try:
-            await conv.send_message("/fedstat " + str(user.id) + " " + fedid.strip())
+            try:
+                await conv.send_message(f"/fedstat {str(user.id)} {fedid.strip()}")
+            except YouBlockedUserError:
+                await legend(unblock("MissRose_bot"))
+                await conv.send_message(f"/fedstat {str(user.id)} {fedid.strip()}")
             response = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
             if "can only" in response.text:
@@ -622,7 +622,7 @@ async def fstat_rose(event):
                 )
                 await legendevent.delete()
                 return
-            await legendevent.edit(result + response.text)
+            await eor(legendevent, result + response.text)
         except YouBlockedUserError:
             await eod(
                 legendevent,

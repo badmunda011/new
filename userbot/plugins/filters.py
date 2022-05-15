@@ -6,7 +6,7 @@ from telethon.utils import get_display_name
 from userbot import legend
 
 from ..core.managers import eor
-from ..sql_helper.filter_sql import (
+from ..sql_helper.filters_sql import (
     add_filter,
     get_filters,
     remove_all_filters,
@@ -41,7 +41,7 @@ async def filter_incoming_handler(event):  # sourcery no-metrics
     my_fullname = f"{my_first} {my_last}" if my_last else my_first
     my_username = f"@{me.username}" if me.username else my_mention
     for trigger in filters:
-        pattern = r"( |^|[^\w])" + re.escape(trigger.keyword) + r"( |$|[^\w])"
+        f"( |^|[^\\w]){re.escape(trigger.keyword)}( |$|[^\\w])"
         if re.search(pattern, name, flags=re.IGNORECASE):
             file_media = None
             filter_msg = None
@@ -95,7 +95,7 @@ async def filter_incoming_handler(event):  # sourcery no-metrics
             "{my_mention}": "To mention myself",
             "{my_username}": "To use my username.",
         },
-        "usage": "{tr}filter <keyword>",
+        "usage": "{tr}filter <keyword> \n<respond text>",
     },
 )
 async def add_new_filter(event):

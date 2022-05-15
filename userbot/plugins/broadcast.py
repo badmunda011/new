@@ -35,8 +35,6 @@ async def _(event):
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     spamDelay = float(input_str.split(" ", 2)[0])
     counter = int(input_str.split(" ", 2)[1])
-    sed = 0
-    lol = 0
     if reply_msg:
         tol = reply_msg.text
         file = reply_msg.media
@@ -53,12 +51,11 @@ async def _(event):
                 try:
                     if chat != -1001368578667:
                         await event.client.send_message(chat, tol, file=file)
-                        lol += 1
                     elif chat == -1001368578667:
                         pass
                 except BaseException:
-                    sed += 1
-    await asyncio.sleep(spamDelay)
+                    pass
+                await sleep(spamDelay)
     await hol.edit(
         "**Gcast Executed Successfully !!** \n\n** Sent in :** `{lol} {omk}`\n**✓ Failed in :** `{sed} {omk}`\n**✓ Total :** `{UwU} {omk}`"
     )

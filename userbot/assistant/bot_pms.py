@@ -69,6 +69,7 @@ async def check_bot_started_users(user, event):
 @legend.bot_cmd(
     pattern=f"^/start({botusername})?([\s]+)?$",
     incoming=True,
+    func=lambda e: e.is_private,
 )
 async def bot_start(event):
     chat = await event.get_chat()
@@ -87,15 +88,16 @@ async def bot_start(event):
     my_last = user.last_name
     my_fullname = f"{my_first} {my_last}" if my_last else my_first
     my_username = f"@{user.username}" if user.username else my_mention
+    custompic = gvarstatus("BOT_START_PIC") or None
     if chat.id != Config.OWNER_ID:
         customstrmsg = gvarstatus("START_TEXT") or None
         if customstrmsg is not None:
             buttons = [
                 (
-                    Button.inline("🔰Rules🔰 ", data="rules"),
-                    Button.inline(" Deploy 🚀", data="depy"),
+                    Button.inline("🔰 Rules 🔰", data="rules"),
+                    Button.inline("❤ Deploy ❤", data="depy"),
                 ),
-                (Button.url(" 🔱Support🔱 ", "https://t.me/LegendBot_OP"),),
+                (Button.url("🔱 Support 🔱", "https://t.me/LegendBot_OP"),),
             ]
             start_msg = customstrmsg.format(
                 mention=mention,
@@ -114,10 +116,10 @@ async def bot_start(event):
             start_msg = f"Hey! 👤{mention},\nI am {my_mention}'s assistant bot.\nYou can contact to my master from here.\n\nPowered by [LegendBot](https://t.me/LegendBot_OP)"
             buttons = [
                 (
-                    Button.inline("🔰Rules🔰 ", data="rules"),
-                    Button.inline(" Deploy 🚀", data="depy"),
+                    Button.inline("🔰 Rules 🔰", data="rules"),
+                    Button.inline("❤ Deploy ❤", data="depy"),
                 ),
-                (Button.url(" 🔱Support🔱 ", "https://t.me/LegendBot_OP"),),
+                (Button.url("🔱 Support 🔱", "https://t.me/LegendBot_OP"),),
             ]
     else:
         start_msg = f"Hey {mention} I am your {my_mention}'s assistant bot.\nI Am Here To Help U \n\nPowered By [LegendBot](https://t.me/LegendBot_OP)"
@@ -133,13 +135,23 @@ async def bot_start(event):
             (Button.inline(" Hack ", data="hack"),),
         ]
     try:
-        await event.client.send_message(
-            chat.id,
-            start_msg,
-            link_preview=False,
-            buttons=buttons,
-            reply_to=reply_to,
-        )
+        if custompic:
+            await event.client.send_message(
+                chat.id,
+                file=custompic,
+                caption=start_msg,
+                link_preview=False,
+                buttons=buttons,
+                reply_to=reply_to,
+            )
+        else:
+            await event.client.send_message(
+                chat.id,
+                start_msg,
+                link_preview=False,
+                buttons=buttons,
+                reply_to=reply_to,
+            )
     except Exception as e:
         if BOTLOG:
             await event.client.send_message(

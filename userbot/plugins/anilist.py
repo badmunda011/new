@@ -17,7 +17,7 @@ from telegraph import exceptions, upload_file
 from userbot import legend
 
 from ..core.managers import eod, eor
-from ..helpers import media_type, readable_time, time_formatter
+from ..helpers import media_type, time_formatter
 from ..helpers.functions import (
     airing_query,
     anilist_user,
@@ -31,6 +31,7 @@ from ..helpers.functions import (
     search_in_animefiller,
     weekdays,
 )
+from ..helpers.progress import readable_time
 from ..helpers.utils import _legendtools, reply_id
 
 jikan = Jikan()

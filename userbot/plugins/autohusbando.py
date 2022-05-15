@@ -131,13 +131,13 @@ async def _(event):
 
 
 @legend.legend_cmd(
-    pattern="autohusbando$",
-    command=("autohusbando", menu_category),
+    pattern="ah$",
+    command=("ah", menu_category),
     info={
         "header": "Add The current Group in husbando database",
         "description": "Add the current group to husbando Database.",
         "usage": [
-            "{tr}autohusbando",
+            "{tr}ah",
         ],
     },
     groups_only=True,
@@ -189,7 +189,7 @@ async def _(event):
         "header": "List Of All Chats Auto Husbando Enabled",
         "description": "Gives the list of all chats with Auto Husbando enabled.",
         "usage": [
-            "{tr}aw ",
+            "{tr}listah",
         ],
     },
     groups_only=True,

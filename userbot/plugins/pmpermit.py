@@ -125,7 +125,7 @@ Choose an option from below to specify the reason of your message and wait for m
     else:
         USER_BOT_NO_WARN = f"""__Hi__ {mention}__, I haven't approved you yet to personal message me.
 You have {warns}/{totalwarns} warns until you get blocked by the LegendUserBot.
-Don't spam my inbox. say reason and wait until my response.__"""
+--Don't spam my inbox. say reason and wait until my response.--"""
     addgvar("pmpermit_text", USER_BOT_NO_WARN)
     PM_WARNS[str(chat.id)] += 1
     try:
@@ -133,16 +133,16 @@ Don't spam my inbox. say reason and wait until my response.__"""
             results = await event.client.inline_query(Config.BOT_USERNAME, "pmpermit")
             msg = await results[0].click(chat.id, reply_to=reply_to_id, hide_via=True)
         else:
-            PM_PIC = (
-                gvarstatus("PM_PIC")
+            PM_IMG = (
+                gvarstatus("PM_IMG")
                 or "https://telegra.ph/file/69fa26f4659e377dea80e.jpg"
             )
-            if PM_PIC:
-                legend = [x for x in PM_PIC.split()]
+            if PM_IMG == "OFF":
+                LEGEND_IMG = None
+            else:
+                legend = [x for x in PM_IMG.split()]
                 PIC = list(legend)
                 LEGEND_IMG = random.choice(PIC)
-            else:
-                LEGEND_IMG = None
             if LEGEND_IMG is not None:
                 msg = await event.client.send_file(
                     chat.id,

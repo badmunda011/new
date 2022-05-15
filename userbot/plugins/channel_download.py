@@ -5,7 +5,7 @@ usage: .geta channel_username [will  get all media from channel, tho there is li
 By: @Legend_K_Boy
 """
 
-
+import contextlib
 import os
 import subprocess
 
@@ -31,12 +31,10 @@ async def get_media(event):
     limit = int(sweetie.split(" ")[0])
     channel_username = str(sweetie.split(" ")[1])
     tempdir = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, channel_username)
-    try:
+    with contextlib.suppress(BaseException):
         os.makedirs(tempdir)
-    except BaseException:
-        pass
     event = await eor(event, "`Downloading Media From this Channel.`")
-    msgs = await event.client.get_messages(channel_username, limit=int(limit))
+    msgs = await event.client.get_messages(channel_username, limit=limit)
     i = 0
     for msg in msgs:
         mediatype = media_type(msg)
@@ -65,16 +63,14 @@ async def get_media(event):
         "description": "pass username to command so the bot will download all media files from that latest no of messages to server ",
         "note": "there is limit of 3000 messages for this process to prevent API limits. that is will download all media files from latest 3000 messages",
         "usage": "{tr}geta channel_username",
-        "examples": "{tr}geta @Official_LegendBot",
+        "examples": "{tr}geta @LegendBot_AI",
     },
 )
 async def get_media(event):
     channel_username = event.pattern_match.group(1)
     tempdir = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, channel_username)
-    try:
+    with contextlib.suppress(BaseException):
         os.makedirs(tempdir)
-    except BaseException:
-        pass
     event = await eor(event, "`Downloading All Media From this Channel.`")
     msgs = await event.client.get_messages(channel_username, limit=3000)
     i = 0

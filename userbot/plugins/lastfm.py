@@ -18,7 +18,8 @@ from userbot import legend
 
 from ..Config import Config
 from ..core.logger import logging
-from ..helpers.functions import deEmojify, hide_inlinebot
+from ..helpers.functions import hide_inlinebot
+from ..helpers.functions.utils import deEmojify
 from ..helpers.utils import reply_id
 from . import BOTLOG, BOTLOG_CHATID, DEFAULT_BIO
 
