@@ -1,6 +1,5 @@
 import os
 
-from htmlwebshot import WebShot
 from PIL import Image, ImageDraw, ImageFont
 
 from ..helpers.tools import async_searcher, text_set
@@ -24,8 +23,6 @@ async def ghtml(e):
     with open("file.html", "w+") as f:
         f.write(k)
     await e.reply(file="file.html")
-
-
 
 
 @legend.legend_cmd(
