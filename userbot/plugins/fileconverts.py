@@ -419,7 +419,7 @@ async def resize_photo(photo):
     info={
         "header": "Reply this command to a image to get png",
         "description": "This converts image to png.",
-        "usage": "{tr}stim",
+        "usage": "{tr}png",
     },
 )
 async def png(args):
