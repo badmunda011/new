@@ -1,22 +1,3 @@
-
-LEGEND-AI
-/
-LEGENDBOT
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-LEGENDBOT/requirements.txt
-@LEGEND-AI
-LEGEND-AI Update requirements.txt
- 1 contributor
-77 lines (77 sloc)  960 Bytes
 aiofiles
 aiohttp
 apscheduler
