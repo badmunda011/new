@@ -137,7 +137,7 @@ async def _(event):
         "header": "Add The current Group in husbando database",
         "description": "Add the current group to husbando Database.",
         "usage": [
-            "{tr}autohusbando",
+            "{tr}ah",
         ],
     },
     groups_only=True,
