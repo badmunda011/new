@@ -52,6 +52,12 @@ def humanbytes(size: int) -> str:
     return f"{str(round(size, 2))} {dict_power_n[raised_to_pow]}B"
 
 
+def scheck(inp):
+    if inp == 1:
+        return ""
+    return "s"
+
+
 def time_formatter(seconds: int) -> str:
     minutes, seconds = divmod(seconds, 60)
     hours, minutes = divmod(minutes, 60)
