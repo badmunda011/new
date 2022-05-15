@@ -38,7 +38,7 @@ vlist = [
     "LAST_NAME",
     "PING_IMG",
     "PING_TEMPLATE",
-    "PM_PIC",
+    "PM_IMG",
     "PM_TEXT",
     "PM_BLOCK",
     "MAX_FLOOD_IN_PMS",
