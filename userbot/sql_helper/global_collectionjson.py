@@ -27,6 +27,8 @@ def get_collection(keywoard):
 
 
 def add_collection(keywoard, json, njson=None):
+    if njson is None:
+        njson = {}
     to_check = get_collection(keywoard)
     if to_check:
         keyword_items = SESSION.query(Legend_GlobalCollection_Json).get(keywoard)
