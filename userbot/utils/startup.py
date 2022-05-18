@@ -3,7 +3,6 @@ import os
 import sys
 from datetime import timedelta
 from pathlib import Path
-import urllib.request
 
 from telethon import Button, functions, types, utils
 from telethon.tl.functions.channels import JoinChannelRequest, LeaveChannelRequest
@@ -32,6 +31,7 @@ if ENV:
     VPS_NOLOAD = ["vps"]
 elif os.path.exists("config.py"):
     VPS_NOLOAD = ["heroku"]
+
 
 async def setup_bot():
     """
@@ -134,7 +134,7 @@ async def load_plugins(folder):
     To load plugins from the mentioned folder
     """
     path = f"userbot/{folder}/*.py"
-    plugin_path = f"userbot/{folder}" 
+    plugin_path = f"userbot/{folder}"
     files = glob.glob(path)
     files.sort()
     success = 0
@@ -180,6 +180,7 @@ async def load_plugins(folder):
                 BOTLOG_CHATID,
                 f'Your external repo plugins have imported \n**No of imported plugins :** `{success}`\n**Failed plugins to import :** `{", ".join(failure)}`',
             )
+
 
 async def hekp():
     try:
