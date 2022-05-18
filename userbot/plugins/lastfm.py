@@ -16,17 +16,18 @@ from telethon.tl.functions.users import GetFullUserRequest
 
 from userbot import legend
 
+
 from ..Config import Config
 from ..core.logger import logging
-from ..helpers.functions import hide_inlinebot
-from ..helpers.functions.utils import deEmojify
+from ..helpers.functions import deEmojify, hide_inlinebot
 from ..helpers.utils import reply_id
-from . import BOTLOG, BOTLOG_CHATID, DEFAULT_BIO
+from ..sql_helper.globals import gvarstatus
+from . import BOTLOG, BOTLOG_CHATID, eor
 
 LOGS = logging.getLogger(__name__)
 menu_category = "extra"
 
-
+DEFAULT_BIO = gvarstatus("DEFAULT_BIO")
 BIO_PREFIX = Config.BIO_PREFIX
 LASTFM_API = Config.LASTFM_API
 LASTFM_SECRET = Config.LASTFM_SECRET
@@ -82,7 +83,7 @@ async def gettags(track=None, isNowPlaying=None, playing=None):
         arg = track.track
     if not tags:
         tags = arg.artist.get_top_tags()
-    tags = "".join(" #" + t.item.__str__() for t in tags[:5])
+    tags = "".join(f" #{t.item.__str__()}" for t in tags[:5])
     tags = sub("^ ", "", tags)
     tags = sub(" ", "_", tags)
     tags = sub("_#", " #", tags)
@@ -100,7 +101,7 @@ async def get_curr_track(lfmbio):  # sourcery no-metrics
         try:
             if LASTFM_.USER_ID == 0:
                 LASTFM_.USER_ID = (await lfmbio.client.get_me()).id
-            user_info = await legend(GetFullUserRequest(LASTFM_.USER_ID))
+            user_info = (await legend(GetFullUserRequest(LASTFM_.USER_ID))).full_user
             LASTFM_.RUNNING = True
             playing = User(LASTFM_USERNAME, lastfm).get_now_playing()
             LASTFM_.SONG = playing.get_title()
@@ -171,7 +172,7 @@ async def get_curr_track(lfmbio):  # sourcery no-metrics
 )
 async def last_fm(lastFM):
     ".lastfm command, fetch scrobble data from last.fm."
-    await lastFM.edit("Processing...")
+    await eor(lastFm, "Processing...")
     preview = None
     playing = User(LASTFM_USERNAME, lastfm).get_now_playing()
     username = f"https://www.last.fm/user/{LASTFM_USERNAME}"
@@ -202,10 +203,9 @@ async def last_fm(lastFM):
             if tags:
                 output += f"`{tags}`\n\n"
     if preview is not None:
-        await lastFM.edit(f"{output}", parse_mode="md", link_preview=True)
+        await eor(lastFM, f"{output}", parse_mode="md", link_preview=True)
     else:
-        await lastFM.edit(f"{output}", parse_mode="md")
-
+        await eor(lastFM, f"{output}", parse_mode="md")
 
 @legend.legend_cmd(
     pattern="lastbio (on|off)",
@@ -226,18 +226,18 @@ async def lastbio(lfmbio):
         if not LASTFM_.LASTFMCHECK:
             LASTFM_.LASTFMCHECK = True
             environ["errorcheck"] = "0"
-            await lfmbio.edit(LFM_BIO_ENABLED)
+            await eor(lfmbio, LFM_BIO_ENABLED)
             await sleep(4)
             await get_curr_track(lfmbio)
         else:
-            await lfmbio.edit(LFM_BIO_RUNNING)
+            await eor(lfmbio, LFM_BIO_RUNNING)
     elif arg == "off":
         LASTFM_.LASTFMCHECK = False
         LASTFM_.RUNNING = False
         await lfmbio.client(UpdateProfileRequest(about=DEFAULT_BIO))
-        await lfmbio.edit(LFM_BIO_DISABLED)
+        await eor(lfmbio, LFM_BIO_DISABLED)
     else:
-        await lfmbio.edit(LFM_BIO_ERR)
+        await eor(lfmbio, LFM_BIO_ERR)
 
 
 @legend.legend_cmd(
@@ -257,12 +257,12 @@ async def lastlog(lstlog):
     LASTFM_.LastLog = False
     if arg == "on":
         LASTFM_.LastLog = True
-        await lstlog.edit(LFM_LOG_ENABLED)
+        await eor(lstlog, LFM_LOG_ENABLED)
     elif arg == "off":
         LASTFM_.LastLog = False
-        await lstlog.edit(LFM_LOG_DISABLED)
+        await eor(lstlog, LFM_LOG_DISABLED)
     else:
-        await lstlog.edit(LFM_LOG_ERR)
+        await eor(lstlog, LFM_LOG_ERR)
 
 
 @legend.legend_cmd(
