@@ -176,12 +176,6 @@ async def load_plugins(folder):
                 LOGS.info(
                     f"unable to load {shortname} because of error {e}\nBase Folder {plugin_path}"
                 )
-            if not failure:
-                failure.append("None")
-            await legend.tgbot.send_message(
-                BOTLOG_CHATID,
-                f'Your external repo plugins have imported \n**No of imported plugins :** `{success}`\n**Failed plugins to import :** `{", ".join(failure)}`',
-            )
 
 
 async def hekp():
