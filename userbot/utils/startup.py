@@ -176,7 +176,9 @@ async def load_plugins(folder):
                 LOGS.info(
                     f"unable to load {shortname} because of error {e}\nBase Folder {plugin_path}"
                 )
-            LOGS.info(f'No of imported plugins - {success}\nFailed plugins to import - {", ".join(failure)}')
+            LOGS.info(
+                f'No of imported plugins - {success}\nFailed plugins to import - {", ".join(failure)}'
+            )
 
 
 async def hekp():
