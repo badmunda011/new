@@ -1,7 +1,5 @@
 from asyncio import sleep
 
-import requests
-
 from userbot import legend
 
 from ..core.managers import eod, eor
@@ -32,6 +30,7 @@ async def googal(event):
         event,
         f"Let me **Google** that for you:\n👉 [{input_str}]({sample_url})\n`Thank me later 😉` ",
     )
+
 
 @legend.legend_cmd(
     pattern="lmy(?: |$)([\s\S]*)",
@@ -86,6 +85,7 @@ async def dukdukgo(event):
         f"Let me **duckduckgo** that for you:\n👉 [{input_str}]({sample_url})\n`Thank me later 😉` ",
     )
 
+
 @legend.legend_cmd(
     pattern="lmalt(?: |$)([\s\S]*)",
     command=("lmalt", menu_category),
@@ -132,6 +132,7 @@ async def var(event):
         f"Let me **var** that for you:\n👉 [{input_str}]({sample_url})\n`Thank me later 😉` ",
     )
 
+
 @legend.legend_cmd(
     pattern="lmlog ([\s\S]*)",
     command=("lmlog", menu_category),
@@ -150,6 +151,7 @@ async def log(event):
         event,
         f"Let me **log** that for you:\n👉 [{input_str}]({sample_url})\n`Thank me later 😉` ",
     )
+
 
 @legend.legend_cmd(
     pattern="dyno ([\s\S]*)",
@@ -176,6 +178,7 @@ async def dyno(event):
             \n`Thank me later 😉`",
     )
 
+
 @legend.legend_cmd(
     pattern="lmkp(?: |$)([\s\S]*)",
     command=("lmkp", menu_category),
@@ -199,6 +202,7 @@ async def kanun(event):
         event,
         f"Let me **Indiankanoon.com : Place** that for you:\n👉 [{input_str}]({sample_url})\n`Thank me later 😉` ",
     )
+
 
 @legend.legend_cmd(
     pattern="gem(?: |$)([\s\S]*)",
