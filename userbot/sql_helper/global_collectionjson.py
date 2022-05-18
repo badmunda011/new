@@ -26,7 +26,7 @@ def get_collection(keywoard):
         SESSION.close()
 
 
-def add_collection(keywoard, json, njson={}):
+def add_collection(keywoard, json, njson=None):
     to_check = get_collection(keywoard)
     if to_check:
         keyword_items = SESSION.query(Legend_GlobalCollection_Json).get(keywoard)
