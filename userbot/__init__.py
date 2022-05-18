@@ -1,6 +1,6 @@
 import signal
 import time
-
+import sys
 import heroku3
 
 from .Config import Config
