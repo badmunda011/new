@@ -1,7 +1,7 @@
 try:
     from . import BASE, SESSION
-except ImportError:
-    raise Exception("Hello!")
+except ImportError as e:
+    raise Exception("Hello!") from e
 
 from sqlalchemy import Column, String
 
