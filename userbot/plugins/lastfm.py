@@ -16,7 +16,6 @@ from telethon.tl.functions.users import GetFullUserRequest
 
 from userbot import legend
 
-
 from ..Config import Config
 from ..core.logger import logging
 from ..helpers.functions import deEmojify, hide_inlinebot
@@ -206,6 +205,7 @@ async def last_fm(lastFM):
         await eor(lastFM, f"{output}", parse_mode="md", link_preview=True)
     else:
         await eor(lastFM, f"{output}", parse_mode="md")
+
 
 @legend.legend_cmd(
     pattern="lastbio (on|off)",
