@@ -52,7 +52,7 @@ def add_to_collectionlist(keywoard, contents):
 
 def rm_from_collectionlist(keywoard, contents):
     with LEGEND_GLOBALCOLLECTION:
-        keyword_items := SESSION.query(Legend_GlobalCollection).get(
+        if keyword_items := SESSION.query(Legend_GlobalCollection).get(
             (keywoard, tuple(contents))
         ):
             if tuple(contents) in COLLECTION_SQL_.CONTENTS_LIST.get(keywoard, set()):
