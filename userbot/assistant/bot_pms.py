@@ -136,7 +136,7 @@ async def bot_start(event):
         ]
     try:
         if custompic:
-            await event.client.send_message(
+            await event.client.send_file(
                 chat.id,
                 file=custompic,
                 caption=start_msg,
