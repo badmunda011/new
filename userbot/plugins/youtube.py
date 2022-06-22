@@ -23,7 +23,6 @@ from yt_dlp.utils import (
     XAttrMetadataError,
 )
 
-
 from ..core import pool
 from ..core.logger import logging
 from ..core.managers import eod, eor
@@ -230,6 +229,7 @@ async def download_audio(event):
             os.remove(_path)
     await legendevent.delete()
 
+
 @legend.legend_cmd(
     pattern="ytv(?:\s|$)([\s\S]*)",
     command=("ytv", menu_category),
@@ -278,7 +278,12 @@ async def download_video(event):
                 file=ul,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                     progress(
-                        d, t, legendevent, c_time, "Upload :", file_name=ytdl_data["title"]
+                        d,
+                        t,
+                        legendevent,
+                        c_time,
+                        "Upload :",
+                        file_name=ytdl_data["title"],
                     )
                 ),
             )
