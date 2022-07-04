@@ -1,6 +1,5 @@
 from telethon import functions
 from telethon.tl import functions
-from telethon.tl.functions.channels import InviteToChannelRequest
 
 from userbot import legend
 
@@ -69,6 +68,7 @@ async def _(event):
                 return await eod(event, f"`{e}`", 5)
 
     await eor(event, f"`{to_add_users} is/are Invited Successfully`")
+
 
 """
 @legend.legend_cmd(
