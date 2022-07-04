@@ -4,7 +4,7 @@ from datetime import datetime
 
 from ..core.managers import eor
 from ..sql_helper.globals import gvarstatus
-from . import hmention, legend, StartTime
+from . import StartTime, hmention, legend
 
 menu_category = "tools"
 
