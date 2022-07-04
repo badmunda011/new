@@ -116,7 +116,27 @@ async def wants_ur_noods(event):
 neko_category = [
     "feet",
     "yuwallpaper",
-    "ngif'", "tickle", "feed", "gecg", "gasm", "slap", "avatar", "lizard", "waifu", "pat", "8ball", "kiss", "neko", "spank", "cuddle", "fox_girl", "hug", "smug", "goose", "woo"]
+    "ngif", 
+    "tickle",
+    "feed", 
+    "gecg",
+    "gasm", 
+    "slap", 
+    "avatar", 
+    "lizard",
+    "waifu",
+    "pat", 
+    "8ball",
+    "kiss", 
+    "neko",
+    "spank",
+    "cuddle", 
+    "fox_girl",
+    "hug", 
+    "smug",
+    "goose", 
+    "woo"
+]
                                 
 
 
