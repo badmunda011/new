@@ -192,9 +192,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         await event.client.disconnect()
         if HEROKU_APP is not None:
             HEROKU_APP.restart()
-    except CancelledError:
-        pass
-
+  
 
 @legend.legend_cmd(
     pattern="update(| now)?$",
