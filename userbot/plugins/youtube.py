@@ -263,7 +263,7 @@ async def download_video(event):
             legendthumb = pathlib.Path("cat_ytv.jpg")
             if not os.path.exists(legendthumb):
                 legendthumb = pathlib.Path("cat_ytv.webp")
-            if not os.path.exists(catthumb):
+            if not os.path.exists(legendthumb):
                 legendthumb = None
             await legendevent.edit(
                 f"`Preparing to upload video:`\
