@@ -815,7 +815,7 @@ async def pic2packcmd(event):
         except YouBlockedUserError:
             await legend(unblock("stickers"))
             await event.client.send_message(chat, "/cancel")
-        await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
+            await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
             await event.client.send_message(chat, "/newpack")
             await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
             await event.client.send_message(chat, args)
