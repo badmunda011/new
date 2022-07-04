@@ -36,13 +36,13 @@ async def ghtml(e):
         "usage": "{tr}note",
     },
 )
-async def writer(e):
+async def note(e):
     lol = e.text
     if e.reply_to_msg_id:
         reply = await e.get_reply_message()
         text = reply.message
     elif lol:
-        text = lol[6:]
+        text = lol[5:]
     else:
         return await eod(e, "Give me Text")
     k = await eor(e, "Processing")
