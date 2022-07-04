@@ -180,26 +180,27 @@ async def knife(event):
 
 
 @legend.legend_cmd(
-    pattern="(|h)doggy(?:\s|$)([\s\S]*)",
-    command=("doggy", menu_category),
+    pattern="(|h)doge(?:\s|$)([\s\S]*)",
+    command=("doge", menu_category),
     info={
-        "header": "Make doggy say anything.",
+        "header": "Make doge say anything.",
         "flags": {
-            "h": "To create doggy sticker with highligted text.",
+            "h": "To create doge sticker with highligted text.",
         },
         "usage": [
-            "{tr}doggy <text/reply to msg>",
-            "{tr}hdoggy <text/reply to msg>",
+            "{tr}doge <text/reply to msg>",
+            "{tr}hdoge <text/reply to msg>",
         ],
         "examples": [
-            "{tr}doggy Gib money",
-            "{tr}hdoggy Gib money",
+            "{tr}dogge Gib money",
+            "{tr}hdogge Gib money",
         ],
     },
 )
 async def doggy(event):
     "Make a cool doggy text sticker"
-    text = event.pattern_match.group(1)
+    cmd = event.pattern_match.group(1).lower()
+    text = event.pattern_match.group(2)
     reply_to_id = await reply_id(event)
     if not text and event.is_reply:
         text = (await event.get_reply_message()).message
