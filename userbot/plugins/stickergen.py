@@ -4,6 +4,14 @@
 import os
 
 from userbot import legend
+import io
+import os
+import random
+import textwrap
+import urllib
+
+from PIL import Image, ImageDraw, ImageFont
+from telethon.tl.types import InputMessagesFilterDocument
 
 from ..helpers.functions import (
     clippy,
@@ -15,6 +23,19 @@ from ..helpers.utils import reply_id
 from . import eod, legend, reply_id
 
 menu_category = "useless"
+
+def file_checker(template):
+    if not os.path.isdir("./temp"):
+        os.mkdir("./temp")
+    tempname = "./temp/cat_temp.png"
+    fontname = "./temp/ArialUnicodeMS.ttf"
+    urllib.request.urlretrieve(template, tempname)
+    if not os.path.exists(fontname):
+        urllib.request.urlretrieve(
+            "https://github.com/ITS-LEGENDBOT/RESOURCES/blob/master/Resources/Spotify/ArialUnicodeMS.ttf?raw=true",
+            fontname,
+        )
+    return tempname, fontname
 
 
 @legend.legend_cmd(
