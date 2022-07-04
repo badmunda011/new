@@ -116,28 +116,27 @@ async def wants_ur_noods(event):
 neko_category = [
     "feet",
     "yuwallpaper",
-    "ngif", 
+    "ngif",
     "tickle",
-    "feed", 
+    "feed",
     "gecg",
-    "gasm", 
-    "slap", 
-    "avatar", 
+    "gasm",
+    "slap",
+    "avatar",
     "lizard",
     "waifu",
-    "pat", 
+    "pat",
     "8ball",
-    "kiss", 
+    "kiss",
     "neko",
     "spank",
-    "cuddle", 
+    "cuddle",
     "fox_girl",
-    "hug", 
+    "hug",
     "smug",
-    "goose", 
-    "woo"
+    "goose",
+    "woo",
 ]
-                                
 
 
 @legend.legend_cmd(

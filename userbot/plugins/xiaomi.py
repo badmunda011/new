@@ -44,7 +44,6 @@ async def firmware(event):
         await eod(event, "check description how to use me")
 
 
-
 @legend.legend_cmd(
     pattern="vendor ([\s\S]*)",
     command=("vendor", menu_category),
