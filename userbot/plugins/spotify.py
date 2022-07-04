@@ -675,27 +675,6 @@ async def spotify_now(event):
             return await eor(event, info, link_preview=True)
         dic = {}
         received = r.json()
-        # if a new refresh is token as well, we save it here
-        try:
-            SP_DATABASE.save_refresh(received["refresh_token"])
-        except KeyError:
-            pass
-        SP_DATABASE.save_token(received["access_token"])
-        glob_db.add_collection(
-            "SP_DATA",
-            {
-                "data": {
-                    "access_token": SP_DATABASE.return_token(),
-                    "refresh_token": SP_DATABASE.return_refresh(),
-                }
-            },
-        )
-    try:
-        if SP_DATABASE.SPOTIFY_MODE:
-            info = f"🎶 Vibing ; [{spotify_bio.title}]({spotify_bio.link}) - {spotify_bio.interpret}"
-            return await eor(event, info, link_preview=True)
-        dic = {}
-        received = r.json()
         if received["currently_playing_type"] == "track":
             dic["title"] = received["item"]["name"]
             dic["progress"] = ms_converter(received["progress_ms"])
