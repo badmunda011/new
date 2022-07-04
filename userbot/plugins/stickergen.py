@@ -136,7 +136,6 @@ async def quby(event):
     },
 )
 async def knife(event):
-    async def knife(event):
     "Make a blob knife text sticker"
     cmd = event.pattern_match.group(1).lower()
     text = event.pattern_match.group(3)
