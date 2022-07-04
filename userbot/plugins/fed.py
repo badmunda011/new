@@ -483,7 +483,7 @@ async def fetch_fedinfo(event):
                 await legend(unblock("MissRose_bot"))
                 await conv.send_message(f"/fedinfo {input_str}")
             response = await conv.get_response()
-            await eor(catevent, response.text)
+            await eor(legendevent, response.text)
         except Exception as e:
             await eod(legendevent, f"**Error while fecthing fedinfo:**\n__{e}__", 10)
         await event.client.send_read_acknowledge(conv.chat_id)

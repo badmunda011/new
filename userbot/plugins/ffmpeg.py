@@ -12,6 +12,17 @@ from ..core.managers import eod, eor
 from ..helpers import media_type, reply_id
 from ..helpers.progress import progress
 from ..helpers.utils import _legendtools
+from ..helpers import (
+    _legendtools,
+    _legendutils,
+    fileinfo,
+    humanbytes,
+    media_type,
+    progress,
+    readable_time,
+    reply_id,
+    time_formatter,
+)
 
 menu_category = "utils"
 
@@ -19,6 +30,82 @@ menu_category = "utils"
 FF_MPEG_DOWN_LOAD_MEDIA_PATH = os.path.join(
     Config.TMP_DOWNLOAD_DIRECTORY, "LegendUserBot.media.ffmpeg"
 )
+
+FINISHED_PROGRESS_STR = Config.FINISHED_PROGRESS_STR
+UN_FINISHED_PROGRESS_STR = Config.UNFINISHED_PROGRESS_STR
+LOGGER = logging.getLogger(__name__)
+
+
+async def convert_video(video_file, output_directory, crf, total_time, bot, message):
+    # https://stackoverflow.com/a/13891070/4723940
+    out_put_file_name = output_directory + "/" + str(round(time.time())) + ".mp4"
+    progress = output_directory + "/" + "progress.txt"
+    with open(progress, "w") as f:
+        pass
+    COMPRESSION_START_TIME = time.time()
+    process = await asyncio.create_subprocess_shell(
+        f'ffmpeg -hide_banner -loglevel quiet -progress {progress} -i """{video_file}""" -preset ultrafast -vcodec libx265 -crf {crf} -c:a copy """{out_put_file_name}"""',
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
+    )
+    LOGGER.info("ffmpeg_process: " + str(process.pid))
+    while process.returncode != 0:
+        await asyncio.sleep(3)
+        with open("./temp/progress.txt", "r+") as file:
+            text = file.read()
+            frame = re.findall("frame=(\d+)", text)
+            time_in_us = re.findall("out_time_ms=(\d+)", text)
+            progress = re.findall("progress=(\w+)", text)
+            speed = re.findall("speed=(\d+\.?\d*)", text)
+            if len(frame):
+                frame = int(frame[-1])
+            else:
+                frame = 1
+            if len(speed):
+                speed = speed[-1]
+            else:
+                speed = 1
+            if len(time_in_us):
+                time_in_us = time_in_us[-1]
+            else:
+                time_in_us = 1
+            if len(progress):
+                if progress[-1] == "end":
+                    LOGGER.info(progress[-1])
+                    break
+            time_formatter((time.time() - COMPRESSION_START_TIME))
+            elapsed_time = int(time_in_us) / 1000000
+            difference = math.floor((total_time - elapsed_time) / float(speed))
+            ETA = "-"
+            if difference > 0:
+                ETA = time_formatter(difference)
+            percentage = math.floor(elapsed_time * 100 / total_time)
+            progress_str = "📊 **Progress :** {0}%\n[{1}{2}]".format(
+                round(percentage, 2),
+                "".join(
+                    [FINISHED_PROGRESS_STR for i in range(math.floor(percentage / 10))]
+                ),
+                "".join(
+                    [
+                        UN_FINISHED_PROGRESS_STR
+                        for i in range(10 - math.floor(percentage / 10))
+                    ]
+                ),
+            )
+            stats = (
+                f"📦️ **Compressing CRF-{crf}**\n\n"
+                f"⏰️ **ETA :** {ETA}\n\n"
+                f"{progress_str}\n"
+            )
+            try:
+                await message.edit(text=stats)
+            except Exception:
+                pass
+    # Wait for the subprocess to finish
+    stdout, stderr = await process.communicate()
+    if os.path.lexists(out_put_file_name):
+        return out_put_file_name
+    return None
 
 # https://github.com/Nekmo/telegram-upload/blob/master/telegram_upload/video.py#L26
 
@@ -30,24 +117,9 @@ async def cult_small_video(
     out_put_file_name = out_put_file_name or os.path.join(
         output_directory, f"{round(time.time())}.mp4"
     )
-
-    file_genertor_command = [
-        "ffmpeg",
-        "-i",
-        video_file,
-        "-ss",
-        start_time,
-        "-to",
-        end_time,
-        "-async",
-        "1",
-        "-strict",
-        "-2",
-        out_put_file_name,
-    ]
-    process = await asyncio.create_subprocess_exec(
-        *file_genertor_command,
+    process = await asyncio.create_subprocess_shell(
         # stdout must a pipe to be accessible as process.stdout
+        f'ffmpeg -i """{video_file}""" -ss {start_time} -to {end_time} -async 1 -strict -2 """{out_put_file_name}"""',
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,
     )
@@ -57,7 +129,139 @@ async def cult_small_video(
         return out_put_file_name
     return None
 
+@legend.legend_cmd(
+    pattern="(|f)compress(?:\s|$)([\s\S]*)",
+    command=("compress", menu_category),
+    info={
+        "header": "Compress the video file.",
+        "description": "Will compress the replied video, if not replied to video it will check any video saved by .ffmpegsave or not.",
+        "flags": {
+            "f": "To Force file the compressed video.",
+        },
+        "note": "For quality of compress choose CRF value [ 0 - 51 ]\nHigher crf value = less video size = low on quality.\nIf no crf given it will use default value 23.",
+        "usage": [
+            "{tr}compress < 0 - 51 >",
+            "{tr}fcompress < 0 - 51 >",
+        ],
+        "examples": [
+            "{tr}compress",
+            "{tr}fcompress",
+            "{tr}compress 35",
+            "{tr}fcompress 35",
+        ],
+    },
+)
+async def ffmpeg_compress(event):
+    "Compress the video file."
+    crf = event.pattern_match.group(2)
+    reply_to_id = await reply_id(event)
+    cmd = event.pattern_match.group(1).lower()
+    reply_message = await event.get_reply_message()
+    start = datetime.now()
+    if not crf:
+        crf = "23"
+    dlpath = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "swt.media.ffmpeg")
+    if not reply_message or not reply_message.media:
+        if os.path.exists(FF_MPEG_DOWN_LOAD_MEDIA_PATH):
+            media = (await fileinfo(FF_MPEG_DOWN_LOAD_MEDIA_PATH))["type"]
+            if media not in ["Video"]:
+                return await eod(event, "`Only Video files are supported`")
+            dlpath = FF_MPEG_DOWN_LOAD_MEDIA_PATH
+            legendevent = await eod(event, "`Processing...`")
+            delete = False
+        else:
+            await eod(
+                event, "`Reply to Video file or save video by .ffmpegsave`"
+            )
+    elif reply_message:
+        media = media_type(reply_message)
+        if media not in ["Video", "Round Video", "Gif"]:
+            return await eod(event, "`Only Video files are supported`")
+        legendevent = await eor(event, "`Saving the file...`")
+        try:
+            c_time = time.time()
+            dl = io.FileIO(dlpath, "a")
+            await event.client.fast_download_file(
+                location=reply_message.document,
+                out=dl,
+                progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                    progress(d, t, legendevent, c_time, "Trying to download")
+                ),
+            )
+            dl.close()
+        except Exception as e:
+            await eor(legendevent, f"**Error:**\n`{e}`")
+        else:
+            await eor(legendevent, "`Processing...`")
+            delete = True
+    else:
+        await eod(event, "`Reply to video file`")
+    old = await fileinfo(dlpath)
+    if not os.path.isdir("./temp"):
+        os.mkdir("./temp")
+    cstart = datetime.now()
+    compress = await convert_video(
+        dlpath, "./temp", crf, old["duration"], legend, legendevent
+    )
+    cend = datetime.now()
+    cms = (cend - cstart).seconds
+    if delete:
+        os.remove(dlpath)
+    if compress:
+        new = await fileinfo(compress)
+        osize = old["size"]
+        nsize = new["size"]
+        cap = f"**Old Size:** `{humanbytes(osize)}`\n**New Size:** `{humanbytes(nsize)}`\n**Compressed:** `{int(100-(nsize/osize*100))}%`\n\n**Time Taken:-**\n**Compression : **`{time_formatter(cms)}`"
+        if cmd == "f":
+            try:
+                c_time = time.time()
+                catt = await event.client.send_file(
+                    event.chat_id,
+                    compress,
+                    thumb=thumb_image_path,
+                    caption=cap,
+                    force_document=True,
+                    supports_streaming=True,
+                    allow_cache=False,
+                    reply_to=reply_to_id,
+                    progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                        progress(d, t, legendevent, c_time, "Trying to upload")
+                    ),
+                )
+                os.remove(compress)
+            except Exception as e:
+                return await eod(legendevent, f"**Error : **`{e}`")
+        else:
+            thumb = await _legendtools.take_screen_shot(compress, "00:01")
+            try:
+                c_time = time.time()
+                catt = await event.client.send_file(
+                    event.chat_id,
+                    compress,
+                    caption=cap,
+                    thumb=thumb,
+                    force_document=False,
+                    supports_streaming=True,
+                    allow_cache=False,
+                    reply_to=reply_to_id,
+                    progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                        progress(d, t, legendevent, c_time, "Trying to upload")
+                    ),
+                )
+                os.remove(compress)
+            except Exception as e:
+                return await eod(legendevent, f"**Error : **`{e}`")
+    else:
+        return await eod(legendevent, "**ERROR :: Unalble to Compress**")
+    await legendevent.delete()
+    end = datetime.now()
+    ms = (end - start).seconds
+    cap += f"\n**Total :** `{time_formatter(ms)}`"
+    await eor(catt, cap)
 
+
+
+    
 @legend.legend_cmd(
     pattern="ffmpegsave$",
     command=("ffmpegsave", menu_category),
@@ -69,9 +273,17 @@ async def cult_small_video(
 )
 async def ff_mpeg_trim_cmd(event):
     "Saves the media file in bot to trim mutliple times"
+    mpath = event.pattern_match.group(1)
     if not os.path.exists(FF_MPEG_DOWN_LOAD_MEDIA_PATH):
-        reply_message = await event.get_reply_message()
-        if reply_message:
+        if mpath and os.path.exists(mpath):
+            media = (await fileinfo(mpath))["type"]
+            if media not in ["Video", "Audio"]:
+                return await eod(event, "`Only media files are supported`", 5)
+            await _catutils.runcmd(f"cp -r {mpath} {FF_MPEG_DOWN_LOAD_MEDIA_PATH}")
+            return await eor(
+                event, f"Saved file to `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}`"
+            )
+        if reply_message := await event.get_reply_message():
             start = datetime.now()
             media = media_type(reply_message)
             if media not in ["Video", "Audio", "Voice", "Round Video", "Gif"]:
@@ -89,11 +301,12 @@ async def ff_mpeg_trim_cmd(event):
                 )
                 dl.close()
             except Exception as e:
-                await legendevent.edit(f"**Error:**\n`{e}`")
+                await eor(legendevent, f"**Error:**\n`{e}`")
             else:
                 end = datetime.now()
                 ms = (end - start).seconds
-                await legendevent.edit(
+                await eor(
+                    legendevent,
                     f"Saved file to `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}` in `{ms}` seconds."
                 )
         else:
@@ -216,37 +429,37 @@ async def ff_mpeg_trim_cmd(event):
     )
 
     if len(cmt) == 3:
-        # output should be audio
         cmd, start_time, end_time = cmt
-        o = await cult_small_video(
-            FF_MPEG_DOWN_LOAD_MEDIA_PATH,
-            Config.TMP_DOWNLOAD_DIRECTORY,
-            start_time,
-            end_time,
-            out_put_file_name,
-        )
-        if o is None:
-            return await eod(legendevent, "**Error : **`Can't complete the process`")
-        try:
-            c_time = time.time()
-            await event.client.send_file(
-                event.chat_id,
-                o,
-                caption=" ".join(cmt[1:]),
-                force_document=False,
-                supports_streaming=True,
-                allow_cache=False,
-                reply_to=reply_to_id,
-                progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, legendevent, c_time, "trying to upload")
-                ),
-            )
-            os.remove(o)
-        except Exception as e:
-            return await eod(legendevent, f"**Error : **`{e}`")
     else:
-        await eod(legendevent, "RTFM")
-        return
+        start_time = "00:00"
+        duration = (await fileinfo(FF_MPEG_DOWN_LOAD_MEDIA_PATH))["duration"]
+        end_time = readable_time(duration)
+    o = await cult_small_video(
+        FF_MPEG_DOWN_LOAD_MEDIA_PATH,
+        Config.TMP_DOWNLOAD_DIRECTORY,
+        start_time,
+        end_time,
+        out_put_file_name,
+    )
+    if o is None:
+        return await eod(legendevent, "**Error : **`Can't complete the process`")
+    try:
+        c_time = time.time()
+        await event.client.send_file(
+            event.chat_id,
+            o,
+            caption=" ".join(cmt[1:]),
+            force_document=False,
+            supports_streaming=True,
+            allow_cache=False,
+            reply_to=reply_to_id,
+            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                progress(d, t, legendevent, c_time, "trying to upload")
+            ),
+        )
+        os.remove(o)
+    except Exception as e:
+        return await eod(legendevent, f"**Error : **`{e}`")
     end = datetime.now()
     ms = (end - start).seconds
     await eod(legendevent, f"`Completed Process in {ms} seconds`", 3)

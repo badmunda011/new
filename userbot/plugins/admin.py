@@ -300,7 +300,7 @@ async def demote(event):
     admin = chat.admin_rights
     creator = chat.creator
     if not admin and not creator:
-        await edit_or_reply(event, NO_ADMIN)
+        await eor(event, NO_ADMIN)
         return
     user, _ = await get_user_from_event(event)
     if not user:
@@ -389,7 +389,7 @@ async def _ban_person(event):
                 await reply.forward_to(BOTLOG_CHATID)
                 await reply.delete()
         except BadRequestError:
-            return await catevent.edit(
+            return await legendevent.edit(
                 "`I dont have message nuking rights! But still he is banned!`"
             )
 
