@@ -158,12 +158,11 @@ async def who(event):
     replied_user, reason = await get_user_from_event(event)
     if not replied_user:
         return
-    legend = await eor(event, "`Fetching userinfo wait....`")
-    replied_user = await event.client(GetFullUserRequest(replied_user.id))
+    lol = await eor(event, "`Fetching userinfo wait....`")
     try:
         photo, caption = await fetch_info(replied_user, event)
     except AttributeError:
-        return await eor(event, "`Could not fetch info of that user.`")
+        return await eor(lol, "`Could not fetch info of that user.`")
     message_id_to_reply = await reply_id(event)
     try:
         await event.client.send_file(
@@ -177,9 +176,9 @@ async def who(event):
         )
         if not photo.startswith("http"):
             os.remove(photo)
-        await legend.delete()
+        await lol.delete()
     except TypeError:
-        await legend.edit(caption, parse_mode="html")
+        await lol.edit(caption, parse_mode="html")
 
 
 @legend.legend_cmd(
