@@ -17,8 +17,11 @@ menu_category = "extra"
     },
 )
 async def ghtml(e):
-    txt = e.text()
-    link = txt[8:]
+    txt = e.pattern_match.group(1).strip()
+    if txt:
+        link = e.text.split(maxsplit=1)[1]
+    else:
+        return await eod(e, "`Either reply to any file or give any text`")
     k = await async_searcher(link)
     with open("file.html", "w+") as f:
         f.write(k)
@@ -26,11 +29,11 @@ async def ghtml(e):
 
 
 @legend.legend_cmd(
-    pattern="write(?:\s|$)([\s\S]*)",
-    command=("write", menu_category),
+    pattern="note(?:\s|$)([\s\S]*)",
+    command=("note", menu_category),
     info={
         "header": "It will write on a paper.",
-        "usage": "{tr}write",
+        "usage": "{tr}note",
     },
 )
 async def writer(e):
