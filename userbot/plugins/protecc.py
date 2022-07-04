@@ -36,6 +36,7 @@ def progress(current, total):
     groups_only=True,
 )
 async def _(event):
+    "Auto Protecc the waifu."
     sweetie = await eor(event, "Hmm..")
     BASE_URL = "http://images.google.com"
     if event.reply_to_msg_id:
@@ -141,6 +142,7 @@ async def _(event):
     groups_only=True,
 )
 async def _(event):
+    "Add The current Group in aw database",
     if not event.is_group:
         await eod(event, "Autowaifu works in Groups Only !!")
         return
@@ -158,7 +160,7 @@ async def _(event):
     pattern="rmaw$",
     command=("rmaw", menu_category),
     info={
-        "header": "Rmv Group From Auto Waify Databse",
+        "header": "Remove Group From Auto Waify Databse",
         "description": "Removes the group from AutoWaifu Database",
         "usage": [
             "{tr}rmaw",
@@ -167,6 +169,7 @@ async def _(event):
     groups_only=True,
 )
 async def _(event):
+    "Remove Group From Auto Waify Databse",
     if not event.is_group:
         await eod(event, "Autowaifu works in groups only !!")
         return
@@ -193,6 +196,7 @@ async def _(event):
     groups_only=True,
 )
 async def _(event):
+    "List Of All Chats Autowaifu Enabled",
     hell = await eor(event, "Fetching Autowaifu chats...")
     all_grp = get_all_grp()
     x = "**Autowaifu enabled chats :** \n\n"
