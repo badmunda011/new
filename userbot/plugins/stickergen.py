@@ -2,16 +2,9 @@
 # LegendUserBot
 
 import os
-
-from userbot import legend
-import io
-import os
-import random
-import textwrap
 import urllib
 
-from PIL import Image, ImageDraw, ImageFont
-from telethon.tl.types import InputMessagesFilterDocument
+from userbot import legend
 
 from ..helpers.functions import (
     clippy,
@@ -23,6 +16,7 @@ from ..helpers.utils import reply_id
 from . import eod, legend, reply_id
 
 menu_category = "useless"
+
 
 def file_checker(template):
     if not os.path.isdir("./temp"):
