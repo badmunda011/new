@@ -95,6 +95,6 @@ def sremove_echos(chat_id):
 
 
 def sremove_all_echos():
-    if saved_filter:= SESSION.query(SEchos)
+    if saved_filter := SESSION.query(SEchos)
         saved_filter.delete()
         SESSION.commit()
