@@ -259,8 +259,6 @@ async def upstream(event):
         return repo.__del__()
     with contextlib.suppress(BaseException):
         repo.create_remote("upstream", off_repo)
-    except BaseException:
-        pass
     ups_rem = repo.remote("upstream")
     ups_rem.fetch(ac_br)
     changelog = await gen_chlog(repo, f"HEAD..upstream/{ac_br}")
