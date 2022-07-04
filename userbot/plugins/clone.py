@@ -29,7 +29,7 @@ DEFAULTUSERBIO = (
         "usage": "{tr}clone <username/userid/reply>",
     },
 )
-async def _(event):
+async def clone(event):
     "To clone account of mentiond user or replied user"
     replied_user, error_i_a = await get_user_from_event(event)
     if replied_user is None:
