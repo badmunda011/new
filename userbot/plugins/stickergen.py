@@ -12,17 +12,6 @@ from ..helpers.functions import (
     higlighted_text,
     soft_deEmojify,
 )
-from ..helpers.functions import (
-    clippy,
-    convert_tosticker,
-    deEmojify,
-    hide_inlinebot,
-    higlighted_text,
-    soft_deEmojify,
-    waifutxt,
-)
-from ..helpers.utils import reply_id
-
 from ..helpers.utils import reply_id
 from . import eod, legend
 
