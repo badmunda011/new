@@ -4,7 +4,7 @@ from datetime import datetime
 
 from ..core.managers import eor
 from ..sql_helper.globals import gvarstatus
-from . import hmention, legend
+from . import hmention, legend, StartTime
 
 menu_category = "tools"
 
@@ -21,6 +21,8 @@ menu_category = "tools"
 async def _(event):
     "To check ping"
     type = event.pattern_match.group(1)
+    reply_to_id = await reply_id(event)
+    uptime = await get_readable_time((time.time() - StartTime))
     start = datetime.now()
     if type == " -a":
         legendevent = await eor(event, "`!....`")
@@ -33,7 +35,7 @@ async def _(event):
         ms = round((tms - 0.6) / 3, 3)
         await legendevent.edit(f"**👨‍💻 Average Pong!**\n➥ {ms} ms")
     else:
-        legendevent = await eor(event, "<b><i>⚡ **Pong!** ⚡</b></i>", "html")
+        legendevent = await eor(event, "<b><i>⚡ Pong! ⚡</b></i>", "html")
         end = datetime.now()
         ms = (end - start).microseconds / 1000
         ping_temp = (gvarstatus("PING_TEMPLATE")) or "set ping template "
@@ -55,7 +57,7 @@ async def _(event):
                 event.chat_id,
                 IPIC,
                 caption=caption,
-                parse_mode="html",
+                reply_to=reply_to_id,
             )
             await legendevent.delete()
 
