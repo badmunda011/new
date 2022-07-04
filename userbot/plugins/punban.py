@@ -143,7 +143,7 @@ neko_category = [
     pattern="porn(?:\s|$)([\s\S]*)",
     command=("porn", menu_category),
     info={
-        "header": "Get a porn video or gif or pic. Check [Nekos Queries](https://telegra.ph/Lêɠêɳdẞογ-02-24-2) ",
+        "header": "Get a porn video or gif or pic. Check [Nekos Queries](https://telegra.ph/Nekos-Query-07-04) ",
         "usage": [
             "{tr}porn",
             "{tr}porn <options>",
@@ -152,6 +152,7 @@ neko_category = [
     },
 )
 async def _(event):
+    "Get a porn video or gif or pic."
     reply_to = await reply_id(event)
     if await age_verification(event, reply_to):
         return
@@ -177,7 +178,7 @@ async def _(event):
     else:
         await eor(
             event,
-            f"**Unmatched argument.** \n\n__Get all the required queries for nekos here__ -> **[Nekos Queries](https://telegra.ph/Lêɠêɳdẞογ-02-24-2)**",
+            f"**Unmatched argument.** \n\n__Get all the required queries for nekos here__ -> **[Nekos Queries](https://telegra.ph/Nekos-Query-07-04)**",
         )
 
 
