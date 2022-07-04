@@ -21,24 +21,28 @@ menu_category = "extra"
         "examples": "{tr}firmware whyred",
     },
 )
-async def _(event):
+async def firmware(event):
     "To get lastest Firmware."
     link = event.pattern_match.group(1)
     firmware = "firmware"
-    legendevent = await eor(event, "```Processing```")
-    async with event.client.conversation("@XiaomiGeeksBot") as conv:
-        try:
-            response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=774181428)
-            )
-            await conv.send_message(f"/{firmware} {link}")
-            respond = await response
-            await event.client.send_read_acknowledge(conv.chat_id)
-        except YouBlockedUserError:
-            return await legendevent.edit("```Unblock @XiaomiGeeksBot plox```")
-        else:
-            await legendevent.delete()
-            await event.client.forward_messages(event.chat_id, respond.message)
+    if link:
+        legendevent = await eor(event, "```Processing```")
+        async with event.client.conversation("@XiaomiGeeksBot") as conv:
+            try:
+                response = conv.wait_event(
+                    events.NewMessage(incoming=True, from_users=774181428)
+                )
+                await conv.send_message(f"/{firmware} {link}")
+                respond = await response
+                await event.client.send_read_acknowledge(conv.chat_id)
+            except YouBlockedUserError:
+                return await legendevent.edit("```Unblock @XiaomiGeeksBot plox```")
+            else:
+                await legendevent.delete()
+                await event.client.forward_messages(event.chat_id, respond.message)
+    else:
+        await eod(event, "check description how to use me")
+
 
 
 @legend.legend_cmd(
@@ -51,9 +55,13 @@ async def _(event):
         "examples": "{tr}vendor whyred",
     },
 )
-async def _(event):
+async def vendor(event):
     "To get lastest Vendor."
     link = event.pattern_match.group(1)
+    if link:
+        pass
+    elss:
+        return await eor(event, "check description how to use me")
     vendor = "vendor"
     legendevent = await eor(event, "```Processing```")
     async with event.client.conversation("@XiaomiGeeksBot") as conv:
@@ -81,9 +89,13 @@ async def _(event):
         "examples": "{tr}xspecs whyred",
     },
 )
-async def _(event):
+async def xpexcs(event):
     "To get quick spec information about device"
     link = event.pattern_match.group(1)
+    if link:
+        pass
+    elss:
+        return await eor(event, "check description how to use me")
     specs = "specs"
     legendevent = await eor(event, "```Processing```")
     async with event.client.conversation("@XiaomiGeeksBot") as conv:
@@ -111,9 +123,13 @@ async def _(event):
         "examples": "{tr}fastboot whyred",
     },
 )
-async def _(event):
+async def fastboot(event):
     "To get latest fastboot MIUI."
     link = event.pattern_match.group(1)
+    if link:
+        pass
+    elss:
+        return await eor(event, "check description how to use me")
     fboot = "fastboot"
     legendevent = await eor(event, "```Processing```")
     async with event.client.conversation("@XiaomiGeeksBot") as conv:
@@ -141,9 +157,13 @@ async def _(event):
         "examples": "{tr}recovery whyred",
     },
 )
-async def _(event):
+async def recovery(event):
     "To get latest recovery MIUI."
     link = event.pattern_match.group(1)
+    if link:
+        pass
+    elss:
+        return await eor(event, "check description how to use me")
     recovery = "recovery"
     legendevent = await eor(event, "```Processing```")
     async with event.client.conversation("@XiaomiGeeksBot") as conv:
@@ -171,9 +191,13 @@ async def _(event):
         "examples": "{tr}pb whyred",
     },
 )
-async def _(event):
+async def pb(event):
     "To get latest PBRP."
     link = event.pattern_match.group(1)
+    if link:
+        pass
+    elss:
+        return await eor(event, "check description how to use me")
     pitch = "pb"
     legendevent = await eor(event, "```Processing```")
     async with event.client.conversation("@XiaomiGeeksBot") as conv:
@@ -201,9 +225,13 @@ async def _(event):
         "examples": "{tr}of whyred",
     },
 )
-async def _(event):
+async def of(event):
     "To get latest ORangeFox Recover."
     link = event.pattern_match.group(1)
+    if link:
+        pass
+    elss:
+        return await eor(event, "check description how to use me")
     ofox = "of"
     legendevent = await eor(event, "```Processing```")
     async with event.client.conversation("@XiaomiGeeksBot") as conv:
