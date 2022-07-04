@@ -67,7 +67,7 @@ async def _(event):
             await event.client.send_file(
                 event.chat_id,
                 IPIC,
-                caption=caption",
+                caption=caption,
                 parse_mode="html",
             )
             await legendevent.delete()
