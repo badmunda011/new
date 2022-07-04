@@ -337,7 +337,7 @@ async def process(msg, user, client, reply, event, replied=None):  # sourcery no
     return True, canvas
 
 
-aasync def drawer(width, height):
+async def drawer(width, height):
     # Top part
     top = Image.new("RGBA", (width, 20), (0, 0, 0, 0))
     draw = ImageDraw.Draw(top)
