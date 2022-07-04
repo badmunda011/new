@@ -199,7 +199,7 @@ async def knife(event):
 )
 async def doggy(event):
     "Make a cool doggy text sticker"
-    cmd = event.pattern_match.group(1).lower()
+    event.pattern_match.group(1).lower()
     text = event.pattern_match.group(2)
     reply_to_id = await reply_id(event)
     if not text and event.is_reply:
