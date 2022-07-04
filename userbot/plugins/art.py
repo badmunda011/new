@@ -13,7 +13,7 @@ menu_category = "fun"
         "usage": "{tr}ded <text>",
     },
 )
-async def _(event):
+async def ded(event):
     "fun art command"
     name = event.text[4:]
     if name:
@@ -46,7 +46,7 @@ async def _(event):
         "usage": "{tr}killer <text>",
     },
 )
-async def _(event):
+async def killer(event):
     "fun art command"
     name = event.pattern_match.group(1)
     if name:
@@ -375,7 +375,7 @@ async def bluedevilmonster(homer):
         "usage": "{tr}elephant",
     },
 )
-async def bluedevilmonster(elephant):
+async def bluedmonster(elephant):
     "fun art command"
     await eor(elephant, XZ)
 
@@ -388,7 +388,7 @@ async def bluedevilmonster(elephant):
         "usage": "{tr}monster",
     },
 )
-async def bluedevilmonster(monster):
+async def bluilmonster(monster):
     "fun art command"
     await eor(monster, A)
 
@@ -401,7 +401,7 @@ async def bluedevilmonster(monster):
         "usage": "{tr}pig",
     },
 )
-async def bluedevilpig(pig):
+async def bevilpig(pig):
     "fun art command"
     await eor(pig, B)
 
@@ -414,7 +414,7 @@ async def bluedevilpig(pig):
         "usage": "{tr}gun",
     },
 )
-async def bluedevilgun(gun):
+async def blueilgun(gun):
     "fun art command"
     await eor(gun, D)
 
@@ -427,7 +427,7 @@ async def bluedevilgun(gun):
         "usage": "{tr}dog",
     },
 )
-async def bluedevildog(dog):
+async def blueldog(dog):
     "fun art command"
     await eor(dog, E)
 
@@ -440,7 +440,7 @@ async def bluedevildog(dog):
         "usage": "{tr}hello",
     },
 )
-async def bluedevilhello(event):
+async def viello(event):
     "fun art command"
     await event.get_chat()
     event = await eor(event, "**(❛ Hi ❜!**")
@@ -477,7 +477,7 @@ async def bluedevilhello(event):
         "usage": "{tr}hmf",
     },
 )
-async def bluedevilhmf(hmf):
+async def blueilhmf(hmf):
     "fun art command"
     await eor(hmf, G)
 
@@ -490,7 +490,7 @@ async def bluedevilhmf(hmf):
         "usage": "{tr}couple",
     },
 )
-async def bluedevilcouple(couple):
+async def bluedecouple(couple):
     "fun art command"
     await eor(couple, H)
 
@@ -503,7 +503,7 @@ async def bluedevilcouple(couple):
         "usage": "{tr}sup",
     },
 )
-async def bluedevilsupreme(supreme):
+async def bluedevilreme(supreme):
     "fun art command"
     await eor(supreme, I)
 
@@ -516,7 +516,7 @@ async def bluedevilsupreme(supreme):
         "usage": "{tr}india",
     },
 )
-async def bluedevilindia(india):
+async def bluedindia(india):
     "fun art command"
     await eor(india, J)
 
@@ -529,7 +529,7 @@ async def bluedevilindia(india):
         "usage": "{tr}wc",
     },
 )
-async def bluedevilwelcome(welcome):
+async def bdevilwelcome(welcome):
     "fun art command"
     await eor(welcome, K)
 
@@ -542,7 +542,7 @@ async def bluedevilwelcome(welcome):
         "usage": "{tr}snk",
     },
 )
-async def bluedevilsnake(snake):
+async def bluvilsnake(snake):
     "fun art command"
     await eor(snake, L)
 
@@ -555,7 +555,7 @@ async def bluedevilsnake(snake):
         "usage": "{tr}carry",
     },
 )
-async def legend(carry):
+async def lnd(carry):
     name = carry.pattern_match.group(1)
     if name:
         await eor(
@@ -608,7 +608,7 @@ async def lon(frog):
         "usage": "{tr}shitos",
     },
 )
-async def bluedevilshitos(shitos):
+async def blueilshitos(shitos):
     "fun art command"
     await eor(shitos, P)
 
@@ -621,7 +621,7 @@ async def bluedevilshitos(shitos):
         "usage": "{tr}dislike",
     },
 )
-async def bluedislike(dislike):
+async def bluslike(dislike):
     "fun art command"
     await eor(dislike, R)
 
@@ -634,7 +634,7 @@ async def bluedislike(dislike):
         "usage": "{tr}sthink <text>",
     },
 )
-async def legend(think):
+async def gend(think):
     name = think.pattern_match.group(1)
     B = (
         f"**{ALIVE_NAME} ~> {name} .\n\n**"
@@ -668,7 +668,7 @@ async def legend(think):
         "usage": "{tr}frog <text>",
     },
 )
-async def lisj(frogsay):
+async def lj(frogsay):
     name = frogsay.pattern_match.group(1)
     C = (
         f"**{ALIVE_NAME} ~> {name} .\n\n**"
@@ -702,7 +702,7 @@ async def lisj(frogsay):
         "usage": "{tr}bye",
     },
 )
-async def bluedevilbye(event):
+async def blilbye(event):
     "fun art command"
     BYE_PIC = "https://te.legra.ph/file/aa16cad62645045062c0f.jpg"
     if BYE_PIC:
