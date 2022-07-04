@@ -17,7 +17,7 @@ from telethon.tl.custom import Button
 from userbot.core.logger import logging
 
 from ..core.managers import eod, eor
-from ..helpers.functions.functions importdelete_conv,  (
+from ..helpers.functions.functions importdelete_conv(
     delete_conv,
     ellipse_create,
     ellipse_layout_create,
