@@ -60,7 +60,7 @@ async def vendor(event):
     link = event.pattern_match.group(1)
     if link:
         pass
-    elss:
+    else:
         return await eor(event, "check description how to use me")
     vendor = "vendor"
     legendevent = await eor(event, "```Processing```")
@@ -94,7 +94,7 @@ async def xpexcs(event):
     link = event.pattern_match.group(1)
     if link:
         pass
-    elss:
+    else:
         return await eor(event, "check description how to use me")
     specs = "specs"
     legendevent = await eor(event, "```Processing```")
@@ -128,7 +128,7 @@ async def fastboot(event):
     link = event.pattern_match.group(1)
     if link:
         pass
-    elss:
+    else:
         return await eor(event, "check description how to use me")
     fboot = "fastboot"
     legendevent = await eor(event, "```Processing```")
@@ -162,7 +162,7 @@ async def recovery(event):
     link = event.pattern_match.group(1)
     if link:
         pass
-    elss:
+    else:
         return await eor(event, "check description how to use me")
     recovery = "recovery"
     legendevent = await eor(event, "```Processing```")
@@ -196,7 +196,7 @@ async def pb(event):
     link = event.pattern_match.group(1)
     if link:
         pass
-    elss:
+    else:
         return await eor(event, "check description how to use me")
     pitch = "pb"
     legendevent = await eor(event, "```Processing```")
@@ -230,7 +230,7 @@ async def of(event):
     link = event.pattern_match.group(1)
     if link:
         pass
-    elss:
+    else:
         return await eor(event, "check description how to use me")
     ofox = "of"
     legendevent = await eor(event, "```Processing```")
