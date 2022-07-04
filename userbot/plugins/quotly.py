@@ -20,12 +20,11 @@ from userbot import legend
 
 from ..core.managers import eod, eor
 from ..helpers import convert_tosticker, media_type, process
-from ..helpers.utils import _legendtools, reply_id, get_user_from_event
+from ..helpers.utils import _legendtools, get_user_from_event, reply_id
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
 
 menu_category = "fun"
-
 
 
 class Forward_Lock:
@@ -203,9 +202,7 @@ async def stickerchat(owoquotes):
         if not fetchmsg and reply:
             fetchmsg = reply.message
         if not fetchmsg:
-            return await eor(
-                owoquotes, "`I cant quote the message . no text is given`"
-            )
+            return await eor(owoquotes, "`I cant quote the message . no text is given`")
     res, lolmsg = await process(
         fetchmsg, user, owoquotes.client, reply, owoquotes, repliedreply
     )
@@ -217,7 +214,6 @@ async def stickerchat(owoquotes):
     await owoquotes.client.send_file(owoquotes.chat_id, endfi, reply_to=reply)
     await legendevent.delete()
     os.remove(endfi)
-
 
 
 @legend.legend_cmd(

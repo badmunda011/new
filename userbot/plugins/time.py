@@ -45,7 +45,7 @@ async def get_tz(con):
 
 
 @legend.legend_cmd(
-   pattern="time(?:\s|$)([\s\S]*)(?<![0-9])(?: |$)([0-9]+)?",
+    pattern="time(?:\s|$)([\s\S]*)(?<![0-9])(?: |$)([0-9]+)?",
     command=("time", menu_category),
     info={
         "header": "To get current time of a paticular country",

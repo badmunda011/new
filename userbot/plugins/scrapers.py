@@ -50,9 +50,7 @@ async def wiki(event):
             )
             return await eor(event, f"**Disambiguated page found.**\n\n{result}")
         except PageError:
-            return await eod(
-                event, f"**Sorry i Can't find any results for **`{match}`"
-            )
+            return await eod(event, f"**Sorry i Can't find any results for **`{match}`")
     await eor(event, "**Search:**\n`" + match + "`\n\n**Result:**\n" + f"__{result}__")
     if BOTLOG:
         await event.client.send_message(

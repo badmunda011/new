@@ -5,14 +5,9 @@ from googletrans import LANGUAGES
 
 from ..Config import Config
 from ..core.managers import eor
-from ..sql_helper.globals import gvarstatus
-from . import _legendtools, convert_toimage, soft_deEmojify, legend
-
-from ..Config import Config
-from ..core.managers import eor
 from ..helpers.functions import getTranslate
 from ..sql_helper.globals import gvarstatus
-from . import _legendtools
+from . import _legendtools, convert_toimage, legend, soft_deEmojify
 
 menu_category = "utils"
 from googletrans import LANGUAGES
@@ -87,7 +82,9 @@ async def ocr(event):
         if cmd == "t":
             TRT_LANG = gvarstatus("TOCR_LANG") or "en"
             try:
-                reply_text = await getTranslate(soft_deEmojify(ParsedText), dest=TRT_LANG)
+                reply_text = await getTranslate(
+                    soft_deEmojify(ParsedText), dest=TRT_LANG
+                )
             except ValueError:
                 return await eod(trans, "`Invalid destination language.`", time=5)
             source_lan = LANGUAGES[f"{reply_text.src.lower()}"]

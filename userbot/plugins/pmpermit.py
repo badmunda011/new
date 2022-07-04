@@ -18,6 +18,7 @@ from ..sql_helper import pmpermit_sql
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from . import mention
 
+
 class PMPERMIT:
     def __init__(self):
         self.TEMPAPPROVED = []
@@ -756,7 +757,6 @@ async def approve_p_m(event):  # sourcery no-metrics
         )
 
 
-
 @legend.legend_cmd(
     pattern="t(emp)?(a|approve)(?:\s|$)([\s\S]*)",
     command=("tapprove", menu_category),
@@ -836,7 +836,6 @@ async def tapprove_pm(event):  # sourcery no-metrics
             event,
             f"[{user.first_name}](tg://user?id={user.id}) __is already in temporary approved list__",
         )
-
 
 
 @legend.legend_cmd(

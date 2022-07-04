@@ -3,7 +3,7 @@ import os
 import re
 import time
 import urllib.request
-from validators.url import url
+
 import lyricsgenius
 import requests
 import ujson
@@ -11,13 +11,15 @@ from PIL import Image, ImageEnhance, ImageFilter
 from telegraph import Telegraph
 from telethon import events
 from telethon.errors import AboutTooLongError, FloodWaitError
+from telethon.tl.custom import Button
 from telethon.tl.functions.account import UpdateProfileRequest
 from telethon.tl.functions.users import GetFullUserRequest
-from telethon.tl.custom import Button
+from validators.url import url
+
 from userbot.core.logger import logging
 
 from ..core.managers import eod, eor
-from ..helpers.functions.functions import(
+from ..helpers.functions.functions import (
     delete_conv,
     ellipse_create,
     ellipse_layout_create,
@@ -154,9 +156,7 @@ async def spotify_setup(event):
     if not (SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET):
         return await eod(event, no_sp_vars, 10)
     if event.chat_id != BOTLOG_CHATID:
-        return await eod(
-            event, "CHAT INVALID :: Do this in your Log Channel", 7
-        )
+        return await eod(event, "CHAT INVALID :: Do this in your Log Channel", 7)
     authurl = (
         "https://accounts.spotify.com/authorize?client_id={}&response_type=code&redirect_uri="
         "https%3A%2F%2Fexample.com%2Fcallback&scope=user-read-playback-state%20user-read-currently"
@@ -522,7 +522,9 @@ def telegraph_lyrics(tittle, artist):
     GENIUS = Config.GENIUS_API_TOKEN
     symbol = "❌"
     if GENIUS is None:
-        result = "Set <b>GENIUS_API_TOKEN</b> in heroku vars for functioning of this command"
+        result = (
+            "Set <b>GENIUS_API_TOKEN</b> in heroku vars for functioning of this command"
+        )
     else:
         genius = lyricsgenius.Genius(GENIUS)
         try:
@@ -552,7 +554,6 @@ def telegraph_lyrics(tittle, artist):
     return response["url"], symbol
 
 
-
 def file_check():
     logo = "temp/legend_music.png"
     font_bold = "temp/ArialUnicodeMS.ttf"
@@ -575,6 +576,7 @@ def file_check():
             font_bold,
         )
     return logo, font_bold, font_mid
+
 
 def sp_data(API):
     oauth = {"Authorization": "Bearer " + SP_DATABASE.return_token()}
@@ -605,8 +607,6 @@ def sp_data(API):
         )
         spdata = requests.get(API, headers=oauth)
     return spdata
-
-
 
 
 async def make_thumb(url, client, song, artist, now, full):
@@ -666,9 +666,7 @@ async def spotify_now(event):
     legendevent = await eor(event, "🎶 `Fetching...`")
     r = sp_data("https://api.spotify.com/v1/me/player/currently-playing")
     if r.status_code == 204:
-        return await eod(
-            legendevent, "\n**I'm not listening anything right now  ;)**"
-        )
+        return await eod(legendevent, "\n**I'm not listening anything right now  ;)**")
     try:
         if SP_DATABASE.SPOTIFY_MODE:
             info = f"🎶 Vibing ; [{spotify_bio.title}]({spotify_bio.link}) - {spotify_bio.interpret}"
@@ -700,9 +698,7 @@ async def spotify_now(event):
         await make_inline(button_format, event.client, event.chat_id, msg_id)
         os.remove(thumb)
     except KeyError:
-        await eod(
-            legendevent, "\n**Strange!! Try after restaring Spotify once ;)**", 7
-        )
+        await eod(legendevent, "\n**Strange!! Try after restaring Spotify once ;)**", 7)
 
 
 @legend.legend_cmd(
@@ -765,8 +761,6 @@ async def spotify_now(event):
                 tittle = regx.group(1)
             song += f"**◉ [{tittle} - {i['track']['artists'][0]['name']}]({i['track']['external_urls']['spotify']})**\n"
     await eor(event, song)
-               
-
 
 
 @legend.legend_cmd(
@@ -828,9 +822,11 @@ async def spotify_now(event):
         await legendevent.delete()
         if cmd == "i":
             songg = await legend.send_file(BOTLOG_CHATID, song)
-            fetch_songg = await legend.tgbot.get_messages(BOTLOG_CHATID, ids= songg.id)
-            btn_song = await legend.tgbot.send_file(BOTLOG_CHATID,fetch_songg,buttons= Button.url('🎧 Spotify', link))
-            fetch_btn_song = await legend.get_messages(BOTLOG_CHATID, ids= btn_song.id)
+            fetch_songg = await legend.tgbot.get_messages(BOTLOG_CHATID, ids=songg.id)
+            btn_song = await legend.tgbot.send_file(
+                BOTLOG_CHATID, fetch_songg, buttons=Button.url("🎧 Spotify", link)
+            )
+            fetch_btn_song = await legend.get_messages(BOTLOG_CHATID, ids=btn_song.id)
             await event.client.forward_messages(event.chat_id, fetch_btn_song)
             await songg.delete()
             await btn_song.delete()

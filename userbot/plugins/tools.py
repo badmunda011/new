@@ -20,7 +20,6 @@ from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import eod, eor
 from ..helpers import AioHttp
-from ..helpers.utils import _format, _legendutils, reply_id
 from ..helpers.functions import delete_conv
 from ..helpers.utils import _legendutils, reply_id
 
@@ -137,6 +136,7 @@ async def scan(event):
                     event.chat_id, response2.media, reply_to=(await reply_id(event))
                 )
         await delete_conv(event, chat, flag)
+
 
 @legend.legend_cmd(
     pattern="decode$",

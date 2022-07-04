@@ -15,7 +15,6 @@ from userbot import HEROKU_APP, UPSTREAM_REPO_URL, legend
 from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import eod, eor
-from ..helpers.utils import _legendutils
 from ..sql_helper.global_collection import (
     add_to_collectionlist,
     del_keyword_collectionlist,
@@ -192,7 +191,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         await event.client.disconnect()
         if HEROKU_APP is not None:
             HEROKU_APP.restart()
-  
+
 
 @legend.legend_cmd(
     pattern="update(| now)?$",

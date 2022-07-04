@@ -2,32 +2,18 @@
 # LegendUserBot
 
 import os
-import urllib
-
-from ..helpers.functions import clippy, convert_tosticker, higlighted_text
-from . import deEmojify, eod, legend, reply_id
-import io
-import os
-import random
-import re
-import textwrap
-
-from PIL import Image, ImageDraw, ImageFont
-from telethon.tl.types import InputMessagesFilterDocument
 
 from userbot import legend
 
-from ..core.managers import eor
 from ..helpers.functions import (
     clippy,
     convert_tosticker,
-    deEmojify,
-    hide_inlinebot,
     higlighted_text,
     soft_deEmojify,
-    waifutxt,
 )
 from ..helpers.utils import reply_id
+from . import eod, legend, reply_id
+
 menu_category = "useless"
 
 
@@ -57,9 +43,7 @@ async def quby(event):
     if not text and event.is_reply:
         text = (await event.get_reply_message()).message
     if not text:
-        return await eod(
-            event, "__What is quby supposed to say? Give some text.__"
-        )
+        return await eod(event, "__What is quby supposed to say? Give some text.__")
     await eod(event, "`Wait, processing.....`")
     temp_name, fontname = file_checker(
         "https://telegra.ph/file/09f4df5a129758a2e1c9c.jpg"
@@ -143,9 +127,7 @@ async def knife(event):
     if not text and event.is_reply:
         text = (await event.get_reply_message()).message
     if not text:
-        return await eod(
-            event, "__What is blob supposed to say? Give some text.__"
-        )
+        return await eod(event, "__What is blob supposed to say? Give some text.__")
     await eod(event, "`Wait, processing.....`")
     temp_name, fontname = file_checker(
         "https://telegra.ph/file/2188367c8c5f43c36aa59.jpg"
@@ -181,6 +163,7 @@ async def knife(event):
         if files and os.path.exists(files):
             os.remove(files)
 
+
 @legend.legend_cmd(
     pattern="(|h)doge(?:\s|$)([\s\S]*)",
     command=("doge", menu_category),
@@ -206,9 +189,7 @@ async def doge(event):
     if not text and event.is_reply:
         text = (await event.get_reply_message()).message
     if not text:
-        return await eod(
-            event, "__What is doge supposed to say? Give some text.__"
-        )
+        return await eod(event, "__What is doge supposed to say? Give some text.__")
     await eod(event, "`Wait, processing.....`")
     text = soft_deEmojify(text)
     temp_name, fontname = file_checker(
@@ -264,7 +245,6 @@ async def doge(event):
     for files in (temp_name, file[0]):
         if files and os.path.exists(files):
             os.remove(files)
-
 
 
 # by Yato
@@ -360,9 +340,7 @@ async def gandhi(event):
     if not text and event.is_reply:
         text = (await event.get_reply_message()).message
     if not text:
-        return await eod(
-            event, "What is gandhi supposed to write? Give some text."
-        )
+        return await eod(event, "What is gandhi supposed to write? Give some text.")
     await eod(event, "Wait, processing.....")
     temp_name, fontname = file_checker(
         "https://telegra.ph/file/3bebc56ee82cce4f300ce.jpg"

@@ -4,7 +4,7 @@ import os
 
 from userbot import legend
 
-from ..core.managers import eod, eor
+from ..core.managers import eor
 from ..helpers.utils import _legendutils
 
 menu_category = "tools"
@@ -52,9 +52,7 @@ async def variable(event):  # sourcery no-metrics
     Manage most of ConfigVars setting, set new var, get current var, or delete var...
     """
     if not os.path.exists(config):
-        return await eor(
-            event, "`There no Config file , You can't use this plugin.`"
-        )
+        return await eor(event, "`There no Config file , You can't use this plugin.`")
     cmd = event.pattern_match.group(1)
     string = ""
     match = None

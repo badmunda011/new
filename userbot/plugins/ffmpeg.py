@@ -1,20 +1,17 @@
 # ported from uniborg by @spechide
 import asyncio
 import io
+import logging
 import os
 import time
 from datetime import datetime
-import logging
+
 from userbot import legend
 
 from ..Config import Config
 from ..core.managers import eod, eor
-from ..helpers import media_type, reply_id
-from ..helpers.progress import progress
-from ..helpers.utils import _legendtools
 from ..helpers import (
     _legendtools,
-    _legendutils,
     fileinfo,
     humanbytes,
     media_type,
@@ -23,6 +20,8 @@ from ..helpers import (
     reply_id,
     time_formatter,
 )
+from ..helpers.progress import progress
+from ..helpers.utils import _legendtools
 
 menu_category = "utils"
 
@@ -107,6 +106,7 @@ async def convert_video(video_file, output_directory, crf, total_time, bot, mess
         return out_put_file_name
     return None
 
+
 # https://github.com/Nekmo/telegram-upload/blob/master/telegram_upload/video.py#L26
 
 
@@ -128,6 +128,7 @@ async def cult_small_video(
     if os.path.lexists(out_put_file_name):
         return out_put_file_name
     return None
+
 
 @legend.legend_cmd(
     pattern="(|f)compress(?:\s|$)([\s\S]*)",
@@ -170,9 +171,7 @@ async def ffmpeg_compress(event):
             legendevent = await eod(event, "`Processing...`")
             delete = False
         else:
-            await eod(
-                event, "`Reply to Video file or save video by .ffmpegsave`"
-            )
+            await eod(event, "`Reply to Video file or save video by .ffmpegsave`")
     elif reply_message:
         media = media_type(reply_message)
         if media not in ["Video", "Round Video", "Gif"]:
@@ -260,8 +259,6 @@ async def ffmpeg_compress(event):
     await eor(catt, cap)
 
 
-
-    
 @legend.legend_cmd(
     pattern="ffmpegsave$",
     command=("ffmpegsave", menu_category),
@@ -280,9 +277,7 @@ async def ff_mpeg_trim_cmd(event):
             if media not in ["Video", "Audio"]:
                 return await eod(event, "`Only media files are supported`", 5)
             await _catutils.runcmd(f"cp -r {mpath} {FF_MPEG_DOWN_LOAD_MEDIA_PATH}")
-            return await eor(
-                event, f"Saved file to `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}`"
-            )
+            return await eor(event, f"Saved file to `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}`")
         if reply_message := await event.get_reply_message():
             start = datetime.now()
             media = media_type(reply_message)
@@ -307,7 +302,7 @@ async def ff_mpeg_trim_cmd(event):
                 ms = (end - start).seconds
                 await eor(
                     legendevent,
-                    f"Saved file to `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}` in `{ms}` seconds."
+                    f"Saved file to `{FF_MPEG_DOWN_LOAD_MEDIA_PATH}` in `{ms}` seconds.",
                 )
         else:
             await eod(event, "`Reply to a any media file`")

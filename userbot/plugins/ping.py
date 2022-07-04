@@ -1,23 +1,10 @@
 import asyncio
 import random
 from datetime import datetime
-import time 
-import requests
-from telethon.errors.rpcerrorlist import (
-    MediaEmptyError,
-    WebpageCurlFailedError,
-    WebpageMediaEmptyError,
-)
 
 from ..core.managers import eor
 from ..sql_helper.globals import gvarstatus
 from . import hmention, legend
-
-from ..Config import Config
-from ..core.managers import eor
-from ..helpers.functions import get_readable_time
-from ..sql_helper.globals import gvarstatus
-from . import StartTime, mention
 
 menu_category = "tools"
 

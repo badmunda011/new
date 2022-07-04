@@ -14,8 +14,8 @@ from bs4 import BeautifulSoup as bs
 from PIL import Image
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.functions.contacts import UnblockRequest as unblock
 from telethon.tl import functions, types
+from telethon.tl.functions.contacts import UnblockRequest as unblock
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from telethon.tl.types import (
@@ -349,7 +349,6 @@ async def kang(args):  # sourcery no-metrics
             photo = 1
         elif message.media.document.mime_type in ["video/mp4", "video/webm"]:
             emojibypass = False
-            is_video = True
             photo = 1
             if message.media.document.mime_type == "video/webm":
                 attributes = message.media.document.attributes
@@ -360,9 +359,7 @@ async def kang(args):  # sourcery no-metrics
                                 args, "__⌛ File size big,,, Downloading..__"
                             )
                             sticker = await animator(message, args, legendevent)
-                            await eor(
-                                legendevent, f"`{random.choice(KANGING_STR)}`"
-                            )
+                            await eor(legendevent, f"`{random.choice(KANGING_STR)}`")
                         else:
                             legendevent = await eor(
                                 args, f"`{random.choice(KANGING_STR)}`"

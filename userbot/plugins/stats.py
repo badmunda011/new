@@ -7,7 +7,7 @@ from telethon.tl.types import Channel, Chat, User
 
 from userbot import legend
 
-from ..core.managers import eod, eor
+from ..core.managers import eor
 
 menu_category = "utils"
 
@@ -224,4 +224,3 @@ async def stats(event):  # sourcery no-metrics
             output,
             caption=caption,
         )
-

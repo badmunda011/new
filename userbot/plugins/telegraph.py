@@ -9,18 +9,14 @@ from telegraph import Telegraph, exceptions, upload_file
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.contacts import UnblockRequest as unblock
 from telethon.utils import get_display_name
-from urlextract import URLExtract
 
 from userbot import legend
 
 from ..Config import Config
 from ..core.logger import logging
-from ..core.managers import eor, eod
-from . import mention
-from ..Config import Config
-from ..core.logger import logging
+from ..core.managers import eod, eor
 from ..helpers.functions import delete_conv
-from . import BOTLOG, BOTLOG_CHATID, legend, reply_id
+from . import legend, mention, reply_id
 
 LOGS = logging.getLogger(__name__)
 menu_category = "utils"
@@ -77,7 +73,6 @@ async def ctg(event):
                 event.chat_id, response, reply_to=reply_to_id, link_preview=True
             )
         await delete_conv(event, chat, msg_flag)
-
 
 
 @legend.legend_cmd(

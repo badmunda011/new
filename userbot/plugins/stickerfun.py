@@ -11,15 +11,7 @@ from telethon.tl.types import InputMessagesFilterDocument
 from userbot import legend
 
 from ..core.managers import eor
-from ..helpers.functions import (
-    clippy,
-    convert_tosticker,
-    deEmojify,
-    hide_inlinebot,
-    higlighted_text,
-    soft_deEmojify,
-    waifutxt,
-)
+from ..helpers.functions import deEmojify, hide_inlinebot, soft_deEmojify, waifutxt
 from ..helpers.utils import reply_id
 
 menu_category = "fun"
@@ -42,8 +34,6 @@ async def get_font_file(client, channel_id, search_kw=""):
     return await client.download_media(font_file_message)
 
 
-
-
 def file_checker(template):
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
@@ -56,7 +46,6 @@ def file_checker(template):
             fontname,
         )
     return tempname, fontname
-
 
 
 EMOJI_PATTERN = re.compile(

@@ -1,12 +1,10 @@
-from asyncio import sleep
-
 from googletrans import LANGUAGES, Translator
 
 from userbot import legend
 
 from ..core.managers import eod, eor
-from ..helpers.functions.utils import soft_deEmojify
 from ..helpers.functions.functions import getTranslate
+from ..helpers.functions.utils import soft_deEmojify
 from ..sql_helper.globals import addgvar, gvarstatus
 from . import BOTLOG, BOTLOG_CHATID
 
@@ -72,9 +70,7 @@ async def translateme(trans):
     elif textx:
         message = textx.text
     else:
-        return await eor(
-            trans, "`Give a text or reply to a message to translate!`"
-        )
+        return await eor(trans, "`Give a text or reply to a message to translate!`")
     TRT_LANG = gvarstatus("TRT_LANG") or "en"
     try:
         reply_text = await getTranslate(soft_deEmojify(message), dest=TRT_LANG)

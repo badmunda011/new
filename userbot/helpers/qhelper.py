@@ -355,8 +355,6 @@ async def drawer(width, height):
     return top, middle, bottom
 
 
-
-
 async def fontTest(letter):
     test = TTFont("./temp/ArialUnicodeMS.ttf")
     for table in test["cmap"].tables:
@@ -411,7 +409,7 @@ async def no_photo(tot):
     letter = "" if not tot else tot[0]
     font = ImageFont.truetype("./temp/Roboto-Regular.ttf", 60)
     pen.text((32, 17), letter, font=font, fill="white")
-    return pfp, 
+    return (pfp,)
 
 
 async def emoji_fetch(emoji):
