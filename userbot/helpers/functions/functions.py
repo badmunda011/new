@@ -222,7 +222,7 @@ async def clippy(borg, msg, chat_id, reply_to_id):
         try:
             msg = await conv.send_file(msg)
         except YouBlockedUserError:
-            await catub(unblock("clippy"))
+            await legend(unblock("clippy"))
             msg = await conv.send_file(msg)
         pic = await conv.get_response()
         await borg.send_read_acknowledge(conv.chat_id)

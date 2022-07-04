@@ -75,7 +75,7 @@ def file_check():
         )
     if not os.path.exists(special):
         urllib.request.urlretrieve(
-            "https://github.com/TgCatUB/CatUserbot-Resources/blob/master/Resources/Spotify/ArialUnicodeMS.ttf?raw=true",
+            "https://github.com/ITS-LEGENDBOT/RESOURCES/blob/master/Resources/Spotify/ArialUnicodeMS.ttf?raw=true",
             special,
         )
 
@@ -276,8 +276,8 @@ async def process(msg, user, client, reply, event, replied=None):  # sourcery no
                 draw.text((space, 20), letter, font=namefallback, fill=color)
                 space += namefallback.getsize(letter)[0]
             else:
-                draw.text((space, 20), letter, font=font, fill=color)
-                space += font.getsize(letter)[0]
+                draw.text((space, 20), letter, font=sepcialn, fill=color)
+                space += sepcialn.getsize(letter)[0]
 
     if title:
         draw.text(
@@ -289,9 +289,9 @@ async def process(msg, user, client, reply, event, replied=None):  # sourcery no
     bold, mono, italic, link = await get_entity(reply)
     index = 0
     emojicount = 0
-    textfallback = ImageFont.truetype("./temp/Quivira.otf", 33, encoding="utf-16")
-    textcolor = "white"
+    textfallback = ImageFont.truetype("./temp/Quivira.otf", 38, encoding="utf-16")
     for line in text:
+        textcolor = "white"
         for letter in line:
             index = (
                 msg.find(letter) if emojicount == 0 else msg.find(letter) + emojicount
@@ -299,27 +299,27 @@ async def process(msg, user, client, reply, event, replied=None):  # sourcery no
             for offset, length in bold.items():
                 if index in range(offset, length):
                     font2 = ImageFont.truetype(
-                        "./temp/Roboto-Medium.ttf", 33, encoding="utf-16"
+                        "./temp/Roboto-Medium.ttf", 38, encoding="utf-16"
                     )
                     textcolor = "white"
             for offset, length in italic.items():
                 if index in range(offset, length):
                     font2 = ImageFont.truetype(
-                        "./temp/Roboto-Italic.ttf", 33, encoding="utf-16"
+                        "./temp/Roboto-Italic.ttf", 38, encoding="utf-16"
                     )
                     textcolor = "white"
             for offset, length in mono.items():
                 if index in range(offset, length):
                     font2 = ImageFont.truetype(
-                        "./temp/DroidSansMono.ttf", 30, encoding="utf-16"
+                        "./temp/DroidSansMono.ttf", 35, encoding="utf-16"
                     )
-                    textcolor = "white"
+                    textcolor = "teal"
             for offset, length in link.items():
                 if index in range(offset, length):
                     font2 = ImageFont.truetype(
-                        "./temp/Roboto-Regular.ttf", 30, encoding="utf-16"
+                        "./temp/Roboto-Regular.ttf", 35, encoding="utf-16"
                     )
-                    textcolor = "#898989"
+                    textcolor = "#59a7f6"
             if letter in emoji.UNICODE_EMOJI["en"]:
                 newemoji, mask = await emoji_fetch(letter)
                 canvas.paste(newemoji, (x, y - 2), mask)
@@ -330,33 +330,35 @@ async def process(msg, user, client, reply, event, replied=None):  # sourcery no
                     draw.text((x, y), letter, font=textfallback, fill=textcolor)
                     x += textfallback.getsize(letter)[0]
                 else:
-                    draw.text((x, y), letter, font=font2, fill=textcolor)
-                    x += font2.getsize(letter)[0]
+                    draw.text((x, y), letter, font=sepcialt, fill=textcolor)
+                    x += sepcialt.getsize(letter)[0]
             msg = msg.replace(letter, "¶", 1)
-        y += 40
         x = pfpbg.width + 30
     return True, canvas
 
 
-async def drawer(width, height):
+aasync def drawer(width, height):
     # Top part
     top = Image.new("RGBA", (width, 20), (0, 0, 0, 0))
     draw = ImageDraw.Draw(top)
-    draw.line((10, 0, top.width - 20, 0), fill=(29, 29, 29, 255), width=50)
-    draw.pieslice((0, 0, 30, 50), 180, 270, fill=(29, 29, 29, 255))
-    draw.pieslice((top.width - 75, 0, top.width, 50), 270, 360, fill=(29, 29, 29, 255))
+    draw.line((10, 0, top.width - 20, 0), fill=(27, 20, 41, 255), width=50)
+    draw.pieslice((0, 0, 30, 50), 180, 270, fill=(27, 20, 41, 255))
+    draw.pieslice((top.width - 75, 0, top.width, 50), 270, 360, fill=(27, 20, 41, 255))
 
     # Middle part
-    middle = Image.new("RGBA", (top.width, height + 75), (29, 29, 29, 255))
+    middle = Image.new("RGBA", (top.width, height + 75), (27, 20, 41, 255))
 
     # Bottom part
-    bottom = ImageOps.flip(top)
-
+    fliptop = ImageOps.flip(top)
+    bottom = Image.new("RGBA", (top.width, 145), 255)
+    bottom.paste(fliptop)
     return top, middle, bottom
 
 
+
+
 async def fontTest(letter):
-    test = TTFont("./temp/Roboto-Medium.ttf")
+    test = TTFont("./temp/ArialUnicodeMS.ttf")
     for table in test["cmap"].tables:
         if ord(letter) in table.cmap.keys():
             return True
@@ -401,15 +403,15 @@ async def swtdoctype(name, size, htype, canvas):
     return canvas
 
 
-async def no_photo(reply, tot):
-    pfp = Image.new("RGBA", (105, 105), (0, 0, 0, 0))
+async def no_photo(tot):
+    pfp = Image.new("RGBA", (90, 90), (0, 0, 0, 0))
     pen = ImageDraw.Draw(pfp)
     color = random.choice(COLORS)
-    pen.ellipse((0, 0, 105, 105), fill=color)
+    pen.ellipse((0, 0, 90, 90), fill=color)
     letter = "" if not tot else tot[0]
     font = ImageFont.truetype("./temp/Roboto-Regular.ttf", 60)
     pen.text((32, 17), letter, font=font, fill="white")
-    return pfp, color
+    return pfp, 
 
 
 async def emoji_fetch(emoji):
@@ -439,7 +441,7 @@ async def transparent(emoji):
 
 
 async def replied_user(draw, tot, text, maxlength, title):
-    namefont = ImageFont.truetype("./temp/Roboto-Medium.ttf", 38)
+    namefont = ImageFont.truetype("./temp/ArialUnicodeMS.ttf", 38)
     namefallback = ImageFont.truetype("./temp/Quivira.otf", 38)
     textfont = ImageFont.truetype("./temp/Roboto-Regular.ttf", 32)
     textfallback = ImageFont.truetype("./temp/Roboto-Medium.ttf", 38)
