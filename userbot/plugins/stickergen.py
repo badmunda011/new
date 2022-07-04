@@ -12,8 +12,19 @@ from ..helpers.functions import (
     higlighted_text,
     soft_deEmojify,
 )
+from ..helpers.functions import (
+    clippy,
+    convert_tosticker,
+    deEmojify,
+    hide_inlinebot,
+    higlighted_text,
+    soft_deEmojify,
+    waifutxt,
+)
 from ..helpers.utils import reply_id
-from . import eod, legend, reply_id
+
+from ..helpers.utils import reply_id
+from . import eod, legend
 
 menu_category = "useless"
 
@@ -26,7 +37,7 @@ def file_checker(template):
     urllib.request.urlretrieve(template, tempname)
     if not os.path.exists(fontname):
         urllib.request.urlretrieve(
-            "https://github.com/ITS-LEGENDBOT/RESOURCES/blob/master/Resources/Spotify/ArialUnicodeMS.ttf?raw=true",
+            "https://github.com/ITS-LEGENDBOT/RESOURCES/blob/master/Spotify/ArialUnicodeMS.ttf?raw=true",
             fontname,
         )
     return tempname, fontname
