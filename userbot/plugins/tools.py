@@ -22,7 +22,7 @@ from ..core.managers import eod, eor
 from ..helpers import AioHttp
 from ..helpers.utils import _format, _legendutils, reply_id
 from ..helpers.functions import delete_conv
-from ..helpers.utils import _catutils, reply_id
+from ..helpers.utils import _legendutils, reply_id
 
 menu_category = "tools"
 
