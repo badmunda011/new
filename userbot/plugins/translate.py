@@ -5,23 +5,12 @@ from googletrans import LANGUAGES, Translator
 from userbot import legend
 
 from ..core.managers import eod, eor
-from ..helpers.functions.utils import deEmojify
+from ..helpers.functions.utils import soft_deEmojify
+from ..helpers.functions.functions import getTranslate
 from ..sql_helper.globals import addgvar, gvarstatus
 from . import BOTLOG, BOTLOG_CHATID
 
 menu_category = "utils"
-
-
-async def getTranslate(text, **kwargs):
-    translator = Translator()
-    result = None
-    for _ in range(10):
-        try:
-            result = translator.translate(text, **kwargs)
-        except Exception:
-            translator = Translator()
-            await sleep(0.1)
-    return result
 
 
 @legend.legend_cmd(
@@ -48,7 +37,7 @@ async def _(event):
         lan, text = input_str.split(";")
     else:
         return await eod(event, "`.tl LanguageCode` as reply to a message", time=5)
-    text = deEmojify(text.strip())
+    text = soft_deEmojify(text.strip())
     lan = lan.strip()
     Translator()
     try:
@@ -66,7 +55,7 @@ async def _(event):
     command=("trt", menu_category),
     info={
         "header": "To translate the text to required language.",
-        "note": "for this command set lanuage by `.lang trt <code name>` command.",
+        "note": "for this command set lanuage by `{tr}lang trt <code name>` command.",
         "usage": [
             "{tr}trt",
             "{tr}trt <text>",
@@ -74,40 +63,33 @@ async def _(event):
         ],
     },
 )
-async def translateme(event):
+async def translateme(trans):
     "To translate the text to required language."
-    if "trim" in event.raw_text:
-        return
-    if gvarstatus("TRT_LANG") is None:
-        await eor(
-            event,
-            f"Set permanently language to english then do `.lang trt en` To Get ~ [Language codes](https://da.gd/ueaQbH)",
-        )
-    input_str = event.pattern_match.group(1)
-    if event.reply_to_msg_id:
-        previous_message = await event.get_reply_message()
-        text = previous_message.message
-        lan = input_str or gvarstatus("TRT_LANG")
-    elif ";" in input_str:
-        olo, text = input_str.split(";")
-        lan = olo.replace(" ", "")
+    textx = await trans.get_reply_message()
+    message = trans.pattern_match.group(1)
+    if message:
+        pass
+    elif textx:
+        message = textx.text
     else:
-        await eor(
-            event,
-            f"If U Want To Set permanently language to english then do `.lang trt en` To Get ~ [Language codes](https://da.gd/ueaQbH)",
+        return await eor(
+            trans, "`Give a text or reply to a message to translate!`"
         )
-        return
-    translator = Translator()
+    TRT_LANG = gvarstatus("TRT_LANG") or "en"
     try:
-        translated = translator.translate(text, dest=lan)
-        after_tr_text = translated.text
-        output_str = """**Translated**\n__From__ {} __to__ {}
-`{}`""".format(
-            translated.src, lan, after_tr_text
+        reply_text = await getTranslate(soft_deEmojify(message), dest=TRT_LANG)
+    except ValueError:
+        return await eod(trans, "`Invalid destination language.`", time=5)
+    source_lan = LANGUAGES[f"{reply_text.src.lower()}"]
+    transl_lan = LANGUAGES[f"{reply_text.dest.lower()}"]
+    reply_text = f"**From {source_lan.title()}({reply_text.src.lower()}) to {transl_lan.title()}({reply_text.dest.lower()}) :**\n`{reply_text.text}`"
+
+    await eor(trans, reply_text)
+    if BOTLOG:
+        await trans.client.send_message(
+            BOTLOG_CHATID,
+            f"`Translated some {source_lan.title()} stuff to {transl_lan.title()} just now.`",
         )
-        await eor(event, output_str)
-    except Exception as exc:
-        await eor(event, str(exc))
 
 
 @legend.legend_cmd(

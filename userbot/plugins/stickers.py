@@ -14,6 +14,7 @@ from bs4 import BeautifulSoup as bs
 from PIL import Image
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
+from telethon.tl.functions.contacts import UnblockRequest as unblock
 from telethon.tl import functions, types
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
@@ -124,15 +125,12 @@ async def resize_photo(photo):
     return image
 
 
-async def delpack(legendevent, conv, cmd, args, packname):
+async def delpack(legendevent, conv, args, packname):
     try:
-        await conv.send_message(cmd)
+        await conv.send_message("/delpack")
     except YouBlockedUserError:
-        await legendevent.edit(
-            "You have blocked the @stickers bot. unblock it and try."
-        )
-        return None, None
-    await conv.send_message("/delpack")
+        await legend(unblock("stickers"))
+        await conv.send_message("/delpack")
     await conv.get_response()
     await args.client.send_read_acknowledge(conv.chat_id)
     await conv.send_message(packname)
@@ -161,13 +159,8 @@ async def newpacksticker(
     try:
         await conv.send_message(cmd)
     except YouBlockedUserError:
-        await args.client(functions.contacts.UnblockRequest("@Stickers"))
-        await legendevent.edit(
-            "You have blocked the @stickers bot. Now Unblocked Try Again"
-        )
-        if not pkang:
-            return None, None, None
-        return None, None
+        await legend(unblock("stickers"))
+        await conv.send_message(cmd)
     await conv.get_response()
     await args.client.send_read_acknowledge(conv.chat_id)
     await conv.send_message(packnick)
@@ -184,7 +177,7 @@ async def newpacksticker(
     rsp = await conv.get_response()
     if not verify_cond(EMOJI_SEN, rsp.text):
         await legendevent.edit(
-            f"Failed to add sticker, use @Stickers bot to add the sticker manually.\n**error :**{rsp}"
+            f"Failed to add sticker, use @Stickers bot to add the sticker manually.\n**error :**{rsp.text}"
         )
         if not pkang:
             return None, None, None
@@ -228,18 +221,22 @@ async def add_to_pack(
     try:
         await conv.send_message("/addsticker")
     except YouBlockedUserError:
-        await args.client(functions.contacts.UnblockRequest("@Stickers"))
-        await legendevent.edit(
-            "You have blocked the @stickers bot.Now unblocked Successfully and Now Try Again."
-        )
-        if not pkang:
-            return None, None
-        return None, None
+        await legend(unblock("stickers"))
+        await conv.send_message("/addsticker")
+    vtry = True if is_video else None
     await conv.get_response()
     await args.client.send_read_acknowledge(conv.chat_id)
     await conv.send_message(packname)
     x = await conv.get_response()
-    while ("50" in x.text) or ("120" in x.text):
+    while ("50" in x.message) or ("120" in x.message) or vtry:
+        if vtry:
+            await conv.send_file("animate.webm")
+            x = await conv.get_response()
+            if "50 video stickers" in x.message:
+                await conv.send_message("/addsticker")
+            else:
+                vtry = None
+                break
         try:
             val = int(pack)
             pack = val + 1
@@ -250,7 +247,7 @@ async def add_to_pack(
         await legendevent.edit(f"`Switching to Pack {pack} due to insufficient space`")
         await conv.send_message(packname)
         x = await conv.get_response()
-        if x.text == "Invalid pack selected.":
+        if x.message == "Invalid set selected.":
             return await newpacksticker(
                 legendevent,
                 conv,
@@ -258,7 +255,7 @@ async def add_to_pack(
                 args,
                 pack,
                 packnick,
-                is_vid,
+                is_video,
                 emoji,
                 packname,
                 is_anim,
@@ -266,19 +263,20 @@ async def add_to_pack(
                 otherpack=True,
                 pkang=pkang,
             )
-    if is_vid:
-        await conv.send_file("animate.webm")
+    if is_video:
         os.remove("animate.webm")
-    if is_anim:
+        rsp = x
+    elif is_anim:
         await conv.send_file("AnimatedSticker.tgs")
         os.remove("AnimatedSticker.tgs")
+        rsp = await conv.get_response()
     else:
         stfile.seek(0)
         await conv.send_file(stfile, force_document=True)
-    rsp = await conv.get_response()
-    if not verify_cond(EMOJI_SEN, rsp.text):
+        rsp = await conv.get_response()
+    if not verify_cond(EMOJI_SEN, rsp.message):
         await legendevent.edit(
-            f"Failed to add sticker, use @Stickers bot to add the sticker manually.\n**error :**{rsp}"
+            f"Failed to add sticker, use @Stickers bot to add the sticker manually.\n**error :**{rsp.message}"
         )
         if not pkang:
             return None, None
@@ -350,19 +348,34 @@ async def kang(args):  # sourcery no-metrics
             is_anim = True
             photo = 1
         elif message.media.document.mime_type in ["video/mp4", "video/webm"]:
+            emojibypass = False
+            is_video = True
+            photo = 1
             if message.media.document.mime_type == "video/webm":
-                await eor(args, f"`{random.choice(KANGING_STR)}`")
-                sticker = await args.client.download_media(
-                    message.media.document, "animate.webm"
-                )
+                attributes = message.media.document.attributes
+                for attribute in attributes:
+                    if isinstance(attribute, DocumentAttributeSticker):
+                        if message.media.document.size / 1024 > 255:
+                            legendevent = await eor(
+                                args, "__⌛ File size big,,, Downloading..__"
+                            )
+                            sticker = await animator(message, args, legendevent)
+                            await eor(
+                                legendevent, f"`{random.choice(KANGING_STR)}`"
+                            )
+                        else:
+                            legendevent = await eor(
+                                args, f"`{random.choice(KANGING_STR)}`"
+                            )
+                            sticker = await args.client.download_media(
+                                message.media.document, "animate.webm"
+                            )
+                        emoji = attribute.alt
+                        emojibypass = True
             else:
                 legendevent = await eor(args, "__⌛ Downloading..__")
                 sticker = await animator(message, args, legendevent)
                 await eor(legendevent, f"`{random.choice(KANGING_STR)}`")
-            is_vid = True
-            emoji = "😂"
-            emojibypass = True
-            photo = 1
         else:
             await eod(args, "`Unsupported File!`")
             return
@@ -510,12 +523,13 @@ async def pack_kang(args):  # sourcery no-metrics
     except BaseException:
         return await eod(args, "`This is not a sticker. Reply to a sticker.`", 5)
     try:
-        get_stickerset = await args.client(
+        get_stickerset = await event.client(
             GetStickerSetRequest(
                 InputStickerSetID(
                     id=stickerset_attr.stickerset.id,
                     access_hash=stickerset_attr.stickerset.access_hash,
-                )
+                ),
+                hash=0,
             )
         )
     except Exception:
@@ -560,6 +574,21 @@ async def pack_kang(args):  # sourcery no-metrics
                     emoji = attribute.alt
             is_anim = True
             photo = 1
+        elif "video/webm" in message.mime_type:
+            await eor(
+                legendevent,
+                f"`This sticker pack is kanging now . Status of kang process : {kangst}/{noofst}`",
+            )
+            if message.size / 1024 > 255:
+                await animator(message, event)
+            else:
+                await event.client.download_media(message, "animate.webm")
+            attributes = message.attributes
+            for attribute in attributes:
+                if isinstance(attribute, DocumentAttributeSticker):
+                    emoji = attribute.alt
+            is_video = True
+            photo = 1
         else:
             await eod(legendevent, "`Unsupported File!`")
             return
@@ -584,7 +613,9 @@ async def pack_kang(args):  # sourcery no-metrics
             packname = pack_name(userid, pack, is_anim, is_vid)
             cmd = "/newpack"
             stfile = io.BytesIO()
-            if is_anim:
+            if is_video:
+                cmd = "/newvideo"
+            elif is_anim:
                 cmd = "/newanimated"
             else:
                 image = await resize_photo(photo)
@@ -655,7 +686,7 @@ async def pack_kang(args):  # sourcery no-metrics
     },
 )
 async def lol(args):
-    "To kang a sticker."
+    "Converted To a sticker."
     message = await args.get_reply_message()
     user = await args.client.get_me()
     userid = user.id
@@ -781,47 +812,42 @@ async def pic2packcmd(event):
         i = 0
         try:
             await event.client.send_message(chat, "/cancel")
-            await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
+        except YouBlockedUserError:
+            await legend(unblock("stickers"))
+            await event.client.send_message(chat, "/cancel")
+        await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
             await event.client.send_message(chat, "/newpack")
             await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
             await event.client.send_message(chat, args)
             await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
             for im in images:
-                img = io.BytesIO(im)
-                img.name = name + ".png"
-                img.seek(0)
-                await event.client.send_file(chat, img, force_document=True)
-                await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
-                await event.client.send_message(chat, emoji)
-                await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
-                await event.client.send_read_acknowledge(conv.chat_id)
-                await asyncio.sleep(1)
-                i += 1
-                await legendevent.edit(
-                    f"__Making the pack.\nProgress: {i}/{len(images)}__"
-                )
-            await event.client.send_message(chat, "/publish")
+            img = io.BytesIO(im)
+            img.name = name + ".png"
+            img.seek(0)
+            await event.client.send_file(chat, img, force_document=True)
             await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
-            await event.client.send_file(chat, new_img, force_document=True)
+            await event.client.send_message(chat, emoji)
             await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
-            await event.client.send_message(chat, name)
-            ending = await conv.wait_event(
-                events.NewMessage(incoming=True, from_users=chat)
-            )
             await event.client.send_read_acknowledge(conv.chat_id)
-            for packname in ending.raw_text.split():
-                stick_pack_name = packname
-                if stick_pack_name.startswith("https://t.me/"):
-                    break
-            await legendevent.edit(
-                f"__successfully created the pack for the replied media : __[{args}]({stick_pack_name})"
-            )
-
-        except YouBlockedUserError:
-            await event.client(functions.contacts.UnblockRequest("@Stickers"))
-            await legendevent.edit(
-                "__You blocked @Stickers bot. Now unblocked Successfully and Now try again__"
-            )
+            await asyncio.sleep(1)
+            i += 1
+            await legendevent.edit(f"__Making the pack.\nProgress: {i}/{len(images)}__")
+        await event.client.send_message(chat, "/publish")
+        await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
+        await event.client.send_file(chat, new_img, force_document=True)
+        await conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
+        await event.client.send_message(chat, name)
+        ending = await conv.wait_event(
+            events.NewMessage(incoming=True, from_users=chat)
+        )
+        await event.client.send_read_acknowledge(conv.chat_id)
+        for packname in ending.raw_text.split():
+            stick_pack_name = packname
+            if stick_pack_name.startswith("https://t.me/"):
+                break
+        await legendevent.edit(
+            f"__successfully created the pack for the replied media : __[{args}]({stick_pack_name})"
+        )
 
 
 @legend.legend_cmd(
@@ -854,7 +880,8 @@ async def get_pack_info(event):
             InputStickerSetID(
                 id=stickerset_attr.stickerset.id,
                 access_hash=stickerset_attr.stickerset.access_hash,
-            )
+            ),
+            hash=0,
         )
     )
     pack_emojis = []

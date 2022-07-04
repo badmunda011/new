@@ -183,7 +183,7 @@ async def download_audio(event):
             else:
                 _fpath = _path
         if not _fpath:
-            return await eod(catevent, "__Unable to upload file__")
+            return await eod(legendevent, "__Unable to upload file__")
         await legendevent.edit(
             f"`Preparing to upload video:`\
             \n**{vid_data['title']}***"
@@ -254,7 +254,7 @@ async def download_video(event):
     legendevent = await eor(event, "`Preparing to download...`")
     reply_to_id = await reply_id(event)
     for url in urls:
-        ytdl_data = await ytdl_down(catevent, video_opts, url)
+        ytdl_data = await ytdl_down(legendevent, video_opts, url)
         if ytdl_down is None:
             return
         try:

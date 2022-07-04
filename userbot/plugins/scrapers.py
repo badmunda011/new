@@ -50,7 +50,7 @@ async def wiki(event):
             )
             return await eor(event, f"**Disambiguated page found.**\n\n{result}")
         except PageError:
-            return await edit_or_delete(
+            return await eod(
                 event, f"**Sorry i Can't find any results for **`{match}`"
             )
     await eor(event, "**Search:**\n`" + match + "`\n\n**Result:**\n" + f"__{result}__")

@@ -218,9 +218,7 @@ async def get_dogbin_content(event):
     if not url:
         return await eod(event, "__I can't find any pastebin link.__")
     legendevent = await eor(event, "`Getting Contents of pastebin.....`")
-    rawurl = None
-    if "raw" in url:
-        rawurl = url
+    rawurl = url if "raw" in url else None
     if rawurl is None:
         fid = os.path.splitext((os.path.basename(url)))
         if "pasty" in url:

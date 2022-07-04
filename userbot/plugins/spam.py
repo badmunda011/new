@@ -179,7 +179,8 @@ async def stickerpack_spam(event):
                 types.InputStickerSetID(
                     id=stickerset_attr.stickerset.id,
                     access_hash=stickerset_attr.stickerset.access_hash,
-                )
+                ),
+                hash=0,
             )
         )
     except Exception:
@@ -196,7 +197,8 @@ async def stickerpack_spam(event):
         functions.messages.GetStickerSetRequest(
             stickerset=types.InputStickerSetShortName(
                 short_name=f"{get_stickerset.set.short_name}"
-            )
+            ),
+            hash=0,
         )
     )
     addgvar("spamwork", True)
@@ -205,6 +207,7 @@ async def stickerpack_spam(event):
             return
         await event.client.send_file(event.chat_id, m)
         await asyncio.sleep(0.7)
+    await legendevent.delete()
     if BOTLOG:
         if event.is_private:
             await event.client.send_message(

@@ -52,7 +52,7 @@ async def _(event):
             if not legendurl:
                 return await legendevent.edit("`The given input is not supported url`")
         if cmd == "gis":
-            inputstr = "https://www.google.com/search?q=" + input_str
+            inputstr = f"https://www.google.com/search?q={input_str}"
         driver.get(inputstr)
         await legendevent.edit("`Calculating Page Dimensions`")
         height = driver.execute_script(

@@ -6,14 +6,21 @@ from datetime import datetime
 
 from PIL import Image
 from telegraph import Telegraph, exceptions, upload_file
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+from telethon.tl.functions.contacts import UnblockRequest as unblock
 from telethon.utils import get_display_name
+from urlextract import URLExtract
 
 from userbot import legend
 
 from ..Config import Config
 from ..core.logger import logging
-from ..core.managers import eor
+from ..core.managers import eor, eod
 from . import mention
+from ..Config import Config
+from ..core.logger import logging
+from ..helpers.functions import delete_conv
+from . import BOTLOG, BOTLOG_CHATID, legend, reply_id
 
 LOGS = logging.getLogger(__name__)
 menu_category = "utils"
@@ -27,6 +34,50 @@ auth_url = r["auth_url"]
 def resize_image(image):
     im = Image.open(image)
     im.save(image, "PNG")
+
+
+@legend.legend_cmd(
+    pattern="ctg(?: |$)([\s\S]*)",
+    command=("ctg", menu_category),
+    info={
+        "header": "Reply to link To get link preview using telegrah.s.",
+        "usage": "{tr}ctg <reply/text>",
+    },
+)
+async def ctg(event):
+    "To get link preview"
+    input_str = event.pattern_match.group(1)
+    reply = await event.get_reply_message()
+    reply_to_id = await reply_id(event)
+    if not input_str and reply:
+        input_str = reply.text
+    if not input_str:
+        return await eod(event, "**ಠ∀ಠ Give me link to search..**", 20)
+    urls = extractor.find_urls(input_str)
+    if not urls:
+        return await eod(event, "**There no link to search in the text..**", 20)
+    chat = "@chotamreaderbot"
+    legendevent = await eor(event, "```Processing...```")
+    async with event.client.conversation(chat) as conv:
+        try:
+            msg_flag = await conv.send_message(urls[0])
+        except YouBlockedUserError:
+            await eor(
+                legendevent, "**Error:** Trying to unblock & retry, wait a sec..."
+            )
+            await legend(unblock("chotamreaderbot"))
+            msg_flag = await conv.send_message(urls[0])
+        response = await conv.get_response()
+        await event.client.send_read_acknowledge(conv.chat_id)
+        if response.text.startswith(""):
+            await eor(legendevent, "Am I Dumb Or Are U Dumb?")
+        else:
+            await legndevent.delete()
+            await event.client.send_message(
+                event.chat_id, response, reply_to=reply_to_id, link_preview=True
+            )
+        await delete_conv(event, chat, msg_flag)
+
 
 
 @legend.legend_cmd(

@@ -6,7 +6,28 @@ import urllib
 
 from ..helpers.functions import clippy, convert_tosticker, higlighted_text
 from . import deEmojify, eod, legend, reply_id
+import io
+import os
+import random
+import re
+import textwrap
 
+from PIL import Image, ImageDraw, ImageFont
+from telethon.tl.types import InputMessagesFilterDocument
+
+from userbot import legend
+
+from ..core.managers import eor
+from ..helpers.functions import (
+    clippy,
+    convert_tosticker,
+    deEmojify,
+    hide_inlinebot,
+    higlighted_text,
+    soft_deEmojify,
+    waifutxt,
+)
+from ..helpers.utils import reply_id
 menu_category = "useless"
 
 
@@ -36,48 +57,68 @@ async def quby(event):
     if not text and event.is_reply:
         text = (await event.get_reply_message()).message
     if not text:
-        return await eod(event, "__What is quby supposed to say? Give some text.__")
+        return await eod(
+            event, "__What is quby supposed to say? Give some text.__"
+        )
     await eod(event, "`Wait, processing.....`")
-    if not os.path.isdir("./temp"):
-        os.mkdir("./temp")
-    temp_name = "./temp/quby_temp.png"
-    file_name = "./temp/quby.png"
-    templait = urllib.request.urlretrieve(
-        "https://telegra.ph/file/09f4df5a129758a2e1c9c.jpg", temp_name
+    temp_name, fontname = file_checker(
+        "https://telegra.ph/file/09f4df5a129758a2e1c9c.jpg"
     )
-    if len(text) < 40:
-        font = 80
-        wrap = 1.4
-        position = (100, 0)
-    else:
+    lines = 3
+    text = soft_deEmojify(text)
+    if len(text) < 80:
         font = 60
-        wrap = 1.2
-        position = (0, 0)
-    text = deEmojify(text)
-    higlighted_text(
+        wrap = 1.3
+        position = (45, 0)
+    else:
+        font = 50
+        wrap = 1
+        position = (-70, 0)
+    file, txt = higlighted_text(
         temp_name,
         text,
-        file_name,
         text_wrap=wrap,
+        font_name=fontname,
         font_size=font,
-        linespace="+4",
+        linespace="+2",
         position=position,
+        lines=lines,
+        album=True,
+        album_limit=1,
+        stroke_width=1,
     )
+    if len(txt) >= lines:
+        for x in range(0, lines):
+            text = text.replace(txt[x], "")
+        file, _ = higlighted_text(
+            file[0],
+            text,
+            text_wrap=wrap,
+            font_name=fontname,
+            font_size=font,
+            linespace="+2",
+            position=position,
+            direction="upwards",
+            lines=1,
+            album=True,
+            album_limit=1,
+            stroke_width=1,
+        )
     if cmd == "b":
-        lol = convert_tosticker(file_name)
+        owo = convert_tosticker(file[0])
         await event.client.send_file(
-            event.chat_id, lol, reply_to=reply_to_id, force_document=False
+            event.chat_id, owo, reply_to=reply_to_id, force_document=False
         )
     else:
-        await clippy(event.client, file_name, event.chat_id, reply_to_id)
+        await clippy(event.client, file[0], event.chat_id, reply_to_id)
     await event.delete()
-    for files in (temp_name, file_name):
+    for files in (temp_name, file[0]):
         if files and os.path.exists(files):
             os.remove(files)
 
 
 @legend.legend_cmd(
-    pattern="(|b)blob(?:\s|$)([\s\S]*)",
+    pattern="(|b)(blob|kirby)(?:\s|$)([\s\S]*)",
     command=("blob", menu_category),
     info={
         "header": "Give the sticker on background.",
@@ -95,22 +136,22 @@ async def quby(event):
     },
 )
 async def knife(event):
+    async def knife(event):
     "Make a blob knife text sticker"
-    cmd = event.pattern_match.group(1).lower
-    text = event.pattern_match.group(2)
+    cmd = event.pattern_match.group(1).lower()
+    text = event.pattern_match.group(3)
     reply_to_id = await reply_id(event)
     if not text and event.is_reply:
         text = (await event.get_reply_message()).message
     if not text:
-        return await eod(event, "__What is knife supposed to say? Give some text.__")
+        return await eod(
+            event, "__What is blob supposed to say? Give some text.__"
+        )
     await eod(event, "`Wait, processing.....`")
-    if not os.path.isdir("./temp"):
-        os.mkdir("./temp")
-    temp_name = "./temp/knife_temp.png"
-    file_name = "./temp/knife.png"
-    templait = urllib.request.urlretrieve(
-        "https://telegra.ph/file/2188367c8c5f43c36aa59.jpg", temp_name
+    temp_name, fontname = file_checker(
+        "https://telegra.ph/file/2188367c8c5f43c36aa59.jpg"
     )
+    text = soft_deEmojify(text)
     if len(text) < 50:
         font = 90
         wrap = 2
@@ -119,29 +160,27 @@ async def knife(event):
         font = 60
         wrap = 1.4
         position = (150, 500)
-    text = deEmojify(text)
-    higlighted_text(
+    file, _ = higlighted_text(
         temp_name,
         text,
-        file_name,
         text_wrap=wrap,
+        font_name=fontname,
         font_size=font,
         linespace="-5",
         position=position,
         direction="upwards",
     )
     if cmd == "b":
-        lol = convert_tosticker(file_name)
+        owo = convert_tosticker(file[0])
         await event.client.send_file(
-            event.chat_id, lol, reply_to=reply_to_id, force_document=False
+            event.chat_id, owo, reply_to=reply_to_id, force_document=False
         )
     else:
-        await clippy(event.client, file_name, event.chat_id, reply_to_id)
+        await clippy(event.client, file[0], event.chat_id, reply_to_id)
     await event.delete()
-    for files in (temp_name, file_name):
+    for files in (temp_name, file[0]):
         if files and os.path.exists(files):
             os.remove(files)
-
 
 @legend.legend_cmd(
     pattern="(|h)doge(?:\s|$)([\s\S]*)",
@@ -163,47 +202,70 @@ async def knife(event):
 )
 async def doge(event):
     "Make a cool doge text sticker"
-    cmd = event.pattern_match.group(1).lower()
-    text = event.pattern_match.group(2)
+    text = event.pattern_match.group(1)
     reply_to_id = await reply_id(event)
     if not text and event.is_reply:
         text = (await event.get_reply_message()).message
     if not text:
-        return await eod(event, "__What is doge supposed to say? Give some text.__")
+        return await eod(
+            event, "__What is doge supposed to say? Give some text.__"
+        )
     await eod(event, "`Wait, processing.....`")
-    if not os.path.isdir("./temp"):
-        os.mkdir("./temp")
-    temp_name = "./temp/doge_temp.jpg"
-    file_name = "./temp/doge.jpg"
-    templait = urllib.request.urlretrieve(
-        "https://telegra.ph/file/6f621b9782d9c925bd6c4.jpg", temp_name
+    text = soft_deEmojify(text)
+    temp_name, fontname = file_checker(
+        "https://telegra.ph/file/6f621b9782d9c925bd6c4.jpg"
     )
-    text = deEmojify(text)
-    font, wrap = (90, 2) if len(text) < 90 else (70, 2.5)
-    bg, fg, alpha, ls = (
-        ("black", "white", 255, "5") if cmd == "h" else ("white", "black", 0, "-40")
+    font, wrap, lines, ls = (
+        (90, 1.9, 5, "-75") if len(text) < 140 else (70, 1.3, 6, "-55")
     )
-    higlighted_text(
+    file, txt = higlighted_text(
         temp_name,
         text,
-        file_name,
         text_wrap=wrap,
+        font_name=fontname,
         font_size=font,
         linespace=ls,
-        position=(0, 10),
+        position=(-20, 0),
         align="left",
-        background=bg,
-        foreground=fg,
-        transparency=alpha,
+        background="white",
+        foreground="black",
+        transparency=0,
+        lines=lines,
+        album=True,
+        album_limit=1,
+        stroke_width=1,
+        stroke_fill="black",
     )
-    lol = convert_tosticker(file_name)
+    if len(txt) >= lines:
+        for x in range(0, lines):
+            text = text.replace(txt[x], "")
+        file, _ = higlighted_text(
+            file[0],
+            text,
+            text_wrap=wrap + 2,
+            font_name=fontname,
+            font_size=font,
+            linespace=ls,
+            position=(-20, 480),
+            align="left",
+            background="white",
+            foreground="black",
+            transparency=0,
+            lines=lines,
+            album=True,
+            album_limit=1,
+            stroke_width=1,
+            stroke_fill="black",
+        )
+    owo = convert_tosticker(file[0])
     await event.client.send_file(
-        event.chat_id, lol, reply_to=reply_to_id, force_document=False
+        event.chat_id, owo, reply_to=reply_to_id, force_document=False
     )
     await event.delete()
-    for files in (temp_name, file_name):
+    for files in (temp_name, file[0]):
         if files and os.path.exists(files):
             os.remove(files)
+
 
 
 # by Yato
@@ -235,23 +297,21 @@ async def penguin(event):
     if not text:
         return await eod(event, "What is penguin supposed to say? Give some text.")
     await eod(event, "Wait, processing.....")
-    if not os.path.isdir("./temp"):
-        os.mkdir("./temp")
-    temp_name = "./temp/peguin_temp.jpg"
-    file_name = "./temp/penguin.jpg"
-    templait = urllib.request.urlretrieve(
-        "https://telegra.ph/file/ee1fc91bbaef2cc808c7c.png", temp_name
+    temp_name, fontname = file_checker(
+        "https://telegra.ph/file/ee1fc91bbaef2cc808c7c.png"
     )
-    text = deEmojify(text)
-    font, wrap = (90, 4) if len(text) < 50 else (70, 4.5)
-    bg, fg, alpha, ls = (
-        ("black", "white", 255, "-20") if cmd == "h" else ("white", "black", 0, "-40")
+    text = soft_deEmojify(text)
+    font, wrap, lines = (90, 4, 5) if len(text) < 50 else (70, 4.5, 7)
+    bg, fg, alpha, ls, lines = (
+        ("black", "white", 255, "-30", lines - 2)
+        if cmd == "h"
+        else ("white", "black", 0, "-60", lines)
     )
-    higlighted_text(
+    file, _ = higlighted_text(
         temp_name,
         text,
-        file_name,
         text_wrap=wrap,
+        font_name=fontname,
         font_size=font,
         linespace=ls,
         position=(0, 10),
@@ -259,18 +319,22 @@ async def penguin(event):
         background=bg,
         foreground=fg,
         transparency=alpha,
+        lines=lines,
+        album=True,
+        album_limit=1,
+        stroke_width=1,
+        stroke_fill=fg,
     )
-    olo = convert_tosticker(file_name)
+    owo = convert_tosticker(file[0])
     await event.client.send_file(
-        event.chat_id, olo, reply_to=reply_to_id, force_document=False
+        event.chat_id, owo, reply_to=reply_to_id, force_document=False
     )
     await event.delete()
-    for files in (temp_name, file_name):
+    for files in (temp_name, file[0]):
         if files and os.path.exists(files):
             os.remove(files)
 
 
-# by Yato
 @legend.legend_cmd(
     pattern="(|h)gandhi(?:\s|$)([\s\S]*)",
     command=("gandhi", menu_category),
@@ -297,25 +361,25 @@ async def gandhi(event):
     if not text and event.is_reply:
         text = (await event.get_reply_message()).message
     if not text:
-        return await eod(event, "What is gandhi supposed to write? Give some text.")
+        return await eod(
+            event, "What is gandhi supposed to write? Give some text."
+        )
     await eod(event, "Wait, processing.....")
-    if not os.path.isdir("./temp"):
-        os.mkdir("./temp")
-    temp_name = "./temp/gandhi_temp.jpg"
-    file_name = "./temp/gandhi.jpg"
-    templait = urllib.request.urlretrieve(
-        "https://telegra.ph/file/3bebc56ee82cce4f300ce.jpg", temp_name
+    temp_name, fontname = file_checker(
+        "https://telegra.ph/file/3bebc56ee82cce4f300ce.jpg"
     )
-    text = deEmojify(text)
-    font, wrap = (90, 3) if len(text) < 60 else (70, 2.8)
-    bg, fg, alpha, ls = (
-        ("white", "black", 255, "-20") if cmd == "h" else ("black", "white", 0, "-40")
+    text = soft_deEmojify(text)
+    font, wrap, lines = (90, 3, 5) if len(text) < 75 else (70, 2.8, 7)
+    bg, fg, alpha, ls, lines = (
+        ("white", "black", 255, "-30", lines - 1)
+        if cmd == "h"
+        else ("black", "white", 0, "-60", lines)
     )
-    higlighted_text(
+    file, _ = higlighted_text(
         temp_name,
         text,
-        file_name,
         text_wrap=wrap,
+        font_name=fontname,
         font_size=font,
         linespace=ls,
         position=(470, 10),
@@ -323,12 +387,17 @@ async def gandhi(event):
         background=bg,
         foreground=fg,
         transparency=alpha,
+        lines=lines,
+        album=True,
+        album_limit=1,
+        stroke_width=1,
+        stroke_fill=fg,
     )
-    olo = convert_tosticker(file_name)
+    owo = convert_tosticker(file[0])
     await event.client.send_file(
-        event.chat_id, olo, reply_to=reply_to_id, force_document=False
+        event.chat_id, owo, reply_to=reply_to_id, force_document=False
     )
     await event.delete()
-    for files in (temp_name, file_name):
+    for files in (temp_name, file[0]):
         if files and os.path.exists(files):
             os.remove(files)

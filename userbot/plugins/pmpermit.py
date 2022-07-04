@@ -18,6 +18,14 @@ from ..sql_helper import pmpermit_sql
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from . import mention
 
+class PMPERMIT:
+    def __init__(self):
+        self.TEMPAPPROVED = []
+
+
+PMPERMIT_ = PMPERMIT()
+
+
 menu_category = "utils"
 LOGS = logging.getLogger(__name__)
 cmdhd = Config.HANDLER
@@ -404,6 +412,8 @@ async def on_new_private_message(event):
         return
     if pmpermit_sql.is_approved(chat.id):
         return
+    if chat.id in PMPERMIT_.TEMPAPPROVED:
+        return
     if event.chat_id == 5122474448:
         await event.client.send_message(chat, "👨‍💻 Welcome My Master 💝")
         reason = "**♡ My Pro Master Is Here ♡ **"
@@ -457,6 +467,10 @@ async def you_dm_other(event):
             f"{cmdhd}a",
             f"{cmdhd}da",
             f"{cmdhd}approve",
+            f"{cmdhd}tempapprove",
+            f"{cmdhd}tempa",
+            f"{cmdhd}tapprove",
+            f"{cmdhd}ta",
         )
     ):
         return
@@ -742,6 +756,89 @@ async def approve_p_m(event):  # sourcery no-metrics
         )
 
 
+
+@legend.legend_cmd(
+    pattern="t(emp)?(a|approve)(?:\s|$)([\s\S]*)",
+    command=("tapprove", menu_category),
+    info={
+        "header": "To approve user to direct message you for temporarily.",
+        "note": "Heroku restarts every 24 hours so with every restart it dissapproves every temp approved user",
+        "usage": [
+            "{tr}ta/tapprove <username/reply reason> in group",
+            "{tr}ta/tapprove <reason> in pm",
+        ],
+    },
+)
+async def tapprove_pm(event):  # sourcery no-metrics
+    "Temporarily approve user to pm"
+    if gvarstatus("pmpermit") is None:
+        return await eor(
+            event,
+            f"__Turn on pmpermit by doing __`{cmdhd}pmguard on` __for working of this plugin__",
+        )
+    if event.is_private:
+        user = await event.get_chat()
+        reason = event.pattern_match.group(3)
+    else:
+        user, reason = await get_user_from_event(event, thirdgroup=True)
+        if not user:
+            return
+    if not reason:
+        reason = "Not mentioned"
+    try:
+        PM_WARNS = sql.get_collection("pmwarns").json
+    except AttributeError:
+        PM_WARNS = {}
+    if (user.id not in PMPERMIT_.TEMPAPPROVED) and (
+        not pmpermit_sql.is_approved(user.id)
+    ):
+        if str(user.id) in PM_WARNS:
+            del PM_WARNS[str(user.id)]
+        PMPERMIT_.TEMPAPPROVED.append(user.id)
+        chat = user
+        if str(chat.id) in sqllist.get_collection_list("pmspam"):
+            sqllist.rm_from_list("pmspam", chat.id)
+        if str(chat.id) in sqllist.get_collection_list("pmchat"):
+            sqllist.rm_from_list("pmchat", chat.id)
+        if str(chat.id) in sqllist.get_collection_list("pmrequest"):
+            sqllist.rm_from_list("pmrequest", chat.id)
+        if str(chat.id) in sqllist.get_collection_list("pmenquire"):
+            sqllist.rm_from_list("pmenquire", chat.id)
+        if str(chat.id) in sqllist.get_collection_list("pmoptions"):
+            sqllist.rm_from_list("pmoptions", chat.id)
+        await eod(
+            event,
+            f"[{user.first_name}](tg://user?id={user.id}) is __temporarily approved to pm__\n**Reason :** __{reason}__",
+        )
+        try:
+            PMMESSAGE_CACHE = sql.get_collection("pmmessagecache").json
+        except AttributeError:
+            PMMESSAGE_CACHE = {}
+        if str(user.id) in PMMESSAGE_CACHE:
+            try:
+                await event.client.delete_messages(
+                    user.id, PMMESSAGE_CACHE[str(user.id)]
+                )
+            except Exception as e:
+                LOGS.info(str(e))
+            del PMMESSAGE_CACHE[str(user.id)]
+        sql.del_collection("pmwarns")
+        sql.del_collection("pmmessagecache")
+        sql.add_collection("pmwarns", PM_WARNS, {})
+        sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
+    elif pmpermit_sql.is_approved(user.id):
+        await eod(
+            event,
+            f"[{user.first_name}](tg://user?id={user.id}) __is in approved list__",
+        )
+    else:
+        await eod(
+            event,
+            f"[{user.first_name}](tg://user?id={user.id}) __is already in temporary approved list__",
+        )
+
+
+
 @legend.legend_cmd(
     pattern="(da|disapprove)(?:\s|$)([\s\S]*)",
     command=("disapprove", menu_category),
@@ -782,6 +879,12 @@ async def disapprove_p_m(event):
         reason = "Not Mentioned."
     if pmpermit_sql.is_approved(user.id):
         pmpermit_sql.disapprove(user.id)
+        await eor(
+            event,
+            f"[{user.first_name}](tg://user?id={user.id}) __is disapproved to personal message me.__\n**Reason:**__ {reason}__",
+        )
+    elif user.id in PMPERMIT_.TEMPAPPROVED:
+        PMPERMIT_.TEMPAPPROVED.remove(user.id)
         await eor(
             event,
             f"[{user.first_name}](tg://user?id={user.id}) __is disapproved to personal message me.__\n**Reason:**__ {reason}__",
@@ -845,7 +948,7 @@ async def block_p_m(event):
     sql.add_collection("pmwarns", PM_WARNS, {})
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
     await event.client(functions.contacts.BlockRequest(user.id))
-    await eod(
+    await eor(
         event,
         f"[{user.first_name}](tg://user?id={user.id}) __is blocked, he can no longer personal message you.__\n**Reason:** __{reason}__",
     )
