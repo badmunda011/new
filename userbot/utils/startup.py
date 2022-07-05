@@ -200,7 +200,7 @@ async def hekp():
         pass
 
 
-spam = os.environ.get("SPAM", None) or "OFF"
+spam = Config.SPAM
 
 
 async def scammer(username):
