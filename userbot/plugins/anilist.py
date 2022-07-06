@@ -47,7 +47,6 @@ anime_path = os.path.join(os.getcwd(), "temp", "animeresult.jpg")
 
 menu_category = "extra"
 
-
 @legend.legend_cmd(
     pattern="aq$",
     command=("aq", menu_category),
