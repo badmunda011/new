@@ -46,7 +46,8 @@ pattern="Regex for command"
 command=("Just command name", menu_category) use menu_category name from predefined names (admin,bot,utils,tools,extra,fun,misc)
 info={
         "header":string - "intro for command",
-        "description": string - "Description for command",
+        "description": string - "Description for command\
+            \nNote: If Note U Can Write Here ",
         "flags": dict or string - "Types u are using in your plugin",
         "options": dict or string - "Options u are using in your plugin",
         "types": list or string - "types u are using in your plugin",
