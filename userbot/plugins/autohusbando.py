@@ -35,7 +35,8 @@ def progress(current, total):
     },
     groups_only=True,
 )
-async def _(event):
+async def at(event):
+    """Auto Protecc the Replied Husbando Pic"""
     sweetie = await eor(event, "Hmm.. Reply To Husbando Pic")
     BASE_URL = "http://images.google.com"
     if event.reply_to_msg_id:
@@ -80,7 +81,7 @@ async def _(event):
 
 
 @legend.legend_cmd(incoming=True, edited=False)
-async def _(event):
+async def on_husbando(event):
     if not event.media:
         return
     if not sex in event.text:
@@ -142,7 +143,8 @@ async def _(event):
     },
     groups_only=True,
 )
-async def _(event):
+async def ah(event):
+    "Add The current Group in husbando database"
     if not event.is_group:
         await eod(event, "Auto Husbando works in Groups Only !!")
         return
@@ -168,7 +170,8 @@ async def _(event):
     },
     groups_only=True,
 )
-async def _(event):
+async def rmah(event):
+    "Remove Group From Auto Husbando Databse"
     if not event.is_group:
         await eod(event, "Auto Husbando works in groups only !!")
         return
@@ -194,7 +197,8 @@ async def _(event):
     },
     groups_only=True,
 )
-async def _(event):
+async def listah(event):
+    "List Of All Chats Auto Husbando Enabled"
     swt = await eor(event, "Fetching Auto Husbando chats...")
     all_grp = get_all_grp()
     x = "**Auto Husbando enabled chats :** \n\n"
