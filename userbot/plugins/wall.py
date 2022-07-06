@@ -38,7 +38,7 @@ async def wall_download(piclink, query):
     info={
         "header": "Searches and uploads wallpaper",
         "usage": ["{tr}wall <query>", "{tr}wall <query> ; <1-10>"],
-        "examples": ["{tr}wall one piece", "{tr}wall one piece ; 2"],
+        "examples": ["{tr}wall legend", "{tr}wall legend ; 2"],
     },
 )
 async def noods(event):
