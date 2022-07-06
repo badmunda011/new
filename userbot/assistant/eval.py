@@ -5,7 +5,6 @@ import traceback
 from userbot import Config, legend
 
 from ..core.logger import logging
-from ..sql_helper.bot_blacklists import check_is_black_list
 
 LOGS = logging.getLogger(__name__)
 
