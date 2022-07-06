@@ -9,11 +9,6 @@ import os
 import random
 import shutil
 from datetime import datetime
-import asyncio
-import os
-import random
-import shutil
-from datetime import datetime
 
 from PIL import Image, ImageDraw, ImageFont
 from pySmartDL import SmartDL
@@ -22,7 +17,6 @@ from telethon.tl import functions
 from .. import legend
 from ..core.logger import logging
 from ..core.managers import eor
-from . import mention
 
 menu_category = "useless"
 
@@ -280,7 +274,6 @@ async def autopic(event):
             return
 
 
-
 TELEGRAPH_MEDIA_LINKS = [
     "https://telegra.ph/file/a2b6e3781680a6d85f842.jpg",
     "https://telegra.ph/file/2f2035b4e8ab1dc6efc3d.jpg",
@@ -339,4 +332,3 @@ async def inddp(event):
             await asyncio.sleep(60)
         except:
             return
-
