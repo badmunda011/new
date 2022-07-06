@@ -1,8 +1,6 @@
 import asyncio
 from collections import deque
 
-from telethon.tl.functions.users import GetFullUserRequest
-
 from . import eor, legend, mention
 
 menu_category = "fun"

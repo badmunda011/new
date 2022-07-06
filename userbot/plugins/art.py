@@ -1,7 +1,8 @@
 import asyncio
 
-from . import ALIVE_NAME, eor, legend
 from ..helpers.utils import reply_id
+from . import ALIVE_NAME, eor, legend
+
 menu_category = "fun"
 
 
@@ -451,7 +452,9 @@ async def viello(event):
         HELLO += f"║┗┛║┗╣┃║┃║X X ║\n"
         HELLO += f"║┏┓║┏╣┗╣┗╣╰╯║\n"
         HELLO += f"╚┛┗╩━╩━╩━╩━━╝\n"
-        on = await event.client.send_file(event.chat_id, file=HELL_PIC, caption=HELLO, reply_to=reply_to_id)
+        on = await event.client.send_file(
+            event.chat_id, file=HELL_PIC, caption=HELLO, reply_to=reply_to_id
+        )
         await asyncio.sleep(3)
         ok = await event.client.edit_message(event.chat_id, on, file=K_PIC)
         await asyncio.sleep(3)
@@ -554,7 +557,7 @@ async def bluvilsnake(snake):
     },
 )
 async def lnd(event):
-    "Just a art command try out yourself to see" 
+    "Just a art command try out yourself to see"
     if name := event.pattern_match.group(1):
         return await eor(
             event,
@@ -707,5 +710,7 @@ async def blilbye(event):
     if BYE_PIC := "https://te.legra.ph/file/aa16cad62645045062c0f.jpg":
         event = await event.send_message(bye, "**❛ Bye ❜!**")
         lol = "Bye Friends"
-        await legend.send_file(event.chat_id, BYE_PIC, caption=lol, reply_to=reply_to_id)
+        await legend.send_file(
+            event.chat_id, BYE_PIC, caption=lol, reply_to=reply_to_id
+        )
         await event.delete()
