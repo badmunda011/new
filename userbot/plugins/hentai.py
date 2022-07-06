@@ -253,7 +253,7 @@ async def hbdsm(event):
             xxxx = await event.client.send_file(event.chat_id, response.message)
             await unsave_gif(event, xxxx)
 
- 
+
 @legend.legend_cmd(
     pattern="hgif$",
     command=("hgif", menu_category),
