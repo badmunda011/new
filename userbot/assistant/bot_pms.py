@@ -158,6 +158,8 @@ async def bot_start(event):
                 BOTLOG_CHATID,
                 f"**Error**\nThere was a error while user starting your bot. `{e}`",
             )
+    else:
+        await check_bot_started_users(chat, event)
 
 
 @legend.tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"rules")))
