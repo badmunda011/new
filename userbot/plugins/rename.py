@@ -20,10 +20,10 @@ thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg"
     command=("rnup", menu_category),
     info={
         "header": "To rename and upload the replied file.",
-        "flags": [
+        "flags": {
             "f": "will upload as file that is document not streamable.",
             "t": "will upload with thumbnail",
-        ],
+        },
         "description": "If type is not used then will upload as steamable file",
         "usage": [
             "{tr}rnup <new file name>",
@@ -31,7 +31,7 @@ thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg"
         ],
     },
 )
-async def _(event):
+async def rnup(event):
     "To rename and upload the file"
     thumb = thumb_image_path if os.path.exists(thumb_image_path) else None
     types = event.pattern_match.group(1)
