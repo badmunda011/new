@@ -708,9 +708,9 @@ async def blilbye(event):
     "fun art command"
     reply_to_id = await reply_id(event)
     if BYE_PIC := "https://te.legra.ph/file/aa16cad62645045062c0f.jpg":
-        event = await event.send_message(bye, "**❛ Bye ❜!**")
+        legendevent = await event.client.send_message(bye, "**❛ Bye ❜!**")
         lol = "Bye Friends"
-        await legend.send_file(
+        await event.client.send_file(
             event.chat_id, BYE_PIC, caption=lol, reply_to=reply_to_id
         )
-        await event.delete()
+        await legendevent.delete()
