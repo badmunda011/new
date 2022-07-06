@@ -27,6 +27,7 @@ menu_category="extra"
         "usage": "{tr}hilegend <text>",
         "examples": "{tr}hilegend how are you bro",
     },
+    
 )
 async def hi_legend(event):
     "Just to say hi to other user."
@@ -59,4 +60,5 @@ allow_sudo=True or False(by default True) - Should your sudo users need to have 
 edited=True or False(by default True) - If suppose you entered wrong command syntax and if you edit it correct should it work or not.
 forword=True or False(by deafult False) - Is forword messages should react or not.
 disable_errors=True or False(by default False) - if any error occured during the command usage should it log or not.
+require_admin=True or False(by default False) - Are u admin in group is required or not
 ```
