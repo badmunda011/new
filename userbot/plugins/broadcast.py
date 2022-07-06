@@ -1,19 +1,6 @@
 import base64
 from asyncio import sleep
-import asyncio
-import os
-import random
-import shutil
-from datetime import datetime
 
-from PIL import Image, ImageDraw, ImageFont
-from pySmartDL import SmartDL
-from telethon.tl import functions
-
-from .. import legend
-from ..core.logger import logging
-from ..core.managers import eor
-from . import mention
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
 from .. import legend
