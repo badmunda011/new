@@ -18,8 +18,6 @@ from userbot import legend
 
 from ..Config import Config
 from ..core.logger import logging
-from ..helpers.functions import deEmojify, hide_inlinebot
-from ..helpers.utils import reply_id
 from ..sql_helper.globals import gvarstatus
 from . import BOTLOG, BOTLOG_CHATID, eor
 
