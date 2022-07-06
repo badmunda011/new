@@ -69,7 +69,7 @@ because he reached the defined flood limit.""",
     groups_only=True,
     require_admin=True,
 )
-async def _(event):
+async def setflood(event):
     "To setup antiflood in a group to prevent spam"
     input_str = event.pattern_match.group(1)
     event = await eor(event, "`updating flood settings!`")
