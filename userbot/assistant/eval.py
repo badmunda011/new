@@ -30,17 +30,11 @@ async def aexec(code, event):
     incoming=True,
     func=lambda e: e.sender_id == Config.OWNER_ID,
 )
-async def bot_ll(event):
-    chat = await event.get_chat()
-    await legend.get_me()
-    if check_is_black_list(chat.id):
-        return
-    rk = await event.reply("`....`")
-    try:
-        cmd = event.text.split(" ", maxsplit=1)[1]
-    except IndexError:
-        return await rk.edit("`No Python Command Was Given`")
-    cmd = event.text.split(" ", maxsplit=1)[1]
+async def bo_ll(event):
+    cmd = await event.get_reply_message()
+    if not cmd:
+        return await event.reply("Reply to a message for Eval !")
+    # cmd = event.text.split(" ", maxsplit=1)[1]
     if cmd in (
         "LEGEND_STRING",
         "session",
