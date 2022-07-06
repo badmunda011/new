@@ -27,7 +27,6 @@ async def gim(event):
     await event.edit(a)
 
 
-
 @legend.legend_cmd(
     pattern="holi$",
     command=("holi", menu_category),
@@ -55,7 +54,6 @@ async def holi(event):
 
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 8], link_preview=True)
-
 
 
 @legend.legend_cmd(
