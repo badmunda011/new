@@ -118,7 +118,7 @@ async def some(event):
     try:
         await event.client(
             functions.channels.GetParticipantRequest(
-                channel=chat, participant=event.from_id.user_id
+                channel=chat, participant=event.from_id
             )
         )
     except UserNotParticipantError:
