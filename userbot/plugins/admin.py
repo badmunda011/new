@@ -107,6 +107,7 @@ from telethon.tl.types import ChannelParticipantsKicked as banned
     require_admin=True,
 )
 async def shj(e):
+    "To Demote all members whom u have promoted"
     sr = await e.client.get_participants(e.chat.id, filter=admin)
     et = 0
     newrights = ChatAdminRights(
@@ -131,7 +132,7 @@ async def shj(e):
     pattern="getbanned$",
     command=("getbanned", menu_category),
     info={
-        "header": "To Get List Of Banned User",
+        "header": "To Get List Of Banned User in group",
         "description": "It Help U to get list of all user banned in group /nNote: u must be have proper right",
         "usage": [
             "{tr}getbanned",
@@ -141,6 +142,7 @@ async def shj(e):
     require_admin=True,
 )
 async def getbaed(event):
+    "To Get List Of Banned User in group"
     try:
         users = await event.client.get_participants(event.chat_id, filter=banned)
     except Exception as e:
