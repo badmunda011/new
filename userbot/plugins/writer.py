@@ -1,18 +1,14 @@
 import os
-
-from PIL import Image, ImageDraw, ImageFont
-
-from ..helpers.tools import async_searcher, text_set
-from . import legend
 import urllib
 
+from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.functions.users import GetFullUserRequest
 
 from ..core.managers import eod, eor
 from ..helpers.functions import deEmojify, higlighted_text
+from ..helpers.tools import async_searcher, text_set
 from ..sql_helper.globals import addgvar, gvarstatus
-from . import BOTLOG, BOTLOG_CHATID, reply_id
-
+from . import BOTLOG, BOTLOG_CHATID, legend, reply_id
 
 menu_category = "tools"
 
@@ -69,7 +65,6 @@ async def note(e):
     await e.reply(file=file)
     os.remove(file)
     await k.delete()
-
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -441,4 +436,3 @@ async def notebook_conf(event):
     )
     await event.client.send_file(event.chat_id, file, caption=cap, reply_to=reply_to_id)
     os.remove(file)
-
