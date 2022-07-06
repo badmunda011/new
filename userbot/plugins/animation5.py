@@ -13,7 +13,7 @@ menu_category = "fun"
         "usage": "{tr}loading",
     },
 )
-async def _(event):
+async def loading(event):
     "animation command"
     animation_interval = 0.3
     animation_ttl = range(20)
