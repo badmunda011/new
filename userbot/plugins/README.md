@@ -27,7 +27,6 @@ menu_category="extra"
         "usage": "{tr}hilegend <text>",
         "examples": "{tr}hilegend how are you bro",
     },
-    
 )
 async def hi_legend(event):
     "Just to say hi to other user."
