@@ -668,7 +668,7 @@ async def gend(think):
     },
 )
 async def lj(frogsay):
-    ""Just a art command try out yourself to see""
+    "Just a art command try out yourself to see"
     C = (
         f"**{ALIVE_NAME} ~> {name} .\n\n**"
         "⠄⠄⠄⠄⠄⣀⣀⣤⣶⣿⣿⣶⣶⣶⣤⣄⣠⣴⣶⣿⣶⣦⣄⠄\n"
