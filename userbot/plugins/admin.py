@@ -648,7 +648,7 @@ async def kick(event):
     else:
         await event.client.send_file(
             event.chat_id,
-            help_pic,
+            bn_pic,
             caption=f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`",
         )
     if BOTLOG:
