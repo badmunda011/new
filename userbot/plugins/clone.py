@@ -45,7 +45,7 @@ async def clone(event):
         last_name = last_name.replace("\u2060", "")
     if last_name is None:
         last_name = "⁪⁬⁮⁮⁮⁮ ‌‌‌‌"
-    replied_user = await event.client(GetFullUserRequest(replied_user.id))
+    replied_user = (await event.client(GetFullUserRequest(replied_user.id))).full_user
     user_bio = replied_user.about
     if user_bio is not None:
         user_bio = replied_user.about
