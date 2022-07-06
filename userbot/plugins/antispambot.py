@@ -160,7 +160,7 @@ async def caschecker(event):
     },
     groups_only=True,
 )
-async def caschecker(event):
+async def spamchecker(event):
     "Searches for spamwatch federation banned users in group and shows you the list"
     text = ""
     legendevent = await eor(
