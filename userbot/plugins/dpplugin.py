@@ -14,7 +14,6 @@ from PIL import Image, ImageDraw, ImageFont
 from pySmartDL import SmartDL
 from telethon.tl import functions
 
-from .. import legend
 from ..core.logger import logging
 from ..core.managers import eor
 
