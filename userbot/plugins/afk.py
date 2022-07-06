@@ -183,7 +183,7 @@ async def on_afk(event):  # sourcery no-metrics
         "note": "Switches off AFK when you type back anything, anywhere. You can use #afk in message to continue in afk without breaking it",
     },
 )
-async def _(event):
+async def afk(event):
     "To mark yourself as afk i.e. Away from keyboard"
     AFK_.USERAFK_ON = {}
     AFK_.afk_time = None
@@ -240,7 +240,7 @@ async def _(event):
         "note": "Switches off AFK when you type back anything, anywhere. You can use #afk in message to continue in afk without breaking it",
     },
 )
-async def _(event):
+async def mafk(event):
     "To mark yourself as afk i.e. Away from keyboard (supports media)"
     reply = await event.get_reply_message()
     media_t = media_type(reply)
