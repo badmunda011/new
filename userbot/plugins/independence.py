@@ -37,7 +37,7 @@ LOGS = logging.getLogger(__name__)
         ],
     },
 )
-async def xd(event):
+async def indanime(event):
     "Help U To Send Independance Day Message In All Group & User"
     await event.get_reply_message()
     type = event.text[9:11] or "-a"
@@ -112,7 +112,8 @@ async def xd(event):
         ],
     },
 )
-async def _(event):
+async def independence(event):
+    "Wish Happy Independence Day"
     animation_interval = 6
     animation_ttl = range(0, 17)
     await event.edit("Starting...")
@@ -163,7 +164,8 @@ TELEGRAPH_MEDIA_LINKS = [
         ],
     },
 )
-async def autopic(event):
+async def inddp(event):
+    "To Apply Automatically Dp"
     while True:
         piclink = random.randint(0, len(TELEGRAPH_MEDIA_LINKS) - 1)
         AUTOPP = TELEGRAPH_MEDIA_LINKS[piclink]
@@ -206,7 +208,8 @@ async def autopic(event):
         ],
     },
 )
-async def _(event):
+async def indslogan(event):
+    "To Get Indian Slogan"
     await event.edit("Speaking A Slogan")
     await asyncio.sleep(2)
     x = random.randrange(1, 25)
