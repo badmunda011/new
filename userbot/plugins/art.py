@@ -15,9 +15,8 @@ menu_category = "fun"
 )
 async def ded(event):
     "fun art command"
-    name = event.text[4:]
-    if name:
-        await eor(
+    if name := event.text[4:]:
+        return await eor(
             event,
             f"{ALIVE_NAME} --- {name}          \n　　　　　|"
             "\n　　　　　| \n"
@@ -35,7 +34,7 @@ async def ded(event):
             "　　　　　 Ｕ Ｕ\n",
         )
     else:
-        await eor(event, "Give me some text")
+        return await eor(event, "Give me some text")
 
 
 @legend.legend_cmd(
@@ -48,9 +47,8 @@ async def ded(event):
 )
 async def killer(event):
     "fun art command"
-    name = event.pattern_match.group(1)
-    if name:
-        await eor(
+    if name := event.pattern_match.group(1):
+        return await eor(
             event,
             f"__**Commando **__{ALIVE_NAME}          \n\n"
             "_/﹋\_\n"
@@ -59,7 +57,7 @@ async def killer(event):
             "_/﹋\_\n",
         )
     else:
-        await eor("Give me some Text")
+        return await eor("Give me some Text")
 
 
 A = (
