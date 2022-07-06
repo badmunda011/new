@@ -644,7 +644,7 @@ async def inline_handler(event):  # sourcery no-metrics
             if PM_IMG == "OFF":
                 LEGEND_IMG = None
             else:
-                legend = [x for x in PM_PIC.split()]
+                legend = [x for x in PM_IMG.split()]
                 PIC = list(legend)
                 LEGEND_IMG = random.choice(PIC)
             query = gvarstatus("pmpermit_text")
