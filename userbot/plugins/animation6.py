@@ -1,5 +1,22 @@
 import asyncio
+import asyncio
+import os
+import random
+import shutil
+from datetime import datetime
 
+from PIL import Image, ImageDraw, ImageFont
+from pySmartDL import SmartDL
+from telethon.tl import functions
+
+from .. import legend
+from ..core.logger import logging
+from ..core.managers import eor
+from . import mention
+
+menu_category = "useless"
+
+LOGS = logging.getLogger(__name__)
 from . import eor, legend
 
 menu_category = "fun"
@@ -436,3 +453,39 @@ async def _(event):
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 7])
+
+@legend.legend_cmd(
+    pattern="independence(?:\s|$)([\s\S]*)",
+    command=("independence", menu_category),
+    info={
+        "header": "Wish Happy Independence Day",
+        "description": "It Can Help U To Send Independence Day Message ",
+        "usage": [
+            "{tr}independence",
+        ],
+    },
+)
+async def independence(event):
+    "Wish Happy Independence Day"
+    animation_interval = 6
+    animation_ttl = range(0, 17)
+    await event.edit("Starting...")
+    animation_chars = [
+        "**нєℓℓο!👋**",
+        "**нοω αяє υ?**",
+        f"**{mention} : нαρργ ιи∂єρєи∂єиϲє ∂αγ**",
+        "ωιѕнιиg υ нαρργ ιи∂єρєи∂єиϲє ∂αγ",
+        "**Happy 😊 Indpendence Day!**",
+        "**From every mountain side Let Fredom Ring**",
+        "**Independence means.. enjoying freedom and empowering others too to let them do so.**",
+        "ͲϴᎠᎪᎽ ᏔᎬ ᎪᎡᎬ ҒᎡᎬᎬ ᏴᎬᏟᎪႮՏᎬ ᎷᎪΝᎽ ՏᎪᏟᎡᏆҒᏆᏟᎬᎠ ͲᎻᎬᎡᎬ ᏞᏆᏙᎬՏ ҒϴᎡ ᏆΝᎠᏆᎪ \nՏᎪᏞႮͲᎬ ͲᎻᎬ ᏀᎡᎬᎪͲ ՏϴႮᏞՏ",
+        "[ƒοя υ](https://telegra.ph/file/66205f168d8c2a0bbaa43.jpg)",
+        "[нαρργ ιи∂ρєи∂єиϲє ∂αγ](https://t.me/Legend_Userbot)",
+    ]
+    for i in animation_ttl:  # By @The_LegendBoy LegendBot
+
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 17], link_preview=True)
+
+
+
