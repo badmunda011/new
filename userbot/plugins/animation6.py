@@ -1,13 +1,4 @@
 import asyncio
-import asyncio
-import os
-import random
-import shutil
-from datetime import datetime
-
-from PIL import Image, ImageDraw, ImageFont
-from pySmartDL import SmartDL
-from telethon.tl import functions
 
 from .. import legend
 from ..core.logger import logging
@@ -454,6 +445,7 @@ async def _(event):
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 7])
 
+
 @legend.legend_cmd(
     pattern="independence(?:\s|$)([\s\S]*)",
     command=("independence", menu_category),
@@ -486,6 +478,3 @@ async def independence(event):
 
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 17], link_preview=True)
-
-
-
