@@ -1,7 +1,7 @@
 import asyncio
 
 from . import ALIVE_NAME, eor, legend
-
+from ..helpers.utils import reply_id
 menu_category = "fun"
 
 
@@ -442,7 +442,7 @@ async def blueldog(dog):
 )
 async def viello(event):
     "fun art command"
-    await event.get_chat()
+    reply_to_id = await reply_id(event)
     event = await eor(event, "**(❛ Hi ❜!**")
     HELL_PIC = "https://te.legra.ph/file/b86eff074051b0b2d4513.jpg"
     K_PIC = "https://te.legra.ph/file/a679e3d061ac6b349cd60.jpg"
@@ -453,7 +453,7 @@ async def viello(event):
         HELLO += f"║┗┛║┗╣┃║┃║X X ║\n"
         HELLO += f"║┏┓║┏╣┗╣┗╣╰╯║\n"
         HELLO += f"╚┛┗╩━╩━╩━╩━━╝\n"
-        on = await event.client.send_file(event.chat_id, file=HELL_PIC, caption=HELLO)
+        on = await event.client.send_file(event.chat_id, file=HELL_PIC, caption=HELLO, reply_to=reply_to_id)
         await asyncio.sleep(3)
         ok = await event.client.edit_message(event.chat_id, on, file=K_PIC)
         await asyncio.sleep(3)
@@ -552,18 +552,18 @@ async def bluvilsnake(snake):
     command=("carry", menu_category),
     info={
         "header": "Just a art command try out yourself to see",
-        "usage": "{tr}carry",
+        "usage": "{tr}carry <name> ",
     },
 )
-async def lnd(carry):
-    name = carry.pattern_match.group(1)
-    if name:
-        await eor(
-            carry,
+async def lnd(event):
+    "Just a art command try out yourself to see" 
+    if name := event.pattern_match.group(1):
+        reuturn await eor(
+            event,
             f"**Carry ~> {name} .**\n\n                     ⣤⣶⣶⣶⣦⣤⣄⡀\n⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀\n⠀⠀⠀⢀⣾⣿⣿⣿⠿⠿⠟⠻⠿⢿⣿⣿⣿⡆\n⠀⠀⠀⢰⣿⣿⡿⠂⠀⠀⠀⠀⠀⠀ ⠈⠉⢻⡇ \n⠀⠀⠀⠈⠿⣿⣇⣠⠤⠤⠤⢤⣀⣤⠤⠤⣺⡏ \n⠀⠀⠀⠀⠐⢉⣯⠹⣀⣀⣢⡸⠉⢏⡄⣀⣯⠁ \n⠀⠀⠀⠀⠡⠀⢹⣆⠀⠀⠀⣀⡀⡰⠀⢠⠖⠂ \n⠀⠀⠀⠀⠀⠈⠙⣿⣿⠀⠠⠚⢋⡁⠀⡜ \n⠀⠀⠀⠀⠀⠀⢸⠈⠙⠦⣤⣀⣤⣤⡼⠁  \n⠀⠀⠀ ⠀⢀⡌⠀⠀⠀⠀ ⠉⢏⡉  \n⠀⠀⠀⣀⣴⣿⣷⣶⣤⣤⣤⣴⣾⣷⣶⣦⡀ \n⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣄ \n⠚⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛",
         )
     else:
-        await eor(carry, "Give Me Some Text")
+        reuturn await eod(event, "Give Me Some Text")
 
 
 @legend.legend_cmd(
@@ -575,6 +575,7 @@ async def lnd(carry):
     },
 )
 async def lon(frog):
+    "Just a art command try out yourself to see"
     name = frog.pattern_match.group(1)
     D = (
         f"**{ALIVE_NAME} ~> {name} .\n\n**"
@@ -635,7 +636,7 @@ async def bluslike(dislike):
     },
 )
 async def gend(think):
-    name = think.pattern_match.group(1)
+    "Just a art command try out yourself to see"
     B = (
         f"**{ALIVE_NAME} ~> {name} .\n\n**"
         "⠀⠀⠀⠀⢀⣀⣀⣀\n"
@@ -654,10 +655,10 @@ async def gend(think):
         "⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁\n"
         "⠀⠀⠛⢿⣿⣿⣿⣿⣿⣿⡿⠟\n"
     )
-    if name:
-        await eor(think, B)
+    if name := think.pattern_match.group(1):
+        return await eor(think, B)
     else:
-        await eor(think, "Give Me Some Text")
+        return await eor(think, "Give Me Some Text")
 
 
 @legend.legend_cmd(
@@ -669,7 +670,7 @@ async def gend(think):
     },
 )
 async def lj(frogsay):
-    name = frogsay.pattern_match.group(1)
+    ""Just a art command try out yourself to see""
     C = (
         f"**{ALIVE_NAME} ~> {name} .\n\n**"
         "⠄⠄⠄⠄⠄⣀⣀⣤⣶⣿⣿⣶⣶⣶⣤⣄⣠⣴⣶⣿⣶⣦⣄⠄\n"
@@ -688,10 +689,10 @@ async def lj(frogsay):
         "⠄⣿⠁⠄⠐⠛⠛⠛⠉⠉⠉⠉⠄⠄⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿\n"
         "⠄⠻⣦⣀⣀⣀⣀⣀⣤⣤⣤⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋\n"
     )
-    if name:
-        await eor(frogsay, C)
+    if name := frogsay.pattern_match.group(1):
+        return await eor(frogsay, C)
     else:
-        await eor(frogsay, "Give Me Some Text")
+        return await eor(frogsay, "Give Me Some Text")
 
 
 @legend.legend_cmd(
@@ -704,9 +705,9 @@ async def lj(frogsay):
 )
 async def blilbye(event):
     "fun art command"
-    BYE_PIC = "https://te.legra.ph/file/aa16cad62645045062c0f.jpg"
-    if BYE_PIC:
+    reply_to_id = await reply_id(event)
+    if BYE_PIC := "https://te.legra.ph/file/aa16cad62645045062c0f.jpg":
         event = await event.send_message(bye, "**❛ Bye ❜!**")
         lol = "Bye Friends"
-        await legend.send_file(event.chat_id, BYE_PIC, caption=lol)
+        await legend.send_file(event.chat_id, BYE_PIC, caption=lol, reply_to=reply_to_id)
         await event.delete()
