@@ -53,6 +53,7 @@ async def _(event):
                 functions.messages.GetStickerSetRequest(
                     types.InputStickerSetShortName("DabOnHaters")
                 )
+                hash=0,
             )
         ).documents
         if x.id not in blacklist
@@ -80,6 +81,7 @@ async def handler(event):
                 functions.messages.GetStickerSetRequest(
                     types.InputStickerSetShortName("supermind")
                 )
+                hash=0,
             )
         ).documents
         if x.id not in blacklist
