@@ -9,6 +9,7 @@ from . import mention
 
 menu_category = "extra"
 
+
 @legend.legend_cmd(
     pattern="indslogan(?:\s|$)([\s\S]*)",
     command=("indslogan", menu_category),
@@ -66,6 +67,7 @@ async def indslogan(event):
         await event.edit(
             "Jawahar Lal Nehru : Aaram Haraam Hai (Cast off your laziness) "
         )
+
 
 @legend.legend_cmd(
     pattern="car$",
