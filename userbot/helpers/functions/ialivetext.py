@@ -84,9 +84,9 @@ async def legendalive(StartTime):
         AppHours = math.floor(AppQuotaUsed / 60)
         AppMinutes = math.floor(AppQuotaUsed % 60)
         if ENV:
-            dyno = "vps"
-        else:
             dyno = f"{AppHours}h {AppMinutes}m/{hours}h {minutes}m"
+        else:
+            dyno = "VPS"
     except Exception as e:
         dyno = e
     return f"꧁ LegendBot Stats ꧂\
