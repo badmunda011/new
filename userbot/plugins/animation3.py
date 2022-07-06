@@ -14,7 +14,7 @@ menu_category = "fun"
         "usage": "{tr}star",
     },
 )
-async def _(event):
+async def star(event):
     "animation command"
     event = await eor(event, "`stars.....`")
     deq = deque(list("🦋✨🦋✨🦋✨🦋✨"))
@@ -32,7 +32,7 @@ async def _(event):
         "usage": "{tr}boxs",
     },
 )
-async def _(event):
+async def boxs(event):
     "animation command"
     event = await eor(event, "`boxs...`")
     deq = deque(list("🟥🟧🟨🟩🟦🟪🟫⬛⬜"))
@@ -50,7 +50,7 @@ async def _(event):
         "usage": "{tr}rain",
     },
 )
-async def _(event):
+async def rain(event):
     "animation command"
     event = await eor(event, "`Raining.......`")
     deq = deque(list("🌬☁️🌩🌨🌧🌦🌥⛅🌤"))
@@ -68,7 +68,7 @@ async def _(event):
         "usage": "{tr}deploy",
     },
 )
-async def _(event):
+async def deploy(event):
     "animation command"
     animation_interval = 3
     animation_ttl = range(12)
@@ -101,7 +101,7 @@ async def _(event):
         "examples": ["{tr}dump", "{tr}dump 🍰🍎🐓"],
     },
 )
-async def _(event):
+async def dump(event):
     "Animation Command"
     try:
         obj = event.pattern_match.group(1)
@@ -147,7 +147,7 @@ async def _(event):
         "usage": "{tr}fleaveme",
     },
 )
-async def _(event):
+async def fleaveme(event):
     "animation command"
     animation_interval = 1
     animation_ttl = range(10)
@@ -178,7 +178,7 @@ async def _(event):
         "usage": "{tr}loveu",
     },
 )
-async def _(event):
+async def love(event):
     "animation command"
     animation_interval = 0.5
     animation_ttl = range(70)
@@ -233,7 +233,7 @@ async def _(event):
         "usage": "{tr}plane",
     },
 )
-async def _(event):
+async def plane(event):
     "animation command"
     event = await eor(event, "Wait for plane...")
     await event.edit("✈-------------")
@@ -261,7 +261,7 @@ async def _(event):
         "usage": "{tr}police",
     },
 )
-async def _(event):
+async def police(event):
     "animation command"
     animation_interval = 0.3
     animation_ttl = range(12)
@@ -293,7 +293,7 @@ async def _(event):
         "usage": "{tr}jio",
     },
 )
-async def _(event):
+async def jio(event):
     "animation command"
     animation_interval = 1
     animation_ttl = range(19)
@@ -332,7 +332,7 @@ async def _(event):
         "usage": "{tr}solarsystem",
     },
 )
-async def _(event):
+async def solarsystem(event):
     "animation command"
     animation_interval = 0.1
     animation_ttl = range(80)
