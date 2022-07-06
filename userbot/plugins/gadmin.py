@@ -97,7 +97,8 @@ async def get_user_from_id(user, event):
         "usage": "{tr}gpromote <username/reply/userid> <reason (optional)>",
     },
 )
-async def _(legendevent):
+async def gpromote(legendevent):
+    "To promote user in every group where you are admin(have a right to promote)."
     i = 0
     await legendevent.get_sender()
     me = await legendevent.client.get_me()
@@ -163,7 +164,8 @@ async def _(legendevent):
         "usage": "{tr}gdemote <username/reply/userid> <reason (optional)>",
     },
 )
-async def _(legendevent):
+async def gdemote(legendevent):
+    "To demote user in that group where you promote person to admin."
     i = 0
     await legendevent.get_sender()
     me = await legendevent.client.get_me()
