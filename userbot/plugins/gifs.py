@@ -2,7 +2,7 @@
 
 import base64
 import random
-
+from telethon.errors.rpcerrorlist import YouBlockedUserError
 import requests
 from telethon import functions, types
 from telethon.errors.rpcerrorlist import UserNotParticipantError
@@ -110,7 +110,7 @@ async def some(event):
     count = 1 if not inpt else int(inpt)
     if count < 0 and count > 20:
         await eod(event, "`Give value in range 1-20`")
-    res = base64.b64decode("aHR0cHM6Ly90Lm1lL2dpZl9sb3ZlX2tpc3NfbmlnaHQ=").decode(
+    res = base64.b64decode("aHR0cHM6Ly90Lm1lL2pvaW5jaGF0L2dCTVRreXVvaGx3eU1HVmw=").decode(
         "utf-8"
     )
     resource = await event.client(GetFullChannelRequest(res))
