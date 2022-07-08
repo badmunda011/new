@@ -136,7 +136,7 @@ async def bot_start(event):
         ]
     try:
         if custompic:
-            await event.client.send_message(
+            await event.client.send_file(
                 chat.id,
                 file=custompic,
                 caption=start_msg,
@@ -158,6 +158,8 @@ async def bot_start(event):
                 BOTLOG_CHATID,
                 f"**Error**\nThere was a error while user starting your bot. `{e}`",
             )
+    else:
+        await check_bot_started_users(chat, event)
 
 
 @legend.tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"rules")))

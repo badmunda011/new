@@ -21,8 +21,16 @@ from ..sql_helper.globals import addgvar, gvarstatus
 from .pluginmanager import load_module, start_spam
 from .tools import create_supergroup
 
+ENV = bool(os.environ.get("ENV", False))
+
 LOGS = logging.getLogger("LegendUserBot")
 cmdhr = Config.HANDLER
+
+
+if ENV:
+    VPS_NOLOAD = ["vps"]
+elif os.path.exists("config.py"):
+    VPS_NOLOAD = ["heroku"]
 
 
 async def setup_bot():
@@ -126,33 +134,49 @@ async def load_plugins(folder):
     To load plugins from the mentioned folder
     """
     path = f"userbot/{folder}/*.py"
+    plugin_path = f"userbot/{folder}"
     files = glob.glob(path)
     files.sort()
+    success = 0
+    failure = []
     for name in files:
         with open(name) as f:
             path1 = Path(f.name)
             shortname = path1.stem
+            pluginname = shortname.replace(".py", "")
             try:
-                if shortname.replace(".py", "") not in Config.NO_LOAD:
-                    type = True
+                if (pluginname not in Config.NO_LOAD) and (
+                    pluginname not in VPS_NOLOAD
+                ):
+                    flag = True
                     check = 0
-                    while type:
+                    while flag:
                         try:
                             load_module(
-                                shortname.replace(".py", ""),
-                                plugin_path=f"userbot/{folder}",
+                                pluginname,
+                                plugin_path=plugin_path,
                             )
+                            if shortname in failure:
+                                failure.remove(shortname)
+                            success += 1
                             break
                         except ModuleNotFoundError as e:
                             install_pip(e.name)
                             check += 1
+                            if shortname not in failure:
+                                failure.append(shortname)
                             if check > 5:
                                 break
                 else:
                     os.remove(Path(f"userbot/{folder}/{shortname}.py"))
             except Exception as e:
-                os.remove(Path(f"userbot/{folder}/{shortname}.py"))
-                LOGS.info(f"unable to load {shortname} because of error {e}")
+                if shortname not in failure:
+                    failure.append(shortname)
+                os.remove(Path(f"{plugin_path}/{shortname}.py"))
+                LOGS.info(
+                    f"unable to load {shortname} because of error {e}\nBase Folder {plugin_path}"
+                )
+            LOGS.info(f'Imported : {success} Plugins \nFailed : {", ".join(failure)}')
 
 
 async def hekp():
@@ -176,7 +200,7 @@ async def hekp():
         pass
 
 
-spam = os.environ.get("SPAM", None) or "OFF"
+spam = Config.SPAM
 
 
 async def scammer(username):

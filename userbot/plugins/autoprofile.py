@@ -28,13 +28,14 @@ from ..sql_helper.global_list import (
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from . import BOTLOG, BOTLOG_CHATID, logging
 
-plugin_category = "tools"
+menu_category = "tools"
 DEFAULTUSERBIO = gvarstatus("DEFAULT_BIO") or " ᗯᗩᏆᎢᏆᑎᏀ ᏞᏆᏦᗴ ᎢᏆᗰᗴ  "
 DEFAULTUSER = gvarstatus("DEFAULT_NAME") or Config.ALIVE_NAME
 LOGS = logging.getLogger(__name__)
 CHANGE_TIME = int(gvarstatus("CHANGE_TIME")) if gvarstatus("CHANGE_TIME") else 60
-
+DEFAULT_PIC = gvarstatus("DEFAULT_PIC") or None
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
+
 
 autopic_path = os.path.join(os.getcwd(), "userbot", "original_pic.png")
 digitalpic_path = os.path.join(os.getcwd(), "userbot", "digital_pic.png")
@@ -64,7 +65,7 @@ menu_category = "tools"
 
 async def autopicloop():
     AUTOPICSTART = gvarstatus("autopic") == "true"
-    if AUTOPICSTART and Config.DEFAULT_PIC is None:
+    if AUTOPICSTART and DEFAULT_PIC is None:
         if BOTLOG:
             return await legend.send_message(
                 BOTLOG_CHATID,
@@ -78,7 +79,7 @@ async def autopicloop():
             LOGS.warn(str(e))
     while AUTOPICSTART:
         if not os.path.exists(autopic_path):
-            downloader = SmartDL(Config.DEFAULT_PIC, autopic_path, progress_bar=False)
+            downloader = SmartDL(DEFAULT_PIC, autopic_path, progress_bar=False)
             downloader.start(blocking=False)
             while not downloader.isFinished():
                 pass
@@ -167,7 +168,7 @@ async def digitalpicloop():
 
 async def bloom_pfploop():
     BLOOMSTART = gvarstatus("bloom") == "true"
-    if BLOOMSTART and Config.DEFAULT_PIC is None:
+    if BLOOMSTART and DEFAULT_PIC is None:
         if BOTLOG:
             return await legend.send_message(
                 BOTLOG_CHATID,
@@ -176,7 +177,7 @@ async def bloom_pfploop():
         return
     while BLOOMSTART:
         if not os.path.exists(autopic_path):
-            downloader = SmartDL(Config.DEFAULT_PIC, autopic_path, progress_bar=False)
+            downloader = SmartDL(DEFAULT_PIC, autopic_path, progress_bar=False)
             downloader.start(blocking=False)
             while not downloader.isFinished():
                 pass
@@ -343,13 +344,13 @@ async def _(event):
 )
 async def _(event):
     "To set time on your profile pic"
-    if Config.DEFAULT_PIC is None:
+    if DEFAULT_PIC is None:
         return await eod(
             event,
             "**Error**\nFor functing of autopic you need to set DEFAULT_PIC var in Heroku vars",
             parse_mode=_format.parse_pre,
         )
-    downloader = SmartDL(Config.DEFAULT_PIC, autopic_path, progress_bar=False)
+    downloader = SmartDL(DEFAULT_PIC, autopic_path, progress_bar=False)
     downloader.start(blocking=False)
     while not downloader.isFinished():
         pass
@@ -408,13 +409,13 @@ async def _(event):
 )
 async def _(event):
     "To set random colour pic with time to profile pic"
-    if Config.DEFAULT_PIC is None:
+    if DEFAULT_PIC is None:
         return await eod(
             event,
             "**Error**\nFor functing of bloom you need to set DEFAULT_PIC var in Heroku vars",
             parse_mode=_format.parse_pre,
         )
-    downloader = SmartDL(Config.DEFAULT_PIC, autopic_path, progress_bar=True)
+    downloader = SmartDL(DEFAULT_PIC, autopic_path, progress_bar=True)
     downloader.start(blocking=False)
     while not downloader.isFinished():
         pass

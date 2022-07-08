@@ -26,7 +26,7 @@ PAT_IMAGE = "pat.webp"
         "usage": "{tr}dab",
     },
 )
-async def _(event):
+async def dab(event):
     "To get random dabbing pose stickers."
     reply_to_id = await reply_id(event)
     blacklist = {
@@ -52,7 +52,8 @@ async def _(event):
             await event.client(
                 functions.messages.GetStickerSetRequest(
                     types.InputStickerSetShortName("DabOnHaters")
-                )
+                ),
+                hash=0,
             )
         ).documents
         if x.id not in blacklist
@@ -79,7 +80,8 @@ async def handler(event):
             await event.client(
                 functions.messages.GetStickerSetRequest(
                     types.InputStickerSetShortName("supermind")
-                )
+                ),
+                hash=0,
             )
         ).documents
         if x.id not in blacklist

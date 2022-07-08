@@ -89,14 +89,12 @@ def sremove_echo(chat_id, user_id):
 
 
 def sremove_echos(chat_id):
-    saved_filter = SESSION.query(SEchos).filter(SEchos.chat_id == str(chat_id))
-    if saved_filter:
+    if saved_filter := SESSION.query(SEchos).filter(SEchos.chat_id == str(chat_id)):
         saved_filter.delete()
         SESSION.commit()
 
 
 def sremove_all_echos():
-    saved_filter = SESSION.query(SEchos)
-    if saved_filter:
+    if saved_filter := SESSION.query(SEchos):
         saved_filter.delete()
         SESSION.commit()

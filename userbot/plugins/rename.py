@@ -16,11 +16,14 @@ thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg"
 
 
 @legend.legend_cmd(
-    pattern="rnup ?(-f)? ([\s\S]*)",
+    pattern="rnup ?(-f|-t)? ([\s\S]*)",
     command=("rnup", menu_category),
     info={
         "header": "To rename and upload the replied file.",
-        "flags": {"f": "will upload as file that is document not streamable."},
+        "flags": {
+            "f": "will upload as file that is document not streamable.",
+            "t": "will upload with thumbnail",
+        },
         "description": "If type is not used then will upload as steamable file",
         "usage": [
             "{tr}rnup <new file name>",
@@ -28,7 +31,7 @@ thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg"
         ],
     },
 )
-async def _(event):
+async def rnup(event):
     "To rename and upload the file"
     thumb = thumb_image_path if os.path.exists(thumb_image_path) else None
     types = event.pattern_match.group(1)
@@ -58,10 +61,13 @@ async def _(event):
     )
     end = datetime.now()
     ms_one = (end - start).seconds
-    try:
-        thumb = await reply_message.download_media(thumb=-1)
-    except Exception:
+    if types == "-t":
         thumb = thumb
+    else:
+        try:
+            thumb = await reply_message.download_media(thumb=-1)
+        except Exception:
+            thumb = thumb
     if not os.path.exists(downloaded_file_name):
         return await legendevent.edit(f"File Not Found {input_str}")
     c_time = time.time()

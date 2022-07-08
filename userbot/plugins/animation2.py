@@ -14,7 +14,8 @@ menu_category = "fun"
         "usage": "{tr}degi",
     },
 )
-async def _(event):
+async def degi(event):
+    "animation command"
     event = await eor(event, "degi")
     await event.edit("WO")
     await asyncio.sleep(1.5)
@@ -43,7 +44,8 @@ async def _(event):
         "usage": "{tr}nehi",
     },
 )
-async def _(event):
+async def nehi(event):
+    "animation command"
     event = await eor(event, "nehi")
     await event.edit(
         "`Wo PaKkA DeGi Tu ManG KaR ToH DekH\n AuR NaA De To UskI BheN Ko PakaD😚😚`"
@@ -58,7 +60,8 @@ async def _(event):
         "usage": "{tr}hnd <name>",
     },
 )
-async def _(event):
+async def hand(event):
+    "animation command"
     name = event.text[4:]
     animation_interval = 0.5
     animation_ttl = range(6)
@@ -84,7 +87,7 @@ async def _(event):
         "usage": "{tr}think",
     },
 )
-async def _(event):
+async def think(event):
     "animation command"
     event = await eor(event, "think")
     deq = deque(list("🤔🧐🤔🧐🤔🧐"))
@@ -102,7 +105,7 @@ async def _(event):
         "usage": "{tr}lmao",
     },
 )
-async def _(event):
+async def lmao(event):
     "animation command"
     event = await eor(event, "lmao")
     deq = deque(list("😂🤣😂🤣😂🤣"))
@@ -120,7 +123,7 @@ async def _(event):
         "usage": "{tr}nothappy",
     },
 )
-async def _(event):
+async def nothappy(event):
     "animation command"
     event = await eor(event, "nathappy")
     deq = deque(list("😁☹️😁☹️😁☹️😁"))
@@ -138,7 +141,7 @@ async def _(event):
         "usage": "{tr}clock",
     },
 )
-async def _(event):
+async def clock(event):
     "animation command"
     event = await eor(event, "clock")
     deq = deque(list("🕙🕘🕗🕖🕕🕔🕓🕒🕑🕐🕛"))
@@ -156,7 +159,7 @@ async def _(event):
         "usage": "{tr}muah",
     },
 )
-async def _(event):
+async def muah(event):
     "animation command"
     event = await eor(event, "muah")
     deq = deque(list("😗😙😚😚😘"))
@@ -174,7 +177,7 @@ async def _(event):
         "usage": "{tr}heart",
     },
 )
-async def _(event):
+async def heart(event):
     "animation command"
     event = await eor(event, "heart")
     deq = deque(list("❤️🧡💛💚💙💜🖤"))
@@ -192,7 +195,7 @@ async def _(event):
         "usage": "{tr}gym",
     },
 )
-async def _(event):
+async def gym(event):
     "animation command"
     event = await eor(event, "gym")
     deq = deque(list("🏃‍🏋‍🤸‍🏃‍🏋‍🤸‍🏃‍🏋‍🤸‍"))
@@ -210,7 +213,7 @@ async def _(event):
         "usage": "{tr}earth",
     },
 )
-async def _(event):
+async def earth(event):
     "animation command"
     event = await eor(event, "earth")
     deq = deque(list("🌏🌍🌎🌎🌍🌏🌍🌎"))
@@ -228,7 +231,7 @@ async def _(event):
         "usage": "{tr}moon",
     },
 )
-async def _(event):
+async def moon(event):
     "animation command"
     event = await eor(event, "moon")
     deq = deque(list("🌗🌘🌑🌒🌓🌔🌕🌖"))
@@ -246,7 +249,7 @@ async def _(event):
         "usage": "{tr}smoon",
     },
 )
-async def _(event):
+async def smoon(event):
     "animation command"
     event = await eor(event, "smoon")
     animation_interval = 0.2
@@ -275,7 +278,7 @@ async def _(event):
         "usage": "{tr}tmoon",
     },
 )
-async def _(event):
+async def tmoon(event):
     "animation command"
     event = await eor(event, "tmoon")
     animation_interval = 0.2

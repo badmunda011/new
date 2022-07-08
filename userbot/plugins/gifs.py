@@ -5,7 +5,7 @@ import random
 
 import requests
 from telethon import functions, types
-from telethon.errors.rpcerrorlist import UserNotParticipantError
+from telethon.errors.rpcerrorlist import UserNotParticipantError, YouBlockedUserError
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
@@ -118,7 +118,7 @@ async def some(event):
     try:
         await event.client(
             functions.channels.GetParticipantRequest(
-                channel=chat, participant=event.from_id.user_id
+                channel=chat, participant=event.from_id
             )
         )
     except UserNotParticipantError:

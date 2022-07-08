@@ -107,6 +107,7 @@ from telethon.tl.types import ChannelParticipantsKicked as banned
     require_admin=True,
 )
 async def shj(e):
+    "To Demote all members whom u have promoted"
     sr = await e.client.get_participants(e.chat.id, filter=admin)
     et = 0
     newrights = ChatAdminRights(
@@ -131,7 +132,7 @@ async def shj(e):
     pattern="getbanned$",
     command=("getbanned", menu_category),
     info={
-        "header": "To Get List Of Banned User",
+        "header": "To Get List Of Banned User in group",
         "description": "It Help U to get list of all user banned in group /nNote: u must be have proper right",
         "usage": [
             "{tr}getbanned",
@@ -141,6 +142,7 @@ async def shj(e):
     require_admin=True,
 )
 async def getbaed(event):
+    "To Get List Of Banned User in group"
     try:
         users = await event.client.get_participants(event.chat_id, filter=banned)
     except Exception as e:
@@ -300,7 +302,7 @@ async def demote(event):
     admin = chat.admin_rights
     creator = chat.creator
     if not admin and not creator:
-        await edit_or_reply(event, NO_ADMIN)
+        await eor(event, NO_ADMIN)
         return
     user, _ = await get_user_from_event(event)
     if not user:
@@ -389,7 +391,7 @@ async def _ban_person(event):
                 await reply.forward_to(BOTLOG_CHATID)
                 await reply.delete()
         except BadRequestError:
-            return await catevent.edit(
+            return await legendevent.edit(
                 "`I dont have message nuking rights! But still he is banned!`"
             )
 
@@ -646,7 +648,7 @@ async def kick(event):
     else:
         await event.client.send_file(
             event.chat_id,
-            help_pic,
+            bn_pic,
             caption=f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`",
         )
     if BOTLOG:

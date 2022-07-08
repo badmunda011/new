@@ -1,12 +1,12 @@
 # Userbot module for fetching info about any user on Telegram(including you!).
 
+
 import html
 import os
 
 from requests import get
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
-from telethon.utils import get_input_location
 
 from userbot import legend
 from userbot.core.logger import logging
@@ -22,26 +22,23 @@ LOGS = logging.getLogger(__name__)
 
 async def fetch_info(replied_user, event):
     """Get details from the User object."""
+    FullUser = (await event.client(GetFullUserRequest(replied_user.id))).full_user
     replied_user_profile_photos = await event.client(
-        GetUserPhotosRequest(
-            user_id=replied_user.user.id, offset=42, max_id=0, limit=80
-        )
+        GetUserPhotosRequest(user_id=replied_user.id, offset=42, max_id=0, limit=80)
     )
     replied_user_profile_photos_count = "User haven't set profile pic"
+    dc_id = "Can't get dc id"
     try:
         replied_user_profile_photos_count = replied_user_profile_photos.count
+        dc_id = replied_user.photo.dc_id
     except AttributeError:
         pass
     user_id = replied_user.id
     first_name = replied_user.first_name
-    last_name = replied_user.last_name
-    try:
-        dc_id, location = get_input_location(replied_user.profile_photo)
-    except Exception:
-        dc_id = "Couldn't fetch DC ID!"
-    common_chat = replied_user.common_chats_count
+    full_name = FullUser.private_forward_name
+    common_chat = FullUser.common_chats_count
     username = replied_user.username
-    user_bio = replied_user.about
+    user_bio = FullUser.about
     is_bot = replied_user.bot
     restricted = replied_user.restricted
     verified = replied_user.verified
@@ -55,13 +52,14 @@ async def fetch_info(replied_user, event):
         if first_name
         else ("This User has no First Name")
     )
-    last_name = last_name.replace("\u2060", "") if last_name else (" ")
+    full_name = full_name or first_name
     username = "@{}".format(username) if username else ("This User has no Username")
     user_bio = "This User has no About" if not user_bio else user_bio
-    caption = f"<b>👤 First Name:</b> {first_name} {last_name}\n"
+    caption = "<b><i>USER INFO from Durov's Database :</i></b>\n\n"
+    caption += f"<b>👤 Name:</b> {full_name}\n"
     caption += f"<b>🤵 Username:</b> {username}\n"
     caption += f"<b>🔖 ID:</b> <code>{user_id}</code>\n"
-    caption += f"<b>🌏 DC ID:</b> {dc_id}\n"
+    caption += f"<b>🌏 Data Centre ID:</b> {dc_id}\n"
     caption += f"<b>🖼 Number of Profile Pics:</b> {replied_user_profile_photos_count}\n"
     caption += f"<b>🤖 Is Bot:</b> {is_bot}\n"
     caption += f"<b>🔏 Is Restricted:</b> {restricted}\n"
@@ -84,11 +82,11 @@ async def fetch_info(replied_user, event):
 )
 async def _(event):
     "Gets information of an user such as restrictions ban by spamwatch or cas"
-    replied_user, error_i_a = await get_user_from_event(event)
+    replied_user, reason = await get_user_from_event(event)
     if not replied_user:
         return
     legendevent = await eor(event, "`Fetching userinfo wait....`")
-    replied_user = await event.client(GetFullUserRequest(replied_user.id))
+    FullUser = (await event.client(GetFullUserRequest(replied_user.id))).full_user
     user_id = replied_user.id
     # some people have weird HTML in their names
     first_name = html.escape(replied_user.first_name)
@@ -99,17 +97,16 @@ async def _(event):
         # names
         first_name = first_name.replace("\u2060", "")
     # inspired by https://telegram.dog/afsaI181
-    common_chats = replied_user.common_chats_count
+    common_chats = FullUser.common_chats_count
     try:
-        dc_id, location = get_input_location(replied_user.profile_photo)
-    except Exception:
-        dc_id = "Couldn't fetch DC ID!"
+        dc_id = replied_user.photo.dc_id
+    except AttributeError:
+        dc_id = "Can't get dc id"
     if spamwatch:
-        ban = spamwatch.get_ban(user_id)
-        if ban:
+        if ban := spamwatch.get_ban(user_id):
             sw = f"**Spamwatch Banned :** `True` \n       **-**🤷‍♂️**Reason : **`{ban.reason}`"
         else:
-            sw = f"**Spamwatch Banned :** `False`"
+            sw = "**Spamwatch Banned :** `False`"
     else:
         sw = "**Spamwatch Banned :**`Not Connected`"
     try:
@@ -128,7 +125,7 @@ async def _(event):
     caption = """**Info of [{}](tg://user?id={}):
    -🔖ID : **`{}`
    **-**👥**Groups in Common : **`{}`
-   **-**🌏**DC Number : **`{}`
+   **-**🌏**Data Centre Number : **`{}`
    **-**🔏**Restricted by telegram : **`{}`
    **-**🦅{}
    **-**👮‍♂️{}
@@ -138,7 +135,7 @@ async def _(event):
         user_id,
         common_chats,
         dc_id,
-        replied_user.user.restricted,
+        replied_user.restricted,
         sw,
         cas,
     )
@@ -161,12 +158,11 @@ async def who(event):
     replied_user, reason = await get_user_from_event(event)
     if not replied_user:
         return
-    legend = await eor(event, "`Fetching userinfo wait....`")
-    replied_user = await event.client(GetFullUserRequest(replied_user.id))
+    lol = await eor(event, "`Fetching userinfo wait....`")
     try:
         photo, caption = await fetch_info(replied_user, event)
     except AttributeError:
-        return await eor(event, "`Could not fetch info of that user.`")
+        return await eor(lol, "`Could not fetch info of that user.`")
     message_id_to_reply = await reply_id(event)
     try:
         await event.client.send_file(
@@ -180,9 +176,9 @@ async def who(event):
         )
         if not photo.startswith("http"):
             os.remove(photo)
-        await legend.delete()
+        await lol.delete()
     except TypeError:
-        await legend.edit(caption, parse_mode="html")
+        await lol.edit(caption, parse_mode="html")
 
 
 @legend.legend_cmd(

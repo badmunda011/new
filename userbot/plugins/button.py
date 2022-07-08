@@ -108,7 +108,7 @@ async def _(event):
     else:
         markdown_note = "".join(event.text.split(maxsplit=1)[1:])
     if not markdown_note:
-        return await edit_delete(event, "`What text should i use in button post`")
+        return await eod(event, "`What text should i use in button post`")
     await make_inline(markdown_note, event.client, event.chat_id, reply_to_id)
     await event.delete()
 

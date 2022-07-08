@@ -1,4 +1,5 @@
 import math
+import os
 import time
 
 import heroku3
@@ -9,6 +10,8 @@ from .utils import get_readable_time
 
 Heroku = heroku3.from_key(Config.API_KEY)
 heroku_api = "https://api.heroku.com"
+
+ENV = bool(os.environ.get("ENV", False))
 
 # UniBorg Telegram UseRBot
 # Copyright (C) 2020 @UniBorg
@@ -80,7 +83,10 @@ async def legendalive(StartTime):
             math.floor(App[0]["quota_used"] * 100 / quota)
         AppHours = math.floor(AppQuotaUsed / 60)
         AppMinutes = math.floor(AppQuotaUsed % 60)
-        dyno = f"{AppHours}h {AppMinutes}m/{hours}h {minutes}m"
+        if ENV:
+            dyno = f"{AppHours}h {AppMinutes}m/{hours}h {minutes}m"
+        else:
+            dyno = "VPS"
     except Exception as e:
         dyno = e
     return f"꧁ LegendBot Stats ꧂\

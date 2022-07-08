@@ -180,7 +180,7 @@ async def procces_img(event):
         "examples": ["{tr}imp blabla", "{tr}impn blabla"],
     },
 )
-async def _(event):
+async def imp(event):
     "Find imposter with stickers animation."
     USERNAME = f"tg://user?id={event.client.uid}"
     name = event.pattern_match.group(2)
@@ -273,7 +273,7 @@ async def _(event):
         "examples": ["{tr}timp blabla", "{tr}timpn blabla"],
     },
 )
-async def _(event):
+async def timp(event):
     "Find imposter with text animation."
     name = event.pattern_match.group(2)
     cmd = event.pattern_match.group(1).lower()

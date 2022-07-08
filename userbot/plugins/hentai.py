@@ -13,11 +13,12 @@ menu_category = "useless"
     pattern="hpic$",
     command=("hpic", menu_category),
     info={
-        "header": "This Is 18+ Plugin",
+        "header": "this will send xnxx anime pic",
         "usage": "{tr}hpic",
     },
 )
-async def _(event):
+async def hpic(event):
+    """this will send xnxx anime pic"""
     chat = "@LoliHeavenBot"
     await event.edit("```Checking...```")
     reply_to = await reply_id(event)
@@ -47,11 +48,12 @@ async def _(event):
     pattern="hfutanari$",
     command=("hfutanari", menu_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "send u sex girl pic anime",
         "usage": "{tr}hfutanari",
     },
 )
-async def _(event):
+async def hfuntari(event):
+    "send u sex girl pic anime"
     chat = "@LoliHeavenBot"
     await event.edit("```Checking...```")
     reply_to = await reply_id(event)
@@ -81,11 +83,12 @@ async def _(event):
     pattern="hshota$",
     command=("hshota", menu_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "sex hentai anime pic",
         "usage": "{tr}hshota",
     },
 )
-async def _(event):
+async def hshota(event):
+    "sex hentai anime pic"
     chat = "@LoliHeavenBot"
     await event.edit("```Checking...```")
     reply_to = await reply_id(event)
@@ -115,11 +118,12 @@ async def _(event):
     pattern="hvideo$",
     command=("hvideo ", menu_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "send u sex hentai anime video",
         "usage": "{tr}hvideo",
     },
 )
-async def _(event):
+async def hvideo(event):
+    "send u sex hentai anime video"
     chat = "@LoliHeavenBot"
     await event.edit("```Checking...```")
     reply_to = await reply_id(event)
@@ -149,11 +153,12 @@ async def _(event):
     pattern="hoppai$",
     command=("hoppai", menu_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "send u hentai ghopcha anime",
         "usage": "{tr}hoppai",
     },
 )
-async def _(event):
+async def hoppai(event):
+    "send u hentai ghopcha anime"
     chat = "@LoliHeavenBot"
     await event.edit("```Checking...```")
     reply_to = await reply_id(event)
@@ -164,7 +169,7 @@ async def _(event):
         return
     async with event.client.conversation(chat) as conv:
         try:
-            response = conv.wait_event(
+            resp = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=986872829)
             )
             await event.client.send_message(chat, "Oppai")
@@ -183,11 +188,12 @@ async def _(event):
     pattern="htrap$",
     command=("htrap", menu_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "sex hentai anime 18+ pic",
         "usage": "{tr}htrap",
     },
 )
-async def _(event):
+async def htrap(event):
+    "sex hentai anime 18+ pic"
     chat = "@LoliHeavenBot"
     await event.edit("```Checking...```")
     reply_to = await reply_id(event)
@@ -198,7 +204,7 @@ async def _(event):
         return
     async with event.client.conversation(chat) as conv:
         try:
-            response = conv.wait_event(
+            resp = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=986872829)
             )
             await event.client.send_message(chat, "Trap")
@@ -217,11 +223,12 @@ async def _(event):
     pattern="hbdsm$",
     command=("hbdsm", menu_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "send u hentai sex back pela",
         "usage": "{tr}hbdsm",
     },
 )
-async def _(event):
+async def hbdsm(event):
+    "send u hentai sex back pela"
     chat = "@LoliHeavenBot"
     await event.edit("```Checking...```")
     reply_to = await reply_id(event)
@@ -248,48 +255,15 @@ async def _(event):
 
 
 @legend.legend_cmd(
-    pattern="hfurry$",
-    command=("hfurry", menu_category),
-    info={
-        "header": "Just a art command try out yourself to see",
-        "usage": "{tr}hfurry",
-    },
-)
-async def _(event):
-    chat = "@LoliHeavenBot"
-    await event.edit("```Checking...```")
-    reply_to = await reply_id(event)
-    if await age_verification(event, reply_to):
-        return
-    type = await useless.importent(event)
-    if type:
-        return
-    async with event.client.conversation(chat) as conv:
-        try:
-            resp = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=986872829)
-            )
-            await event.client.send_message(chat, "Furry")
-            response = await resp
-        except YouBlockedUserError:
-            return await event.edit("```Unblock @LoliHeavenBot```")
-        if response.text.startswith("I can't find that"):
-            await event.edit("😐")
-        else:
-            await event.delete()
-            xxxx = await event.client.send_file(event.chat_id, response.message)
-            await unsave_gif(event, xxxx)
-
-
-@legend.legend_cmd(
     pattern="hgif$",
     command=("hgif", menu_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "It will send u hentai gifs anime",
         "usage": "{tr}hgif",
     },
 )
-async def _(event):
+async def hgif(event):
+    "It will send u hentai gifs anime"
     chat = "@LoliHeavenBot"
     await event.edit("```Checking...```")
     reply_to = await reply_id(event)
@@ -319,11 +293,12 @@ async def _(event):
     pattern="hcosplay$",
     command=("hcosplay", menu_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "It Will send u hentai anime",
         "usage": "{tr}hcosplay",
     },
 )
-async def _(event):
+async def hcosplay(event):
+    "It Will send u hentai anime"
     chat = "@LoliHeavenBot"
     await event.edit("```Checking...```")
     reply_to = await reply_id(event)

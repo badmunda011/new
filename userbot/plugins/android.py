@@ -83,6 +83,7 @@ async def device_info(event):
     },
 )
 async def codename_info(event):
+    "To Search for android device codename"
     textx = await event.get_reply_message()
     brand = event.pattern_match.group(1).lower()
     device = event.pattern_match.group(2).lower()

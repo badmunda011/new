@@ -1,5 +1,13 @@
 import asyncio
 
+from .. import legend
+from ..core.logger import logging
+from ..core.managers import eor
+from . import mention
+
+menu_category = "useless"
+
+LOGS = logging.getLogger(__name__)
 from . import eor, legend
 
 menu_category = "fun"
@@ -13,10 +21,39 @@ menu_category = "fun"
         "usage": "{tr}gim",
     },
 )
-async def _(event):
-
+async def gim(event):
+    "Fun animation try yourself to know more"
     a = "🎱➖✊➖➖✊➖🎱\n🌟        \         /          🌟\n⭐          \😁/            ⭐\n✨           🎽             ✨\n              /    \ \n            👟    👟"
     await event.edit(a)
+
+
+@legend.legend_cmd(
+    pattern="holi$",
+    command=("holi", menu_category),
+    info={
+        "header": "Wish Happy Holi",
+        "usage": "{tr}holi",
+    },
+)
+async def holi(event):
+    "Wish Holi"
+    animation_interval = 3
+    animation_ttl = range(0, 9)
+    await event.edit("𝐻𝒶𝓅𝓅𝓎𝐻𝑜𝓁𝒾")
+    animation_chars = [
+        "[Happy Holy Once Again To All](https://telegra.ph/file/ee2a7df3bc0a3334194b0.jpg)",
+        "[­](https://telegra.ph/file/2e4ca1bc7f747858fe98d.jpg)",
+        "[ㅤ­](https://telegra.ph/file/7f842a8f3aba51b8d5ac7.jpg)",
+        "[­ㅤ](https://telegra.ph/file/f24efadcd212d996bb937.jpg)",
+        "[ㅤ](https://telegra.ph/file/97b713907cd99f6831932.jpg)",
+        "[🎨](https://telegra.ph/file/0b604517d37fc519f16b6.jpg)",
+        "[❣️](https://telegra.ph/file/aaadc0e87f78be44cfdaa.jpg)",
+        "[❣️🎨ㅤ­](https://telegra.ph/file/d7d62ebbff4b5b092d4e0.jpg)",
+    ]
+    for i in animation_ttl:
+
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 8], link_preview=True)
 
 
 @legend.legend_cmd(
@@ -27,8 +64,8 @@ async def _(event):
         "usage": "{tr}cry",
     },
 )
-async def _(event):
-
+async def cry(event):
+    "Fun animation try yourself to know more"
     animation_interval = 1
 
     animation_ttl = range(0, 35)
@@ -88,7 +125,7 @@ async def _(event):
         "usage": "{tr}unoob",
     },
 )
-async def _(event):
+async def unoob(event):
     "animation command"
     animation_interval = 1
     animation_ttl = range(9)
@@ -117,7 +154,7 @@ async def _(event):
         "usage": "{tr}menoob",
     },
 )
-async def _(event):
+async def menoob(event):
     "animation command"
     animation_interval = 1
     animation_ttl = range(9)
@@ -146,7 +183,7 @@ async def _(event):
         "usage": "{tr}upro",
     },
 )
-async def _(event):
+async def upro(event):
     "animation command"
     animation_interval = 1
     animation_ttl = range(8)
@@ -174,7 +211,7 @@ async def _(event):
         "usage": "{tr}mepro",
     },
 )
-async def _(event):
+async def mepro(event):
     "animation command"
     animation_interval = 1
     animation_ttl = range(8)
@@ -202,7 +239,7 @@ async def _(event):
         "usage": "{tr}quickheal",
     },
 )
-async def _(event):
+async def quickheal(event):
     "animation command"
     animation_interval = 5
     animation_ttl = range(11)
@@ -233,7 +270,7 @@ async def _(event):
         "usage": "{tr}sqh",
     },
 )
-async def _(event):
+async def sqh(event):
     "animation command"
     animation_interval = 0.1
     animation_ttl = range(11)
@@ -264,7 +301,7 @@ async def _(event):
         "usage": "{tr}vquickheal",
     },
 )
-async def _(event):
+async def vquickheal(event):
     "animation command"
     animation_interval = 5
     animation_ttl = range(11)
@@ -295,7 +332,7 @@ async def _(event):
         "usage": "{tr}macoc",
     },
 )
-async def _(event):
+async def macoc(event):
     "animation command"
     animation_interval = 0.5
     animation_ttl = range(11)
@@ -326,7 +363,7 @@ async def _(event):
         "usage": "{tr}windows",
     },
 )
-async def _(event):
+async def windows(event):
     "animation command"
     animation_interval = 0.5
     animation_ttl = range(11)
@@ -357,7 +394,7 @@ async def _(event):
         "usage": "{tr}linux",
     },
 )
-async def _(event):
+async def linux(event):
     "animation command"
     animation_interval = 0.5
     animation_ttl = range(11)
@@ -388,7 +425,7 @@ async def _(event):
         "usage": "{tr}stock",
     },
 )
-async def _(event):
+async def stock(event):
     "animation command"
     animation_interval = 0.5
     animation_ttl = range(11)
@@ -419,7 +456,7 @@ async def _(event):
         "usage": "{tr}os",
     },
 )
-async def _(event):
+async def os(event):
     "animation command"
     animation_interval = 0.1
     animation_ttl = range(7)
@@ -436,3 +473,37 @@ async def _(event):
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await event.edit(animation_chars[i % 7])
+
+
+@legend.legend_cmd(
+    pattern="independence(?:\s|$)([\s\S]*)",
+    command=("independence", menu_category),
+    info={
+        "header": "Wish Happy Independence Day",
+        "description": "It Can Help U To Send Independence Day Message ",
+        "usage": [
+            "{tr}independence",
+        ],
+    },
+)
+async def independence(event):
+    "Wish Happy Independence Day"
+    animation_interval = 6
+    animation_ttl = range(0, 17)
+    await event.edit("Starting...")
+    animation_chars = [
+        "**нєℓℓο!👋**",
+        "**нοω αяє υ?**",
+        f"**{mention} : нαρργ ιи∂єρєи∂єиϲє ∂αγ**",
+        "ωιѕнιиg υ нαρργ ιи∂єρєи∂єиϲє ∂αγ",
+        "**Happy 😊 Indpendence Day!**",
+        "**From every mountain side Let Fredom Ring**",
+        "**Independence means.. enjoying freedom and empowering others too to let them do so.**",
+        "ͲϴᎠᎪᎽ ᏔᎬ ᎪᎡᎬ ҒᎡᎬᎬ ᏴᎬᏟᎪႮՏᎬ ᎷᎪΝᎽ ՏᎪᏟᎡᏆҒᏆᏟᎬᎠ ͲᎻᎬᎡᎬ ᏞᏆᏙᎬՏ ҒϴᎡ ᏆΝᎠᏆᎪ \nՏᎪᏞႮͲᎬ ͲᎻᎬ ᏀᎡᎬᎪͲ ՏϴႮᏞՏ",
+        "[ƒοя υ](https://telegra.ph/file/66205f168d8c2a0bbaa43.jpg)",
+        "[нαρργ ιи∂ρєи∂єиϲє ∂αγ](https://t.me/Legend_Userbot)",
+    ]
+    for i in animation_ttl:  # By @The_LegendBoy LegendBot
+
+        await asyncio.sleep(animation_interval)
+        await event.edit(animation_chars[i % 17], link_preview=True)

@@ -5,7 +5,6 @@ import traceback
 from userbot import Config, legend
 
 from ..core.logger import logging
-from ..sql_helper.bot_blacklists import check_is_black_list
 
 LOGS = logging.getLogger(__name__)
 
@@ -30,17 +29,11 @@ async def aexec(code, event):
     incoming=True,
     func=lambda e: e.sender_id == Config.OWNER_ID,
 )
-async def bot_ll(event):
-    chat = await event.get_chat()
-    await legend.get_me()
-    if check_is_black_list(chat.id):
-        return
-    rk = await event.reply("`....`")
-    try:
-        cmd = event.text.split(" ", maxsplit=1)[1]
-    except IndexError:
-        return await rk.edit("`No Python Command Was Given`")
-    cmd = event.text.split(" ", maxsplit=1)[1]
+async def bo_ll(event):
+    cmd = await event.get_reply_message()
+    if not cmd:
+        return await event.reply("Reply to a message for Eval !")
+    # cmd = event.text.split(" ", maxsplit=1)[1]
     if cmd in (
         "LEGEND_STRING",
         "session",
@@ -48,7 +41,7 @@ async def bot_ll(event):
         "HEROKU_API_KEY",
         "DeleteAccountRequest",
     ):
-        return await rk.edit(
+        return await event.reply(
             "Sorry, This Is Sensitive Data I Cant Send It To Public.& Reported to Admin Of [LegendBot](https://t.me/LegendBot_AI) Group admin. & Dont Try To Send Any Information Without Knowing Anything."
         )
     reply_to_id = event.message.id
@@ -93,4 +86,4 @@ async def bot_ll(event):
             )
 
     else:
-        await rk.edit(final_output)
+        await event.reply(final_output)

@@ -33,7 +33,7 @@ unfbanresults = ["I'll give", "Un-FedBan", "un-FedBan"]
         "usage": "{tr}info <userid/username/reply>",
     },
 )
-async def _(event):
+async def roseinfo(event):
     "Info of a person."
     if event.pattern_match.group(1):
         sysarg = event.pattern_match.group(1)
@@ -45,7 +45,7 @@ async def _(event):
             GetFullUserRequest(previous_message.sender_id)
         )
         getuser = str(replied_user.user.id)
-        async with event.client.conversation(bots) as conv:
+        async with event.client.conversation(rose) as conv:
             try:
                 await conv.send_message("/start")
                 await conv.get_response()
@@ -58,7 +58,7 @@ async def _(event):
                     "**Error:** `unblock` @MissRose_bot `and retry! Or `.unblock @missrose_bot`"
                 )
     else:
-        async with event.client.conversation(bots) as conv:
+        async with event.client.conversation(rose) as conv:
             try:
                 await conv.send_message("/start")
                 await conv.get_response()
@@ -483,7 +483,7 @@ async def fetch_fedinfo(event):
                 await legend(unblock("MissRose_bot"))
                 await conv.send_message(f"/fedinfo {input_str}")
             response = await conv.get_response()
-            await eor(catevent, response.text)
+            await eor(legendevent, response.text)
         except Exception as e:
             await eod(legendevent, f"**Error while fecthing fedinfo:**\n__{e}__", 10)
         await event.client.send_read_acknowledge(conv.chat_id)

@@ -1,4 +1,5 @@
 import signal
+import sys
 import time
 
 import heroku3

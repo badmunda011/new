@@ -58,6 +58,7 @@ menu_category = "extra"
     },
 )
 async def anime_quote(event):
+    "Get random Anime quotes."
     data = requests.get("https://animechan.vercel.app/api/random").json()
     anime = data["anime"]
     character = data["character"]
@@ -184,7 +185,7 @@ async def user(event):
         "examples": "{tr}airing one piece",
     },
 )
-async def anilist(event):
+async def airimg(event):
     "Get airing date & time of any anime"
     search = event.pattern_match.group(1)
     if not search:
@@ -216,7 +217,7 @@ async def anilist(event):
         "examples": "{tr}anime fairy tail",
     },
 )
-async def anilist(event):
+async def anime(event):
     "Get info on any anime."
     input_str = event.pattern_match.group(1)
     if not input_str:
@@ -274,7 +275,7 @@ async def get_manga(event):
         ],
     },
 )
-async def get_anime(event):
+async def fillers(event):
     "to get list of filler episodes."
     input_str = event.pattern_match.group(1)
     reply = await event.get_reply_message()
@@ -468,7 +469,7 @@ async def character(event):
         ],
     },
 )
-async def anime_download(event):  # sourcery no-metrics
+async def anime_downld(event):  # sourcery no-metrics
     "Anime download links."
     search_query = event.pattern_match.group(2)
     input_str = event.pattern_match.group(1)

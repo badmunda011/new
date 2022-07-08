@@ -25,7 +25,7 @@ menu_category = "tools"
         "examples": "{tr}ls userbot",
     },
 )
-async def lst(event):  # sourcery no-metrics
+async def ls(event):  # sourcery no-metrics
     "To list all files and folders."
     legend = "".join(event.text.split(maxsplit=1)[1:])
     path = legend or os.getcwd()
@@ -114,7 +114,7 @@ async def lst(event):  # sourcery no-metrics
         "examples": "{tr}rem Dockerfile",
     },
 )
-async def lst(event):
+async def rem(event):
     "To delete a file or folder."
     legend = event.pattern_match.group(1)
     if legend:
@@ -146,7 +146,7 @@ async def lst(event):
         "examples": "{tr}mkdir legend",
     },
 )
-async def _(event):
+async def mkdir(event):
     "To create a new directory."
     pwd = os.getcwd()
     input_str = event.pattern_match.group(1)
@@ -181,7 +181,7 @@ async def _(event):
         "examples": "{tr}cpto sample_config.py ; downloads",
     },
 )
-async def _(event):
+async def cpto(event):
     "To copy a file from one directory to other directory"
     pwd = os.getcwd()
     input_str = event.pattern_match.group(1)
@@ -225,7 +225,7 @@ async def _(event):
         "examples": "{tr}mvto stringsession.py ; downloads",
     },
 )
-async def _(event):
+async def mvto(event):
     "To move a file from one directory to other directory"
     pwd = os.getcwd()
     input_str = event.pattern_match.group(1)

@@ -6,7 +6,7 @@ from . import eor, legend
 menu_category = "fun"
 
 
-edit_or_reply = eor
+eor = eor
 
 
 KANNADIGAOSTR = [
@@ -111,7 +111,7 @@ CRI = [
 async def cri(e):
     """y u du dis, i cry everytime !!"""
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        await edit_or_reply(e, random.choice(CRI))
+        await eor(e, random.choice(CRI))
 
 
 @legend.legend_cmd(
@@ -125,7 +125,7 @@ async def cri(e):
 async def hoi(hello):
     """Greet everyone!"""
     if not hello.text[0].isalpha() and hello.text[0] not in ("/", "#", "@", "!"):
-        await edit_or_reply(hello, random.choice(KANNADIGAOSTR))
+        await eor(hello, random.choice(KANNADIGAOSTR))
 
 
 @legend.legend_cmd(
@@ -139,7 +139,7 @@ async def hoi(hello):
 async def shrugger(shg):
     r"""¯\_(ツ)_/¯"""
     if not shg.text[0].isalpha() and shg.text[0] not in ("/", "#", "@", "!"):
-        await edit_or_reply(shg, random.choice(SHGS))
+        await eor(shg, random.choice(SHGS))
 
 
 @legend.legend_cmd(
@@ -153,7 +153,7 @@ async def shrugger(shg):
 async def _(event):
     animation_interval = 0.1
     animation_ttl = range(0, 7)
-    await edit_or_reply(event, "nope")
+    await eor(event, "nope")
     animation_chars = [
         "No",
         "Problem",

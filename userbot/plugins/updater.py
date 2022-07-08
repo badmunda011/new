@@ -1,4 +1,5 @@
 import asyncio
+import contextlib
 import os
 import sys
 from asyncio.exceptions import CancelledError
@@ -35,6 +36,7 @@ async def ld_info(lb_info):
 
 menu_category = "tools"
 cmdhd = Config.HANDLER
+ENV = bool(os.environ.get("ENV", False))
 
 LOGS = logging.getLogger(__name__)
 # -- Constants -- #
@@ -113,7 +115,7 @@ async def update_requirements():
         return repr(e)
 
 
-async def update(event, repo, ups_rem, ac_br):
+async def update_legend(event, repo, ups_rem, ac_br):
     try:
         ups_rem.pull(ac_br)
     except GitCommandError:
@@ -185,12 +187,10 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         await event.edit(f"{txt}\n**Here is the error log:**\n`{error}`")
         return repo.__del__()
     await event.edit("`Deploy was failed. So restarting to update`")
-    try:
+    with contextlib.suppress(CancelledError):
         await event.client.disconnect()
         if HEROKU_APP is not None:
             HEROKU_APP.restart()
-    except CancelledError:
-        pass
 
 
 @legend.legend_cmd(
@@ -217,7 +217,7 @@ async def upstream(event):
     off_repo = UPSTREAM_REPO_URL
     _version, _release, _branch, _author, _auturl = await ld_info(lb_info)
     force_update = False
-    if API_KEY is None or APP_NAME is None:
+    if ENV and (API_KEY is None or APP_NAME is None):
         return await eor(
             event,
             "`👨‍💻 Set the required vars first to Update the [Lêɠêɳ̃dẞø†](https://t.me/LegendBot_AI/292)`",
@@ -256,10 +256,8 @@ async def upstream(event):
             "please checkout to any official branch`"
         )
         return repo.__del__()
-    try:
+    with contextlib.suppress(BaseException):
         repo.create_remote("upstream", off_repo)
-    except BaseException:
-        pass
     ups_rem = repo.remote("upstream")
     ups_rem.fetch(ac_br)
     changelog = await gen_chlog(repo, f"HEAD..upstream/{ac_br}")
@@ -287,7 +285,7 @@ async def upstream(event):
         )
     if conf == "now":
         await event.edit("`Updating userbot, please wait....`")
-        await update(event, repo, ups_rem, ac_br)
+        await update_legend(event, repo, ups_rem, ac_br)
     return
 
 

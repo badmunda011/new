@@ -1,14 +1,18 @@
 import asyncio
+import glob
+import io
 import os
-import time
-from datetime import datetime
+import pathlib
+from time import time
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl import types
-from telethon.tl.types import DocumentAttributeAudio
+from telethon.tl.functions.contacts import UnblockRequest as unblock
 from telethon.utils import get_attributes
-from youtube_dl import YoutubeDL
-from youtube_dl.utils import (
+from urlextract import URLExtract
+from wget import download
+from yt_dlp import YoutubeDL
+from yt_dlp.utils import (
     ContentTooShortError,
     DownloadError,
     ExtractorError,
@@ -19,17 +23,20 @@ from youtube_dl.utils import (
     XAttrMetadataError,
 )
 
-from userbot import legend
-
+from ..core import pool
 from ..core.logger import logging
 from ..core.managers import eod, eor
-from ..helpers import progress
-from ..helpers.functions.utube import ytsearch
+from ..helpers import progress, reply_id
+from ..helpers.functions import delete_conv
+from ..helpers.functions.utube import _mp3Dl, get_yt_video_id, get_ytthumb, ytsearch
 from ..helpers.utils import _format
-from . import hmention
+from . import BOTLOG, BOTLOG_CHATID, legend
 
 BASE_YT_URL = "https://www.youtube.com/watch?v="
+extractor = URLExtract()
 LOGS = logging.getLogger(__name__)
+
+
 menu_category = "misc"
 
 
@@ -45,7 +52,7 @@ video_opts = {
         {"key": "FFmpegVideoConvertor", "preferedformat": "mp4"},
         {"key": "FFmpegMetadata"},
     ],
-    "outtmpl": "%(title)s.mp4",
+    "outtmpl": "legend_ytv.mp4",
     "logtostderr": False,
     "quiet": True,
 }
@@ -122,7 +129,9 @@ async def fix_attributes(
     if video and isinstance(video, types.DocumentAttributeVideo):
         new_attributes.append(video)
 
-    for attr in attributes:
+    new_attributes.extend(
+        attr
+        for attr in attributes
         if (
             isinstance(attr, types.DocumentAttributeAudio)
             and not audio
@@ -130,148 +139,173 @@ async def fix_attributes(
             and not video
             or not isinstance(attr, types.DocumentAttributeAudio)
             and not isinstance(attr, types.DocumentAttributeVideo)
-        ):
-            new_attributes.append(attr)
+        )
+    )
     return new_attributes, mime_type
 
 
 @legend.legend_cmd(
-    pattern="yt(a|v)(?:\s|$)([\s\S]*)",
-    command=("yt", menu_category),
+    pattern="yta(?:\s|$)([\s\S]*)",
+    command=("yta", menu_category),
     info={
-        "header": "To download audio from many sites like Youtube",
-        "description": "downloads the audio from the given link (Suports the all sites which support youtube-dl)",
+        "header": "To download audio from many sites like Youtube, Facebook, Instagram, etc.",
+        "description": "downloads the audio from the given link ([Supported Sites](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md))",
         "examples": ["{tr}yta <reply to link>", "{tr}yta <link>"],
     },
 )
-async def download_video(v_url):
-    """For .yta/ytv command, download media from YouTube and many other sites."""
-    url = v_url.pattern_match.group(2)
-    type = v_url.pattern_match.group(1).lower()
-    await eor(v_url, "`Preparing to download...`")
-
-    if type == "a":
-        opts = {
-            "format": "bestaudio",
-            "addmetadata": True,
-            "key": "FFmpegMetadata",
-            "writethumbnail": True,
-            "prefer_ffmpeg": True,
-            "geo_bypass": True,
-            "nocheckcertificate": True,
-            "postprocessors": [
-                {
-                    "key": "FFmpegExtractAudio",
-                    "preferredcodec": "mp3",
-                    "preferredquality": "480",
-                }
-            ],
-            "outtmpl": "%(id)s.mp3",
-            "quiet": True,
-            "logtostderr": False,
-        }
-        video = False
-        song = True
-
-    elif type == "v":
-        opts = {
-            "format": "best",
-            "addmetadata": True,
-            "key": "FFmpegMetadata",
-            "prefer_ffmpeg": True,
-            "geo_bypass": True,
-            "nocheckcertificate": True,
-            "postprocessors": [
-                {"key": "FFmpegVideoConvertor", "preferedformat": "mp4"}
-            ],
-            "outtmpl": "%(id)s.mp4",
-            "logtostderr": False,
-            "quiet": True,
-        }
-        song = False
-        video = True
-
-    try:
-        await eor(v_url, "`Fetching data, please wait..`")
-        with YoutubeDL(opts) as ytdl:
-            ytdl_data = ytdl.extract_info(url)
-    except DownloadError as DE:
-        await eor(v_url, f"`{str(DE)}`")
-        return
-    except ContentTooShortError:
-        await eor(v_url, "`The download content was too short.`")
-        return
-    except GeoRestrictedError:
-        await eor(
-            v_url,
-            "`Video is not available from your geographic location due to geographic restrictions imposed by a website.`",
-        )
-        return
-    except MaxDownloadsReached:
-        await eor(v_url, "`Max-downloads limit has been reached.`")
-        return
-    except PostProcessingError:
-        await eor(v_url, "`There was an error during post processing.`")
-        return
-    except UnavailableVideoError:
-        await eor(v_url, "`Media is not available in the requested format.`")
-        return
-    except XAttrMetadataError as XAME:
-        await eor(v_url, f"`{XAME.code}: {XAME.msg}\n{XAME.reason}`")
-        return
-    except ExtractorError:
-        await eor(v_url, "`There was an error during info extraction.`")
-        return
-    except Exception as e:
-        await eor(v_url, f"{str(type(e)): {str(e)}}")
-        return
-    c_time = time.time()
-    if song:
-        await eor(
-            v_url,
-            f"`Preparing to upload song:`\
-        \n**{ytdl_data['title']}**\
-        \nby *{ytdl_data['uploader']}*",
-        )
-        await v_url.client.send_file(
-            v_url.chat_id,
-            f"{ytdl_data['id']}.mp3",
-            supports_streaming=True,
-            attributes=[
-                DocumentAttributeAudio(
-                    duration=int(ytdl_data["duration"]),
-                    title=str(ytdl_data["title"]),
-                    performer=str(ytdl_data["uploader"]),
-                )
-            ],
-            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(
-                    d, t, v_url, c_time, "Uploading..", f"{ytdl_data['title']}.mp3"
-                )
-            ),
-        )
-        os.remove(f"{ytdl_data['id']}.mp3")
-        await v_url.delete()
-    elif video:
-        await eor(
-            v_url,
+async def download_audio(event):
+    """To download audio from YouTube and many other sites."""
+    msg = event.pattern_match.group(1)
+    rmsg = await event.get_reply_message()
+    if not msg and rmsg:
+        msg = rmsg.text
+    urls = extractor.find_urls(msg)
+    if not urls:
+        return await eor(event, "What I am Supposed to do? Give link")
+    legendevent = await eor(event, "`Preparing to download...`")
+    reply_to_id = await reply_id(event)
+    for url in urls:
+        try:
+            vid_data = YoutubeDL({"no-playlist": True}).extract_info(
+                url, download=False
+            )
+        except ExtractorError:
+            vid_data = {"title": url, "uploader": "Legenduserbot", "formats": []}
+        startTime = time()
+        retcode = await _mp3Dl(url=url, starttime=startTime, uid="320")
+        if retcode != 0:
+            return await event.edit(str(retcode))
+        _fpath = ""
+        thumb_pic = None
+        for _path in glob.glob(os.path.join(Config.TEMP_DIR, str(startTime), "*")):
+            if _path.lower().endswith((".jpg", ".png", ".webp")):
+                thumb_pic = _path
+            else:
+                _fpath = _path
+        if not _fpath:
+            return await eod(legendevent, "__Unable to upload file__")
+        await legendevent.edit(
             f"`Preparing to upload video:`\
-        \n**{ytdl_data['title']}**\
-        \nby *{ytdl_data['uploader']}*",
+            \n**{vid_data['title']}***"
         )
-        await v_url.client.send_file(
-            v_url.chat_id,
-            f"{ytdl_data['id']}.mp4",
-            supports_streaming=True,
-            caption=ytdl_data["title"],
+        attributes, mime_type = get_attributes(str(_fpath))
+        ul = io.open(pathlib.Path(_fpath), "rb")
+        if thumb_pic is None:
+            thumb_pic = str(
+                await pool.run_in_thread(download)(
+                    await get_ytthumb(get_yt_video_id(url))
+                )
+            )
+        uploaded = await event.client.fast_upload_file(
+            file=ul,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
                 progress(
-                    d, t, v_url, c_time, "Uploading..", f"{ytdl_data['title']}.mp4"
+                    d,
+                    t,
+                    legendevent,
+                    startTime,
+                    "trying to upload",
+                    file_name=os.path.basename(pathlib.Path(_fpath)),
                 )
             ),
         )
-        os.remove(f"{ytdl_data['id']}.mp4")
-        await v_url.delete()
+        ul.close()
+        media = types.InputMediaUploadedDocument(
+            file=uploaded,
+            mime_type=mime_type,
+            attributes=attributes,
+            force_file=False,
+            thumb=await event.client.upload_file(thumb_pic) if thumb_pic else None,
+        )
+        await event.client.send_file(
+            event.chat_id,
+            file=media,
+            caption=f"<b>File Name : </b><code>{vid_data.get('title', os.path.basename(pathlib.Path(_fpath)))}</code>",
+            supports_streaming=True,
+            reply_to=reply_to_id,
+            parse_mode="html",
+        )
+        for _path in [_fpath, thumb_pic]:
+            os.remove(_path)
+    await legendevent.delete()
+
+
+@legend.legend_cmd(
+    pattern="ytv(?:\s|$)([\s\S]*)",
+    command=("ytv", menu_category),
+    info={
+        "header": "To download video from many sites like Youtube, Facebook, Instagram",
+        "description": "downloads the video from the given link ([Supported Sites](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md))",
+        "examples": [
+            "{tr}ytv <reply to link>",
+            "{tr}ytv <link>",
+        ],
+    },
+)
+async def download_video(event):
+    """To download video from YouTube and many other sites."""
+    msg = event.pattern_match.group(1)
+    rmsg = await event.get_reply_message()
+    if not msg and rmsg:
+        msg = rmsg.text
+    urls = extractor.find_urls(msg)
+    if not urls:
+        return await eor(event, "What I am Supposed to do? Give link")
+    legendevent = await eor(event, "`Preparing to download...`")
+    reply_to_id = await reply_id(event)
+    for url in urls:
+        ytdl_data = await ytdl_down(legendevent, video_opts, url)
+        if ytdl_down is None:
+            return
+        try:
+            f = pathlib.Path("legend_ytv.mp4")
+            print(f)
+            legendthumb = pathlib.Path("cat_ytv.jpg")
+            if not os.path.exists(legendthumb):
+                legendthumb = pathlib.Path("cat_ytv.webp")
+            if not os.path.exists(legendthumb):
+                legendthumb = None
+            await legendevent.edit(
+                f"`Preparing to upload video:`\
+                \n**{ytdl_data['title']}**"
+            )
+            ul = io.open(f, "rb")
+            c_time = time()
+            attributes, mime_type = await fix_attributes(
+                f, ytdl_data, supports_streaming=True
+            )
+            uploaded = await event.client.fast_upload_file(
+                file=ul,
+                progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                    progress(
+                        d,
+                        t,
+                        legendevent,
+                        c_time,
+                        "Upload :",
+                        file_name=ytdl_data["title"],
+                    )
+                ),
+            )
+            ul.close()
+            media = types.InputMediaUploadedDocument(
+                file=uploaded,
+                mime_type=mime_type,
+                attributes=attributes,
+            )
+            await event.client.send_file(
+                event.chat_id,
+                file=media,
+                reply_to=reply_to_id,
+                caption=f'**Title :** `{ytdl_data["title"]}`',
+                thumb=legendthumb,
+            )
+            os.remove(f)
+            if legendthumb:
+                os.remove(legenthumb)
+        except TypeError:
+            await asyncio.sleep(2)
+    await legendevent.delete()
 
 
 @legend.legend_cmd(
@@ -311,7 +345,7 @@ async def yt_search(event):
 
 
 @legend.legend_cmd(
-    pattern="insta ([\s\S]*)",
+    pattern="insta(?: |$)([\s\S]*)",
     command=("insta", menu_category),
     info={
         "header": "To download instagram video/photo",
@@ -321,39 +355,89 @@ async def yt_search(event):
         ],
     },
 )
-async def kakashi(event):
+async def insta_dl(event):
     "For downloading instagram media"
-    chat = "@instasavegrambot"
     link = event.pattern_match.group(1)
-    if "www.instagram.com" not in link:
-        await eor(event, "` I need a Instagram link to download it's Video...`(*_*)")
-    else:
-        start = datetime.now()
-        legendevent = await eor(event, "**Downloading.....**")
-    async with event.client.conversation(chat) as conv:
+    reply = await event.get_reply_message()
+    if not link and reply:
+        link = reply.text
+    if not link:
+        return await eod(event, "**ಠ∀ಠ Give me link to search..**", 10)
+    if "instagram.com" not in link:
+        return await eod(
+            event, "` I need a Instagram link to download it's Video...`(*_*)", 10
+        )
+    v1 = "@instasave_bot"
+    v2 = "@videomaniacbot"
+    media_list = []
+    legendevent = await eor(event, "**Downloading.....**")
+    async with event.client.conversation(v1) as conv:
         try:
-            msg_start = await conv.send_message("/start")
-            response = await conv.get_response()
-            msg = await conv.send_message(link)
-            video = await conv.get_response()
-            details = await conv.get_response()
-            await event.client.send_read_acknowledge(conv.chat_id)
+            v1_flag = await conv.send_message("/start")
         except YouBlockedUserError:
-            await legendevent.edit(
-                "**Error:** `unblock` @instasavegrambot `and retry!`"
+            await eor(
+                legendevent, "**Error:** Trying to unblock & retry, wait a sec..."
             )
-            return
-        await legendevent.delete()
-        legend = await event.client.send_file(
-            event.chat_id,
-            video,
-        )
-        end = datetime.now()
-        ms = (end - start).seconds
-        await legend.edit(
-            f"<b><i>➥ Video uploaded in {ms} seconds.</i></b>\n<b><i>➥ Uploaded by :- {hmention}</i></b>",
-            parse_mode="html",
-        )
-    await event.client.delete_messages(
-        conv.chat_id, [msg_start.id, response.id, msg.id, video.id, details.id]
-    )
+            await legend(unblock("instasave_bot"))
+            v1_flag = await conv.send_message("/start")
+        response = await conv.get_response()
+        checker = response.text
+        await event.client.send_read_acknowledge(conv.chat_id)
+        if checker == "Welcome!":
+            await asyncio.sleep(2)
+            await conv.send_message(link)
+            media = await conv.get_response()
+            await event.client.send_read_acknowledge(conv.chat_id)
+            if media.media:
+                if media.grouped_id:
+                    while media.grouped_id:
+                        media_list.append(media)
+                        media = await conv.get_response()
+                else:
+                    media_list.append(media)
+                    media = await conv.get_response()
+                    await event.client.send_read_acknowledge(conv.chat_id)
+                details = media.message.splitlines()
+                await legendevent.delete()
+                await event.client.send_file(
+                    event.chat_id,
+                    media_list,
+                    caption=f"**{details[0]}**",
+                )
+                return await delete_conv(event, v1, v1_flag)
+            checker = media.message.splitlines()[2]
+        await delete_conv(event, v1, v1_flag)
+        await eor(legendevent, "**Switching v2...**")
+        async with event.client.conversation(v2) as conv:
+            try:
+                v2_flag = await conv.send_message("/start")
+            except YouBlockedUserError:
+                await eor(
+                    legendevent, "**Error:** Trying to unblock & retry, wait a sec..."
+                )
+                await legend(unblock("videomaniacbot"))
+                v2_flag = await conv.send_message("/start")
+            await conv.get_response()
+            await event.client.send_read_acknowledge(conv.chat_id)
+            await asyncio.sleep(1)
+            await conv.send_message(link)
+            await conv.get_response()
+            await event.client.send_read_acknowledge(conv.chat_id)
+            media = await conv.get_response()
+            await event.client.send_read_acknowledge(conv.chat_id)
+            if media.media:
+                if BOTLOG and "join the channel" in checker:
+                    error = checker.splitlines()[2]
+                    await event.client.send_message(
+                        BOTLOG_CHATID,
+                        f"**#V1_ERROR :-**\n\n__Currently we using @instasave_bot for v1, that need users to join this chat : {error}__\n\n__If you know any good bot which does'nt need join channel, inform us here: @catuserbot_support__",
+                    )
+                await legendevent.delete()
+                await event.client.send_file(event.chat_id, media)
+            else:
+                await eod(
+                    legendevent,
+                    f"**#ERROR\nv1 :** __{checker}__\n\n**v2 :**__ {media.text}__",
+                    40,
+                )
+            await delete_conv(event, v2, v2_flag)

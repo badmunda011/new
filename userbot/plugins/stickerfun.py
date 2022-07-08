@@ -11,7 +11,7 @@ from telethon.tl.types import InputMessagesFilterDocument
 from userbot import legend
 
 from ..core.managers import eor
-from ..helpers.functions import deEmojify, hide_inlinebot, waifutxt
+from ..helpers.functions import deEmojify, hide_inlinebot, soft_deEmojify, waifutxt
 from ..helpers.utils import reply_id
 
 menu_category = "fun"
@@ -32,6 +32,20 @@ async def get_font_file(client, channel_id, search_kw=""):
     font_file_message = random.choice(font_file_message_s)
     # download and return the file path
     return await client.download_media(font_file_message)
+
+
+def file_checker(template):
+    if not os.path.isdir("./temp"):
+        os.mkdir("./temp")
+    tempname = "./temp/legend_temp.png"
+    fontname = "./temp/ArialUnicodeMS.ttf"
+    urllib.request.urlretrieve(template, tempname)
+    if not os.path.exists(fontname):
+        urllib.request.urlretrieve(
+            "https://github.com/ITS-LEGENDBOT/RESOURCES/blob/master/Resources/Spotify/ArialUnicodeMS.ttf?raw=true",
+            fontname,
+        )
+    return tempname, fontname
 
 
 EMOJI_PATTERN = re.compile(
@@ -201,7 +215,7 @@ async def honk(event):
             text = (await event.get_reply_message()).message
         else:
             return await eod(event, "__What is honk supposed to say? Give some text.__")
-    text = deEmojify(text)
+    text = soft_deEmojify(text)
     await event.delete()
     await hide_inlinebot(event.client, bot_name, text, event.chat_id, reply_to_id)
 
@@ -225,7 +239,7 @@ async def twt(event):
             text = (await event.get_reply_message()).message
         else:
             return await eod(event, "__What am I supposed to Tweet? Give some text.__")
-    text = deEmojify(text)
+    text = soft_deEmojify(text)
     await event.delete()
     await hide_inlinebot(event.client, bot_name, text, event.chat_id, reply_to_id)
 
@@ -260,7 +274,7 @@ async def glax(event):
             text = (await event.get_reply_message()).message
         else:
             return await eod(event, "What is glax supposed to scream? Give text..")
-    text = deEmojify(text)
+    text = soft_deEmojify(text)
     await event.delete()
     await hide_inlinebot(
         event.client, bot_name, text, event.chat_id, reply_to_id, c_lick=c_lick
@@ -286,6 +300,6 @@ async def twt(event):
             text = (await event.get_reply_message()).message
         else:
             return await eod(event, "__What am I supposed to search? Give some text.__")
-    text = deEmojify(text)
+    text = soft_deEmojify(text)
     await event.delete()
     await hide_inlinebot(event.client, bot_name, text, event.chat_id, reply_to_id)

@@ -67,7 +67,7 @@ async def _(event):
             "100k",
             "-vbr",
             "on",
-            required_file_name + ".opus",
+            f"{required_file_name}.opus",
         ]
         try:
             t_response = subprocess.check_output(
@@ -78,7 +78,7 @@ async def _(event):
             # continue sending required_file_name
         else:
             os.remove(required_file_name)
-            required_file_name = required_file_name + ".opus"
+            required_file_name = f"{required_file_name}.opus"
         end = datetime.now()
         ms = (end - start).seconds
         await event.client.send_file(
@@ -91,7 +91,7 @@ async def _(event):
         os.remove(required_file_name)
         await eod(
             legendevent,
-            "`Processed text {} into voice in {} seconds!`".format(text[0:20], ms),
+            "`Processed text {} into voice in {} seconds!`".format(text[:20], ms),
         )
     except Exception as e:
         await eor(legendevent, f"**Error:**\n`{e}`")

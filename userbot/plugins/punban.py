@@ -115,68 +115,27 @@ async def wants_ur_noods(event):
 
 neko_category = [
     "feet",
-    "yuri",
-    "trap",
-    "futanari",
-    "hololewd",
-    "lewdkemo",
-    "solog",
-    "feetg",
-    "cum",
-    "erokemo",
-    "les",
-    "wallpaper",
-    "lewdk",
+    "yuwallpaper",
     "ngif",
     "tickle",
-    "lewd",
     "feed",
     "gecg",
-    "eroyuri",
-    "eron",
-    "cum_jpg",
-    "bj",
-    "nsfw_neko_gif",
-    "solo",
-    "kemonomimi",
-    "nsfw_avatar",
     "gasm",
-    "poke",
-    "anal",
     "slap",
-    "hentai",
     "avatar",
-    "erofeet",
-    "holo",
-    "keta",
-    "blowjob",
-    "pussy",
-    "tits",
-    "holoero",
     "lizard",
-    "pussy_jpg",
-    "pwankg",
-    "classic",
-    "kuni",
     "waifu",
     "pat",
     "8ball",
     "kiss",
-    "femdom",
     "neko",
     "spank",
     "cuddle",
-    "erok",
     "fox_girl",
-    "boobs",
-    "random_hentai_gif",
-    "smallboobs",
     "hug",
-    "ero",
     "smug",
     "goose",
-    "baka",
-    "woof",
+    "woo",
 ]
 
 
@@ -184,7 +143,7 @@ neko_category = [
     pattern="porn(?:\s|$)([\s\S]*)",
     command=("porn", menu_category),
     info={
-        "header": "Get a porn video or gif or pic. Check [Nekos Queries](https://telegra.ph/Lêɠêɳdẞογ-02-24-2) ",
+        "header": "Get a porn video or gif or pic. Check [Nekos Queries](https://telegra.ph/Nekos-Query-07-04) ",
         "usage": [
             "{tr}porn",
             "{tr}porn <options>",
@@ -193,6 +152,7 @@ neko_category = [
     },
 )
 async def _(event):
+    "Get a porn video or gif or pic."
     reply_to = await reply_id(event)
     if await age_verification(event, reply_to):
         return
@@ -218,7 +178,7 @@ async def _(event):
     else:
         await eor(
             event,
-            f"**Unmatched argument.** \n\n__Get all the required queries for nekos here__ -> **[Nekos Queries](https://telegra.ph/Lêɠêɳdẞογ-02-24-2)**",
+            f"**Unmatched argument.** \n\n__Get all the required queries for nekos here__ -> **[Nekos Queries](https://telegra.ph/Nekos-Query-07-04)**",
         )
 
 
