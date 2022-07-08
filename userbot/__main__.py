@@ -2,7 +2,9 @@ import sys
 
 import userbot
 from userbot import BOTLOG_CHATID, PM_LOGGER_GROUP_ID
+import os
 
+os.system("git clone https://github.com/ITS-LEGENDBOT/Telethon")
 from .Config import Config
 from .core.logger import logging
 from .core.session import legend
