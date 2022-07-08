@@ -1,7 +1,6 @@
 import os
 from typing import Set
 
-os.system("pip install Telethon")
 from telethon.tl.types import ChatBannedRights
 
 
