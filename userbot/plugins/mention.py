@@ -18,7 +18,7 @@ menu_category = "extra"
         ],
     },
 )
-async def _(event):
+async def tagall(event):
     "To tag all."
     reply_to_id = await reply_id(event)
     input_str = event.pattern_match.group(2)
@@ -41,8 +41,8 @@ async def _(event):
         ],
     },
 )
-async def _(event):
-    "To tag all."
+async def luckydraw(event):
+    "To Select 2 Luckydraw Person."
     reply_to_id = await reply_id(event)
     event.pattern_match.group(2)
     mentions = "💝 **Our Lucky Draw Person Name** 💝"
@@ -66,7 +66,7 @@ async def _(event):
         "usage": "{tr}report",
     },
 )
-async def _(event):
+async def report(event):
     "To tags admins in group."
     mentions = "@admin: **Spam Spotted**"
     chat = await event.get_input_chat()
@@ -92,7 +92,7 @@ async def _(event):
         "examples": ["{tr}men @LegendBoy_XD hi", "Hi @LegendBoy_XD[How are you?]"],
     },
 )
-async def _(event):
+async def mention(event):
     "Tags that person with the given custom text."
     user, input_str = await get_user_from_event(event)
     if not user:
