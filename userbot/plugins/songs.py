@@ -4,10 +4,10 @@ import os
 import time
 
 import requests
-import yt_dlp
 from ShazamAPI import Shazam
 from telethon import types
 from telethon.tl.types import DocumentAttributeAudio
+from youtube_search import YoutubeSearch
 from yt_dlp import YoutubeDL
 from yt_dlp.utils import (
     ContentTooShortError,
@@ -19,7 +19,6 @@ from yt_dlp.utils import (
     UnavailableVideoError,
     XAttrMetadataError,
 )
-from youtube_search import YoutubeSearch
 
 from userbot import legend
 
