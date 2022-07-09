@@ -21,11 +21,12 @@ from yt_dlp.utils import (
 )
 
 from userbot import legend
-from ..helpers.utils import reply_id
+
 from ..core.logger import logging
 from ..core.managers import eod, eor
 from ..helpers import progress
 from ..helpers.tools import media_type
+from ..helpers.utils import reply_id
 from ..helpers.yt_helper import *
 from . import mention
 
@@ -33,6 +34,7 @@ menu_category = "utils"
 LOGS = logging.getLogger(__name__)
 
 perf = "LegendBot"
+
 
 @legend.legend_cmd(
     pattern="ytlink(?:\s|$)([\s\S]*)",
@@ -304,7 +306,7 @@ async def song(event):
         supports_streaming=True,
         caption=f"**✘ Song -** `{title}` \n**✘ Views -** `{views}` \n**✘ Duration -** `{duration}` \n\n**✘ By :** {mention}",
         thumb=thumb_name,
-        reply_to=reply_to_id
+        reply_to=reply_to_id,
     )
     await event.delete()
     os.remove(audio_file)
