@@ -1,8 +1,10 @@
 import asyncio
 import io
 import os
+import re
 import time
 
+import lyricsgenius
 import requests
 from ShazamAPI import Shazam
 from telethon import types
@@ -22,6 +24,7 @@ from yt_dlp.utils import (
 
 from userbot import legend
 
+from ..Config import Config
 from ..core.logger import logging
 from ..core.managers import eod, eor
 from ..helpers import progress
@@ -29,14 +32,6 @@ from ..helpers.tools import media_type
 from ..helpers.utils import reply_id
 from ..helpers.yt_helper import *
 from . import mention
-import re
-
-import lyricsgenius
-
-from userbot import legend
-
-from ..Config import Config
-from ..core.managers import eor
 
 GENIUS = Config.GENIUS_API_TOKEN
 
@@ -129,8 +124,6 @@ async def lyrics(event):  # sourcery no-metrics
             songtitle = response["hits"][songno - 1]["result"]["title"]
             result += f"`{genius.search_song(songtitle).lyrics}`"
     await eor(legendevent, result)
-
-
 
 
 @legend.legend_cmd(
