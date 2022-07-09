@@ -21,7 +21,7 @@ from yt_dlp.utils import (
 )
 
 from userbot import legend
-
+from ..helpers.utils import reply_id
 from ..core.logger import logging
 from ..core.managers import eod, eor
 from ..helpers import progress
@@ -34,19 +34,6 @@ LOGS = logging.getLogger(__name__)
 
 perf = "LegendBot"
 
-# from youtubesearchpython import *
-# =========================================================== #
-#                           STRINGS                           #
-# =========================================================== #
-SONG_SEARCH_STRING = "<code>wi8..! I am finding your song....</code>"
-SONG_NOT_FOUND = "<code>Sorry !I am unable to find any song like that</code>"
-SONG_SENDING_STRING = "<code>yeah..! i found something wi8..🥰...</code>"
-SONGBOT_BLOCKED_STRING = "<code>Please unblock @songdl_bot and try again</code>"
-# =========================================================== #
-#                                                             #
-# =========================================================== #
-
-
 @legend.legend_cmd(
     pattern="ytlink(?:\s|$)([\s\S]*)",
     command=("ytlink", menu_category),
@@ -55,7 +42,7 @@ SONGBOT_BLOCKED_STRING = "<code>Please unblock @songdl_bot and try again</code>"
         "usage": "{tr}ytlink",
     },
 )
-async def hmm(ytwala):
+async def ytlink(ytwala):
     "Get Link of query from youtube limit 7"
     query = ytwala.pattern_match.group(1)
     if not query:
@@ -232,6 +219,7 @@ async def vsong(event):
         "logtostderr": False,
         "quiet": True,
     }
+    reply_to_id = await reply_id(event)
     m = await eor(event, "searching video song")
     query = event.text[6:]
     try:
@@ -264,6 +252,7 @@ async def vsong(event):
         supports_streaming=True,
         caption=f"**✘ Video Song -** `{title}` \n**✘ Views -** `{views}` \n**✘ Duration -** `{duration}` \n\n**✘ By :** {mention}",
         thumb=thumb_name,
+        reply_to=reply_to_id,
     )
     await event.delete()
     os.remove(audio_file)
@@ -280,6 +269,7 @@ async def vsong(event):
 )
 async def song(event):
     "Search Audio Song Fast Mode"
+    reply_to_id = await reply_id(event)
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     m = await eor(event, "searching song")
     query = event.text[6:]
@@ -314,6 +304,7 @@ async def song(event):
         supports_streaming=True,
         caption=f"**✘ Song -** `{title}` \n**✘ Views -** `{views}` \n**✘ Duration -** `{duration}` \n\n**✘ By :** {mention}",
         thumb=thumb_name,
+        reply_to=reply_to_id
     )
     await event.delete()
     os.remove(audio_file)
