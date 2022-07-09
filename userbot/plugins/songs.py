@@ -28,7 +28,7 @@ from ..core.managers import eod, eor
 from ..helpers import progress
 from ..helpers.tools import media_type
 from ..helpers.yt_helper import *
-from . import deEmojify, mention
+from . import mention
 
 menu_category = "utils"
 LOGS = logging.getLogger(__name__)
@@ -70,7 +70,6 @@ async def hmm(ytwala):
     for i in results["videos"]:
         output += f"--> `{i['title']}`\nhttps://www.youtube.com{i['url_suffix']}\n\n"
     await eor(ytwala, output, link_preview=False)
-
 
 
 @legend.legend_cmd(
