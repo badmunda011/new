@@ -57,6 +57,7 @@ SONGBOT_BLOCKED_STRING = "<code>Please unblock @songdl_bot and try again</code>"
     },
 )
 async def hmm(ytwala):
+    "Get Link of query from youtube limit 7"
     query = ytwala.pattern_match.group(1)
     if not query:
         await eor(ytwala, "`Enter query to search`")
@@ -71,46 +72,17 @@ async def hmm(ytwala):
     await eor(ytwala, output, link_preview=False)
 
 
-@legend.legend_cmd(
-    pattern="slyrics(?:\s|$)([\s\S]*)",
-    command=("slyrics", menu_category),
-    info={
-        "header": "Lyrics Of Song",
-        "usage": "{tr}slyrics",
-    },
-)
-async def nope(aura):
-    KANNADIGA = aura.pattern_match.group(1)
-    if not KANNADIGA:
-        if aura.is_reply:
-            (await aura.get_reply_message()).message
-        else:
-            await aura.edit(
-                "`Sir please give some query to search and download it for you..!`"
-            )
-            return
-
-    troll = await bot.inline_query("iLyricsBot", f"{(deEmojify(KANNADIGA))}")
-
-    await troll[0].click(
-        aura.chat_id,
-        reply_to=aura.reply_to_msg_id,
-        silent=True if aura.is_reply else False,
-        hide_via=True,
-    )
-
-    await aura.delete()
-
 
 @legend.legend_cmd(
     pattern="ssong(?:\s|$)([\s\S]*)",
     command=("ssong", menu_category),
     info={
-        "header": "Search Song",
+        "header": "Search Song slow mode",
         "usage": "{tr}ssong",
     },
 )
-async def _(event):
+async def ssong(event):
+    "Search Song slow mode"
     query = event.text[6:]
     max_results = 1
     if query == "":
@@ -174,11 +146,12 @@ async def _(event):
     pattern="vssong(?:\s|$)([\s\S]*)",
     command=("vssong", menu_category),
     info={
-        "header": "Search Song",
+        "header": "Search video Song slow mode",
         "usage": "{tr}vssong",
     },
 )
-async def _(event):
+async def vssong(event):
+    "Search video Song slow mode"
     query = event.text[7:]
     max_results = 1
     if query == "":
@@ -242,12 +215,12 @@ def time_to_seconds(time):
     pattern="vsong(?:\s|$)([\s\S]*)",
     command=("vsong", menu_category),
     info={
-        "header": " Video Search Song",
+        "header": "Video Search Song Fast Mode",
         "usage": "{tr}vsong",
     },
 )
-async def shazamcmd(event):
-    # ydl_opts = {"format": "bestvideo[ext=mp4]"}
+async def vsong(event):
+    "Video Search Song Fast Mode"
     ydl_opts = {
         "format": "best",
         "addmetadata": True,
@@ -303,11 +276,12 @@ async def shazamcmd(event):
     pattern="song(?:\s|$)([\s\S]*)",
     command=("song", menu_category),
     info={
-        "header": "Search Song",
+        "header": "Search Audio Song Fast Mode",
         "usage": "{tr}song",
     },
 )
-async def shazamcmd(event):
+async def song(event):
+    "Search Audio Song Fast Mode"
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     m = await eor(event, "searching song")
     query = event.text[6:]
@@ -357,7 +331,7 @@ async def shazamcmd(event):
         "usage": "{tr}shazam <reply to voice/audio>",
     },
 )
-async def shazamcmd(event):
+async def spic(event):
     "To reverse search song."
     reply = await event.get_reply_message()
     mediatype = media_type(reply)
