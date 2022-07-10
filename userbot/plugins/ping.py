@@ -6,7 +6,7 @@ from datetime import datetime
 from ..core.managers import eor
 from ..helpers.functions import get_readable_time
 from ..sql_helper.globals import gvarstatus
-from . import StartTime, hmention, legend
+from . import StartTime, hmention, legend, mention
 
 menu_category = "tools"
 
@@ -20,7 +20,7 @@ menu_category = "tools"
         "usage": ["{tr}ping", "{tr}ping -a"],
     },
 )
-async def _(event):
+async def ping(event):
     "To check ping"
     type = event.pattern_match.group(1)
     reply_to_id = await reply_id(event)
@@ -46,7 +46,7 @@ async def _(event):
             or "https://telegra.ph/file/e15a2fe1430358e26713c.jpg"
         )
         caption = ping_temp.format(
-            mention=hmention,
+            mention=mention,
             uptime=uptime,
             ping=ms,
         )
