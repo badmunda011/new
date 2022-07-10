@@ -6,7 +6,7 @@ from datetime import datetime
 from ..core.managers import eor
 from ..helpers.functions import get_readable_time
 from ..sql_helper.globals import gvarstatus
-from . import StartTime, hmention, legend, mention
+from . import StartTime, legend, mention
 
 menu_category = "tools"
 
