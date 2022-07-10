@@ -11,6 +11,7 @@ from ..core.logger import logging
 from ..core.managers import eod, eor
 
 LOGS = logging.getLogger(__name__)
+
 menu_category = "utils"
 
 
@@ -29,7 +30,7 @@ def user_list(l, n):
     pattern="invitevc$",
     command=("invitevc", menu_category),
     info={
-        "header": "Invite All To Vc",
+        "header": "Invite All The Latest Online Member To Vc",
         "description": "This Cmd  Is Used To Invite All Members Of Group In Voice Call",
         "usage": [
             "{tr}invitevc",
@@ -37,7 +38,8 @@ def user_list(l, n):
     },
     groups_only=True,
 )
-async def _(e):
+async def vcinvite(e):
+    "Invite All The Latest Online Member To Vc"
     ok = await eor(e, "`Inviting Members to Voice Chat...`")
     users = []
     z = 0
@@ -65,42 +67,15 @@ async def _(e):
         ],
     },
     groups_only=True,
+    require_admin=True,
 )
-async def _(e):
+async def stopvc(e):
+    "To Stop Vc"
     try:
         await e.client(stopvc(await get_call(e)))
-        await eor(e, "`Voice Chat Stopped...`")
+        await eor(e, "`Voice Chat Stopped Successfully...`")
     except Exception as ex:
         await eor(e, f"`{str(ex)}`")
-
-
-@legend.legend_cmd(
-    pattern="playvc$",
-    command=("playvc", menu_category),
-    info={
-        "header": "Soon It Will add Features",
-        "description": "Comming Soon To Play Music In Group",
-        "usage": [
-            "{tr}playvc",
-        ],
-    },
-    groups_only=True,
-)
-async def _(e):
-    zz = await eor(e, "`VC bot started...`")
-    er, out = await bash("python3 vcstarter.py & sleep 10 && npm start")
-    LOGS.info(er)
-    LOGS.info(out)
-    if er:
-        msg = f"Failed {er}\n\n{out}"
-        if len(msg) > 4096:
-            with open("vc-error.txt", "w") as f:
-                f.write(msg.replace("`", ""))
-            await e.reply(file="vc-error.txt")
-            await zz.delete()
-            remove("vc-error.txt")
-            return
-        await zz.edit(msg)
 
 
 @legend.legend_cmd(
@@ -114,11 +89,13 @@ async def _(e):
         ],
     },
     groups_only=True,
+    require_admin=True,
 )
-async def _(e):
+async def startvc(e):
+    "To start vc of the group"
     try:
         await e.client(startvc(e.chat_id))
-        await eor(e, "`Voice Chat Started...`")
+        await eor(e, "`Voice Chat Started Successfully...`")
     except Exception as ex:
         await eor(e, f"`{str(ex)}`")
 
@@ -136,12 +113,12 @@ async def _(e):
     groups_only=True,
     require_admin=True,
 )
-async def _(e):
+async def vctitle(e):
     title = e.pattern_match.group(1)
     if not title:
         return await eod(e, "Send Me Text of Title")
     try:
         await e.client(settitle(call=await get_call(e), title=title.strip()))
-        await eod(e, "Done Voice call title changed")
+        await eod(e, f"Done Voice call title changed to {title}")
     except Exception as ex:
-        await e.eor(f"`{ex}`")
+        await eor(f"`{ex}`")
