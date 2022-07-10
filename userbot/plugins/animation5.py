@@ -32,7 +32,7 @@ async def loading(event):
         "usage": "{tr}asquare",
     },
 )
-async def _(event):
+async def asquare(event):
     "animation command"
     animation_interval = 0.3
     animation_ttl = range(20)
@@ -51,7 +51,7 @@ async def _(event):
         "usage": "{tr}up",
     },
 )
-async def _(event):
+async def up(event):
     "animation command"
     animation_interval = 0.3
     animation_ttl = range(20)
@@ -70,7 +70,7 @@ async def _(event):
         "usage": "{tr}round",
     },
 )
-async def _(event):
+async def round(event):
     "animation command"
     animation_interval = 0.3
     animation_ttl = range(20)
@@ -89,7 +89,7 @@ async def _(event):
         "usage": "{tr}hart",
     },
 )
-async def _(event):
+async def hart(event):
     "animation command"
     animation_interval = 0.5
     animation_ttl = range(20)
@@ -108,7 +108,7 @@ async def _(event):
         "usage": "{tr}anim",
     },
 )
-async def _(event):
+async def anim(event):
     "animation command"
     animation_interval = 1
     animation_ttl = range(20)
@@ -123,7 +123,7 @@ async def _(event):
         "😧",
         "😡",
         "😢",
-        "__**[Good to see you guys....]**__(github.com/ITS-LEGENDBOT/LEGENDUSERBOT)",
+        "__**[Good to see you guys....]**__(github.com/LEGEND-AI/LEGENDBOT)",
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
@@ -138,7 +138,7 @@ async def _(event):
         "usage": "{tr}fnl",
     },
 )
-async def _(event):
+async def fnl(event):
     "animation command"
     animation_interval = 2
     animation_ttl = range(6)
@@ -157,7 +157,7 @@ async def _(event):
         "usage": "{tr}monkey",
     },
 )
-async def _(event):
+async def monkey(event):
     "animation command"
     animation_interval = 2
     animation_ttl = range(12)
@@ -176,7 +176,7 @@ async def _(event):
         "usage": "{tr}herber",
     },
 )
-async def _(event):
+async def herber(event):
     "animation command"
     animation_interval = 2
     animation_ttl = range(10)
@@ -206,7 +206,7 @@ async def _(event):
         "usage": "{tr}hand",
     },
 )
-async def _(event):
+async def hand(event):
     "animation command"
     animation_interval = 1
     animation_ttl = range(13)
@@ -239,7 +239,7 @@ async def _(event):
         "usage": "{tr}gsg",
     },
 )
-async def _(event):
+async def gsg(event):
     "animation command"
     animation_interval = 1
     animation_ttl = range(12)
@@ -271,7 +271,7 @@ async def _(event):
         "usage": "{tr}theart",
     },
 )
-async def _(event):
+async def theart(event):
     "animation command"
     animation_interval = 0.3
     animation_ttl = range(54)
