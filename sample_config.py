@@ -160,6 +160,7 @@ class Config(object):
     LEGENDUBLOGO = None
     BOTLOG = False
     BOTLOG_CHATID = 0
+    EXTRA_REPOBRANCH = os.environ.get("EXTRA_REPOBRANCH", "main")
 
 
 class Production(Config):
