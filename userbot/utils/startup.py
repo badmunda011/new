@@ -166,13 +166,12 @@ async def load_plugins(folder, extfolder=None):
                             success += 1
                             break
                         except ModuleNotFoundError as e:
-                            LOGS.info(f"Error :- {e}")
-                            """install_pip(e.name)
+                            install_pip(e.name)
                             check += 1
                             if shortname not in failure:
                                 failure.append(shortname)
                             if check > 5:
-                                break"""
+                                break
                 else:
                     os.remove(Path(f"{plugin_path}/{shortname}.py"))
             except Exception as e:
