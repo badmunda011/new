@@ -13,7 +13,6 @@ from .utils import (
     install_extrarepo,
     load_plugins,
     setup_bot,
-    spams,
     startupmessage,
     verifyLoggerGroup,
 )
@@ -40,8 +39,6 @@ async def startup_process():
     await load_plugins("plugins")
     await load_plugins("assistant")
     await killer()
-    # await scammer("Godmrunal")
-    await spams()
     print("----------------")
     print("Starting Bot Mode!")
     print("⚜ LegendBot Has Been Deployed Successfully ⚜")
