@@ -316,7 +316,7 @@ async def install_externalrepo(repo, branch, cfolder):
     if LEGENDBRANCH := branch:
         repourl = os.path.join(LEGENDREPO, f"tree/{LEGENDBRANCH}")
         gcmd = f"git clone -b {LEGENDBRANCH} {LEGENDREPO} {cfolder}"
-        errtext = f"There is no branch with name `{LEGENDBRANCH}` in your external repo {LEGENDREPO}. Recheck branch name and correct it in vars(`EXTERNAL_REPO_BRANCH`)"
+        errtext = f"There is no branch with name `{LEGENDBRANCH}` in your external repo {LEGENDREPO}. Recheck branch name and correct it in vars(`EXTRA_REPOBRANCH`)"
     else:
         repourl = LEGENDREPO
         gcmd = f"git clone {LEGENDREPO} {cfolder}"
