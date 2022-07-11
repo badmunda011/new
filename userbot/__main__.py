@@ -12,6 +12,7 @@ from .start import killer
 from .utils import (
     add_bot_to_logger_group,
     hekp,
+    install_extrarepo,
     load_plugins,
     setup_bot,
     spams,
@@ -56,9 +57,15 @@ async def startup_process():
     await startupmessage()
     return
 
+async def extrarepo():
+    if Config.EXTRA_REPO:
+        await install_extrarepo(
+            Config.EXTRA_REPO, Config.EXTRA_REPOBRANCH, "xtraplugins"
+        )
 
 legend.loop.run_until_complete(startup_process())
 legend.loop.create_task(hekp())
+legend.loop.run_until_complete(extrarepo())
 
 if len(sys.argv) in (1, 3, 4):
     try:
