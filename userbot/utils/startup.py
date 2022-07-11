@@ -129,12 +129,16 @@ async def add_bot_to_logger_group(chat_id):
             LOGS.error(str(e))
 
 
-async def load_plugins(folder):
+async def load_plugins(folder, extfolder=None):
     """
     To load plugins from the mentioned folder
     """
-    path = f"userbot/{folder}/*.py"
-    plugin_path = f"userbot/{folder}"
+    if extfolder:
+        path = f"{extfolder}/*.py"
+        plugin_path = extfolder
+    else:
+        path = f"userbot/{folder}/*.py"
+        plugin_path = f"userbot/{folder}"
     files = glob.glob(path)
     files.sort()
     success = 0
@@ -177,7 +181,13 @@ async def load_plugins(folder):
                     f"unable to load {shortname} because of error {e}\nBase Folder {plugin_path}"
                 )
             LOGS.info(f'Imported : {success} Plugins \nFailed : {", ".join(failure)}')
-
+    if extfolder:
+        if not failure:
+            failure.append("None")
+        await legend.tgbot.send_message(
+            BOTLOG_CHATID,
+            f'Your external repo plugins have imported \n**No of imported plugins :** `{success}`\n**Failed plugins to import :** `{", ".join(failure)}`',
+        )
 
 async def hekp():
     try:
@@ -297,3 +307,33 @@ async def verifyLoggerGroup():
         args = [executable, "-m", "userbot"]
         os.execle(executable, *args, os.environ)
         sys.exit(0)
+
+
+
+async def install_externalrepo(repo, branch, cfolder):
+    LEGENDREPO = repo
+    if LEGENDBRANCH := branch:
+        repourl = os.path.join(LEGENDREPO, f"tree/{LEGENDBRANCH}")
+        gcmd = f"git clone -b {LEGENDBRANCH} {LEGENDREPO} {cfolder}"
+        errtext = f"There is no branch with name `{LEGENDBRANCH}` in your external repo {LEGENDREPO}. Recheck branch name and correct it in vars(`EXTERNAL_REPO_BRANCH`)"
+    else:
+        repourl = LEGENDREPO
+        gcmd = f"git clone {LEGENDREPO} {cfolder}"
+        errtext = f"The link({LEGENDREPO}) you provided for `EXTERNAL_REPO` in vars is invalid. please recheck that link"
+    response = urllib.request.urlopen(repourl)
+    if response.code != 200:
+        LOGS.error(errtext)
+        return await legend.tgbot.send_message(BOTLOG_CHATID, errtext)
+    await runcmd(gcmd)
+    if not os.path.exists(cfolder):
+        LOGS.error(
+            "There was a problem in cloning the external repo. please recheck external repo link"
+        )
+        return await catub.tgbot.send_message(
+            BOTLOG_CHATID,
+            "There was a problem in cloning the external repo. please recheck external repo link",
+        )
+    if os.path.exists(os.path.join(cfolder, "requirements.txt")):
+        rpath = os.path.join(cfolder, "requirements.txt")
+        await runcmd(f"pip3 install --no-cache-dir {rpath}")
+    await load_plugins(folder="userbot", extfolder=cfolder)
