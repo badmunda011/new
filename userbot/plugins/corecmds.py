@@ -22,6 +22,13 @@ menu_category = "tools"
 DELETE_TIMEOUT = 5
 thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
 
+def plug_checker(plugin):
+    plug_path = f"./userbot/plugins/{plugin}.py"
+    if not os.path.exists(plug_path):
+        plug_path = f"./xtraplugins/{plugin}.py"
+    if not os.path.exists(plug_path):
+        plug_path = f"./userbot/assistant/{plugin}.py"
+    return plug_path
 
 @legend.legend_cmd(
     pattern="install$",
@@ -128,6 +135,7 @@ async def load(event):
         )
 
 
+
 @legend.legend_cmd(
     pattern="send ([\s\S]*)",
     command=("send", menu_category),
@@ -142,7 +150,7 @@ async def send(event):
     reply_to_id = await reply_id(event)
     thumb = thumb_image_path if os.path.exists(thumb_image_path) else None
     input_str = event.pattern_match.group(1)
-    the_plugin_file = f"./userbot/plugins/{input_str}.py"
+    the_plugin_file = plug_checker(input_str)
     if os.path.exists(the_plugin_file):
         start = datetime.now()
         caat = await event.client.send_file(
@@ -198,7 +206,7 @@ async def unload(event):
 async def unload(event):
     "To uninstall a plugin."
     shortname = event.pattern_match.group(1)
-    path = Path(f"userbot/plugins/{shortname}.py")
+    path = plug_checker(shortname)
     if not os.path.exists(path):
         return await eod(event, f"There is no plugin with path {path} to uninstall it")
     os.remove(path)
@@ -213,3 +221,7 @@ async def unload(event):
         await eor(event, f"{shortname} is Uninstalled successfully")
     except Exception as e:
         await eor(event, f"Successfully uninstalled {shortname}\n{e}")
+    if shortname in PLG_INFO:
+        for cmd in PLG_INFO[shortname]:
+            CMD_INFO.pop(cmd)
+        PLG_INFO.pop(shortname)
