@@ -27,7 +27,7 @@ async def delayspam(e):
     if Config.SPAM == "ON":
         if e.text[0].isalpha() and e.text[0] in ("/", "#", "@", "!"):
             return await e.reply(usage, parse_mode=None, link_preview=None)
-        smex = await event.get_reply_message()
+        smex = await e.get_reply_message()
         legendboy = "".join(e.text.split(maxsplit=1)[1:]).split(" ", 2)
         legendgirl = legendboy[1:]
         if len(legendgirl) == 2:
