@@ -3,7 +3,7 @@ import os
 import sys
 from datetime import timedelta
 from pathlib import Path
-
+import urllib.request
 from telethon import Button, functions, types, utils
 from telethon.tl.functions.channels import JoinChannelRequest, LeaveChannelRequest
 
@@ -17,6 +17,7 @@ from ..sql_helper.global_collection import (
     del_keyword_collectionlist,
     get_item_collectionlist,
 )
+from ..helpers.utils.utils import runcmd
 from ..sql_helper.globals import addgvar, gvarstatus
 from .pluginmanager import load_module, start_spam
 from .tools import create_supergroup
@@ -172,7 +173,7 @@ async def load_plugins(folder, extfolder=None):
                             if check > 5:
                                 break
                 else:
-                    os.remove(Path(f"userbot/{folder}/{shortname}.py"))
+                    os.remove(Path(f"{plugin_path}/{shortname}.py"))
             except Exception as e:
                 if shortname not in failure:
                     failure.append(shortname)
@@ -180,7 +181,6 @@ async def load_plugins(folder, extfolder=None):
                 LOGS.info(
                     f"unable to load {shortname} because of error {e}\nBase Folder {plugin_path}"
                 )
-            LOGS.info(f'Imported : {success} Plugins \nFailed : {", ".join(failure)}')
     if extfolder:
         if not failure:
             failure.append("None")
@@ -188,7 +188,6 @@ async def load_plugins(folder, extfolder=None):
             BOTLOG_CHATID,
             f'Your external repo plugins have imported \n**No of imported plugins :** `{success}`\n**Failed plugins to import :** `{", ".join(failure)}`',
         )
-
 
 async def hekp():
     try:
@@ -308,6 +307,7 @@ async def verifyLoggerGroup():
         args = [executable, "-m", "userbot"]
         os.execle(executable, *args, os.environ)
         sys.exit(0)
+
 
 
 async def install_externalrepo(repo, branch, cfolder):
