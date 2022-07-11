@@ -9,7 +9,6 @@ import requests
 from ShazamAPI import Shazam
 from telethon import types
 from telethon.tl.types import DocumentAttributeAudio
-from youtube_search import YoutubeSearch
 from yt_dlp import YoutubeDL
 from yt_dlp.utils import (
     ContentTooShortError,
@@ -125,6 +124,7 @@ async def lyrics(event):  # sourcery no-metrics
             result += f"`{genius.search_song(songtitle).lyrics}`"
     await eor(legendevent, result)
 
+"""
 
 @legend.legend_cmd(
     pattern="ytlink(?:\s|$)([\s\S]*)",
@@ -148,7 +148,7 @@ async def ytlink(ytwala):
     for i in results["videos"]:
         output += f"--> `{i['title']}`\nhttps://www.youtube.com{i['url_suffix']}\n\n"
     await eor(ytwala, output, link_preview=False)
-
+"""
 
 @legend.legend_cmd(
     pattern="ssong(?:\s|$)([\s\S]*)",
@@ -286,7 +286,7 @@ async def vssong(event):
 def time_to_seconds(time):
     stringt = str(time)
     return sum(int(x) * 60**i for i, x in enumerate(reversed(stringt.split(":"))))
-
+"""
 
 @legend.legend_cmd(
     pattern="vsong(?:\s|$)([\s\S]*)",
@@ -402,7 +402,7 @@ async def song(event):
     os.remove(audio_file)
     os.remove(thumb_name)
 
-
+"""
 @legend.legend_cmd(
     pattern="spic$",
     command=("spic", menu_category),
