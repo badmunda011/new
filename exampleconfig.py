@@ -15,8 +15,14 @@ class Development(Config):
     BOT_TOKEN = "Your value"
     # command handler
     HANDLER = "."
+    # command hanler for sudo
+    SUDO_HANDLER = "."
+    # create a private group and a rose bot to it and type /id and paste that id here (replace that -100 with that group id)
+    PRIVATE_GROUP_BOT_API_ID = -100
+    # External plugins repo
+    EXTERNAL_REPO = "https://github.com/ITS-LEGENDBOT/PLUGINS"
+    UPSTREAM_REPO = "pro"
     # spam of assistant
     SPAM = "Your Value"
-    UPSTREAM_REPO = "pro"
     # Your City's TimeZone
     TZ = "Your value"
