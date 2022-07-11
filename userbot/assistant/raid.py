@@ -1,5 +1,4 @@
 import asyncio
-import os
 import random
 
 from telethon import events
@@ -324,6 +323,7 @@ RAID = [
     "TERA MAA MERI FAN",
     "TERI SEXY BAHEN KI CHUT OP",
 ]
+
 
 @tgbot.on(events.NewMessage(pattern="/raid", func=lambda e: e.sender_id == bot.uid))
 async def spam(e):
