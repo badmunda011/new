@@ -8,7 +8,7 @@ from pathlib import Path
 from telethon import Button, functions, types, utils
 from telethon.tl.functions.channels import JoinChannelRequest, LeaveChannelRequest
 
-from userbot import BOTLOG, BOTLOG_CHATID, PM_LOGGER_GROUP_ID
+from userbot import BOTLOG, BOTLOG_CHATID, PM_LOGGER_GROUP_ID, legendversion
 
 from ..Config import Config
 from ..core.logger import logging
@@ -67,13 +67,13 @@ async def startupmessage():
     """
     Start up message in telegram logger group
     """
-    "True" if Config.SUDO_USERS else "False"
+    is_sudo = "True" if Config.SUDO_USERS else "False"
     try:
         if BOTLOG:
             Config.LEGENDUBLOGO = await legend.tgbot.send_file(
                 BOTLOG_CHATID,
                 "https://telegra.ph/file/294b4dbdb74334fb0a8c1.jpg",
-                caption="#START\n\n**__Version__**:- {legendversion}\n\n**__Sudo__** :- {is_sudo}\n\n**Your LegendBot has been started successfully.**",
+                caption=f"#START\n\n**__Version__**:- {legendversion}\n\n**__Sudo__** :- {is_sudo}\n\n**Your LegendBot has been started successfully.**",
                 buttons=[(Button.url("Support", "https://t.me/LegendBot_XD"),)],
             )
     except Exception as e:
