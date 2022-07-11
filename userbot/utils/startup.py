@@ -20,7 +20,7 @@ from ..sql_helper.global_collection import (
     get_item_collectionlist,
 )
 from ..sql_helper.globals import addgvar, gvarstatus
-from .pluginmanager import load_module, start_spam
+from .pluginmanager import load_module
 from .tools import create_supergroup
 
 ENV = bool(os.environ.get("ENV", False))
@@ -244,6 +244,7 @@ async def spams():
     else:
         print("⚠️Spam Not Loading⚠️")
 """
+
 
 async def verifyLoggerGroup():
     """
