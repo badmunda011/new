@@ -22,6 +22,7 @@ menu_category = "tools"
 DELETE_TIMEOUT = 5
 thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
 
+
 def plug_checker(plugin):
     plug_path = f"./userbot/plugins/{plugin}.py"
     if not os.path.exists(plug_path):
@@ -29,6 +30,7 @@ def plug_checker(plugin):
     if not os.path.exists(plug_path):
         plug_path = f"./userbot/assistant/{plugin}.py"
     return plug_path
+
 
 @legend.legend_cmd(
     pattern="install$",
@@ -133,7 +135,6 @@ async def load(event):
             event,
             f"Could not load {shortname} because of the following error.\n{e}",
         )
-
 
 
 @legend.legend_cmd(
