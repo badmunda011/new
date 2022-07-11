@@ -22,7 +22,5 @@ class Development(Config):
     # External plugins repo
     EXTERNAL_REPO = "https://github.com/ITS-LEGENDBOT/PLUGINS"
     UPSTREAM_REPO = "pro"
-    # spam of assistant
-    SPAM = "Your Value"
     # Your City's TimeZone
     TZ = "Your value"
