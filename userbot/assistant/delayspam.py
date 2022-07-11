@@ -1,9 +1,9 @@
 import asyncio
-import os
 
 from telethon import functions, types
 
 from . import *
+
 
 async def gifspam(e, smex):
     try:
