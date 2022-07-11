@@ -28,7 +28,6 @@ from ..core.logger import logging
 from ..core.managers import eod, eor
 from ..helpers import progress
 from ..helpers.tools import media_type
-from ..helpers.utils import reply_id
 from ..helpers.yt_helper import *
 from . import mention
 
@@ -124,6 +123,7 @@ async def lyrics(event):  # sourcery no-metrics
             result += f"`{genius.search_song(songtitle).lyrics}`"
     await eor(legendevent, result)
 
+
 """
 
 @legend.legend_cmd(
@@ -149,6 +149,7 @@ async def ytlink(ytwala):
         output += f"--> `{i['title']}`\nhttps://www.youtube.com{i['url_suffix']}\n\n"
     await eor(ytwala, output, link_preview=False)
 """
+
 
 @legend.legend_cmd(
     pattern="ssong(?:\s|$)([\s\S]*)",
@@ -286,6 +287,8 @@ async def vssong(event):
 def time_to_seconds(time):
     stringt = str(time)
     return sum(int(x) * 60**i for i, x in enumerate(reversed(stringt.split(":"))))
+
+
 """
 
 @legend.legend_cmd(
@@ -403,6 +406,8 @@ async def song(event):
     os.remove(thumb_name)
 
 """
+
+
 @legend.legend_cmd(
     pattern="spic$",
     command=("spic", menu_category),
