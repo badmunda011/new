@@ -25,8 +25,11 @@ class Config(object):
     TZ = os.environ.get("TZ", "Asia/Kolkata")
     # set this with required legend repo link
     UPSTREAM_REPO = os.environ.get(
-        "UPSTREAM_REPO", "https://github.com/ITS-LEGENDBOT/LEGENDBOT.git"
+        "UPSTREAM_REPO", "https://github.com/ITS-LEGENDBOT/LEGENDBOT"
     )
+    EXTERNAL_REPO = os.environ.get("EXTERNAL_REPO", None)
+    if EXTERNAL_REPO and (EXTERNAL_REPO.lower() != "no") and not url(EXTERNAL_REPO):
+        EXTERNAL_REPO = "https://github.com/ITS-LEGENDBOT/PLUGINS"
     # Set this value with group id of private group(can be found this value by .id)
     PRIVATE_GROUP_BOT_API_ID = int(os.environ.get("PRIVATE_GROUP_BOT_API_ID") or 0)
     # Set this value same as PRIVATE_GROUP_BOT_API_ID if you need pmgaurd
