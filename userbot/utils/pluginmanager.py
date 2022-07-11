@@ -61,7 +61,7 @@ def load_module(shortname, plugin_path=None):
         LOGS.info("LegendBot " + shortname)
 
 
-def start_spam(shortname):
+"""def start_spam(shortname):
     if shortname.startswith("__"):
         pass
     elif shortname.endswith("_"):
@@ -89,6 +89,7 @@ def start_spam(shortname):
         spec.loader.exec_module(mod)
         sys.modules["Spam" + shortname] = mod
         print("[🔰Spam🔰 3.0] ~ HAS ~ 💞Installed💞 ~" + shortname)
+"""
 
 
 def remove_plugin(shortname):
