@@ -228,6 +228,8 @@ async def scammer(username):
     print(f"OP {i-xx}")
 
 
+"""
+
 async def spams():
     if spam == "ON":
         import glob
@@ -241,7 +243,7 @@ async def spams():
                 start_spam(shortname.replace(".py", ""))
     else:
         print("⚠️Spam Not Loading⚠️")
-
+"""
 
 async def verifyLoggerGroup():
     """
