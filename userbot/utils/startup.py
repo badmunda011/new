@@ -8,7 +8,7 @@ from pathlib import Path
 from telethon import Button, functions, types, utils
 from telethon.tl.functions.channels import JoinChannelRequest, LeaveChannelRequest
 
-from userbot import BOTLOG, BOTLOG_CHATID, PM_LOGGER_GROUP_ID, legendversion
+from userbot import BOTLOG, BOTLOG_CHATID, PM_LOGGER_GROUP_ID
 
 from ..Config import Config
 from ..core.logger import logging
@@ -67,7 +67,7 @@ async def startupmessage():
     """
     Start up message in telegram logger group
     """
-    is_sudo = "True" if Config.SUDO_USERS else "False"
+    "True" if Config.SUDO_USERS else "False"
     try:
         if BOTLOG:
             Config.LEGENDUBLOGO = await legend.tgbot.send_file(
