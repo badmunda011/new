@@ -61,8 +61,6 @@ def load_module(shortname, plugin_path=None):
         LOGS.info("LegendBot " + shortname)
 
 
-
-
 def remove_plugin(shortname):
     try:
         cmd = []
