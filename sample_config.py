@@ -27,9 +27,9 @@ class Config(object):
     UPSTREAM_REPO = os.environ.get(
         "UPSTREAM_REPO", "https://github.com/ITS-LEGENDBOT/LEGENDBOT"
     )
-    EXTRA_PLUGIN = os.environ.get("EXTRA_PLUGIN", None)
-    if EXTRA_PLUGIN and (EXTRA_PLUGIN.lower() != "no") and not url(EXTRA_PLUGIN):
-        EXTRA_PLUGIN = "https://github.com/ITS-LEGENDBOT/PLUGINS"
+    EXTRA_REPO = os.environ.get("EXTRA_REPO", None)
+    if EXTRA_REPO and (EXTRA_REPO.lower() != "no") and not url(EXTRA_REPO):
+        EXTRA_REPO = "https://github.com/ITS-LEGENDBOT/PLUGINS"
     # Set this value with group id of private group(can be found this value by .id)
     PRIVATE_GROUP_BOT_API_ID = int(os.environ.get("PRIVATE_GROUP_BOT_API_ID") or 0)
     # Set this value same as PRIVATE_GROUP_BOT_API_ID if you need pmgaurd
