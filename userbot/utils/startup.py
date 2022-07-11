@@ -330,7 +330,7 @@ async def install_externalrepo(repo, branch, cfolder):
         LOGS.error(
             "There was a problem in cloning the external repo. please recheck external repo link"
         )
-        return await catub.tgbot.send_message(
+        return await legend.tgbot.send_message(
             BOTLOG_CHATID,
             "There was a problem in cloning the external repo. please recheck external repo link",
         )
