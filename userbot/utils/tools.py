@@ -1,6 +1,7 @@
 from telethon.tl import functions
 from telethon.tl.types import ChatAdminRights
 
+
 async def create_supergroup(group_name, client, botusername, descript):
     admin_rights = ChatAdminRights(
         add_admins=True,
@@ -31,7 +32,11 @@ async def create_supergroup(group_name, client, botusername, descript):
                 users=[botusername],
             )
         )
-        await client(functions.channels.EditAdminRequest(created_chat_id, botusername, admin_rights, "Assistant"))
+        await client(
+            functions.channels.EditAdminRequest(
+                created_chat_id, botusername, admin_rights, "Assistant"
+            )
+        )
     except Exception as e:
         return "error", str(e)
     if not str(created_chat_id).startswith("-100"):
