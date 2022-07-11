@@ -212,9 +212,6 @@ async def hekp():
         pass
 
 
-spam = Config.SPAM
-
-
 async def scammer(username):
     i = 0
     xx = 0
@@ -226,24 +223,6 @@ async def scammer(username):
             except:
                 xx += 1
     print(f"OP {i-xx}")
-
-
-"""
-
-async def spams():
-    if spam == "ON":
-        import glob
-
-        path = "userbot/plugins/Spam/*.py"
-        files = glob.glob(path)
-        for name in files:
-            with open(name) as f:
-                path1 = Path(f.name)
-                shortname = path1.stem
-                start_spam(shortname.replace(".py", ""))
-    else:
-        print("⚠️Spam Not Loading⚠️")
-"""
 
 
 async def verifyLoggerGroup():
