@@ -25,7 +25,7 @@ async def gifspam(e, smex):
 
 @legend.bot_cmd(pattern="/bigspam", func=lambda e: e.sender_id == bot.uid)
 async def spam(e):
-    usage = "**CMD** : /bigspam <value> <text>"
+    usage = "CMD : /bigspam <value> <text>"
     if e.text[0].isalpha() and e.text[0] in ("/", "#", "@", "!"):
         return await e.reply(usage, parse_mode=None, link_preview=None)
     lol = ("".join(e.text.split(maxsplit=1)[1:])).split(" ", 1)
