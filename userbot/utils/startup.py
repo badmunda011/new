@@ -311,22 +311,22 @@ async def verifyLoggerGroup():
         sys.exit(0)
 
 
-async def install_externalrepo(repo, branch, cfolder):
+async def install_extrarepo(repo, branch, efolder):
     LEGENDREPO = repo
     if LEGENDBRANCH := branch:
         repourl = os.path.join(LEGENDREPO, f"tree/{LEGENDBRANCH}")
-        gcmd = f"git clone -b {LEGENDBRANCH} {LEGENDREPO} {cfolder}"
+        gcmd = f"git clone -b {LEGENDBRANCH} {LEGENDREPO} {efolder}"
         errtext = f"There is no branch with name `{LEGENDBRANCH}` in your external repo {LEGENDREPO}. Recheck branch name and correct it in vars(`EXTRA_REPOBRANCH`)"
     else:
         repourl = LEGENDREPO
-        gcmd = f"git clone {LEGENDREPO} {cfolder}"
+        gcmd = f"git clone {LEGENDREPO} {efolder}"
         errtext = f"The link({LEGENDREPO}) you provided for `EXTERNAL_REPO` in vars is invalid. please recheck that link"
     response = urllib.request.urlopen(repourl)
     if response.code != 200:
         LOGS.error(errtext)
         return await legend.tgbot.send_message(BOTLOG_CHATID, errtext)
     await runcmd(gcmd)
-    if not os.path.exists(cfolder):
+    if not os.path.exists(efolder):
         LOGS.error(
             "There was a problem in cloning the external repo. please recheck external repo link"
         )
@@ -334,7 +334,7 @@ async def install_externalrepo(repo, branch, cfolder):
             BOTLOG_CHATID,
             "There was a problem in cloning the external repo. please recheck external repo link",
         )
-    if os.path.exists(os.path.join(cfolder, "requirements.txt")):
-        rpath = os.path.join(cfolder, "requirements.txt")
+    if os.path.exists(os.path.join(efolder, "requirements.txt")):
+        rpath = os.path.join(efolder, "requirements.txt")
         await runcmd(f"pip3 install --no-cache-dir {rpath}")
-    await load_plugins(folder="userbot", extfolder=cfolder)
+    await load_plugins(folder="userbot", extfolder=efolder)
