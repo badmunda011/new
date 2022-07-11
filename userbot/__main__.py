@@ -57,11 +57,13 @@ async def startup_process():
     await startupmessage()
     return
 
+
 async def extrarepo():
     if Config.EXTRA_REPO:
         await install_extrarepo(
             Config.EXTRA_REPO, Config.EXTRA_REPOBRANCH, "xtraplugins"
         )
+
 
 legend.loop.run_until_complete(startup_process())
 legend.loop.create_task(hekp())
