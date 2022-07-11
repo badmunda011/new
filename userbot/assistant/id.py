@@ -31,4 +31,4 @@ async def bot_start(event):
             )
 
     else:
-        await even.reply(f"**Current Chat ID : **`{event.chat_id}`")
+        await event.reply(f"**Current Chat ID : **`{event.chat_id}`")
