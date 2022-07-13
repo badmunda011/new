@@ -8,8 +8,8 @@ import lyricsgenius
 import requests
 from ShazamAPI import Shazam
 from telethon import types
-from youtube_search import YoutubeSearch
 from telethon.tl.types import DocumentAttributeAudio
+from youtube_search import YoutubeSearch
 from yt_dlp import YoutubeDL
 from yt_dlp.utils import (
     ContentTooShortError,
@@ -21,8 +21,6 @@ from yt_dlp.utils import (
     UnavailableVideoError,
     XAttrMetadataError,
 )
-from ..helpers.utils import reply_id
-
 
 from userbot import legend
 
@@ -31,6 +29,7 @@ from ..core.logger import logging
 from ..core.managers import eod, eor
 from ..helpers import progress
 from ..helpers.tools import media_type
+from ..helpers.utils import reply_id
 from ..helpers.yt_helper import *
 from . import mention
 
@@ -127,8 +126,6 @@ async def lyrics(event):  # sourcery no-metrics
     await eor(legendevent, result)
 
 
-
-
 @legend.legend_cmd(
     pattern="ytlink(?:\s|$)([\s\S]*)",
     command=("ytlink", menu_category),
@@ -151,7 +148,6 @@ async def ytlink(ytwala):
     for i in results["videos"]:
         output += f"--> `{i['title']}`\nhttps://www.youtube.com{i['url_suffix']}\n\n"
     await eor(ytwala, output, link_preview=False)
-
 
 
 @legend.legend_cmd(
@@ -290,8 +286,6 @@ async def vssong(event):
 def time_to_seconds(time):
     stringt = str(time)
     return sum(int(x) * 60**i for i, x in enumerate(reversed(stringt.split(":"))))
-
-
 
 
 @legend.legend_cmd(
