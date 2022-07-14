@@ -27,6 +27,32 @@ cmds = [
 # ========================================================================
 
 
+vlist = [
+    "SUDO_USERS",
+]
+
+
+
+@legend.legend_cmd(
+    pattern="var([\s\S]*)",
+    command=("var", menu_category),
+    info={
+        "header": "To check all config vars.",
+        "usage": [
+            "{tr}var",
+        ],
+        "examples": [
+            "{tr}var",
+        ],
+    },
+)
+asyn def var(event):
+    vnlist = "".join(f"{i}. `{each}`\n" for i, each in enumerate(vlist, start=1))
+    await eod(
+        event, f"**📑 Give correct var name from the list :\n\n**{vnlist}", time=120
+    )
+
+
 @legend.legend_cmd(
     pattern="(set|get|del) var ([\s\S]*)",
     command=("var", menu_category),
