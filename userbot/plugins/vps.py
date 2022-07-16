@@ -46,7 +46,7 @@ vlist = [
         ],
     },
 )
-asyn def var(event):
+async def var(event):
     vnlist = "".join(f"{i}. `{each}`\n" for i, each in enumerate(vlist, start=1))
     await eod(
         event, f"**📑 Give correct var name from the list :\n\n**{vnlist}", time=120
