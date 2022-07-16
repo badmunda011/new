@@ -32,7 +32,6 @@ vlist = [
 ]
 
 
-
 @legend.legend_cmd(
     pattern="var([\s\S]*)",
     command=("var", menu_category),
