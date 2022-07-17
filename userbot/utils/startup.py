@@ -13,6 +13,7 @@ from userbot import BOTLOG, BOTLOG_CHATID, PM_LOGGER_GROUP_ID, legendversion
 from ..Config import Config
 from ..core.logger import logging
 from ..core.session import legend
+from ..helpers.utils import install_pip
 from ..helpers.utils.utils import runcmd
 from ..sql_helper.global_collection import (
     del_keyword_collectionlist,
@@ -21,7 +22,7 @@ from ..sql_helper.global_collection import (
 from ..sql_helper.globals import addgvar, gvarstatus
 from .pluginmanager import load_module
 from .tools import create_supergroup
-from ..helpers.utils import install_pip
+
 ENV = bool(os.environ.get("ENV", False))
 
 LOGS = logging.getLogger("LegendUserBot")
