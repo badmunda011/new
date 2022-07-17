@@ -3,22 +3,7 @@ import asyncio
 from telethon import events
 
 from . import *
-
-
-async def gifspam(e, smex):
-    try:
-        await e.client(
-            functions.messages.SaveGifRequest(
-                id=types.InputDocument(
-                    id=smex.media.document.id,
-                    access_hash=smex.media.document.access_hash,
-                    file_reference=smex.media.document.file_reference,
-                ),
-                unsave=True,
-            )
-        )
-    except Exception:
-        pass
+from ..helpers.utils import unsavegif
 
 
 @tgbot.on(events.NewMessage(pattern="/spam", func=lambda e: e.sender_id == bot.uid))
@@ -42,7 +27,7 @@ async def spam(e):
             return await e.reply(error, parse_mode=None, link_preview=None)
         for _ in range(counter):
             smex = await e.client.send_file(e.chat_id, smex, caption=smex.text)
-            await gifspam(e, smex)
+            await unsavegif(e, smex)
     elif e.reply_to_msg_id and smex.text:
         message = smex.text
         counter = int(legend[0])
