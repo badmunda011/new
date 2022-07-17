@@ -156,6 +156,7 @@ async def load_plugins(folder, extfolder=None):
                     pluginname not in VPS_NOLOAD
                 ):
                     flag = True
+                    check = 0
                     while flag:
                         try:
                             load_module(
