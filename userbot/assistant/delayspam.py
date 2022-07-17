@@ -3,22 +3,7 @@ import asyncio
 from telethon import functions, types
 
 from . import *
-
-
-async def gifspam(e, smex):
-    try:
-        await e.client(
-            functions.messages.SaveGifRequest(
-                id=types.InputDocument(
-                    id=sandy.media.document.id,
-                    access_hash=smex.media.document.access_hash,
-                    file_reference=smex.media.document.file_reference,
-                ),
-                unsave=True,
-            )
-        )
-    except Exception:
-        pass
+from ..helpers.utils import unsavegif
 
 
 @legend.bot_cmd(pattern="/delayspam", func=lambda e: e.sender_id == bot.uid)
@@ -47,7 +32,7 @@ async def delayspam(e):
             for _ in range(counter):
                 async with e.client.action(e.chat_id, "document"):
                     smex = await e.client.send_file(e.chat_id, smex, caption=smex.text)
-                    await gifspam(e, smex)
+                    await unsavegif(e, smex)
                 await asyncio.sleep(sleeptime)
         elif e.reply_to_msg_id and smex.text:
             message = smex.text
