@@ -1,11 +1,10 @@
 import asyncio
 
-from telethon import functions, types
-
 from userbot import bot
 
-from . import *
 from ..helpers.utils import unsavegif
+from . import *
+
 
 @legend.bot_cmd(pattern="/bigspam", func=lambda e: e.sender_id == bot.uid)
 async def spam(e):
