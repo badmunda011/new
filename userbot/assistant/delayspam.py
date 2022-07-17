@@ -1,9 +1,7 @@
 import asyncio
 
-from telethon import functions, types
-
-from . import *
 from ..helpers.utils import unsavegif
+from . import *
 
 
 @legend.bot_cmd(pattern="/delayspam", func=lambda e: e.sender_id == bot.uid)
