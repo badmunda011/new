@@ -2,7 +2,6 @@ import re
 import time
 from datetime import datetime
 
-from emoji import get_emoji_regexp
 from telethon.tl.types import Channel, PollAnswer
 
 
@@ -47,9 +46,9 @@ async def get_readable_time(seconds: int) -> str:
 # gban
 
 
-async def admin_groups(legend):
+async def admin_groups(lol):
     legendgroups = []
-    async for dialog in legend.iter_dialogs():
+    async for dialog in lol.iter_dialogs():
         entity = dialog.entity
         if (
             isinstance(entity, Channel)
@@ -104,4 +103,4 @@ def deEmojify(inputString: str) -> str:
 
 def soft_deEmojify(inputString: str) -> str:
     """Remove emojis and other non-safe characters from string"""
-    return get_emoji_regexp().sub("", inputString)
+    return re.sub("[^a-zA-Z0-9 \\`~!@#$%^&*(){}[\]_+=.:;\n'\",><?/-]", "", inputString)
