@@ -13,9 +13,9 @@ from Legendbot import *
 from . import *
 from .helpers.hack import *
 
-mybot = "missrose_bot"
+mybot = "Diobrandooooo_bot"
 
-legendboy = 2024465080
+×͜× Ⓤⓜⓜ ×͜×= 5404761904
 
 
 from telethon import Button, custom, events
@@ -23,22 +23,22 @@ from telethon import Button, custom, events
 from .core.logger import logging
 from .core.session import legend, tgbot
 
-LOGS = logging.getLogger("LegendUserBot")
-LEGEND_PIC = "https://te.legra.ph/file/d3785d49b2c5e6f00bc67.jpg"
+LOGS = logging.getLogger("×͜× Ⓤⓜⓜ ×͜× userbot")
+LEGEND_PIC = "https://te.legra.ph/file/09f6abb3a40afeafea8cd.jpg"
 
 onbot = "start - Check if I am Alive \nhelp - Check ALL Command\nalive- To Check alive status\nping - To check ping of bot\nuinfo - To Check info of assistant chat\nbroadcast - broadcast message to all the person who has started ur bot\nban - to ban person to block message in assistant chat\nunban - To Unban Person allw to message in assistant chat\neval - To run python code\npurge - To Purge Message from replied\ndel - To del replied message\nbigspam - To Spam Through Bot value > 100\ndelayspam - Spam With Delay \nraid - To Abuse Anyone By username/name/reply\nreplyraid - To Activate Raid On Anyone\ndreplyraid - To Stop Raid\nspam - To Spam With Chat value < 100\nhack - Hack Telegram account through StringSession"
-perf = "[ †hê Lêɠêɳ̃dẞø† ]"
+perf = "[ ×͜× Ⓤⓜⓜ ×͜× ]"
 
-bot = legend
+bot = Dio brando
 
 
 async def killer():
-    LEGEND_USER = bot.me.first_name
-    The_LegendBoy = bot.uid
-    legd_mention = f"[{LEGEND_USER}](tg://user?id={The_LegendBoy})"
-    name = f"{legd_mention}'s Assistant"
+    ×͜× Ⓤⓜⓜ ×͜× = bot.me.first_name
+    Ummmmmmmmmmmmmmmmmmmmmmmmmmmmmp = bot.uid
+    Ummm_mention = f"[{×͜× Ⓤⓜⓜ ×͜×_USER}](tg://user?id={Ummmmmmmmmmmmmmmmmmmmmmmmmmmmmp})"
+    name = f"{Ummm_mention}'s Assistant"
     description = (
-        f"I am Assistant Of {legd_mention}.This Bot Can Help U To Chat With My Master"
+        f"I am Assistant Of {Ummm_mention}.This Bot Can Help U To Chat With My Master"
     )
     starkbot = await legend.tgbot.get_me()
     bot_name = starkbot.first_name
