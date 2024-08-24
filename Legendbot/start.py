@@ -32,7 +32,7 @@ bot = Dio brando
 
 
 async def killer():
-    ×͜× Ⓤⓜⓜ ×͜× = bot.me.first_name
+    x = bot.me.first_name
     Ummmmmmmmmmmmmmmmmmmmmmmmmmmmmp = bot.uid
     Ummm_mention = f"[{×͜× Ⓤⓜⓜ ×͜×_USER}](tg://user?id={Ummmmmmmmmmmmmmmmmmmmmmmmmmmmmp})"
     name = f"{Ummm_mention}'s Assistant"
