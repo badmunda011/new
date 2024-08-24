@@ -15,8 +15,7 @@ from .helpers.hack import *
 
 mybot = "Diobrandooooo_bot"
 
-×͜× Ⓤⓜⓜ ×͜×= 5404761904
-
+x = 5404761904
 
 from telethon import Button, custom, events
 
