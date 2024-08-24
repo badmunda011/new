@@ -34,7 +34,7 @@ bot = client
 async def killer():
     x = bot.me.first_name
     Ummmmmmmmmmmmmmmmmmmmmmmmmmmmmp = bot.uid
-    Ummm_mention = f"[{×͜× Ⓤⓜⓜ ×͜×_USER}](tg://user?id={Ummmmmmmmmmmmmmmmmmmmmmmmmmmmmp})"
+    Ummm_mention = f"[{X}](tg://user?id={Ummmmmmmmmmmmmmmmmmmmmmmmmmmmmp})"
     name = f"{Ummm_mention}'s Assistant"
     description = (
         f"I am Assistant Of {Ummm_mention}.This Bot Can Help U To Chat With My Master"
