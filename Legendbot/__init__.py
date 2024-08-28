@@ -34,9 +34,9 @@ def close_connection(*_):
 signal.signal(signal.SIGTERM, close_connection)
 
 
-if Config.UPSTREAM_REPO == "pro":
+if Config.UPSTREAM_REPO == "master":
     UPSTREAM_REPO_URL = "https://github.com/badmunda011/new"
-elif Config.UPSTREAM_REPO == "multi":
+elif Config.UPSTREAM_REPO == "master":
     UPSTREAM_REPO_URL = "https://github.com/Billingjatt4/Leo"
 else:
     UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
