@@ -25,7 +25,7 @@ class Config(object):
     TZ = os.environ.get("TZ", "Asia/Kolkata")
     # set this with required legend repo link
     UPSTREAM_REPO = os.environ.get(
-        "UPSTREAM_REPO", "https://github.com/ITS-LEGENDBOT/LEGENDBOT"
+        "UPSTREAM_REPO", "https://github.com/badmunda011/new"
     )
     EXTRA_REPO = os.environ.get("EXTRA_REPO", None)
     if EXTRA_REPO and (EXTRA_REPO.lower() != "no") and not url(EXTRA_REPO):
